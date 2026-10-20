@@ -44,6 +44,9 @@ def create_app(
     try:
         store = Store(workspace)
         jobs = Jobs(store)
+        # Probe before the HTTP server/request thread pool starts. Scanner preexec
+        # resource setup must not fork from a multithreaded request handler.
+        capability_snapshot = diagnose(excluded_roots=(workspace.models_root, workspace.root))
     except BaseException:
         workspace.close()
         raise
@@ -68,6 +71,16 @@ def create_app(
     app.state.workspace, app.state.browser_session = workspace, session
     app.state.store, app.state.jobs = store, jobs
     app.add_middleware(LocalBoundary, session=session)
+
+    @app.exception_handler(Exception)
+    async def unexpected(request: Request, error: Exception) -> JSONResponse:
+        return JSONResponse(
+            {
+                "error": "INTERNAL_FAILURE",
+                "message": "The local operation failed. No successful result is inferred.",
+            },
+            status_code=500,
+        )
 
     @app.exception_handler(Busy)
     async def busy(request: Request, error: Busy) -> JSONResponse:
@@ -130,7 +143,7 @@ def create_app(
 
     @app.get("/api/v1/capabilities", response_model=Capabilities)
     def capabilities() -> Capabilities:
-        result = diagnose()
+        result = capability_snapshot
         return Capabilities(
             version=__version__,
             models_root_label=workspace.models_root.name,

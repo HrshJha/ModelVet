@@ -65,6 +65,24 @@ def write_private(path: Path, data: bytes) -> None:
         os.close(parent)
 
 
+def trusted_worker_path(workspace: "Workspace") -> str:
+    """Exclude model/workspace-controlled executable directories from PATH."""
+    directories = []
+    for entry in os.environ.get("PATH", "/usr/bin:/bin").split(os.pathsep):
+        if not entry or not Path(entry).is_absolute():
+            continue
+        try:
+            selected = Path(entry).resolve(strict=True)
+            for root in (workspace.models_root, workspace.root):
+                InputGate().validate(root, selected, ScanLimits())
+            fd = open_directory(selected)
+            os.close(fd)
+            directories.append(str(selected))
+        except (OSError, ValueError, InvalidInput):
+            continue
+    return os.pathsep.join(dict.fromkeys(directories))
+
+
 class Workspace:
     def __init__(self, models_root: Path, root: Path) -> None:
         self.models_root = absolute_path(models_root)

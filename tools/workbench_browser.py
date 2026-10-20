@@ -24,6 +24,7 @@ def main() -> None:
             "unknown-content",
             "missing-provenance",
             "serialized-fixture",
+            "hostile-metadata",
         ):
             artifact = models / name
             artifact.mkdir()
@@ -38,6 +39,16 @@ def main() -> None:
                     else {}
                 )
             )
+            if name == "hostile-metadata":
+                (artifact / "config.json").write_text(
+                    json.dumps(
+                        {
+                            "license": "<img src=x onerror=window.__modelvet_xss=1>",
+                            "repo_id": "synthetic/hostile-text",
+                            "revision": "a" * 40,
+                        }
+                    )
+                )
             if name == "with-repository-code":
                 (artifact / "modeling.py").write_text("# Inert source-presence fixture.\n")
             if name == "unknown-content":

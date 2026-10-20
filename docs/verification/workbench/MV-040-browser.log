@@ -1,0 +1,13 @@
+
+> modelvet-workbench@0.1.0 test:browser
+> playwright test
+
+
+Running 2 tests using 1 worker
+
+(node:57678) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/workbench.spec.ts:16:1 › overview has real empty state and working navigation (457ms)
+  ✓  2 tests/workbench.spec.ts:27:1 › folder browser runs a genuine supported static scan (1.0s)
+
+  2 passed (2.4s)

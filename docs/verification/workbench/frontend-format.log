@@ -1,0 +1,25 @@
+
+> modelvet-workbench@0.1.0 format
+> prettier --write src tests scripts *.ts *.json index.html
+
+src/api.ts 41ms
+src/App.tsx 31ms
+src/CompareView.tsx 22ms
+src/components.test.tsx 2ms
+src/components.tsx 7ms
+src/HistoryView.tsx 7ms
+src/main.tsx 1ms
+src/ReportView.tsx 21ms
+src/ScanView.tsx 12ms
+src/styles.css 66ms
+src/workspace.css 26ms
+tests/auth.setup.ts 2ms
+tests/workbench.spec.ts 19ms
+scripts/notices.mjs 10ms
+playwright.config.ts 1ms
+vite.config.ts 1ms
+vitest.config.ts 1ms
+package-lock.json 6ms (unchanged)
+package.json 0ms (unchanged)
+tsconfig.json 1ms
+index.html 11ms

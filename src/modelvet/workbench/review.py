@@ -67,6 +67,7 @@ def evidence_page(
         len(file_id) != 64 or any(c not in "0123456789abcdef" for c in file_id)
     ):
         raise InvalidInput("Invalid evidence file identifier.")
+    rows: list[dict[str, Any]]
     if section == "references":
         rows = [{"id": key, "pointer": value} for key, value in sorted(report.references.items())]
     else:

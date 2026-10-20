@@ -1,0 +1,167 @@
+
+> modelvet-workbench@0.1.0 test:browser
+> playwright test
+
+
+Running 13 tests using 1 worker
+
+(node:59014) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/workbench.spec.ts:26:1 › overview has real empty state and working navigation (522ms)
+  ✓   2 tests/workbench.spec.ts:38:1 › folder browser runs a genuine supported static scan (1.1s)
+  ✓   3 tests/workbench.spec.ts:68:1 › BLOCK, INSUFFICIENT and CONTROLS remain distinct completed outcomes (1.6s)
+  ✓   4 tests/workbench.spec.ts:85:1 › original JSON download/import and attachment checks preserve stored admission (385ms)
+  ✓   5 tests/workbench.spec.ts:105:1 › comparison exposes exact changes without recomputing decisions (563ms)
+  ✓   6 tests/workbench.spec.ts:122:1 › cancellation stops a real worker and never produces an admission result (956ms)
+  ✘   7 tests/workbench.spec.ts:134:3 › responsive and accessible review at 375px (353ms)
+(node:59042) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   8 tests/workbench.spec.ts:134:3 › responsive and accessible review at 768px (0ms)
+  -   9 tests/workbench.spec.ts:134:3 › responsive and accessible review at 1024px
+  -  10 tests/workbench.spec.ts:134:3 › responsive and accessible review at 1440px
+  -  11 tests/workbench.spec.ts:155:1 › hostile declaration text never becomes browser markup
+  -  12 tests/workbench.spec.ts:166:1 › disconnected progress keeps the last observed state and can reconnect
+  -  13 tests/workbench.spec.ts:183:1 › keyboard and coarse-pointer controls remain usable
+
+
+  1) tests/workbench.spec.ts:134:3 › responsive and accessible review at 375px ─────────────────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 95
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "description": "Ensure buttons have discernible text",
+    +     "help": "Buttons must have discernible text",
+    +     "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/button-name?application=playwright",
+    +     "id": "button-name",
+    +     "impact": "critical",
+    +     "nodes": Array [
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": null,
+    +             "id": "button-has-visible-text",
+    +             "impact": "critical",
+    +             "message": "Element does not have inner text that is visible to screen readers",
+    +             "relatedNodes": Array [],
+    +           },
+    +           Object {
+    +             "data": null,
+    +             "id": "aria-label",
+    +             "impact": "critical",
+    +             "message": "aria-label attribute does not exist or is empty",
+    +             "relatedNodes": Array [],
+    +           },
+    +           Object {
+    +             "data": null,
+    +             "id": "aria-labelledby",
+    +             "impact": "critical",
+    +             "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
+    +             "relatedNodes": Array [],
+    +           },
+    +           Object {
+    +             "data": Object {
+    +               "messageKey": "noAttr",
+    +             },
+    +             "id": "non-empty-title",
+    +             "impact": "critical",
+    +             "message": "Element has no title attribute",
+    +             "relatedNodes": Array [],
+    +           },
+    +           Object {
+    +             "data": null,
+    +             "id": "implicit-label",
+    +             "impact": "critical",
+    +             "message": "Element does not have an implicit (wrapped) <label>",
+    +             "relatedNodes": Array [],
+    +           },
+    +           Object {
+    +             "data": null,
+    +             "id": "explicit-label",
+    +             "impact": "critical",
+    +             "message": "Element does not have an explicit <label>",
+    +             "relatedNodes": Array [],
+    +           },
+    +           Object {
+    +             "data": null,
+    +             "id": "presentational-role",
+    +             "impact": "critical",
+    +             "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
+    +             "relatedNodes": Array [],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   Element does not have inner text that is visible to screen readers
+    +   aria-label attribute does not exist or is empty
+    +   aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty
+    +   Element has no title attribute
+    +   Element does not have an implicit (wrapped) <label>
+    +   Element does not have an explicit <label>
+    +   Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
+    +         "html": "<button class=\"jump-button\">",
+    +         "impact": "critical",
+    +         "none": Array [],
+    +         "target": Array [
+    +           ".jump-button",
+    +         ],
+    +       },
+    +     ],
+    +     "tags": Array [
+    +       "cat.name-role-value",
+    +       "wcag2a",
+    +       "wcag412",
+    +       "section508",
+    +       "section508.22.a",
+    +       "TTv5",
+    +       "TT6.a",
+    +       "EN-301-549",
+    +       "EN-9.4.1.2",
+    +       "ACT",
+    +       "RGAAv4",
+    +       "RGAA-11.9.1",
+    +     ],
+    +   },
+    + ]
+
+      140 |     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+      141 |     const overview = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+    > 142 |     expect(overview.violations).toEqual([]);
+          |                                 ^
+      143 |     await page.screenshot({ path: info.outputPath(`overview-${width}.png`), fullPage: true });
+      144 |     await page.getByRole('link', { name: 'Scan history', exact: true }).click();
+      145 |     await page.getByRole('link', { name: /unknown-content/ }).first().click();
+        at /Users/harshkumarjha/Desktop/ModelVet/frontend/tests/workbench.spec.ts:142:33
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/workbench-responsive-and-accessible-review-at-375px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/workbench-responsive-and-accessible-review-at-375px/error-context.md
+
+  2) tests/workbench.spec.ts:134:3 › responsive and accessible review at 768px ─────────────────────
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      18 |     headers: { Origin: 'http://127.0.0.1:48231' },
+      19 |   });
+    > 20 |   expect(response.ok()).toBeTruthy();
+         |                         ^
+      21 |   authenticated = await context.storageState();
+      22 |   await context.close();
+      23 | });
+        at /Users/harshkumarjha/Desktop/ModelVet/frontend/tests/workbench.spec.ts:20:25
+
+    Error Context: test-results/workbench-responsive-and-accessible-review-at-768px/error-context.md
+
+  2 failed
+    tests/workbench.spec.ts:134:3 › responsive and accessible review at 375px ──────────────────────
+    tests/workbench.spec.ts:134:3 › responsive and accessible review at 768px ──────────────────────
+  5 did not run
+  6 passed (8.2s)

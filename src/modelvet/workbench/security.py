@@ -1,7 +1,9 @@
 """Loopback capability session and bounded same-origin request boundary."""
 
+import asyncio
 import secrets
 import threading
+import time
 from http.cookies import CookieError, SimpleCookie
 from urllib.parse import urlsplit
 
@@ -59,8 +61,26 @@ class BrowserSession:
 class LocalBoundary:
     def __init__(self, app: ASGIApp, session: BrowserSession) -> None:
         self.app, self.session = app, session
+        self.slots = asyncio.Semaphore(4)
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] == "http" and scope.get("path", "").startswith("/api/"):
+            if self.slots.locked():
+                await JSONResponse(
+                    {
+                        "error": "REQUEST_LIMIT",
+                        "message": "Local request capacity is busy. Retry shortly.",
+                    },
+                    status_code=429,
+                    headers={"Cache-Control": "no-store", "X-Content-Type-Options": "nosniff"},
+                )(scope, receive, send)
+                return
+            async with self.slots:
+                await self.handle(scope, receive, send)
+        else:
+            await self.handle(scope, receive, send)
+
+    async def handle(self, scope: Scope, receive: Receive, send: Send) -> None:
         if scope["type"] != "http":
             await self.app(scope, receive, send)
             return
@@ -139,8 +159,16 @@ class LocalBoundary:
                     await error(413, "BODY_LIMIT", "Request exceeds the size limit.")
                     return
                 body = bytearray()
+                deadline = time.monotonic() + 10
                 while True:
-                    chunk = await receive()
+                    try:
+                        remaining = deadline - time.monotonic()
+                        if remaining <= 0:
+                            raise TimeoutError
+                        chunk = await asyncio.wait_for(receive(), timeout=remaining)
+                    except TimeoutError:
+                        await error(408, "BODY_TIMEOUT", "Request body did not complete in time.")
+                        return
                     if chunk["type"] != "http.request":
                         await error(400, "DISCONNECTED", "Request was interrupted.")
                         return

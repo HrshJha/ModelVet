@@ -14,7 +14,7 @@ from modelvet.scanners.modelscan import ModelScanAdapter
 from modelvet.scanners.process import PROCESS_LIMITATIONS
 
 
-def diagnose() -> dict[str, Any]:
+def diagnose(*, excluded_roots: tuple[Path, ...] = ()) -> dict[str, Any]:
     temporary_private = False
     output_writable = False
     try:
@@ -31,7 +31,8 @@ def diagnose() -> dict[str, Any]:
             os.close(descriptor)
     except (OSError, InvalidInput):
         pass
-    scanner = ModelScanAdapter().probe()
+    adapter = ModelScanAdapter()
+    scanner = adapter.probe(excluded_roots=excluded_roots) if excluded_roots else adapter.probe()
     available = not isinstance(scanner, ToolUnavailable)
     supported = platform.system() in {"Linux", "Darwin"} and platform.python_version_tuple()[
         :2

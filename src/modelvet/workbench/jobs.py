@@ -17,7 +17,7 @@ from modelvet.core.errors import InvalidInput
 from modelvet.core.json_data import strict_json
 from modelvet.inventory.gate import open_directory
 from modelvet.workbench.models import JobRecord, ScanInput
-from modelvet.workbench.paths import read_private, relative_path
+from modelvet.workbench.paths import read_private, relative_path, trusted_worker_path
 from modelvet.workbench.store import Store, opaque_id
 
 STAGES = {
@@ -109,31 +109,31 @@ class Jobs:
                 stage="validation",
                 started_at=datetime.now(UTC).isoformat(),
             )
-            self.store.save_job(record)
-            task = self.store.descriptor(
-                key,
-                {
-                    "id": key,
-                    "workspace": str(workspace.root),
-                    "workspace_identity": workspace.identity,
-                    "models_root": str(workspace.models_root),
-                    "model_identity": workspace.model_identity,
-                    "parent_pid": os.getpid(),
-                    "request": request.model_dump(),
-                },
-            )
-            environment = {
-                "PATH": os.environ.get("PATH", "/usr/bin:/bin"),
-                "HOME": str(stage),
-                "TMPDIR": str(stage),
-                "PYTHONUTF8": "1",
-                "PYTHONNOUSERSITE": "1",
-                "PYTHONDONTWRITEBYTECODE": "1",
-                "LC_ALL": "C",
-                "OPENBLAS_NUM_THREADS": "1",
-                "OMP_NUM_THREADS": "1",
-            }
             try:
+                self.store.save_job(record)
+                task = self.store.descriptor(
+                    key,
+                    {
+                        "id": key,
+                        "workspace": str(workspace.root),
+                        "workspace_identity": workspace.identity,
+                        "models_root": str(workspace.models_root),
+                        "model_identity": workspace.model_identity,
+                        "parent_pid": os.getpid(),
+                        "request": request.model_dump(),
+                    },
+                )
+                environment = {
+                    "PATH": trusted_worker_path(workspace),
+                    "HOME": str(stage),
+                    "TMPDIR": str(stage),
+                    "PYTHONUTF8": "1",
+                    "PYTHONNOUSERSITE": "1",
+                    "PYTHONDONTWRITEBYTECODE": "1",
+                    "LC_ALL": "C",
+                    "OPENBLAS_NUM_THREADS": "1",
+                    "OMP_NUM_THREADS": "1",
+                }
                 # Fixed own-module worker; argv/descriptor contract tested independently.
                 process = subprocess.Popen(  # noqa: S603 - trusted installed module, not artifact code.
                     (sys.executable, "-I", "-m", "modelvet.workbench.worker", str(task)),
@@ -146,10 +146,14 @@ class Jobs:
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE,
                 )
-            except OSError:
+            except Exception:
                 record.status, record.error_code = "failed", "WORKER_UNAVAILABLE"
-                self.store.save_job(record)
-                self.cleanup(key)
+                try:
+                    self.store.save_job(record)
+                except Exception:
+                    logging.getLogger(__name__).error("Worker setup state could not be saved.")
+                finally:
+                    self.cleanup(key)
                 raise
             self.process, self.active_id = process, key
             self.started, self.cancel_at = time.monotonic(), None
@@ -160,7 +164,18 @@ class Jobs:
                 daemon=True,
                 name="modelvet-scan-supervisor",
             )
-            self.thread.start()
+            try:
+                self.thread.start()
+            except RuntimeError:
+                try:
+                    self.cancel(key)
+                    self.collect(record, process)
+                    failed = self.store.job(key)
+                    failed.status, failed.error_code = "failed", "SUPERVISOR_UNAVAILABLE"
+                    self.store.save_job(failed)
+                finally:
+                    self.thread = None
+                raise
             return record
 
     def current(self, key: str) -> JobRecord:
@@ -242,7 +257,19 @@ class Jobs:
                             elif kind == "result" and isinstance(event.get("report_path"), str):
                                 result_path = event["report_path"]
                             elif kind == "error":
-                                error = "SCAN_FAILED"
+                                code = event.get("code")
+                                error = (
+                                    code
+                                    if code
+                                    in {
+                                        "SCAN_FAILED",
+                                        "BUDGET_EXCEEDED",
+                                        "INVALID_INPUT",
+                                        "IDENTITY_DRIFT",
+                                        "REPORT_WRITE_FAILED",
+                                    }
+                                    else "SCAN_FAILED"
+                                )
                             elif kind != "cancelled":
                                 raise InvalidInput("Unknown worker event.")
                         if len(pending) > 4096:

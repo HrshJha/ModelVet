@@ -9,10 +9,11 @@ from pathlib import Path
 from typing import Any
 
 from modelvet.application.scan import ScanRequest, ScanService
-from modelvet.core.errors import InvalidInput
+from modelvet.core.errors import BudgetExceeded, InvalidInput, SnapshotChanged
 from modelvet.core.json_data import strict_json
 from modelvet.core.limits import MIB, ScanLimits
 from modelvet.inventory.gate import InputGate, has_ancestor_identity, open_directory
+from modelvet.reports.writer import ReportWriteError
 from modelvet.workbench.models import ScanInput
 from modelvet.workbench.paths import read_private, relative_path
 
@@ -96,9 +97,20 @@ def main() -> int:
         except BrokenPipeError:
             pass
         return 130
-    except Exception:
+    except Exception as error:
+        code = (
+            "BUDGET_EXCEEDED"
+            if isinstance(error, BudgetExceeded)
+            else "IDENTITY_DRIFT"
+            if isinstance(error, SnapshotChanged)
+            else "INVALID_INPUT"
+            if isinstance(error, InvalidInput)
+            else "REPORT_WRITE_FAILED"
+            if isinstance(error, ReportWriteError)
+            else "SCAN_FAILED"
+        )
         try:
-            emit("error", code="SCAN_FAILED")
+            emit("error", code=code)
         except BrokenPipeError:
             pass
         return 50

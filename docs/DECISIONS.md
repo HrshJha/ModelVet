@@ -268,3 +268,7 @@ The normalized JSON validator already checked string values, but direct Python c
 ## PH-15–17 workbench scope — user-authorized
 
 The user explicitly requested implementation of the local browser workbench plan. Amend the scope of proposed ADR-001/011 for this extension: permit loopback-only FastAPI/Uvicorn, a bundled React/TypeScript/Vite interface and a private stdlib SQLite index. Core CLI dependencies stay separate through the optional ui extra. ScanService remains authoritative; worker JSON progress is observational, not evidence. UI decisions are never evaluated in JavaScript. All ADRs remain Proposed; no independent review or loader gate is accepted by this change.
+
+## Workbench acceptance refinements — 2026-10-21
+
+Cache capability probes before HTTP request threads start; resource-limit preexec must not run from those threads. Exclude both lexical and resolved model/workspace scanner paths, and filter worker PATH against those roots. Track launched scanner groups through bounded own-worker JSON events; POSIX parent-death polling uses a signal timer rather than a second worker thread. Recompute UI summaries from pinned, validated report bytes; index fields cannot promote admission. Bound active API requests to four and body reception to ten seconds. Job setup/thread/disk failures clean staging and cannot finalize a report. Node typings, Prettier and axe/Playwright are test/build-only tooling; axe is unmodified MPL-2.0 and is not bundled into the runtime. All ADRs remain Proposed.

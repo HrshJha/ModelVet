@@ -12,6 +12,7 @@ from pathlib import Path
 
 from modelvet.core.errors import InvalidInput
 from modelvet.core.json_data import strict_json
+from modelvet.core.limits import ScanLimits
 from modelvet.core.snapshot import Snapshot
 from modelvet.inventory.discover import stat_identity
 from modelvet.inventory.gate import InputGate, open_directory
@@ -68,11 +69,19 @@ class ModelScanAdapter:
         found = str(self.executable) if self.executable is not None else shutil.which("modelscan")
         return Path(found).resolve(strict=True) if found else None
 
-    def probe(self) -> ToolInfo | ToolUnavailable:
+    def probe(self, *, excluded_roots: tuple[Path, ...] = ()) -> ToolInfo | ToolUnavailable:
         try:
+            original = (
+                str(self.executable) if self.executable is not None else shutil.which("modelscan")
+            )
+            if original:
+                for root in excluded_roots:
+                    InputGate().validate(root, Path(original).absolute().parent, ScanLimits())
             binary = self._executable()
             if binary is None or not binary.is_file() or not os.access(binary, os.X_OK):
                 return ToolUnavailable("ModelScan executable unavailable.")
+            for root in excluded_roots:
+                InputGate().validate(root, binary.parent, ScanLimits())
             digest = _binary_digest(binary)
             with tempfile.TemporaryDirectory(prefix="modelvet-probe-") as directory:
                 result = run_bounded(
@@ -119,7 +128,7 @@ class ModelScanAdapter:
             return RawScannerExecution(
                 manifest.manifest_digest, None, "NOT_RUN", reason="Scanner executable unavailable."
             )
-        tool = self.probe()
+        tool = self.probe(excluded_roots=(snapshot.source.artifact_dir, snapshot.root))
         if isinstance(tool, ToolUnavailable):
             return RawScannerExecution(
                 manifest.manifest_digest, None, "NOT_RUN", reason=tool.reason

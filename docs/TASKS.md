@@ -604,30 +604,36 @@
 
 ### MV-040 — Build visual evidence workspace
 
-- **Priority / status / phase:** P1; **NOT STARTED**; `PH-16`. **Requirement(s):** FR-026.
+- **Priority / status / phase:** P1; **COMPLETE**; `PH-16`. **Requirement(s):** FR-026.
 - **Prerequisites:** MV-039.
 - **Procedure / failure modes:** Decision/explanation, searchable file/check coverage, evidence details, findings/claims/conflicts, safe text, paging and accessible controls. Missing, malformed, conflicting, unsupported and interrupted paths must remain explicit; no model deserialization or policy weakening.
 - **Interfaces:** WORKBENCH_SPEC.md.
 - **Verification:** `frontend/tests/workbench.spec.ts` plus lock/lint/types/full suite and build as applicable; commands/results recorded in PROGRESS. Planned checks are not verification.
 - **DoD:** implemented behavior and actual passing tests, reviewed diff/dependencies, updated source-of-truth documentation; independent release gates remain pending.
 
+**Actual verification:** verification/workbench/MV-040-api-tests.log: 6 report API tests pass; MV-040-components.log: 7 frontend cases pass; MV-040-browser.log: 2 Chromium workflows pass including coverage → file checks → record modal → findings. Production build/types pass. Captured desktop overview/report screenshots were visually inspected. Unresolved-filter tuple/bool handling and validation expectations were corrected during development; report decisions now derive from pinned validated bytes even if cached index summary fields are altered.
+
 ### MV-041 — Add history, import, comparison and guidance
 
-- **Priority / status / phase:** P1; **NOT STARTED**; `PH-16`. **Requirement(s):** FR-026.
+- **Priority / status / phase:** P1; **COMPLETE**; `PH-16`. **Requirement(s):** FR-026.
 - **Prerequisites:** MV-040.
 - **Procedure / failure modes:** Persistent run navigation, exact-byte import/download, raw verification, existing comparison service, deterministic check/rule guidance, demo separation. Missing, malformed, conflicting, unsupported and interrupted paths must remain explicit; no model deserialization or policy weakening.
 - **Interfaces:** WORKBENCH_SPEC.md.
 - **Verification:** `tests/test_workbench_reports.py` plus lock/lint/types/full suite and build as applicable; commands/results recorded in PROGRESS. Planned checks are not verification.
 - **DoD:** implemented behavior and actual passing tests, reviewed diff/dependencies, updated source-of-truth documentation; independent release gates remain pending.
 
+**Actual verification:** verification/workbench/MV-041-browser.log: 6 Chromium workflows pass (all four decisions, controlled policy import, exact-byte download/import, no-raw verification preserving admission, comparison with optional path reveal, and actual scanner cancellation). MV-041-build.log: production build/types pass. History and comparison use bounded/paged validated report reads; gallery is wired separately from history, with packaged fixtures completed in MV-044.
+
 ### MV-042 — Complete workbench fault and browser acceptance
 
-- **Priority / status / phase:** P1; **NOT STARTED**; `PH-17`. **Requirement(s):** FR-027.
+- **Priority / status / phase:** P1; **COMPLETE**; `PH-17`. **Requirement(s):** FR-027.
 - **Prerequisites:** MV-041.
 - **Procedure / failure modes:** CLI/UI semantic parity, all decisions, browser auth/path/XSS boundaries, interruption/disk/read errors, no false approval, responsive/keyboard/reduced-motion. Missing, malformed, conflicting, unsupported and interrupted paths must remain explicit; no model deserialization or policy weakening.
 - **Interfaces:** WORKBENCH_SPEC.md.
 - **Verification:** `tests/test_workbench_security.py` plus lock/lint/types/full suite and build as applicable; commands/results recorded in PROGRESS. Planned checks are not verification.
 - **DoD:** implemented behavior and actual passing tests, reviewed diff/dependencies, updated source-of-truth documentation; independent release gates remain pending.
+
+**Actual verification:** verification/workbench/MV-042-security.log: 22 security/worker tests pass. MV-042-browser.log: 13 Chromium workflows pass, including WCAG 2 A/AA and 2.1 A/AA automated checks at four measured viewport widths, safe hostile text, disconnection, keyboard/coarse-pointer targets and cancellation. Initial audits caught unnamed/mismatched shortcut labels and narrow-screen text overflow; failures retained and corrected. API concurrency/body limits, startup-only probes, untrusted PATH exclusion, disk/thread/protocol faults and server-death cleanup are covered. Independent review remains pending.
 
 ### MV-043 — Package assets and extend supported CI
 

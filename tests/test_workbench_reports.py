@@ -70,9 +70,8 @@ def test_malformed_and_tampered_reports_do_not_open(ui) -> None:
     for suffix in ("", "/download", "/evidence/files"):
         assert client.get(f"/api/v1/reports/{key}{suffix}").status_code == 400
     assert client.post(f"/api/v1/reports/{key}/verify", json={}).status_code == 400
-    assert (
-        app.state.store.reports(0, 50).total == 1
-    )  # Original historical summary, not a fresh verdict.
+    assert app.state.store.query("SELECT COUNT(*) FROM reports")[0][0] == 1
+    assert client.get("/api/v1/reports").status_code == 400
 
 
 def test_verify_and_compare_do_not_promote_admission(ui) -> None:
@@ -111,3 +110,16 @@ def test_imported_missing_raw_attachments_remain_incomplete(ui) -> None:
     assert response.status_code == 201, response.text
     audit = client.post(f"/api/v1/reports/{response.json()['id']}/verify", json={}).json()
     assert audit["status"] == "INCOMPLETE" and audit["verified_attachments"] == 0
+
+
+def test_index_summary_cannot_promote_a_report(ui) -> None:
+    client, _, _, app = ui
+    key, _ = saved(ui, "unknown")
+    cached = json.loads(
+        app.state.store.query("SELECT summary FROM reports WHERE id = ?", (key,))[0][0]
+    )
+    cached["decision"] = "APPROVE"
+    cached["required_complete"] = cached["required_total"]
+    app.state.store.query("UPDATE reports SET summary = ? WHERE id = ?", (json.dumps(cached), key))
+    assert client.get(f"/api/v1/reports/{key}").json()["decision"] == "INSUFFICIENT"
+    assert client.get("/api/v1/reports").json()["items"][0]["decision"] == "INSUFFICIENT"
