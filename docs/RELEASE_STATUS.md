@@ -1,6 +1,6 @@
 # Local v0.1.0 candidate and release gates
 
-The user selected **“Finish local candidate; leave hosted CI pending.”** PH-06/07 and the local portions of PH-09/10 are implemented. This is not a public release, hosted CI pass or independent security certification. Work started at e2f2bb269683d79cd6a12757aa140357fef089ad. A newer local checkpoint af86ffee5c7b4f1e990e9dbbdba6625e973acef0 appeared outside agent commands; subsequent validation/docs changes remain uncommitted.
+The user selected **“Finish local candidate; leave hosted CI pending.”** PH-06/07 and the local portions of PH-09/10 are implemented. This is not a public release, hosted CI pass or independent security certification. Work started at e2f2bb269683d79cd6a12757aa140357fef089ad. A newer local checkpoint af86ffee5c7b4f1e990e9dbbdba6625e973acef0 appeared outside agent commands; checkpoint b91a791c6c3b4137a39fb540822e888d54948549 was observed later; final working-tree/source identities are recorded in verification/MV-023/.
 
 ## Local evidence
 
@@ -20,7 +20,7 @@ Exact final commands, counts, failed attempts and artifact checksums are in `ver
 | Hosted Ubuntu/macOS CI | Workflow prepared and locally parsed; never dispatched. GitHub CLI is not authenticated. |
 | Linux execution and resource limits | Implemented target; unverified locally; Linux-only memory test explicitly skipped on macOS. |
 | Project review and risk acceptance | ADRs remain Proposed. Scanner is not containment, and memory/network/format limitations need explicit review before broader claims. |
-| Version-controlled release checkpoint | A local checkpoint af86ffee exists; subsequent changes remain uncommitted. Final reviewed release checkpoint is pending; no agent commit/tag/push made. |
+| Version-controlled release checkpoint | Local checkpoints af86ffee/b91a791c exist; final source/worktree identities are recorded in verification/MV-023/. Final reviewed release checkpoint is pending; no agent commit/tag/push made. |
 | Public package/release | Not published; no automatic deployment/release workflow. |
 
 Run the pinned hosted matrix and review the actual results before widening supported-platform claims. Review source, dependency notices, privacy and residual risks, then make a version-controlled release checkpoint and publish only when the public release checklist passes. No credentials or raw model artifacts should enter CI.

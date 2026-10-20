@@ -1,6 +1,6 @@
 # ModelVet progress dashboard
 
-**Updated 2026-10-20. Overall: local static candidate complete through PH-10. Hosted CI/public release PENDING by user-selected scope.** The five MVP commands and optional offline advisory command work. Work started against base `e2f2bb269683d79cd6a12757aa140357fef089ad`; a newer checkpoint `af86ffee5c7b4f1e990e9dbbdba6625e973acef0` appeared during this run outside the agent commands and was preserved. Subsequent changes remain uncommitted. Only a synthetic development pilot ran; no model loading or independently adjudicated benchmark.
+**Updated 2026-10-20. Overall: local static candidate complete through PH-10. Hosted CI/public release PENDING by user-selected scope.** The five MVP commands and optional offline advisory command work. Work started against base `e2f2bb269683d79cd6a12757aa140357fef089ad`; a newer checkpoint `af86ffee5c7b4f1e990e9dbbdba6625e973acef0` appeared during this run outside the agent commands and was preserved. Latest observed checkpoint is `b91a791c6c3b4137a39fb540822e888d54948549`; final working-tree state and source hashes are recorded in `verification/MV-023/`. Only a synthetic development pilot ran; no model loading or independently adjudicated benchmark.
 
 | Workstream | Actual state | Evidence |
 |---|---|---|
