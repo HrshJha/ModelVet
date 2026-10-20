@@ -16,6 +16,9 @@ from modelvet.core.diagnostics import diagnose
 from modelvet.core.errors import InvalidInput
 from modelvet.core.limits import MIB, ScanLimits
 from modelvet.dependencies.advisories import AdvisoryDocument, AdvisoryReader
+from modelvet.reports.audit import verify_report
+from modelvet.reports.batch import audit_batch
+from modelvet.reports.compare import compare_reports
 from modelvet.reports.json_report import read_report
 from modelvet.reports.privacy import redact
 
@@ -168,6 +171,43 @@ def advisories(
     data = AdvisoryDocument.from_assessment(assessment).model_dump(mode="json")
     typer.echo(json.dumps(data, sort_keys=True, ensure_ascii=True))
     raise typer.Exit(assessment.exit_code)
+
+
+@cli.command()
+def verify(
+    report: Annotated[Path, typer.Argument(help="Stored report and its declared raw attachments.")],
+    expected_report_sha256: Annotated[
+        str | None, typer.Option(help="External exact report byte pin.")
+    ] = None,
+) -> None:
+    """Verify stored byte consistency. This does not authenticate or admit a model."""
+    audit = verify_report(report, expected_report_sha256=expected_report_sha256)
+    typer.echo(audit.model_dump_json())
+    raise typer.Exit(0 if audit.status == "VERIFIED" else 30)
+
+
+@cli.command()
+def compare(
+    before: Annotated[Path, typer.Argument(help="Earlier stored JSON report.")],
+    after: Annotated[Path, typer.Argument(help="Later stored JSON report.")],
+    show_paths: bool = False,
+    fail_on_change: bool = False,
+) -> None:
+    """Compare stored assertions without recomputing admission or reading raw files."""
+    result = compare_reports(before, after, show_paths=show_paths)
+    typer.echo(result.model_dump_json())
+    raise typer.Exit(30 if fail_on_change and not result.same_semantics else 0)
+
+
+@cli.command("audit-batch")
+def audit_batch_command(
+    manifest: Annotated[Path, typer.Argument(help="Explicit local JSON report list.")],
+    root: Annotated[Path, typer.Option(help="Root containing the listed relative report paths.")],
+) -> None:
+    """Audit a bounded list of stored reports; no model or admission reevaluation."""
+    result = audit_batch(manifest, root)
+    typer.echo(result.model_dump_json())
+    raise typer.Exit(0 if result.status == "VERIFIED" else 30)
 
 
 @policy_cli.command("validate")

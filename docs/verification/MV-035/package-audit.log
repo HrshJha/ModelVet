@@ -1,0 +1,46 @@
+{
+  "observed_at": "2026-10-20T17:12:17.013538+00:00",
+  "head_observed": "e537025a2e39bcbadb4b66b8d8b5e4ba40abd74c",
+  "agent_commits_pushes_tags": false,
+  "scope": "PH-12 through PH-14 static report audit extensions; external gates remain pending",
+  "artifacts": [
+    {
+      "path": "dist/modelvet-0.1.0-py3-none-any.whl",
+      "size": 107600,
+      "sha256": "2e52507732aabc8bad17ecedd578829c3e83bcae81dc845c24ba41279293dafe"
+    },
+    {
+      "path": "dist/modelvet-0.1.0.tar.gz",
+      "size": 262551,
+      "sha256": "a342b0ffc3a743ca2aa431fc9313d8ba74d721641daf211a73afc0bccfe26125"
+    }
+  ],
+  "uv_lock_sha256": "a46d68b74ef8036d8bdad809862d3e0fabf77e2f5e078b6f21a5cde8240eeba5",
+  "third_party_dependencies_added": 0,
+  "packaged_schemas": [
+    "modelvet/schemas/advisories-v1.json",
+    "modelvet/schemas/benchmark-corpus-v1.json",
+    "modelvet/schemas/benchmark-run-v1.json",
+    "modelvet/schemas/conflict-v1.json",
+    "modelvet/schemas/coverage-v1.json",
+    "modelvet/schemas/decision-v1.json",
+    "modelvet/schemas/evidence-v1.json",
+    "modelvet/schemas/policy-v1.json",
+    "modelvet/schemas/report-audit-v1.json",
+    "modelvet/schemas/report-batch-audit-v1.json",
+    "modelvet/schemas/report-batch-manifest-v1.json",
+    "modelvet/schemas/report-comparison-v1.json",
+    "modelvet/schemas/report-v1.json"
+  ],
+  "wheel_all_python_sources_and_policy_match": true,
+  "sdist_source_tests_docs_schemas_examples_match": true,
+  "operational_evidence_excluded": true,
+  "full_tests_passed": 558,
+  "linux_only_skipped": 1,
+  "post_docs_targeted_passed": 103,
+  "final_doc_contract_passed": 4,
+  "whitespace_review_files": 137,
+  "whitespace_problems": 0,
+  "hosted_ci_verified": false,
+  "loader_enabled": false
+}

@@ -1,0 +1,690 @@
+{
+  "reviewed_files": 137,
+  "problems": [
+    {
+      "path": ".python-version",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "AGENTS.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "PRD.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "README.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/ADVISORY_SPEC.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/API_SPEC.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/BENCHMARK_PLAN.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/CLI_SPEC.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/COMMANDS.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/DATA_MODEL.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/DEFINITION_OF_DONE.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/DESIGN_SPEC.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/LOADER_REVIEW_PACKET.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/OPEN_QUESTIONS.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/POLICY_SPEC.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/PROGRESS.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/RELEASE_STATUS.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/REPORT_AUDIT_SPEC.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/RESEARCH_REFERENCES.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/SECURITY_POLICY.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/SPEC_AUDIT.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/TASKS.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/TECH_STACK.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/TESTING_STRATEGY.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/THIRD_PARTY.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "docs/THREAT_MODEL.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "examples/README.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "examples/advisory-environment.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "examples/advisory-snapshot.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "examples/controls.toml",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "examples/create_fixture.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "examples/default.toml",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "pyproject.toml",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "schemas/advisories-v1.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "schemas/benchmark-corpus-v1.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "schemas/benchmark-run-v1.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "schemas/conflict-v1.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "schemas/coverage-v1.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "schemas/decision-v1.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "schemas/evidence-v1.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "schemas/policy-v1.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "schemas/report-audit-v1.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "schemas/report-batch-audit-v1.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "schemas/report-batch-manifest-v1.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "schemas/report-comparison-v1.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "schemas/report-v1.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/__init__.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/__main__.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/application/__init__.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/application/scan.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/benchmarks/__init__.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/benchmarks/corpus.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/benchmarks/metrics.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/benchmarks/runner.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/cli/__init__.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/cli/main.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/core/__init__.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/core/bytes.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/core/config.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/core/diagnostics.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/core/errors.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/core/json_data.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/core/limits.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/core/snapshot.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/coverage/__init__.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/coverage/conflicts.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/coverage/reconciler.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/dependencies/__init__.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/dependencies/advisories.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/dependencies/manifest.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/evidence/__init__.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/evidence/models.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/evidence/modelscan_schema.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/evidence/normalize.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/inventory/__init__.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/inventory/classify.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/inventory/discover.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/inventory/gate.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/inventory/identity.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/metadata/__init__.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/metadata/claims.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/policies/__init__.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/policies/default.toml",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/policies/evaluator.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/policies/models.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/reports/__init__.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/reports/audit.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/reports/batch.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/reports/compare.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/reports/json_report.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/reports/markdown.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/reports/privacy.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/reports/writer.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/scanners/__init__.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/scanners/base.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/scanners/modelscan.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/scanners/process.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/structural/__init__.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/structural/base.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/structural/safetensors.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "src/modelvet/structural/zip_index.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/fixture_factory.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_advisories.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_benchmark_manifest.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_benchmark_metrics.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_ci_contract.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_claims.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_classify.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_cli.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_conflicts.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_coverage.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_dependencies.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_docs_contract.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_doctor.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_e2e.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_evidence.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_fail_closed.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_identity.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_import_smoke.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_input_gate.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_modelscan_adapter.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_policy.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_policy_config.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_release.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_report_audit.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_report_batch.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_report_compare.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_reports.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_reproducibility.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_resource_limits.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_security_invariants.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_snapshot.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "tests/test_structural.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "uv.lock",
+      "exit": 1,
+      "output": ""
+    }
+  ]
+}

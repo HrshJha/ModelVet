@@ -92,3 +92,7 @@ Summary report paths are relative to the selected output root; report_root is <r
 ## Optional synthetic development pilot
 
 `uv run python -m modelvet.benchmarks.runner --manifest benchmarks/manifest.json --out out/NEW_DIRECTORY [--repeats 2] [--timeout-sec 120]` runs only the validated closed inert recipes. The root must be new; output is private. Return 30 for the explicit INCONCLUSIVE research result; 40 invalid arguments/input, 50 failure before result publication, 130 interruption. The completed result marker is written last; failed runs may retain private partial evidence. Exact local execution/limitations are in BENCHMARK_PLAN and benchmarks/README.md. It is separate from admission and is not an independently adjudicated efficacy benchmark.
+
+## Implemented stored-report audits — PH-12–14
+
+`verify REPORT.json [--expected-report-sha256 HEX]`, `compare BEFORE.json AFTER.json [--show-paths] [--fail-on-change]`, and `audit-batch MANIFEST.json --root REPORT_ROOT` emit typed JSON to stdout. Verify/batch use 0 for VERIFIED and 30 for incomplete checks; compare uses 0 for a completed comparison or 30 for semantic differences when requested. Common errors remain 40/50/130. These are stored assertion/byte workflows, not admission decisions. No network or model access occurs. See [REPORT_AUDIT_SPEC](REPORT_AUDIT_SPEC.md) for bounds, schemas, privacy and partial failures.

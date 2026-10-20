@@ -49,3 +49,25 @@ uv run modelvet advisories "$demo_root/advisory-reports/$advisory_report_rel" --
 ```
 
 The final command exits 30 for the synthetic affected-version assertion. Omitting `--snapshot` also exits 30 because required advisory evidence is NOT_RUN. `--optional` permits unresolved evidence to exit 0 while keeping its status visible; positive matches still exit 30. There is no runtime network call. Read the [snapshot and matching contract](../docs/ADVISORY_SPEC.md) before supplying actual data. Preserve the snapshot privately; freshness/completeness/source claims are operator-supplied and not authenticated. This supplement does not recompute admission or establish exploitability.
+
+## Verify, compare and batch stored reports
+
+Continue from the first clean example above. These commands work after removing the original artifact. This example compares two scans of the same unchanged synthetic bytes; run timestamps differ while semantic content stays equal.
+
+```sh
+umask 077
+uv run modelvet scan "$demo_root/artifact" --out "$demo_root/reports" --json-summary > "$demo_root/second-summary.json"
+second_rel=$(uv run python -c 'import json,sys; print(json.load(open(sys.argv[1]))["report"])' "$demo_root/second-summary.json")
+uv run modelvet verify "$demo_root/reports/$report_rel" > "$demo_root/verified.json"
+uv run modelvet compare "$demo_root/reports/$report_rel" "$demo_root/reports/$second_rel" --fail-on-change > "$demo_root/compared.json"
+uv run python - "$demo_root" "$report_rel" "$second_rel" <<'PY'
+import hashlib, json, sys
+from pathlib import Path
+root = Path(sys.argv[1])
+rows = [{"path": name, "expected_report_sha256": hashlib.sha256((root / "reports" / name).read_bytes()).hexdigest()} for name in sys.argv[2:]]
+(root / "batch.json").write_text(json.dumps({"schema_version": "1.0.0", "reports": rows}))
+PY
+uv run modelvet audit-batch "$demo_root/batch.json" --root "$demo_root/reports" > "$demo_root/batch-audit.json"
+```
+
+All commands in this clean audit example return 0. Verification means declared stored bytes match; it does not authenticate authors or approve an artifact. Incomplete/pin-mismatched audits return 30. `compare --fail-on-change` returns 30 on semantic change. Manifest paths must be canonical, unique, relative to the explicit root; no discovery or model access occurs. Default output suppresses paths; digests can remain linkable. Keep the manifest and redirected output private. See [bounds and schemas](../docs/REPORT_AUDIT_SPEC.md).

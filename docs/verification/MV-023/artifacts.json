@@ -1,0 +1,50 @@
+{
+  "observed_at": "2026-10-20T16:17:29.863668+00:00",
+  "head_observed": "e537025a2e39bcbadb4b66b8d8b5e4ba40abd74c",
+  "worktree_status": [
+    " M docs/PROGRESS.md",
+    " M docs/verification/MV-023/README.md",
+    "?? docs/verification/MV-023/final-build.log",
+    "?? docs/verification/MV-023/whitespace-review.json"
+  ],
+  "agent_commits_pushes_tags": false,
+  "scope": "Local development corpus/pilot and loader review preparation; independent research/PH-11/public gates pending by user selection",
+  "artifacts": [
+    {
+      "path": "dist/modelvet-0.1.0-py3-none-any.whl",
+      "size": 94368,
+      "sha256": "be1b0b79735a61f8de51b23827c071c7bcd74b81f9aa65c891413a786c67a328"
+    },
+    {
+      "path": "dist/modelvet-0.1.0.tar.gz",
+      "size": 240819,
+      "sha256": "c7a7a55c3cfd05ab406c9344f3d300eb5420b820f97d26c4214a81fb4ed0c771"
+    }
+  ],
+  "uv_lock_sha256": "a46d68b74ef8036d8bdad809862d3e0fabf77e2f5e078b6f21a5cde8240eeba5",
+  "third_party_dependencies_added": 0,
+  "packaged_schemas": [
+    "modelvet/schemas/advisories-v1.json",
+    "modelvet/schemas/benchmark-corpus-v1.json",
+    "modelvet/schemas/benchmark-run-v1.json",
+    "modelvet/schemas/conflict-v1.json",
+    "modelvet/schemas/coverage-v1.json",
+    "modelvet/schemas/decision-v1.json",
+    "modelvet/schemas/evidence-v1.json",
+    "modelvet/schemas/policy-v1.json",
+    "modelvet/schemas/report-v1.json"
+  ],
+  "wheel_all_python_sources_match": true,
+  "sdist_current_docs_corpus_match": true,
+  "operational_evidence_excluded": true,
+  "full_tests_passed": 486,
+  "linux_only_skipped": 1,
+  "targeted_tests_passed": 60,
+  "post_docs_release_contract_passed": 12,
+  "final_doc_contract_passed": 3,
+  "whitespace_review_files": 138,
+  "whitespace_problems": 0,
+  "real_pilot_exit": 30,
+  "real_pilot_status": "INCONCLUSIVE",
+  "loader_enabled": false
+}

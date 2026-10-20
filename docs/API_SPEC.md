@@ -129,3 +129,11 @@ application/scan.py owns ScanRequest/ScanOutcome/ScanService. ReportBuilder addi
 ## MV-022/023 development experiments
 
 `benchmarks.corpus.load_manifest(path)` validates a bounded closed recipe manifest and re-establishes generator/file/artifact identity and stdlib method labels. `materialize(case, path)` exclusively creates private inert fixture bytes. `benchmarks.runner.run(manifest_path, output, repeats=2, timeout_s=120)` writes a fresh private pilot tree with result.json last as completion marker, returning `PilotResult`. `development_metrics(observations)` rejects duplicate/mismatched identities and separates eligibility, unavailability, partial states and policy blocks. No efficacy rates exist without reviewed positives. All pilot results are INCONCLUSIVE; no benchmark result can promote admission. External/human-reviewed holdout ingestion is not implemented.
+
+## Stored-report audit API — FR-022–024
+
+- `reports.audit.verify_report(path, expected_report_sha256=None, max_raw_bytes=32 MiB, max_attachments=64) -> ReportAudit`. Hash only declared raw evidence; preserve explicit unresolved states and report byte identity.
+- `reports.compare.compare_reports(before, after, show_paths=False, max_changes=200) -> ReportComparison`. Compare stored semantic content, with independent document/raw-declaration identity fields and bounded details.
+- `reports.batch.audit_batch(manifest_path, root, max_report_bytes=128 MiB, max_raw_bytes=128 MiB) -> BatchAudit`. Explicit relative manifest entries, no recursive discovery; report read/recheck charge and raw budget shared across rows.
+
+`read_report_bytes(path, max_bytes=32 MiB)` is the secure bounded reader shared with report validation. Limits can only decrease from their hard ceilings. Invalid inputs raise typed InvalidInput/BudgetExceeded; unresolved evidence remains result data. No API recalculates admission. Full wire and CLI semantics: [REPORT_AUDIT_SPEC](REPORT_AUDIT_SPEC.md).

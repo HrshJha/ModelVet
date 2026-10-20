@@ -1,0 +1,14 @@
+Created synthetic fixture. No trained model or safety claim.
+{"policy_digest": "sha256:d7de8bfeccfb859c8e0f790fc44602e36102b3a20f2351ea397428ced0900ab6", "policy_id": "default-policy-v1", "policy_version": "1", "valid": true}
+Stored decision: APPROVE
+Configured static checks completed for this artifact and policy; scoped approval only.
+Artifact: sha256:7b1da1581e41f51d79f064001a17bf143a158b9dd5114d5bf3f23ccdb448682d
+Stored report; digest is not a signature or independent attestation.
+{"verify": "VERIFIED", "same_semantics": true, "batch": "VERIFIED", "verified_reports": 2}
+
+APPROVE: Configured static checks completed for this artifact and policy; scoped approval only.
+Report: <report-root>/7b1da1581e41/82f3d923ab8e462e9985c313b3af5458/report.json
+APPROVE: Configured static checks completed for this artifact and policy; scoped approval only.
+Report: <report-root>/7b1da1581e41/1a296dda356244349b7ca088a24837d1/report.json
+
+{"example_exit": 0}

@@ -1,0 +1,25 @@
+UP017 [*] Use `datetime.UTC` alias
+  --> docs/verification/MV-035/verify_candidate.py:83:33
+   |
+81 | ).stdout.strip()
+82 | record = {
+83 |     "observed_at": datetime.now(timezone.utc).isoformat(),
+   |                                 ^^^^^^^^^^^^
+84 |     "head_observed": head,
+85 |     "worktree_status": status,
+   |
+help: Convert to `datetime.UTC` alias
+   |
+7  | import zipfile
+   - from datetime import datetime, timezone
+8  + from datetime import datetime, timezone, UTC
+9  | from pathlib import Path
+--------------------------------------------------------------------------------
+82 | record = {
+   -     "observed_at": datetime.now(timezone.utc).isoformat(),
+83 +     "observed_at": datetime.now(UTC).isoformat(),
+84 |     "head_observed": head,
+   |
+
+Found 1 error.
+[*] 1 fixable with `--fix`.

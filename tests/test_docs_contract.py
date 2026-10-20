@@ -40,7 +40,7 @@ def test_p0_requirement_task_test_traceability() -> None:
         assert re.search(r"MV-\d{3}", row) and re.search(r"T-[A-Z0-9-]+", row)
         assert (ROOT / "tests" / test).is_file() and requirement in tasks
     ids = re.findall(r"^### (MV-\d{3}) —", tasks, re.M)
-    assert ids == [f"MV-{i:03d}" for i in range(1, 33)]
+    assert ids == [f"MV-{i:03d}" for i in range(1, 36)]
 
 
 def test_documentation_relative_links_resolve() -> None:
@@ -78,3 +78,26 @@ def test_version_support_and_claim_boundaries_are_explicit() -> None:
             "targets"
         ]["sdist"]["exclude"]
     )
+
+
+def test_local_audit_extension_requirement_task_test_traceability() -> None:
+    prd = (ROOT / "PRD.md").read_text()
+    tasks = (ROOT / "docs/TASKS.md").read_text()
+    roadmap = (ROOT / "docs/ROADMAP.md").read_text()
+    for requirement, task, phase, test in (
+        ("FR-022", "MV-033", "PH-12", "test_report_audit.py"),
+        ("FR-023", "MV-034", "PH-13", "test_report_compare.py"),
+        ("FR-024", "MV-035", "PH-14", "test_report_batch.py"),
+    ):
+        row = next(line for line in prd.splitlines() if line.startswith(f"| {requirement} |"))
+        assert "| P1 |" in row and task in row and "T-" in row
+        assert f"### {task} —" in tasks and phase in roadmap
+        assert (ROOT / "tests" / test).is_file()
+    for schema in (
+        "report-audit-v1.json",
+        "report-comparison-v1.json",
+        "report-batch-manifest-v1.json",
+        "report-batch-audit-v1.json",
+    ):
+        assert (ROOT / "schemas" / schema).is_file()
+        assert schema in (ROOT / "docs/REPORT_AUDIT_SPEC.md").read_text()

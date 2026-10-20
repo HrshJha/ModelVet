@@ -69,6 +69,9 @@ P0 = essential first release, P1 = validated follow-up, P2 = gated research. The
 | FR-019 | Advisory enrichment | P1 | Use explicitly supplied offline OSV snapshot with timestamp; network mode separate and opt-in | `Dependencies` | `MV-020` | `T-OSV-01` |
 | FR-020 | Doctor diagnostics | P0 | Report dependency availability and support status without scanning or importing models | `CLI` | `MV-018` | `T-DOCTOR-01` |
 | FR-021 | Loader-version discrepancy experiment | P2 | Show observed v1/v2 behavioral differences on independently checked controlled fixtures | `Verification` | `MV-031` | `T-VERSION-01` |
+| FR-022 | Stored raw evidence verification | P1 | Hash every declared bounded attachment; incomplete/tampered evidence cannot verify | `Reports` | `MV-033` | `T-AUDIT-01` |
+| FR-023 | Stored report comparison | P1 | Compare identities/semantic evidence without recomputing admission; bounded private output | `Reports` | `MV-034` | `T-COMPARE-01` |
+| FR-024 | Batch stored-report audit | P1 | Explicit local manifest, aggregate budgets, independent row failures and no false aggregate success | `Reports` | `MV-035` | `T-BATCH-01` |
 
 ### Requirement contracts
 
@@ -227,3 +230,7 @@ MV-020 implements a separate optional offline advisory supplement on stored depe
 ## FR-017 development checkpoint — 2026-10-20
 
 MV-022/023 engineering now supplies ten inert development recipes, frozen identities/method labels, a validated pilot runner, raw evidence, fair input-context eligibility and null efficacy metrics where reviewed data is absent. A real ModelScan 0.8.8 two-repeat local pilot is explicitly INCONCLUSIVE. This does not complete the independent baseline benchmark requirement: hidden holdout, independent adjudication and broader eligible comparisons remain pending by user selection. No loader execution requirement is implemented; PH-11 gates remain in force.
+
+## Local static report extension — FR-022–024
+
+The user explicitly selected “Extend the local feature plan.” PH-12–14 extend the local static CLI while externally gated research remains pending. PH-12–14 add raw-attachment verification, report comparison and explicit-manifest batch auditing. They consume existing stored reports, never load models, recalculate admission or imply author authentication. New task/FR IDs extend the original register without renumbering it. This is implementation scope, not acceptance of the proposed ADRs or external security gates. See REPORT_AUDIT_SPEC for finite budgets, privacy and command semantics.

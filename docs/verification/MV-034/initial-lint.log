@@ -1,0 +1,22 @@
+E501 Line too long (106 > 100)
+  --> src/modelvet/reports/compare.py:68:101
+   |
+66 |     admission_recomputed: Literal[False] = False
+67 |     notice: Literal[
+68 |         "Stored assertions only; raw bytes and authors are not authenticated. No admission is recomputed."
+   |                                                                                                     ^^^^^^
+69 |     ] = "Stored assertions only; raw bytes and authors are not authenticated. No admission is recomputed."
+   |
+
+E501 Line too long (106 > 100)
+  --> src/modelvet/reports/compare.py:69:101
+   |
+67 |     notice: Literal[
+68 |         "Stored assertions only; raw bytes and authors are not authenticated. No admission is recomputed."
+69 |     ] = "Stored assertions only; raw bytes and authors are not authenticated. No admission is recomputed."
+   |                                                                                                     ^^^^^^
+70 |
+71 |     @model_validator(mode="after")
+   |
+
+Found 2 errors.

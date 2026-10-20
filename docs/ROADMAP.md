@@ -17,6 +17,9 @@ Status: **PLANNED**, 2026-10-20. PH-01–07 and local PH-09/10 candidate work ar
 | PH-09 | Security hardening and CI | MV-024–MV-026 | 16–28 h | P0 | T-RESOURCE-01/T-RELEASE-01 |
 | PH-10 | Documentation and release candidate | MV-027–MV-029 | 10–18 h | P0 | T-RELEASE-01 |
 | PH-11 | Gated isolated loading research | MV-030–MV-032 | 35–70 h | P2 | T-VM-01 |
+| PH-12 | Stored raw-evidence verification | MV-033 | not calibrated | P1 local extension | T-AUDIT-01 |
+| PH-13 | Stored report comparison | MV-034 | not calibrated | P1 local extension | T-COMPARE-01 |
+| PH-14 | Explicit-manifest batch audit | MV-035 | not calibrated | P1 local extension | T-BATCH-01 |
 
 ## Dependency graph
 
@@ -177,3 +180,7 @@ Research here means independent source/version review, fixture provenance, secur
 ## Smallest end-to-end demonstration
 
 Input: 1 local deliberately malformed synthetic safetensors fixture, default policy and scanner configured. Output: manifest SHA-256; malformed-header FAILED; incomplete mandatory evidence; `INSUFFICIENT` JSON and Markdown; exit 30; no model execution. This must be tested *before* adding dashboards, remote registry support or broad frameworks.
+
+## Local continuation phases — PH-12–14 implemented
+
+PH-12–14 extend the completed static report path independently of PH-11: MV-016 → MV-033 → MV-034 → MV-035. They handle stored-report audit workflows only. The original phase estimates remain historical and do not include this extension; no delivery estimate is invented. New IDs are appended, and the loader/research/public-release gates remain unchanged. Each task must pass its own targeted/full gate before advancing.

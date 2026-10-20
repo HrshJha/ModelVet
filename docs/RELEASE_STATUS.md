@@ -28,3 +28,7 @@ Run the pinned hosted matrix and review the actual results before widening suppo
 The PH-10 evidence above is the historical local candidate checkpoint. Subsequent PH-08/MV-020 work adds an optional offline advisory supplement; current build/test evidence is retained in verification/MV-020/. A synthetic development pilot is INCONCLUSIVE; hidden holdout and independent adjudication remain pending. PH-11 loader execution remains gated and unimplemented. The local candidate has no benchmark superiority, legal clearance or universal model-safety claim.
 
 The user explicitly selected leaving independent benchmark/security review and dedicated Linux/KVM gates pending while local validation finishes. PH-11 review preparation is documented in LOADER_REVIEW_PACKET.md; it enables no capability. Latest local corpus/pilot/package evidence is in verification/MV-023/.
+
+## PH-12–14 local extension
+
+The user selected “Extend the local feature plan.” Verify, compare and explicit-manifest batch audits now extend the local static report workflow. Current source/build/test identities and actual results are retained in `verification/MV-035/`; prior checkpoints above remain historical. No dependency, admission policy or loader capability changed. Hosted CI, Linux validation, independent review, public release and PH-11 gates remain pending.

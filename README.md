@@ -12,6 +12,7 @@ Local static assessment of model artifacts, with independent coverage, determini
 - Uses a separately installed, pinned ModelScan executable when applicable; retains bounded original and normalized evidence.
 - Reconciles each applicable file/check pair and evaluates independent BLOCK, INSUFFICIENT, named CONTROLS, then APPROVE.
 - Writes schema-validated reports outside input using private, atomic, non-overwriting output.
+- Verifies declared raw report attachments, compares stored report semantics, and audits explicit report batches with shared limits.
 - Optionally matches declared exact PyPI versions against an explicitly supplied offline OSV snapshot, as supplementary evidence.
 
 `APPROVE` means configured static predicates completed on the exact artifact under the recorded policy. It does not establish malware freedom, loader safety, legal rights or verified provenance. ModelVet does not load models, import repository code, download artifacts or use an LLM judge.
@@ -37,6 +38,9 @@ modelvet scan ARTIFACT_DIR [--policy FILE] [--out DIR] [--scanner auto|modelscan
 modelvet inspect REPORT.json [--format text|json] [--show-evidence]
 modelvet advisories REPORT.json --as-of UTC_RFC3339 [--snapshot FILE]
                     [--max-age-days N] [--required|--optional]
+modelvet verify REPORT.json [--expected-report-sha256 HEX]
+modelvet compare BEFORE.json AFTER.json [--show-paths] [--fail-on-change]
+modelvet audit-batch MANIFEST.json --root REPORT_ROOT
 modelvet policy validate POLICY.toml [--json]
 modelvet doctor [--json]
 modelvet version [--json]
@@ -47,7 +51,7 @@ modelvet version [--json]
 | 0 | Scoped APPROVE or successful non-scan command |
 | 10 | CONTROLS; named conditions and owners apply |
 | 20 | BLOCK; independently supported explicit prohibition |
-| 30 | INSUFFICIENT; required evidence incomplete or unresolved |
+| 30 | INSUFFICIENT, incomplete audit/supplement, or requested semantic-change signal |
 | 40 | Invalid input/config/schema/budgets/paths |
 | 50 | Failure before a defensible report could be completed |
 | 130 | Interrupted |
@@ -55,6 +59,8 @@ modelvet version [--json]
 JSON machine output uses stdout; routine scan status/errors use stderr. Summary `report` paths are relative to the selected output root; absolute host roots are redacted. JSON is always saved, including with `--format markdown`. `doctor` exit 0 means diagnostics completed: inspect availability/readiness fields. `inspect` validates a stored assertion; a digest is not a signature or independent attestation.
 
 The optional `advisories` command emits JSON evidence bound to an existing report and a local snapshot; it does not recompute admission. Required unresolved evidence or any affected-version match returns 30. Optional unresolved evidence may return 0 while remaining visibly unknown; 0 is not an admission verdict. It makes no network calls. See [format, scope and examples](docs/ADVISORY_SPEC.md).
+
+The [stored-report audit commands](docs/REPORT_AUDIT_SPEC.md) emit JSON without changing their inputs. `verify` and `audit-batch` return 0 only when declared byte checks complete; incomplete evidence returns 30. `compare` returns 0 on a completed comparison, or 30 on semantic change with `--fail-on-change`. These results do not recompute admission or authenticate authors. Paths are suppressed by default; use `umask 077` for redirected output.
 
 ## Policy, scanner and limits
 

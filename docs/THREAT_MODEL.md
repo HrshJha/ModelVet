@@ -78,3 +78,9 @@ Optional local snapshots are untrusted, bounded data. Refuse linked/special/over
 ## MV-022/023 development experiment boundary
 
 Only closed inert recipes are generated: bounded malformed/index/declaration cases and a strict static pickle opcode allowlist. No archive extraction or model loading occurs on the host. The manifest cannot select an executable, external payload, arbitrary path, hidden split or independent-review status. Generator/file/artifact identities and an alternative static method must agree. Existing ModelScan process boundaries apply; raw output remains private and untrusted. Corpus labels and pilot metrics do not establish exploitability or loader behavior. No review or host gate is relaxed by development repeat agreement. The PH-11 proposed review packet is preparation only and enables no runner.
+
+## Stored report audits — FR-022–024
+
+Stored reports, batch manifests and raw attachment paths remain untrusted. Audit reads reject linked/special files and unsafe ancestry; canonical relative manifest paths cannot select outside the explicit root. Raw filenames are constructed only from validated SHA-256 values. Count, per-file and shared byte ceilings bound work; report/manifest/root rechecks detect observed changes. These checks are best effort, not an atomic snapshot against a concurrent attacker.
+
+A consistent report plus raw bytes is forgeable by its author. VERIFIED authenticates neither author nor model safety; an external hash pin only checks equality to the operator-supplied pin. No failed/unprocessed batch row can produce aggregate VERIFIED, and no audit promotes admission. Comparison hides free text and relative paths by default; hashes remain linkable. Stdout redirection permissions belong to the caller (`umask 077` examples). No network, deserialization, artifact import or new dependency is introduced.

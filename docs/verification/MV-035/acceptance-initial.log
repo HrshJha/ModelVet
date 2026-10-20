@@ -1,0 +1,16 @@
+............................F....                                        [100%]
+=================================== FAILURES ===================================
+_______ test_byte_verified_insufficient_report_cannot_promote_admission ________
+
+tmp_path = PosixPath('/private/var/folders/dh/_5m7l0cd7gv5nypd9dv3lyyh0000gn/T/pytest-of-harshkumarjha/pytest-268/test_byte_verified_insufficien0')
+
+    def test_byte_verified_insufficient_report_cannot_promote_admission(tmp_path):
+        from fixture_factory import artifact
+    
+>       from modelvet.core.scan import ScanService
+E       ModuleNotFoundError: No module named 'modelvet.core.scan'
+
+tests/test_report_batch.py:241: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED tests/test_report_batch.py::test_byte_verified_insufficient_report_cannot_promote_admission
+1 failed, 32 passed in 1.18s

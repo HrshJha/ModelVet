@@ -271,3 +271,64 @@ runpy.run_module("modelvet.benchmarks.runner", run_name="__main__")
     summary = json.loads(result.stdout)
     assert summary["study_status"] == "INCONCLUSIVE" and summary["observations"] == 20
     assert (parent / "installed-pilot/result.json").is_file()
+
+
+def test_installed_report_audit_compare_and_batch_without_network(installed_candidate) -> None:
+    import hashlib
+    import shutil
+
+    parent, python, _, _ = installed_candidate
+    target = parent / "audit-feature-input"
+    command([str(python), str(ROOT / "examples/create_fixture.py"), str(target)], cwd=parent)
+    output = parent / "audit-feature-reports"
+    reports = []
+    for _ in range(2):
+        scan = invoke_installed(
+            installed_candidate,
+            "scan",
+            str(target),
+            "--out",
+            str(output),
+            "--json-summary",
+            network_guard=True,
+        )
+        assert scan.returncode == 0, scan.stderr
+        reports.append(output / json.loads(scan.stdout)["report"])
+    shutil.rmtree(target)  # Audits must not rescan or require the original artifact.
+    first_pin = hashlib.sha256(reports[0].read_bytes()).hexdigest()
+    verified = invoke_installed(
+        installed_candidate,
+        "verify",
+        str(reports[0]),
+        "--expected-report-sha256",
+        first_pin,
+        network_guard=True,
+    )
+    assert verified.returncode == 0 and json.loads(verified.stdout)["status"] == "VERIFIED"
+    changed = invoke_installed(
+        installed_candidate,
+        "verify",
+        str(reports[0]),
+        "--expected-report-sha256",
+        "f" * 64,
+        network_guard=True,
+    )
+    assert changed.returncode == 30
+    compared = invoke_installed(
+        installed_candidate, "compare", *map(str, reports), "--fail-on-change", network_guard=True
+    )
+    assert compared.returncode == 0 and json.loads(compared.stdout)["same_semantics"]
+    manifest = parent / "report-audit-batch.json"
+    rows = [{"path": str(p.relative_to(output))} for p in reports]
+    manifest.write_text(json.dumps({"schema_version": "1.0.0", "reports": rows}))
+    audited = invoke_installed(
+        installed_candidate, "audit-batch", str(manifest), "--root", str(output), network_guard=True
+    )
+    assert audited.returncode == 0 and json.loads(audited.stdout)["verified_reports"] == 2
+    rows[0]["expected_report_sha256"] = "f" * 64
+    manifest.write_text(json.dumps({"schema_version": "1.0.0", "reports": rows}))
+    audited = invoke_installed(
+        installed_candidate, "audit-batch", str(manifest), "--root", str(output), network_guard=True
+    )
+    assert audited.returncode == 30 and json.loads(audited.stdout)["unresolved_reports"] == 1
+    assert str(parent) not in audited.stdout + audited.stderr

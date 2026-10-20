@@ -112,3 +112,7 @@ Every confirmed security failure: create harmless reproducer → assert fails on
 ## T-BENCH-01 local engineering evidence
 
 `test_benchmark_manifest.py`: 28 cases cover deterministic identity/materialization, modes, alternative byte methods, bad inputs, links/limits, tampered paths/hashes/eligibility/labels and forbidden review/holdout promotion. `test_benchmark_metrics.py`: 23 cases separate NOT_APPLICABLE/unavailable from misses, keep zero-denominator rates null, reject contradictory/duplicate identities, validate complete accounting and fail without a completion marker on report failure/interruption. A fresh installed-package test runs the pilot offline with unavailable scanner injection. Real ModelScan development evidence is retained separately; no ordinary CI malicious execution or independent adjudication is claimed.
+
+## PH-12–14 report audit acceptance
+
+`tests/test_report_audit.py`, `tests/test_report_compare.py` and `tests/test_report_batch.py` cover byte/pin mismatches, missing/linked/special files, malformed/oversized input, identity drift, aggregate budgets, omitted rows, privacy, schema coherence and partial failures. `tests/test_release.py` exercises all three commands from an installed wheel with socket connections denied and original artifacts removed. Audits preserve stored decisions and cannot provide new admission. The exact targeted/full results are retained in verification/MV-033 through MV-035; Linux-only resource enforcement remains skipped locally.

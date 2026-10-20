@@ -1,6 +1,6 @@
 # Executable implementation backlog
 
-**As of 2026-10-20 P0 tasks through MV-029 are complete for the local candidate. Hosted CI/public release remain pending; PH-08/MV-020 is complete; MV-022/023 local development engineering is implemented with independent research gates PENDING; gated PH-11 execution tasks are NOT STARTED.** Task IDs stable; completion means implementation + test evidence + updated PROGRESS, never existence of planned filename alone. **Scheduling order follows P0 phase dependencies rather than numeric task IDs**: MV-021 (PH-07/P0) precedes optional MV-020 (PH-08/P1) in the recommended release path. There is no remaining local-candidate P0 implementation task in the selected scope. Task estimates are focused hours, not time-to-delivery promises. Command patterns remain planned until their task evidence records successful execution.
+**As of 2026-10-20 P0 tasks through MV-029 are complete for the local candidate. Hosted CI/public release remain pending; PH-08/MV-020 is complete; MV-022/023 local development engineering is implemented with independent research gates PENDING; gated PH-11 execution tasks are NOT STARTED.** PH-12–14 local report audits are complete with evidence in verification/MV-033 through MV-035. Task IDs stable; completion means implementation + test evidence + updated PROGRESS, never existence of planned filename alone. **Scheduling order follows P0 phase dependencies rather than numeric task IDs**: MV-021 (PH-07/P0) precedes optional MV-020 (PH-08/P1) in the recommended release path. There is no remaining local-candidate P0 implementation task in the selected scope. Task estimates are focused hours, not time-to-delivery promises. Command patterns remain planned until their task evidence records successful execution.
 
 ## Backlog index
 
@@ -38,6 +38,9 @@
 | MV-030 | Design and independently review isolated loader runner | P2 | PH-11 | FR-018 | MV-023,MV-029 | 15–30 h |
 | MV-031 | Implement scoped version-specific loader test | P2 | PH-11 | FR-021 | MV-030 | 12–25 h |
 | MV-032 | Independently adjudicate discrepancy findings | P2 | PH-11 | FR-018,FR-021 | MV-031 | 8–15 h |
+| MV-033 | Verify stored raw evidence | P1 | PH-12 | FR-022 | MV-016 | not calibrated |
+| MV-034 | Compare stored reports | P1 | PH-13 | FR-023 | MV-033 | not calibrated |
+| MV-035 | Audit an explicit report batch | P1 | PH-14 | FR-024 | MV-033,MV-034 | not calibrated |
 
 ## Detailed task cards (normative)
 
@@ -515,6 +518,42 @@
 - **Planned verification:** `uv run pytest -q tests/isolated/test_version_diff.py`; additionally run `uv run pytest -q` and `uv run ruff check .` after broader suite exists. Commands are unverified until code and environment exist.
 - **Acceptance / task DoD:** Every claimed discrepancy has reproducible artifact, scanner, loader and guest identity. Actual command exit/status and test log recorded in `PROGRESS.md`, diff reviewed, security invariants checked, and all relevant source-of-truth docs updated. Do not mark complete on prose alone.
 
+### MV-033 — Verify stored raw evidence
+
+- **Priority / status / phase:** P1; **COMPLETE**; `PH-12`. **Requirement(s):** FR-022.
+- **Prerequisites/dependencies:** MV-016; static report contract implemented. No dependency on enabling PH-11.
+- **Expected files:** `src/modelvet/reports/audit.py`, `tests/test_report_audit.py`, versioned schema, CLI and REPORT_AUDIT_SPEC.
+- **Implementation procedure:** Validate the stored report, securely hash each declared raw attachment, honor aggregate budgets and recheck report identity. Missing, unsafe, mismatched or changing bytes cannot yield VERIFIED. No source artifact is loaded or rescanned.
+- **Failure modes:** invalid schema/path, unsafe file, identity drift, exhausted budgets, write/read errors and interruption must remain controlled; no fabricated success.
+- **Planned verification:** `uv run pytest -q tests/test_report_audit.py`; then lock/lint/format/security/types/full tests/build.
+- **Acceptance / task DoD:** clean, malformed, missing, conflicting, unsupported, budget and failure tests pass; actual logs and security/privacy limits recorded in PROGRESS. No new dependency without review. No admission or authentication claim.
+
+**Actual verification:** verification/MV-033/task.log: 22 targeted pass; gate.log: 508 full-suite pass / one Linux-only skip; lock/lint/format/security/types (52 source files) pass. Secure bounded raw hashing, missing/unsafe/drift/pin/budget paths and 0/30/40 CLI states are verified. This is stored byte consistency, not authentication/admission; no dependency added.
+
+### MV-034 — Compare stored reports
+
+- **Priority / status / phase:** P1; **COMPLETE**; `PH-13`. **Requirement(s):** FR-023.
+- **Prerequisites/dependencies:** MV-033; static report contract implemented. No dependency on enabling PH-11.
+- **Expected files:** `src/modelvet/reports/compare.py`, `tests/test_report_compare.py`, versioned schema, CLI and REPORT_AUDIT_SPEC.
+- **Implementation procedure:** Validate both stored reports; compare artifact/policy/semantic identities and bounded file/check summaries. Hide relative filenames by default, disclose truncation and never recalculate or promote admission.
+- **Failure modes:** invalid schema/path, unsafe file, identity drift, exhausted budgets, write/read errors and interruption must remain controlled; no fabricated success.
+- **Planned verification:** `uv run pytest -q tests/test_report_compare.py`; then lock/lint/format/security/types/full tests/build.
+- **Acceptance / task DoD:** clean, malformed, missing, conflicting, unsupported, budget and failure tests pass; actual logs and security/privacy limits recorded in PROGRESS. No new dependency without review. No admission or authentication claim.
+
+**Actual verification:** verification/MV-034/gate.log: 13 targeted / 521 full-suite pass, one Linux-only skip; lock/lint/format/security/types (53 source files) pass. Run/raw metadata is separate from semantic change; stored policy/decision differences never trigger reevaluation. Relative names/free text are suppressed by default; truncation/counts and drift checks are verified. Initial formatting/type failures retained. Next MV-035.
+
+### MV-035 — Audit an explicit report batch
+
+- **Priority / status / phase:** P1; **COMPLETE**; `PH-14`. **Requirement(s):** FR-024.
+- **Prerequisites/dependencies:** MV-033,MV-034; static report contract implemented. No dependency on enabling PH-11.
+- **Expected files:** `src/modelvet/reports/batch.py`, `tests/test_report_batch.py`, versioned schema, CLI and REPORT_AUDIT_SPEC.
+- **Implementation procedure:** Read a bounded closed local JSON manifest with relative report paths. Enforce one report root and aggregate report/raw budgets; preserve one typed row per input. Any invalid/missing/incomplete row prevents aggregate verification.
+- **Failure modes:** invalid schema/path, unsafe file, identity drift, exhausted budgets, write/read errors and interruption must remain controlled; no fabricated success.
+- **Planned verification:** `uv run pytest -q tests/test_report_batch.py`; then lock/lint/format/security/types/full tests/build.
+- **Acceptance / task DoD:** clean, malformed, missing, conflicting, unsupported, budget and failure tests pass; actual logs and security/privacy limits recorded in PROGRESS. No new dependency without review. No admission or authentication claim.
+
+**Actual verification:** verification/MV-035/gate.log: 29 batch / 558 full-suite tests pass, one Linux-only skip; lock/lint/format/security/types (54 source files) pass. targeted.log: 98 combined phase/CLI/fresh-install cases pass before two final regressions were added; acceptance.log: 33 batch/doc cases pass. examples.log runs the documented clean workflow successfully. Batch limits reserve both report reads, preserve failed rows, reject root/manifest drift and never promote stored admission. Initial test import failure is retained in acceptance-initial.log. Final package identities and release checks are retained alongside these logs; no dependency added.
+
 ## Next task
 
-No further local-candidate P0 task remains in the selected scope. Next external gates: hosted Ubuntu/macOS CI and explicit project review before public release. No eligible local task remains within the selected scope. MV-022/023 development corpus/pilot are implemented; independent review and hidden holdout remain pending. PH-11 prerequisites are documented in LOADER_REVIEW_PACKET.md; MV-030–032 remain gated and unimplemented. Hosted CI and project review remain pending by user selection.
+No further local-candidate P0 task remains in the selected scope. Next external gates: hosted Ubuntu/macOS CI and explicit project review before public release. The requested three local extension phases **MV-033–035 / PH-12–14 are complete**. No additional local task is selected; existing external gates remain pending. MV-022/023 development corpus/pilot are implemented; independent review and hidden holdout remain pending. PH-11 prerequisites are documented in LOADER_REVIEW_PACKET.md; MV-030–032 remain gated and unimplemented. Hosted CI and project review remain pending by user selection.

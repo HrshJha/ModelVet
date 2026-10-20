@@ -1,6 +1,6 @@
 # ModelVet progress dashboard
 
-**Updated 2026-10-20. Overall: local static candidate complete through PH-10. Hosted CI/public release PENDING by user-selected scope.** The five MVP commands and optional offline advisory command work. Work started against base `e2f2bb269683d79cd6a12757aa140357fef089ad`; a newer checkpoint `af86ffee5c7b4f1e990e9dbbdba6625e973acef0` appeared during this run outside the agent commands and was preserved. Latest observed checkpoint is `b91a791c6c3b4137a39fb540822e888d54948549`; final working-tree state and source hashes are recorded in `verification/MV-023/`. Only a synthetic development pilot ran; no model loading or independently adjudicated benchmark.
+**Updated 2026-10-20. Overall: local static candidate complete through PH-10. Hosted CI/public release PENDING by user-selected scope.** The five MVP commands, optional offline advisory command and three stored-report audit commands work. PH-12–14 are complete. Work started against base `e2f2bb269683d79cd6a12757aa140357fef089ad`; a newer checkpoint `af86ffee5c7b4f1e990e9dbbdba6625e973acef0` appeared during this run outside the agent commands and was preserved. Further external checkpoints were observed and preserved; the prior pilot checkpoint is recorded in `verification/MV-023/`; current extension source/build identities are in `verification/MV-035/`. Only a synthetic development pilot ran; no model loading or independently adjudicated benchmark.
 
 | Workstream | Actual state | Evidence |
 |---|---|---|
@@ -8,12 +8,12 @@
 | Architecture and threat model | Drafted, pending review | `ARCHITECTURE.md`, `THREAT_MODEL.md` |
 | Dependency resolution / lock | COMPLETE for foundation | `../pyproject.toml`, `../uv.lock`, `verification/MV-001/` |
 | Source implementation | Full local CLI, static checks, evidence/coverage/policy, reports and packaging | `../src/modelvet/` |
-| Tests/fixtures | 486 passed / one Linux-only skip | `verification/MV-023/gate.log` |
+| Tests/fixtures | 558 passed / one Linux-only skip | `verification/MV-035/gate.log` |
 | Benchmarks | INCONCLUSIVE local development pilot; independent research PENDING | `../benchmarks/results/`, `verification/MV-023/` |
 | Isolated model-loading safety | DEFERRED | PH-11 / ADR-009 proposed |
 | Release | NOT RELEASED | Local wheel/sdist verified; hosted CI/public release pending |
 
-**Active task:** none eligible locally; MV-022/023 engineering implemented. **Next gates:** independent corpus/security review and dedicated Linux/KVM prerequisites, left pending by user selection. **Next external gate:** hosted CI and explicit project review. ADRs remain Proposed; provisional toolchain choices and deviations are recorded in ADR-002.
+**Active task:** none; the requested PH-12–14 / MV-033–035 local extension is complete. **Next gates:** independent corpus/security review and dedicated Linux/KVM prerequisites, left pending by user selection. **Next external gate:** hosted CI and explicit project review. ADRs remain Proposed; provisional toolchain choices and deviations are recorded in ADR-002.
 
 ## Milestones
 
@@ -30,6 +30,9 @@
 | PH-09 | LOCAL CANDIDATE COMPLETE; hosted CI PENDING | MV-024–026, scope explicitly selected by user |
 | PH-10 | LOCAL CANDIDATE COMPLETE; public release PENDING | MV-027–029 verified; 381 pass / one Linux-only skip |
 | PH-11 | GATED; execution NOT STARTED | Proposed review packet prepared; no reviewed Linux/KVM environment |
+| PH-12 | COMPLETE | Raw evidence verification; 508 pass / one Linux-only skip |
+| PH-13 | COMPLETE | Stored report comparison; 521 pass / one Linux-only skip |
+| PH-14 | COMPLETE | Explicit report batch audit; 558 pass / one Linux-only skip |
 
 ## Decisions awaiting approval
 
@@ -115,3 +118,9 @@ On completing an individual task: edit only its status from NOT STARTED to COMPL
 - **2026-10-20 MV-023 local pilot/validation:** 60 targeted / 486 full-suite pass, one Linux-only skip; lock/lint/format/security/types (51 source files) pass. Fresh installed benchmark module runs with socket connections denied and an injected unavailable scanner; no completed result survives report failure/interruption. Real ModelScan 0.8.8 pilot on ten inert development cases, two repeats: 40 observations; six eligible joint input-context observations; fourteen baseline observations NOT_APPLICABLE. Outcome/policy/version tuples agree across 13 repeated eligible available groups, including unresolved outcomes. No efficacy/error rates or intervals are reported because independent adjudication and hidden holdout are absent. Complete private result/raw hashes and sanitized summary are retained; public study status INCONCLUSIVE.
 
 - **2026-10-20 later-phase readiness:** Proposed PH-11 review packet prepared; read-only checks confirm Darwin arm64, no KVM device/Firecracker/jailer. No loader code or execution added. User explicitly selected **leave those gates pending; finish local validation** for independent benchmark/security review and a dedicated Linux/KVM host. PH-11 and public release remain gated. A newer external Git checkpoint af86ffee5c7b4f1e990e9dbbdba6625e973acef0 was observed during work; no agent commit/push/tag was performed, and subsequent changes are saved uncommitted.
+
+- **2026-10-20 PH-12/MV-033 complete:** New local continuation adds raw-evidence verification; 22 targeted / 508 full-suite pass, one Linux-only skip; lock/lint/format/security/types pass (verification/MV-033/). Report byte pins and before/after checks, owner-path reads, bounded streaming raw hashes, missing/symlink/hardlink/FIFO/size/hash/drift and budget cases cannot falsely verify. New FR/task IDs extend the roadmap; external research/loader gates remain pending. Next MV-034.
+
+- **2026-10-20 PH-13/MV-034 complete:** 13 targeted / 521 full-suite pass, one Linux-only skip; lock/lint/format/security/types (53 source files) pass (verification/MV-034/). Comparison distinguishes exact report bytes, raw declarations and semantic content, counts changed files/check groups and suppresses names/free text by default. Policy decisions are displayed as stored; no admission evaluation or raw-file authentication occurs. Explicit truncation, source drift and 0/30/40 CLI cases pass. Next MV-035.
+
+- **2026-10-20 PH-14/MV-035 complete:** 29 batch / 558 full-suite tests pass, one Linux-only skip; lock/lint/format/security/types (54 source files) pass (verification/MV-035/). Explicit manifests retain all rows, share finite report/raw budgets and reject unsafe paths/drift. Captured report JSON is conservatively charged twice to reserve read/recheck work. A byte-verified INSUFFICIENT report remains INSUFFICIENT; audits never evaluate admission. 98 combined audit/CLI/fresh-install checks passed before final regressions; 33 batch/doc acceptance checks and the documented synthetic examples pass. Initial test-only import failure is retained. Final distribution/source identities and post-documentation verification are recorded in the same evidence directory. The user explicitly chose to extend the local plan; no dependencies, loader capability or accepted ADRs were added. All three requested local phases are complete; hosted CI, independent review/holdout, Linux/KVM, public release and PH-11 remain pending.

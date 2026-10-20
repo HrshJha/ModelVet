@@ -22,7 +22,18 @@ def invoke(*arguments: str) -> subprocess.CompletedProcess[str]:
 
 @pytest.mark.parametrize(
     "command",
-    [[], ["scan"], ["inspect"], ["advisories"], ["doctor"], ["version"], ["policy", "validate"]],
+    [
+        [],
+        ["scan"],
+        ["inspect"],
+        ["advisories"],
+        ["verify"],
+        ["compare"],
+        ["audit-batch"],
+        ["doctor"],
+        ["version"],
+        ["policy", "validate"],
+    ],
 )
 def test_help_and_exit_contract(command: list[str]) -> None:
     result = invoke(*command, "--help")
@@ -55,6 +66,9 @@ def test_scan_help_lists_all_flags() -> None:
         ["scan"],
         ["inspect"],
         ["advisories"],
+        ["verify"],
+        ["compare"],
+        ["audit-batch"],
         ["policy", "validate"],
         ["unknown"],
         ["scan", ".", "--scanner", "unsafe"],

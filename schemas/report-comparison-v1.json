@@ -1,0 +1,365 @@
+{
+  "$defs": {
+    "CheckDifference": {
+      "additionalProperties": false,
+      "properties": {
+        "path_digest": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Path Digest",
+          "type": "string"
+        },
+        "relpath": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Relpath"
+        },
+        "check_id": {
+          "title": "Check Id",
+          "type": "string"
+        },
+        "before_observations": {
+          "title": "Before Observations",
+          "type": "integer"
+        },
+        "after_observations": {
+          "title": "After Observations",
+          "type": "integer"
+        },
+        "before_statuses": {
+          "items": {
+            "$ref": "#/$defs/CheckStatus"
+          },
+          "title": "Before Statuses",
+          "type": "array"
+        },
+        "after_statuses": {
+          "items": {
+            "$ref": "#/$defs/CheckStatus"
+          },
+          "title": "After Statuses",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path_digest",
+        "relpath",
+        "check_id",
+        "before_observations",
+        "after_observations",
+        "before_statuses",
+        "after_statuses"
+      ],
+      "title": "CheckDifference",
+      "type": "object"
+    },
+    "CheckStatus": {
+      "enum": [
+        "COMPLETE",
+        "SKIPPED",
+        "FAILED",
+        "UNSUPPORTED",
+        "INCONCLUSIVE",
+        "NOT_RUN"
+      ],
+      "title": "CheckStatus",
+      "type": "string"
+    },
+    "DecisionState": {
+      "enum": [
+        "APPROVE",
+        "CONTROLS",
+        "BLOCK",
+        "INSUFFICIENT"
+      ],
+      "title": "DecisionState",
+      "type": "string"
+    },
+    "FileDifference": {
+      "additionalProperties": false,
+      "properties": {
+        "path_digest": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Path Digest",
+          "type": "string"
+        },
+        "relpath": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Relpath"
+        },
+        "kind": {
+          "enum": [
+            "ADDED",
+            "REMOVED",
+            "CHANGED"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "before_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Before Sha256"
+        },
+        "after_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "After Sha256"
+        },
+        "before_format": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileFormat"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "after_format": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileFormat"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "before_mismatch": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Before Mismatch"
+        },
+        "after_mismatch": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "After Mismatch"
+        }
+      },
+      "required": [
+        "path_digest",
+        "relpath",
+        "kind",
+        "before_sha256",
+        "after_sha256",
+        "before_format",
+        "after_format",
+        "before_mismatch",
+        "after_mismatch"
+      ],
+      "title": "FileDifference",
+      "type": "object"
+    },
+    "FileFormat": {
+      "enum": [
+        "SAFETENSORS",
+        "PICKLE_LIKE",
+        "PYTORCH_ZIP",
+        "ZIP_OTHER",
+        "JSON",
+        "MARKDOWN",
+        "TEXT",
+        "PYTHON_SOURCE",
+        "BINARY_UNKNOWN",
+        "UNKNOWN"
+      ],
+      "title": "FileFormat",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "before_report_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Before Report Sha256",
+      "type": "string"
+    },
+    "after_report_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "After Report Sha256",
+      "type": "string"
+    },
+    "before_artifact": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Before Artifact",
+      "type": "string"
+    },
+    "after_artifact": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "After Artifact",
+      "type": "string"
+    },
+    "before_policy": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Before Policy",
+      "type": "string"
+    },
+    "after_policy": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "After Policy",
+      "type": "string"
+    },
+    "before_semantic": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Before Semantic",
+      "type": "string"
+    },
+    "after_semantic": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "After Semantic",
+      "type": "string"
+    },
+    "stored_decision_before": {
+      "$ref": "#/$defs/DecisionState"
+    },
+    "stored_decision_after": {
+      "$ref": "#/$defs/DecisionState"
+    },
+    "same_report_bytes": {
+      "title": "Same Report Bytes",
+      "type": "boolean"
+    },
+    "same_artifact": {
+      "title": "Same Artifact",
+      "type": "boolean"
+    },
+    "same_policy": {
+      "title": "Same Policy",
+      "type": "boolean"
+    },
+    "same_semantics": {
+      "title": "Same Semantics",
+      "type": "boolean"
+    },
+    "same_declared_raw": {
+      "title": "Same Declared Raw",
+      "type": "boolean"
+    },
+    "changed_sections": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Changed Sections",
+      "type": "array"
+    },
+    "changed_file_count": {
+      "minimum": 0,
+      "title": "Changed File Count",
+      "type": "integer"
+    },
+    "changed_check_count": {
+      "minimum": 0,
+      "title": "Changed Check Count",
+      "type": "integer"
+    },
+    "omitted_file_changes": {
+      "minimum": 0,
+      "title": "Omitted File Changes",
+      "type": "integer"
+    },
+    "omitted_check_changes": {
+      "minimum": 0,
+      "title": "Omitted Check Changes",
+      "type": "integer"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/FileDifference"
+      },
+      "maxItems": 200,
+      "title": "Files",
+      "type": "array"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/CheckDifference"
+      },
+      "maxItems": 200,
+      "title": "Checks",
+      "type": "array"
+    },
+    "admission_recomputed": {
+      "const": false,
+      "default": false,
+      "title": "Admission Recomputed",
+      "type": "boolean"
+    },
+    "notice": {
+      "const": "Stored assertions; raw bytes and authors are not authenticated. No admission recomputed.",
+      "default": "Stored assertions; raw bytes and authors are not authenticated. No admission recomputed.",
+      "title": "Notice",
+      "type": "string"
+    }
+  },
+  "required": [
+    "before_report_sha256",
+    "after_report_sha256",
+    "before_artifact",
+    "after_artifact",
+    "before_policy",
+    "after_policy",
+    "before_semantic",
+    "after_semantic",
+    "stored_decision_before",
+    "stored_decision_after",
+    "same_report_bytes",
+    "same_artifact",
+    "same_policy",
+    "same_semantics",
+    "same_declared_raw",
+    "changed_sections",
+    "changed_file_count",
+    "changed_check_count",
+    "omitted_file_changes",
+    "omitted_check_changes",
+    "files",
+    "checks"
+  ],
+  "title": "ReportComparison",
+  "type": "object"
+}

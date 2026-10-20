@@ -34,3 +34,5 @@ There are no independently adjudicated discrepancy positives or hidden holdout, 
 ## Later phase prerequisites
 
 loader-readiness.json records current Darwin arm64, absent KVM/Firecracker/jailer and no supplied dedicated Linux host/independent review/holdout. Proposed review packet ../../LOADER_REVIEW_PACKET.md enables no capability and does not complete MV-030. User explicitly selected leaving these gates pending while finishing local validation. PH-08 research acceptance, PH-11 execution, hosted CI and public release remain pending.
+
+Final full rerun: final-gate.log, exit 0, 486 pass / one Linux-only skip, lock/lint/format/security/types (51 files) and wheel/sdist build pass. docs-final.log records three final documentation contract cases. The final archive rebuild after the last progress wording update is recorded in final-build.log. All original failures and earlier successful gates remain retained.

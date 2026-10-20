@@ -406,7 +406,9 @@ def serialize_report(report: Report) -> bytes:
     return raw
 
 
-def read_report(path: Path) -> Report:
+def read_report_bytes(path: Path, *, max_bytes: int = MAX_REPORT_BYTES) -> bytes:
+    if type(max_bytes) is not int or not 0 <= max_bytes <= MAX_REPORT_BYTES:
+        raise InvalidInput("Report read budget is outside hard ceilings.")
     selected = absolute_path(path)
     try:
         parent = open_directory(selected.parent)
@@ -422,9 +424,19 @@ def read_report(path: Path) -> Report:
                 or before.st_size > MAX_REPORT_BYTES
             ):
                 raise InvalidInput("Unsafe or oversized report file.")
-            raw = stream.read(MAX_REPORT_BYTES + 1)
+            if before.st_size > max_bytes:
+                from modelvet.core.errors import BudgetExceeded
+
+                raise BudgetExceeded("Report exceeds the remaining read budget.")
+            raw = stream.read(before.st_size)
             if stat_identity(before) != stat_identity(os.fstat(stream.fileno())):
                 raise InvalidInput("Report changed while reading.")
-        return parse_report(raw)
+        if len(raw) != before.st_size:
+            raise InvalidInput("Report changed while reading.")
+        return raw
     except OSError as exc:
         raise InvalidInput("Cannot safely read report file.") from exc
+
+
+def read_report(path: Path) -> Report:
+    return parse_report(read_report_bytes(path))

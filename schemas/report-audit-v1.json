@@ -1,0 +1,156 @@
+{
+  "$defs": {
+    "AttachmentAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Digest",
+          "type": "string"
+        },
+        "size": {
+          "maximum": 4194304,
+          "minimum": 0,
+          "title": "Size",
+          "type": "integer"
+        },
+        "status": {
+          "enum": [
+            "VERIFIED",
+            "MISSING",
+            "UNSAFE",
+            "SIZE_MISMATCH",
+            "HASH_MISMATCH",
+            "CHANGED",
+            "BUDGET_EXCEEDED"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "bytes_read": {
+          "default": 0,
+          "maximum": 4194304,
+          "minimum": 0,
+          "title": "Bytes Read",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "digest",
+        "size",
+        "status"
+      ],
+      "title": "AttachmentAudit",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "report_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Report Sha256",
+      "type": "string"
+    },
+    "artifact_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Artifact Digest",
+      "type": "string"
+    },
+    "semantic_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Semantic Digest",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "VERIFIED",
+        "INCOMPLETE"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "report_pin_matches": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Report Pin Matches"
+    },
+    "report_unchanged": {
+      "title": "Report Unchanged",
+      "type": "boolean"
+    },
+    "declared_attachments": {
+      "minimum": 0,
+      "title": "Declared Attachments",
+      "type": "integer"
+    },
+    "verified_attachments": {
+      "minimum": 0,
+      "title": "Verified Attachments",
+      "type": "integer"
+    },
+    "unresolved_attachments": {
+      "minimum": 0,
+      "title": "Unresolved Attachments",
+      "type": "integer"
+    },
+    "omitted_attachments": {
+      "minimum": 0,
+      "title": "Omitted Attachments",
+      "type": "integer"
+    },
+    "raw_bytes_read": {
+      "maximum": 33554432,
+      "minimum": 0,
+      "title": "Raw Bytes Read",
+      "type": "integer"
+    },
+    "attachments": {
+      "items": {
+        "$ref": "#/$defs/AttachmentAudit"
+      },
+      "maxItems": 64,
+      "title": "Attachments",
+      "type": "array"
+    },
+    "admission_recomputed": {
+      "const": false,
+      "default": false,
+      "title": "Admission Recomputed",
+      "type": "boolean"
+    },
+    "notice": {
+      "const": "Stored byte consistency only; not a signature, source rescan or admission decision.",
+      "default": "Stored byte consistency only; not a signature, source rescan or admission decision.",
+      "title": "Notice",
+      "type": "string"
+    }
+  },
+  "required": [
+    "report_sha256",
+    "artifact_digest",
+    "semantic_digest",
+    "status",
+    "report_pin_matches",
+    "report_unchanged",
+    "declared_attachments",
+    "verified_attachments",
+    "unresolved_attachments",
+    "omitted_attachments",
+    "raw_bytes_read",
+    "attachments"
+  ],
+  "title": "ReportAudit",
+  "type": "object"
+}

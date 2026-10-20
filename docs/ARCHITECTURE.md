@@ -142,3 +142,7 @@ A test fixture with an external scanner failure produces evidence showing `FAILE
 ## Optional offline advisory supplement
 
 MV-020 adds dependencies/advisories.py and a separate CLI path: read/validate stored report → bounded explicit OSV snapshot → exact-version evidence → digest-bound supplementary JSON. It has no network or model access and does not call the admission engine or rewrite reports. The static MVP scan path/policy contract is unchanged. See ADVISORY_SPEC.md.
+
+## Static report audit extension — PH-12–14
+
+The reports boundary owns `audit.py`, `compare.py` and `batch.py`. They consume validated stored reports through the secure bounded JSON reader; they never call the scan service or policy evaluator. Batch reuses captured bytes and raw audit logic with shared budgets. CLI wrappers map typed results/errors to documented exits. Versioned result/manifest schemas ship with the wheel. Read-only operations retain best-effort identity checks; no filesystem transaction or signature is implied. See [REPORT_AUDIT_SPEC](REPORT_AUDIT_SPEC.md).

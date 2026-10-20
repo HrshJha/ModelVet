@@ -1,0 +1,21 @@
+I001 [*] Import block is un-sorted or un-formatted
+   --> tests/test_report_compare.py:145:5
+    |
+144 |   def test_unrecognized_check_names_and_free_text_are_suppressed(tmp_path):
+145 | /     from test_policy import fixture
+146 | |     from test_reports import make_report
+147 | |     from modelvet.inventory.classify import FileFormat
+148 | |     from modelvet.reports.writer import ReportWriter
+    | |____________________________________________________^
+149 |
+150 |       left, _ = saved(tmp_path)
+    |
+help: Organize imports
+    |
+146 |     from test_reports import make_report
+147 +
+148 |     from modelvet.inventory.classify import FileFormat
+    |
+
+Found 1 error.
+[*] 1 fixable with `--fix`.

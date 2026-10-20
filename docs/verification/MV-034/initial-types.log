@@ -1,0 +1,3 @@
+src/modelvet/reports/compare.py:102: error: Need type annotation for "file_rows" (hint: "file_rows: list[<type>] = ...")  [var-annotated]
+src/modelvet/reports/compare.py:138: error: Need type annotation for "check_rows" (hint: "check_rows: list[<type>] = ...")  [var-annotated]
+Found 2 errors in 1 file (checked 53 source files)
