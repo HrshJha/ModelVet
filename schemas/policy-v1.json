@@ -1,0 +1,198 @@
+{
+  "$defs": {
+    "Control": {
+      "additionalProperties": false,
+      "properties": {
+        "control_id": {
+          "enum": [
+            "ISOLATED_LOADING",
+            "NO_CODE_IMPORT"
+          ],
+          "title": "Control Id",
+          "type": "string"
+        },
+        "owner": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Owner",
+          "type": "string"
+        }
+      },
+      "required": [
+        "control_id",
+        "owner"
+      ],
+      "title": "Control",
+      "type": "object"
+    },
+    "ControlRule": {
+      "additionalProperties": false,
+      "properties": {
+        "condition": {
+          "enum": [
+            "REPOSITORY_CODE",
+            "SERIALIZED_MODEL",
+            "MODEL_PRESENT"
+          ],
+          "title": "Condition",
+          "type": "string"
+        },
+        "control_ids": {
+          "items": {
+            "enum": [
+              "ISOLATED_LOADING",
+              "NO_CODE_IMPORT"
+            ],
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "Control Ids",
+          "type": "array"
+        },
+        "rule_id": {
+          "pattern": "^[A-Z][A-Z0-9_-]{0,63}$",
+          "title": "Rule Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "rule_id",
+        "condition",
+        "control_ids"
+      ],
+      "title": "ControlRule",
+      "type": "object"
+    },
+    "Prohibition": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "const": "REPOSITORY_CODE",
+          "title": "Category",
+          "type": "string"
+        },
+        "rule_id": {
+          "pattern": "^[A-Z][A-Z0-9_-]{0,63}$",
+          "title": "Rule Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "rule_id",
+        "category"
+      ],
+      "title": "Prohibition",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "applicability_version": {
+      "const": "2",
+      "title": "Applicability Version",
+      "type": "string"
+    },
+    "control_rules": {
+      "items": {
+        "$ref": "#/$defs/ControlRule"
+      },
+      "maxItems": 32,
+      "title": "Control Rules",
+      "type": "array"
+    },
+    "controls": {
+      "items": {
+        "$ref": "#/$defs/Control"
+      },
+      "maxItems": 2,
+      "title": "Controls",
+      "type": "array"
+    },
+    "mandatory_checks": {
+      "items": {
+        "enum": [
+          "identity",
+          "classification",
+          "structural:safetensors",
+          "structural:zip",
+          "metadata:local",
+          "dependencies:declared",
+          "source:presence",
+          "modelscan",
+          "scanner:resources"
+        ],
+        "type": "string"
+      },
+      "title": "Mandatory Checks",
+      "type": "array"
+    },
+    "optional_checks": {
+      "items": {
+        "enum": [
+          "identity",
+          "classification",
+          "structural:safetensors",
+          "structural:zip",
+          "metadata:local",
+          "dependencies:declared",
+          "source:presence",
+          "modelscan",
+          "scanner:resources"
+        ],
+        "type": "string"
+      },
+      "title": "Optional Checks",
+      "type": "array"
+    },
+    "policy_id": {
+      "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+      "title": "Policy Id",
+      "type": "string"
+    },
+    "policy_version": {
+      "pattern": "^[1-9][0-9]{0,8}$",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "prohibitions": {
+      "items": {
+        "$ref": "#/$defs/Prohibition"
+      },
+      "maxItems": 32,
+      "title": "Prohibitions",
+      "type": "array"
+    },
+    "required_claims": {
+      "default": [],
+      "items": {
+        "enum": [
+          "LICENSE",
+          "PROVENANCE",
+          "DEPENDENCY"
+        ],
+        "type": "string"
+      },
+      "title": "Required Claims",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "policy_id",
+    "policy_version",
+    "applicability_version",
+    "mandatory_checks",
+    "optional_checks",
+    "prohibitions",
+    "controls",
+    "control_rules"
+  ],
+  "title": "Policy",
+  "type": "object"
+}

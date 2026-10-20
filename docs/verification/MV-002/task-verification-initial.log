@@ -1,0 +1,260 @@
+.......FFFFFFF.....FF                                                    [100%]
+=================================== FAILURES ===================================
+__________________ test_invalid_arguments_exit_40[arguments0] __________________
+
+arguments = ['scan']
+
+    @pytest.mark.parametrize(
+        "arguments",
+        [
+            ["scan"],
+            ["inspect"],
+            ["policy", "validate"],
+            ["unknown"],
+            ["scan", ".", "--scanner", "unsafe"],
+            ["scan", ".", "--timeout-sec", "0"],
+            ["scan", ".", "--unknown"],
+        ],
+    )
+    def test_invalid_arguments_exit_40(arguments: list[str]) -> None:
+        result = invoke(*arguments)
+>       assert result.returncode == 40
+E       AssertionError: assert 1 == 40
+E        +  where 1 = CompletedProcess(args=['/Users/harshkumarjha/Desktop/ModelVet/.venv/bin/python', '-m', 'modelvet', 'scan'], returncode....UsageError:\n           ^^^^^^^^^^^^^^^^^\nAttributeError: module \'typer._click\' has no attribute \'UsageError\'\n').returncode
+
+tests/test_cli.py:65: AssertionError
+__________________ test_invalid_arguments_exit_40[arguments1] __________________
+
+arguments = ['inspect']
+
+    @pytest.mark.parametrize(
+        "arguments",
+        [
+            ["scan"],
+            ["inspect"],
+            ["policy", "validate"],
+            ["unknown"],
+            ["scan", ".", "--scanner", "unsafe"],
+            ["scan", ".", "--timeout-sec", "0"],
+            ["scan", ".", "--unknown"],
+        ],
+    )
+    def test_invalid_arguments_exit_40(arguments: list[str]) -> None:
+        result = invoke(*arguments)
+>       assert result.returncode == 40
+E       AssertionError: assert 1 == 40
+E        +  where 1 = CompletedProcess(args=['/Users/harshkumarjha/Desktop/ModelVet/.venv/bin/python', '-m', 'modelvet', 'inspect'], returnc....UsageError:\n           ^^^^^^^^^^^^^^^^^\nAttributeError: module \'typer._click\' has no attribute \'UsageError\'\n').returncode
+
+tests/test_cli.py:65: AssertionError
+__________________ test_invalid_arguments_exit_40[arguments2] __________________
+
+arguments = ['policy', 'validate']
+
+    @pytest.mark.parametrize(
+        "arguments",
+        [
+            ["scan"],
+            ["inspect"],
+            ["policy", "validate"],
+            ["unknown"],
+            ["scan", ".", "--scanner", "unsafe"],
+            ["scan", ".", "--timeout-sec", "0"],
+            ["scan", ".", "--unknown"],
+        ],
+    )
+    def test_invalid_arguments_exit_40(arguments: list[str]) -> None:
+        result = invoke(*arguments)
+>       assert result.returncode == 40
+E       AssertionError: assert 1 == 40
+E        +  where 1 = CompletedProcess(args=['/Users/harshkumarjha/Desktop/ModelVet/.venv/bin/python', '-m', 'modelvet', 'policy', 'validate....UsageError:\n           ^^^^^^^^^^^^^^^^^\nAttributeError: module \'typer._click\' has no attribute \'UsageError\'\n').returncode
+
+tests/test_cli.py:65: AssertionError
+__________________ test_invalid_arguments_exit_40[arguments3] __________________
+
+arguments = ['unknown']
+
+    @pytest.mark.parametrize(
+        "arguments",
+        [
+            ["scan"],
+            ["inspect"],
+            ["policy", "validate"],
+            ["unknown"],
+            ["scan", ".", "--scanner", "unsafe"],
+            ["scan", ".", "--timeout-sec", "0"],
+            ["scan", ".", "--unknown"],
+        ],
+    )
+    def test_invalid_arguments_exit_40(arguments: list[str]) -> None:
+        result = invoke(*arguments)
+>       assert result.returncode == 40
+E       AssertionError: assert 1 == 40
+E        +  where 1 = CompletedProcess(args=['/Users/harshkumarjha/Desktop/ModelVet/.venv/bin/python', '-m', 'modelvet', 'unknown'], returnc....UsageError:\n           ^^^^^^^^^^^^^^^^^\nAttributeError: module \'typer._click\' has no attribute \'UsageError\'\n').returncode
+
+tests/test_cli.py:65: AssertionError
+__________________ test_invalid_arguments_exit_40[arguments4] __________________
+
+arguments = ['scan', '.', '--scanner', 'unsafe']
+
+    @pytest.mark.parametrize(
+        "arguments",
+        [
+            ["scan"],
+            ["inspect"],
+            ["policy", "validate"],
+            ["unknown"],
+            ["scan", ".", "--scanner", "unsafe"],
+            ["scan", ".", "--timeout-sec", "0"],
+            ["scan", ".", "--unknown"],
+        ],
+    )
+    def test_invalid_arguments_exit_40(arguments: list[str]) -> None:
+        result = invoke(*arguments)
+>       assert result.returncode == 40
+E       AssertionError: assert 1 == 40
+E        +  where 1 = CompletedProcess(args=['/Users/harshkumarjha/Desktop/ModelVet/.venv/bin/python', '-m', 'modelvet', 'scan', '.', '--sca....UsageError:\n           ^^^^^^^^^^^^^^^^^\nAttributeError: module \'typer._click\' has no attribute \'UsageError\'\n').returncode
+
+tests/test_cli.py:65: AssertionError
+__________________ test_invalid_arguments_exit_40[arguments5] __________________
+
+arguments = ['scan', '.', '--timeout-sec', '0']
+
+    @pytest.mark.parametrize(
+        "arguments",
+        [
+            ["scan"],
+            ["inspect"],
+            ["policy", "validate"],
+            ["unknown"],
+            ["scan", ".", "--scanner", "unsafe"],
+            ["scan", ".", "--timeout-sec", "0"],
+            ["scan", ".", "--unknown"],
+        ],
+    )
+    def test_invalid_arguments_exit_40(arguments: list[str]) -> None:
+        result = invoke(*arguments)
+>       assert result.returncode == 40
+E       AssertionError: assert 1 == 40
+E        +  where 1 = CompletedProcess(args=['/Users/harshkumarjha/Desktop/ModelVet/.venv/bin/python', '-m', 'modelvet', 'scan', '.', '--tim....UsageError:\n           ^^^^^^^^^^^^^^^^^\nAttributeError: module \'typer._click\' has no attribute \'UsageError\'\n').returncode
+
+tests/test_cli.py:65: AssertionError
+__________________ test_invalid_arguments_exit_40[arguments6] __________________
+
+arguments = ['scan', '.', '--unknown']
+
+    @pytest.mark.parametrize(
+        "arguments",
+        [
+            ["scan"],
+            ["inspect"],
+            ["policy", "validate"],
+            ["unknown"],
+            ["scan", ".", "--scanner", "unsafe"],
+            ["scan", ".", "--timeout-sec", "0"],
+            ["scan", ".", "--unknown"],
+        ],
+    )
+    def test_invalid_arguments_exit_40(arguments: list[str]) -> None:
+        result = invoke(*arguments)
+>       assert result.returncode == 40
+E       AssertionError: assert 1 == 40
+E        +  where 1 = CompletedProcess(args=['/Users/harshkumarjha/Desktop/ModelVet/.venv/bin/python', '-m', 'modelvet', 'scan', '.', '--unk....UsageError:\n           ^^^^^^^^^^^^^^^^^\nAttributeError: module \'typer._click\' has no attribute \'UsageError\'\n').returncode
+
+tests/test_cli.py:65: AssertionError
+_______________ test_boundary_errors_are_controlled[error0-130] ________________
+
+kwargs = {'standalone_mode': False, 'color': False}
+
+    def fail(**kwargs: object) -> None:
+>       raise error
+E       KeyboardInterrupt
+
+tests/test_cli.py:102: KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x106e61490>
+capsys = <_pytest.capture.CaptureFixture object at 0x106e62fc0>
+error = KeyboardInterrupt(), expected = 130
+
+    @pytest.mark.parametrize("error, expected", [(KeyboardInterrupt(), 130), (RuntimeError(), 50)])
+    def test_boundary_errors_are_controlled(
+        monkeypatch: pytest.MonkeyPatch,
+        capsys: pytest.CaptureFixture[str],
+        error: BaseException,
+        expected: int,
+    ) -> None:
+        def fail(**kwargs: object) -> None:
+            raise error
+    
+        monkeypatch.setattr(main, "cli", fail)
+        with pytest.raises(SystemExit) as caught:
+>           main.app()
+
+tests/test_cli.py:106: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def app() -> None:
+        """Translate Typer failures to the documented ModelVet exit contract."""
+        try:
+            result = cli(standalone_mode=False, color=False)
+            code = int(result) if isinstance(result, int) else 0
+>       except _click.UsageError:
+               ^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'typer._click' has no attribute 'UsageError'
+
+src/modelvet/cli/main.py:127: AttributeError
+________________ test_boundary_errors_are_controlled[error1-50] ________________
+
+kwargs = {'standalone_mode': False, 'color': False}
+
+    def fail(**kwargs: object) -> None:
+>       raise error
+E       RuntimeError
+
+tests/test_cli.py:102: RuntimeError
+
+During handling of the above exception, another exception occurred:
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x106e63320>
+capsys = <_pytest.capture.CaptureFixture object at 0x106e61df0>
+error = RuntimeError(), expected = 50
+
+    @pytest.mark.parametrize("error, expected", [(KeyboardInterrupt(), 130), (RuntimeError(), 50)])
+    def test_boundary_errors_are_controlled(
+        monkeypatch: pytest.MonkeyPatch,
+        capsys: pytest.CaptureFixture[str],
+        error: BaseException,
+        expected: int,
+    ) -> None:
+        def fail(**kwargs: object) -> None:
+            raise error
+    
+        monkeypatch.setattr(main, "cli", fail)
+        with pytest.raises(SystemExit) as caught:
+>           main.app()
+
+tests/test_cli.py:106: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def app() -> None:
+        """Translate Typer failures to the documented ModelVet exit contract."""
+        try:
+            result = cli(standalone_mode=False, color=False)
+            code = int(result) if isinstance(result, int) else 0
+>       except _click.UsageError:
+               ^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'typer._click' has no attribute 'UsageError'
+
+src/modelvet/cli/main.py:127: AttributeError
+=========================== short test summary info ============================
+FAILED tests/test_cli.py::test_invalid_arguments_exit_40[arguments0] - Assert...
+FAILED tests/test_cli.py::test_invalid_arguments_exit_40[arguments1] - Assert...
+FAILED tests/test_cli.py::test_invalid_arguments_exit_40[arguments2] - Assert...
+FAILED tests/test_cli.py::test_invalid_arguments_exit_40[arguments3] - Assert...
+FAILED tests/test_cli.py::test_invalid_arguments_exit_40[arguments4] - Assert...
+FAILED tests/test_cli.py::test_invalid_arguments_exit_40[arguments5] - Assert...
+FAILED tests/test_cli.py::test_invalid_arguments_exit_40[arguments6] - Assert...
+FAILED tests/test_cli.py::test_boundary_errors_are_controlled[error0-130] - A...
+FAILED tests/test_cli.py::test_boundary_errors_are_controlled[error1-50] - At...
+9 failed, 12 passed in 0.70s

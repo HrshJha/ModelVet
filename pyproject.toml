@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[project]
+name = "modelvet"
+version = "0.1.0"
+description = "Evidence-backed local ML model artifact admission verification"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = ["typer==0.27.3", "pydantic==2.14.1"]
+
+[project.scripts]
+modelvet = "modelvet.cli.main:app"
+
+[dependency-groups]
+dev = [
+    "hatchling==1.32.4",
+    "hypothesis==6.170.5",
+    "mypy==2.4.0",
+    "packaging==26.3",
+    "pytest==9.1.1",
+    "pytest-cov==7.1.0",
+    "ruff==0.17.1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/modelvet"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/modelvet", "tests", "schemas", "pyproject.toml", "uv.lock", ".python-version", "README.md", "LICENSE", "PRD.md", "AGENTS.md", "docs/*.md", "examples", "tools/modelscan", "tools/smoke_scanner.py", ".github/workflows/ci.yml", "benchmarks/*.json", "benchmarks/*.md", "benchmarks/freeze_manifest.py"]
+exclude = ["docs/verification"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"schemas" = "modelvet/schemas"
+
+[tool.uv]
+required-version = "==0.13.3"
+build-constraint-dependencies = [
+    "packaging==26.3",
+    "pathspec==1.1.1",
+    "pluggy==1.7.0",
+    "tomlkit==0.15.2",
+    "trove-classifiers==2026.9.21.13",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-config --strict-markers"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+include = ["*.py", "*.pyi"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true

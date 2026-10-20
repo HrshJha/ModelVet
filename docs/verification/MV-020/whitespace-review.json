@@ -1,0 +1,5 @@
+{
+  "command": "git diff --no-index --check /dev/null <each source/config/spec file>",
+  "files_checked": 124,
+  "problems": []
+}

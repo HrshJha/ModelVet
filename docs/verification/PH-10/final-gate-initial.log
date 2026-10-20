@@ -1,0 +1,16 @@
+Resolved 31 packages in 2ms
+....................................                                     [100%]
+36 passed in 2.98s
+All checks passed!
+74 files already formatted
+S105 Possible hardcoded password assigned to: "SECRET_KEY"
+ --> src/modelvet/reports/privacy.py:6:5
+  |
+5 |   SECRET_KEY = (
+6 | /     r"(?:access[_-]?token|refresh[_-]?token|client[_-]?secret|token|password|"
+7 | |     r"secret|api[_-]?key|authorization)"
+  | |________________________________________^
+8 |   )
+  |
+
+Found 1 error.

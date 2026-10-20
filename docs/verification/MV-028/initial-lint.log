@@ -1,0 +1,12 @@
+E501 Line too long (134 > 100)
+   --> tests/test_release.py:116:101
+    |
+114 |             "-I",
+115 |             "-c",
+116 |             "import modelvet; from modelvet.core.config import load_policy; print(modelvet.__file__); print(load_policy().policy_id)",
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+117 |         ],
+118 |         cwd=parent,
+    |
+
+Found 1 error.

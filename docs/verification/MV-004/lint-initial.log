@@ -1,0 +1,29 @@
+I001 [*] Import block is un-sorted or un-formatted
+  --> src/modelvet/core/snapshot.py:3:1
+   |
+ 1 |   """Private bounded copy; never follow links or deserialize artifact contents."""
+ 2 |
+ 3 | / import hashlib
+ 4 | | import os
+ 5 | | import shutil
+ 6 | | import stat
+ 7 | | import tempfile
+ 8 | | from collections.abc import Iterator
+ 9 | | from contextlib import contextmanager
+10 | | from dataclasses import dataclass
+11 | | from pathlib import Path
+12 | |
+13 | | from modelvet.core.errors import BudgetExceeded, IOFailure, InvalidInput, SnapshotChanged
+14 | | from modelvet.inventory.discover import stat_identity, validate_relpath
+15 | | from modelvet.inventory.gate import ValidatedInput, open_directory
+   | |__________________________________________________________________^
+help: Organize imports
+   |
+12 |
+   - from modelvet.core.errors import BudgetExceeded, IOFailure, InvalidInput, SnapshotChanged
+13 + from modelvet.core.errors import BudgetExceeded, InvalidInput, IOFailure, SnapshotChanged
+14 | from modelvet.inventory.discover import stat_identity, validate_relpath
+   |
+
+Found 1 error.
+[*] 1 fixable with `--fix`.

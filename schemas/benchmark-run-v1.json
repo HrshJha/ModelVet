@@ -1,0 +1,220 @@
+{
+  "$defs": {
+    "JsonValue": {},
+    "Observation": {
+      "additionalProperties": false,
+      "properties": {
+        "fixture_id": {
+          "title": "Fixture Id",
+          "type": "string"
+        },
+        "artifact_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Artifact Digest",
+          "type": "string"
+        },
+        "tool_id": {
+          "enum": [
+            "modelvet",
+            "modelscan"
+          ],
+          "title": "Tool Id",
+          "type": "string"
+        },
+        "tool_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tool Version"
+        },
+        "repeat_id": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Repeat Id",
+          "type": "integer"
+        },
+        "eligibility": {
+          "enum": [
+            "SUPPORTED_CONTEXT",
+            "NOT_APPLICABLE"
+          ],
+          "title": "Eligibility",
+          "type": "string"
+        },
+        "outcome": {
+          "enum": [
+            "COMPLETE_NO_FINDINGS",
+            "REPORTED_FINDINGS",
+            "POLICY_BLOCK",
+            "UNRESOLVED",
+            "UNAVAILABLE",
+            "NOT_APPLICABLE"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "wall_s": {
+          "minimum": 0,
+          "title": "Wall S",
+          "type": "number"
+        },
+        "peak_rss_bytes": {
+          "const": null,
+          "default": null,
+          "title": "Peak Rss Bytes",
+          "type": "null"
+        },
+        "decision": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Decision"
+        },
+        "evidence_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Ref"
+        },
+        "raw_refs": {
+          "default": [],
+          "items": {
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "title": "Raw Refs",
+          "type": "array"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        }
+      },
+      "required": [
+        "fixture_id",
+        "artifact_digest",
+        "tool_id",
+        "tool_version",
+        "repeat_id",
+        "eligibility",
+        "outcome",
+        "wall_s"
+      ],
+      "title": "Observation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "study_status": {
+      "const": "INCONCLUSIVE",
+      "default": "INCONCLUSIVE",
+      "title": "Study Status",
+      "type": "string"
+    },
+    "corpus_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Corpus Digest",
+      "type": "string"
+    },
+    "platform": {
+      "title": "Platform",
+      "type": "string"
+    },
+    "observed_at": {
+      "title": "Observed At",
+      "type": "string"
+    },
+    "repeats": {
+      "maximum": 3,
+      "minimum": 1,
+      "title": "Repeats",
+      "type": "integer"
+    },
+    "fixture_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Fixture Ids",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "metrics": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Metrics",
+      "type": "object"
+    },
+    "alternatives": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Alternatives",
+      "type": "object"
+    },
+    "limitations": {
+      "default": [
+        "Synthetic development pilot; independent review and hidden holdout are pending.",
+        "ModelScan uses the conservative pinned adapter interpretation; raw evidence retained.",
+        "Admission and scanner assessment differ; no detection superiority inference.",
+        "Darwin required memory enforcement is unavailable; subprocesses are not containment.",
+        "Distinct pipelines/probes are timed; peak RSS and comparative overhead are unmeasured.",
+        "No loader execution, malware efficacy, legal clearance or public release validation."
+      ],
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "corpus_digest",
+    "platform",
+    "observed_at",
+    "repeats",
+    "fixture_ids",
+    "observations",
+    "metrics"
+  ],
+  "title": "PilotResult",
+  "type": "object"
+}

@@ -1,0 +1,491 @@
+{
+  "lock_change_note": "Build constraints and direct packaging dev dependency added; all third-party names and versions unchanged.",
+  "lock_sha256": "1615ef70d22a4192e6cc6f0c877c4d597cb2e31db33477b5ab5c42119f84b8f7",
+  "observed_at": "2026-10-20T07:34:03.753721+00:00",
+  "packages": [
+    {
+      "license": "MIT",
+      "license_classifiers": [],
+      "name": "annotated-doc",
+      "project_urls": {
+        "Changelog": "https://github.com/fastapi/annotated-doc/release-notes.md",
+        "Documentation": "https://github.com/fastapi/annotated-doc",
+        "Homepage": "https://github.com/fastapi/annotated-doc",
+        "Issues": "https://github.com/fastapi/annotated-doc/issues",
+        "Repository": "https://github.com/fastapi/annotated-doc"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.9",
+      "source": "https://pypi.org/pypi/annotated-doc/0.0.5/json",
+      "version": "0.0.5",
+      "yanked_files": []
+    },
+    {
+      "license": "MIT",
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "name": "annotated-types",
+      "project_urls": {
+        "Changelog": "https://github.com/annotated-types/annotated-types/releases",
+        "Homepage": "https://github.com/annotated-types/annotated-types",
+        "Source": "https://github.com/annotated-types/annotated-types"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.10",
+      "source": "https://pypi.org/pypi/annotated-types/0.8.0/json",
+      "version": "0.8.0",
+      "yanked_files": []
+    },
+    {
+      "license": "MIT",
+      "license_classifiers": [],
+      "name": "ast-serialize",
+      "project_urls": {
+        "Homepage": "https://github.com/mypyc/ast_serialize",
+        "Issues": "https://github.com/mypyc/ast_serialize/issues"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.7",
+      "source": "https://pypi.org/pypi/ast-serialize/0.13.1/json",
+      "version": "0.13.1",
+      "yanked_files": []
+    },
+    {
+      "license": "",
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "name": "colorama",
+      "project_urls": {
+        "Homepage": "https://github.com/tartley/colorama"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7",
+      "source": "https://pypi.org/pypi/colorama/0.4.6/json",
+      "version": "0.4.6",
+      "yanked_files": []
+    },
+    {
+      "license": "Apache-2.0",
+      "license_classifiers": [],
+      "name": "coverage",
+      "project_urls": {
+        "Documentation": "https://coverage.readthedocs.io/en/7.16.2",
+        "Funding": "https://tidelift.com/subscription/pkg/pypi-coverage?utm_source=pypi-coverage&utm_medium=referral&utm_campaign=pypi",
+        "Homepage": "https://github.com/coveragepy/coveragepy",
+        "Issues": "https://github.com/coveragepy/coveragepy/issues",
+        "Mastodon": "https://hachyderm.io/@coveragepy",
+        "Mastodon (nedbat)": "https://hachyderm.io/@nedbat"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.10",
+      "source": "https://pypi.org/pypi/coverage/7.16.2/json",
+      "version": "7.16.2",
+      "yanked_files": []
+    },
+    {
+      "license": "MIT",
+      "license_classifiers": [],
+      "name": "hatchling",
+      "project_urls": {
+        "History": "https://hatch.pypa.io/dev/history/hatchling/",
+        "Homepage": "https://hatch.pypa.io/latest/",
+        "Source": "https://github.com/pypa/hatch/tree/master/backend",
+        "Sponsor": "https://github.com/sponsors/ofek",
+        "Tracker": "https://github.com/pypa/hatch/issues"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.10",
+      "source": "https://pypi.org/pypi/hatchling/1.32.4/json",
+      "version": "1.32.4",
+      "yanked_files": []
+    },
+    {
+      "license": "MPL-2.0",
+      "license_classifiers": [],
+      "name": "hypothesis",
+      "project_urls": {
+        "changelog": "https://hypothesis.readthedocs.io/en/latest/changelog.html",
+        "documentation": "https://hypothesis.readthedocs.io",
+        "homepage": "https://hypothesis.works",
+        "issues": "https://github.com/HypothesisWorks/hypothesis/issues",
+        "source": "https://github.com/HypothesisWorks/hypothesis"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.11",
+      "source": "https://pypi.org/pypi/hypothesis/6.170.5/json",
+      "version": "6.170.5",
+      "yanked_files": []
+    },
+    {
+      "license": "MIT",
+      "license_classifiers": [],
+      "name": "iniconfig",
+      "project_urls": {
+        "Homepage": "https://github.com/pytest-dev/iniconfig"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.10",
+      "source": "https://pypi.org/pypi/iniconfig/2.3.1/json",
+      "version": "2.3.1",
+      "yanked_files": []
+    },
+    {
+      "license": "MIT",
+      "license_classifiers": [],
+      "name": "librt",
+      "project_urls": {
+        "Homepage": "https://github.com/mypyc/librt",
+        "Issues": "https://github.com/mypyc/mypyc/issues"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.9",
+      "source": "https://pypi.org/pypi/librt/0.16.0/json",
+      "version": "0.16.0",
+      "yanked_files": []
+    },
+    {
+      "license": null,
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "name": "markdown-it-py",
+      "project_urls": {
+        "Documentation": "https://markdown-it-py.readthedocs.io",
+        "Homepage": "https://github.com/executablebooks/markdown-it-py"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.10",
+      "source": "https://pypi.org/pypi/markdown-it-py/4.2.0/json",
+      "version": "4.2.0",
+      "yanked_files": []
+    },
+    {
+      "license": "",
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "name": "mdurl",
+      "project_urls": {
+        "Homepage": "https://github.com/executablebooks/mdurl"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.7",
+      "source": "https://pypi.org/pypi/mdurl/0.1.2/json",
+      "version": "0.1.2",
+      "yanked_files": []
+    },
+    {
+      "license": "MIT",
+      "license_classifiers": [],
+      "name": "mypy",
+      "project_urls": {
+        "Changelog": "https://github.com/python/mypy/blob/master/CHANGELOG.md",
+        "Documentation": "https://mypy.readthedocs.io/en/stable/index.html",
+        "Homepage": "https://www.mypy-lang.org/",
+        "Issues": "https://github.com/python/mypy/issues",
+        "Repository": "https://github.com/python/mypy"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.10",
+      "source": "https://pypi.org/pypi/mypy/2.4.0/json",
+      "version": "2.4.0",
+      "yanked_files": []
+    },
+    {
+      "license": null,
+      "license_classifiers": [],
+      "name": "mypy-extensions",
+      "project_urls": {
+        "Homepage": "https://github.com/python/mypy_extensions"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.8",
+      "source": "https://pypi.org/pypi/mypy-extensions/1.1.0/json",
+      "version": "1.1.0",
+      "yanked_files": []
+    },
+    {
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "license_classifiers": [],
+      "name": "packaging",
+      "project_urls": {
+        "Documentation": "https://packaging.pypa.io/",
+        "Source": "https://github.com/pypa/packaging"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.9",
+      "source": "https://pypi.org/pypi/packaging/26.3/json",
+      "version": "26.3",
+      "yanked_files": []
+    },
+    {
+      "license": null,
+      "license_classifiers": [
+        "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
+      ],
+      "name": "pathspec",
+      "project_urls": {
+        "Change Log": "https://python-path-specification.readthedocs.io/en/latest/changes.html",
+        "Documentation": "https://python-path-specification.readthedocs.io/en/latest/index.html",
+        "Issue Tracker": "https://github.com/cpburnz/python-pathspec/issues",
+        "Source Code": "https://github.com/cpburnz/python-pathspec"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.9",
+      "source": "https://pypi.org/pypi/pathspec/1.1.1/json",
+      "version": "1.1.1",
+      "yanked_files": []
+    },
+    {
+      "license": "MIT",
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "name": "pluggy",
+      "project_urls": {
+        "Changelog": "https://pluggy.readthedocs.io/en/latest/changelog.html",
+        "Documentation": "https://pluggy.readthedocs.io/",
+        "Funding": "https://tidelift.com/subscription/pkg/pypi-pluggy",
+        "Homepage": "https://github.com/pytest-dev/pluggy",
+        "Issues": "https://github.com/pytest-dev/pluggy/issues",
+        "Repository": "https://github.com/pytest-dev/pluggy"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.10",
+      "source": "https://pypi.org/pypi/pluggy/1.7.0/json",
+      "version": "1.7.0",
+      "yanked_files": []
+    },
+    {
+      "license": "MIT",
+      "license_classifiers": [],
+      "name": "pydantic",
+      "project_urls": {
+        "Changelog": "https://pydantic.dev/docs/validation/latest/get-started/changelog/",
+        "Documentation": "https://pydantic.dev/docs/validation/latest/get-started/",
+        "Funding": "https://github.com/sponsors/samuelcolvin",
+        "Homepage": "https://github.com/pydantic/pydantic",
+        "Source": "https://github.com/pydantic/pydantic"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.10",
+      "source": "https://pypi.org/pypi/pydantic/2.14.1/json",
+      "version": "2.14.1",
+      "yanked_files": []
+    },
+    {
+      "license": "MIT",
+      "license_classifiers": [],
+      "name": "pydantic-core",
+      "project_urls": {
+        "Funding": "https://github.com/sponsors/samuelcolvin",
+        "Homepage": "https://github.com/pydantic",
+        "Source": "https://github.com/pydantic/pydantic/tree/main/pydantic-core"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.10",
+      "source": "https://pypi.org/pypi/pydantic-core/2.50.1/json",
+      "version": "2.50.1",
+      "yanked_files": []
+    },
+    {
+      "license": "BSD-2-Clause",
+      "license_classifiers": [],
+      "name": "pygments",
+      "project_urls": {
+        "Bug Tracker": "https://github.com/pygments/pygments/issues",
+        "Changelog": "https://github.com/pygments/pygments/blob/master/CHANGES",
+        "Documentation": "https://pygments.org/docs",
+        "Homepage": "https://pygments.org",
+        "Source": "https://github.com/pygments/pygments"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.9",
+      "source": "https://pypi.org/pypi/pygments/2.21.0/json",
+      "version": "2.21.0",
+      "yanked_files": []
+    },
+    {
+      "license": "MIT",
+      "license_classifiers": [],
+      "name": "pytest",
+      "project_urls": {
+        "Changelog": "https://docs.pytest.org/en/stable/changelog.html",
+        "Contact": "https://docs.pytest.org/en/stable/contact.html",
+        "Funding": "https://docs.pytest.org/en/stable/sponsor.html",
+        "Homepage": "https://docs.pytest.org/en/latest/",
+        "Source": "https://github.com/pytest-dev/pytest",
+        "Tracker": "https://github.com/pytest-dev/pytest/issues"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.10",
+      "source": "https://pypi.org/pypi/pytest/9.1.1/json",
+      "version": "9.1.1",
+      "yanked_files": []
+    },
+    {
+      "license": "MIT",
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "name": "pytest-cov",
+      "project_urls": {
+        "Changelog": "https://pytest-cov.readthedocs.io/en/latest/changelog.html",
+        "Documentation": "https://pytest-cov.readthedocs.io/",
+        "Issue Tracker": "https://github.com/pytest-dev/pytest-cov/issues",
+        "Sources": "https://github.com/pytest-dev/pytest-cov"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.9",
+      "source": "https://pypi.org/pypi/pytest-cov/7.1.0/json",
+      "version": "7.1.0",
+      "yanked_files": []
+    },
+    {
+      "license": "MIT",
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "name": "rich",
+      "project_urls": {
+        "Documentation": "https://rich.readthedocs.io/en/latest/",
+        "Homepage": "https://github.com/Textualize/rich"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.9.0",
+      "source": "https://pypi.org/pypi/rich/15.0.0/json",
+      "version": "15.0.0",
+      "yanked_files": []
+    },
+    {
+      "license": "MIT",
+      "license_classifiers": [],
+      "name": "ruff",
+      "project_urls": {
+        "Changelog": "https://github.com/astral-sh/ruff/blob/main/CHANGELOG.md",
+        "Documentation": "https://docs.astral.sh/ruff/",
+        "Homepage": "https://docs.astral.sh/ruff",
+        "Repository": "https://github.com/astral-sh/ruff"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.7",
+      "source": "https://pypi.org/pypi/ruff/0.17.1/json",
+      "version": "0.17.1",
+      "yanked_files": []
+    },
+    {
+      "license": "ISC License",
+      "license_classifiers": [
+        "License :: OSI Approved :: ISC License (ISCL)"
+      ],
+      "name": "shellingham",
+      "project_urls": {
+        "Homepage": "https://github.com/sarugaku/shellingham"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.7",
+      "source": "https://pypi.org/pypi/shellingham/1.5.4/json",
+      "version": "1.5.4",
+      "yanked_files": []
+    },
+    {
+      "license": "Apache 2.0",
+      "license_classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "name": "sortedcontainers",
+      "project_urls": {
+        "Homepage": "http://www.grantjenks.com/docs/sortedcontainers/"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": "",
+      "source": "https://pypi.org/pypi/sortedcontainers/2.4.0/json",
+      "version": "2.4.0",
+      "yanked_files": []
+    },
+    {
+      "license": "MIT",
+      "license_classifiers": [],
+      "name": "tomlkit",
+      "project_urls": {
+        "Changelog": "https://github.com/python-poetry/tomlkit/blob/master/CHANGELOG.md",
+        "Homepage": "https://github.com/python-poetry/tomlkit",
+        "Repository": "https://github.com/python-poetry/tomlkit"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.9",
+      "source": "https://pypi.org/pypi/tomlkit/0.15.2/json",
+      "version": "0.15.2",
+      "yanked_files": []
+    },
+    {
+      "license": null,
+      "license_classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "name": "trove-classifiers",
+      "project_urls": {
+        "Homepage": "https://github.com/pypa/trove-classifiers"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": null,
+      "source": "https://pypi.org/pypi/trove-classifiers/2026.9.21.13/json",
+      "version": "2026.9.21.13",
+      "yanked_files": []
+    },
+    {
+      "license": "MIT",
+      "license_classifiers": [],
+      "name": "typer",
+      "project_urls": {
+        "Changelog": "https://typer.tiangolo.com/release-notes/",
+        "Documentation": "https://typer.tiangolo.com",
+        "Homepage": "https://github.com/fastapi/typer",
+        "Issues": "https://github.com/fastapi/typer/issues",
+        "Repository": "https://github.com/fastapi/typer"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.10",
+      "source": "https://pypi.org/pypi/typer/0.27.3/json",
+      "version": "0.27.3",
+      "yanked_files": []
+    },
+    {
+      "license": "PSF-2.0",
+      "license_classifiers": [],
+      "name": "typing-extensions",
+      "project_urls": {
+        "Bug Tracker": "https://github.com/python/typing_extensions/issues",
+        "Changes": "https://github.com/python/typing_extensions/blob/main/CHANGELOG.md",
+        "Documentation": "https://typing-extensions.readthedocs.io/",
+        "Home": "https://github.com/python/typing_extensions",
+        "Q & A": "https://github.com/python/typing/discussions",
+        "Repository": "https://github.com/python/typing_extensions"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.9",
+      "source": "https://pypi.org/pypi/typing-extensions/4.16.0/json",
+      "version": "4.16.0",
+      "yanked_files": []
+    },
+    {
+      "license": "MIT",
+      "license_classifiers": [],
+      "name": "typing-inspection",
+      "project_urls": {
+        "Changelog": "https://github.com/pydantic/typing-inspection/blob/main/HISTORY.md",
+        "Documentation": "https://pydantic.github.io/typing-inspection/dev/",
+        "Homepage": "https://github.com/pydantic/typing-inspection",
+        "Source": "https://github.com/pydantic/typing-inspection"
+      },
+      "pypi_vulnerability_ids": [],
+      "requires_python": ">=3.10",
+      "source": "https://pypi.org/pypi/typing-inspection/0.4.4/json",
+      "version": "0.4.4",
+      "yanked_files": []
+    }
+  ],
+  "reviewed_lock_sha256": "a46d68b74ef8036d8bdad809862d3e0fabf77e2f5e078b6f21a5cde8240eeba5"
+}

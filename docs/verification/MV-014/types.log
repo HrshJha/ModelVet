@@ -1,0 +1,13 @@
+src/modelvet/policies/models.py:23: error: "<typing special form>" has no attribute "__args__"  [attr-defined]
+src/modelvet/policies/models.py:104: error: "WireModel" has no attribute "rule_id"  [attr-defined]
+src/modelvet/policies/evaluator.py:237: error: Incompatible types in assignment (expression has type "Literal['LICENSE', 'PROVENANCE', 'DEPENDENCY']", variable has type "FileClassification | None")  [assignment]
+src/modelvet/policies/evaluator.py:238: error: List comprehension has incompatible type List[MetadataClaim]; expected List[CoverageRecord]  [misc]
+src/modelvet/policies/evaluator.py:238: error: Non-overlapping equality check (left operand type: "Literal['LICENSE', 'PROVENANCE', 'DEPENDENCY']", right operand type: "FileClassification | None")  [comparison-overlap]
+src/modelvet/policies/evaluator.py:240: error: "CoverageRecord" has no attribute "source_file_id"  [attr-defined]
+src/modelvet/policies/evaluator.py:241: error: "CoverageRecord" has no attribute "source_file_id"  [attr-defined]
+src/modelvet/policies/evaluator.py:241: error: "CoverageRecord" has no attribute "source_sha256"  [attr-defined]
+src/modelvet/policies/evaluator.py:243: error: "CoverageRecord" has no attribute "source_file_id"  [attr-defined]
+src/modelvet/policies/evaluator.py:244: error: Non-overlapping equality check (left operand type: "FileClassification | None", right operand type: "Literal['DEPENDENCY']")  [comparison-overlap]
+src/modelvet/policies/evaluator.py:264: error: Incompatible types in assignment (expression has type "ControlRule", variable has type "Prohibition")  [assignment]
+src/modelvet/policies/evaluator.py:266: error: "Prohibition" has no attribute "control_ids"  [attr-defined]
+Found 12 errors in 2 files (checked 37 source files)

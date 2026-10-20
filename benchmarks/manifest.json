@@ -1,0 +1,274 @@
+{
+  "schema_version": "1.0.0",
+  "corpus_id": "modelvet-synthetic-development-v1",
+  "generator_sha256": "46869bdb90eff59a3da47cd990310a5ac3f38674185e9f2726b1da0d905adb8a",
+  "holdout_status": "NOT_SUPPLIED",
+  "independent_review_status": "PENDING",
+  "cases": [
+    {
+      "fixture_id": "tensor-valid",
+      "recipe": "tensor-valid",
+      "split": "development",
+      "stratum": "S1",
+      "label": "VALID_STRUCTURE",
+      "artifact_digest": "sha256:b9b5da49d45d87eadcf2836b8d8af69041ac1b136bc47e7c111d67012e26218b",
+      "files": [
+        {
+          "relpath": "config.json",
+          "sha256": "dc3d3ba3dfae5b3f52972f984c7c5527276dc2971d331beeb125133fb8e54391",
+          "size": 65
+        },
+        {
+          "relpath": "weights.safetensors",
+          "sha256": "d7d247482395f891ddf71b226570af49b59f304cc826ea43e9e73eb6ba63a943",
+          "size": 66
+        }
+      ],
+      "license": "MIT",
+      "provenance": "modelvet closed synthetic recipe v1",
+      "oracle_method": "stdlib-byte-oracle-v1",
+      "adjudication": "METHOD_CHECKED_NOT_INDEPENDENT_REVIEW",
+      "baseline_eligibility": "NOT_APPLICABLE"
+    },
+    {
+      "fixture_id": "tensor-truncated",
+      "recipe": "tensor-truncated",
+      "split": "development",
+      "stratum": "S1",
+      "label": "MALFORMED_STRUCTURE",
+      "artifact_digest": "sha256:2f65bc9c3c5b1789ed0ef6d3fb7b2a7a80619e9b44cb99516f8ddd6f15378d1c",
+      "files": [
+        {
+          "relpath": "config.json",
+          "sha256": "dc3d3ba3dfae5b3f52972f984c7c5527276dc2971d331beeb125133fb8e54391",
+          "size": 65
+        },
+        {
+          "relpath": "weights.safetensors",
+          "sha256": "fef02424157f106b48d04276276c15ebba9c516e6024d4f82ea2f648af3e09c8",
+          "size": 8
+        }
+      ],
+      "license": "MIT",
+      "provenance": "modelvet closed synthetic recipe v1",
+      "oracle_method": "stdlib-byte-oracle-v1",
+      "adjudication": "METHOD_CHECKED_NOT_INDEPENDENT_REVIEW",
+      "baseline_eligibility": "NOT_APPLICABLE"
+    },
+    {
+      "fixture_id": "zip-valid",
+      "recipe": "zip-valid",
+      "split": "development",
+      "stratum": "S2",
+      "label": "VALID_STRUCTURE",
+      "artifact_digest": "sha256:7b0d858214f453fce1c3ae0ad7d4c762f4e6029eff535139cc86479474f68f95",
+      "files": [
+        {
+          "relpath": "config.json",
+          "sha256": "dc3d3ba3dfae5b3f52972f984c7c5527276dc2971d331beeb125133fb8e54391",
+          "size": 65
+        },
+        {
+          "relpath": "weights.zip",
+          "sha256": "b964f3684a0516c83ffb076383978030347aabf543fbc19916d5fb1c151d5eff",
+          "size": 158
+        }
+      ],
+      "license": "MIT",
+      "provenance": "modelvet closed synthetic recipe v1",
+      "oracle_method": "stdlib-byte-oracle-v1",
+      "adjudication": "METHOD_CHECKED_NOT_INDEPENDENT_REVIEW",
+      "baseline_eligibility": "NOT_APPLICABLE"
+    },
+    {
+      "fixture_id": "zip-traversal",
+      "recipe": "zip-traversal",
+      "split": "development",
+      "stratum": "S2",
+      "label": "UNSAFE_MEMBER_PATH",
+      "artifact_digest": "sha256:f01f2d008c6d61ee3ca6fb5f70ca0bf7a2465c7f9b3c72ac710b75e7073a91d3",
+      "files": [
+        {
+          "relpath": "config.json",
+          "sha256": "dc3d3ba3dfae5b3f52972f984c7c5527276dc2971d331beeb125133fb8e54391",
+          "size": 65
+        },
+        {
+          "relpath": "weights.zip",
+          "sha256": "b6b31c1a9213fefd864b1599ff25e0b7ebee7fd8e4853402499d8ae0c828d7c2",
+          "size": 154
+        }
+      ],
+      "license": "MIT",
+      "provenance": "modelvet closed synthetic recipe v1",
+      "oracle_method": "stdlib-byte-oracle-v1",
+      "adjudication": "METHOD_CHECKED_NOT_INDEPENDENT_REVIEW",
+      "baseline_eligibility": "NOT_APPLICABLE"
+    },
+    {
+      "fixture_id": "pickle-none",
+      "recipe": "pickle-none",
+      "split": "development",
+      "stratum": "S2",
+      "label": "VALID_STRUCTURE",
+      "artifact_digest": "sha256:efa69022f2ae3ac98e886bdb0500943ecdaf12f6f677c8cfc42ae8ba8773562a",
+      "files": [
+        {
+          "relpath": "config.json",
+          "sha256": "dc3d3ba3dfae5b3f52972f984c7c5527276dc2971d331beeb125133fb8e54391",
+          "size": 65
+        },
+        {
+          "relpath": "weights.pkl",
+          "sha256": "9c298d589a2158eb513cb52191144518a2acab2cb0c04f1df14fca0f712fa4a1",
+          "size": 4
+        }
+      ],
+      "license": "MIT",
+      "provenance": "modelvet closed synthetic recipe v1",
+      "oracle_method": "stdlib-byte-oracle-v1",
+      "adjudication": "METHOD_CHECKED_NOT_INDEPENDENT_REVIEW",
+      "baseline_eligibility": "STANDALONE_PICKLE"
+    },
+    {
+      "fixture_id": "pickle-int",
+      "recipe": "pickle-int",
+      "split": "development",
+      "stratum": "S2",
+      "label": "VALID_STRUCTURE",
+      "artifact_digest": "sha256:1c15f45a7b50ed73061d34c020a0518ca543d2f7138815935574a27855a3f7d1",
+      "files": [
+        {
+          "relpath": "config.json",
+          "sha256": "dc3d3ba3dfae5b3f52972f984c7c5527276dc2971d331beeb125133fb8e54391",
+          "size": 65
+        },
+        {
+          "relpath": "weights.pkl",
+          "sha256": "4ee5d22e9e44ec6480a2fc727c72c7886855f94562e8549cfae9a33f7361574b",
+          "size": 5
+        }
+      ],
+      "license": "MIT",
+      "provenance": "modelvet closed synthetic recipe v1",
+      "oracle_method": "stdlib-byte-oracle-v1",
+      "adjudication": "METHOD_CHECKED_NOT_INDEPENDENT_REVIEW",
+      "baseline_eligibility": "STANDALONE_PICKLE"
+    },
+    {
+      "fixture_id": "pickle-truncated",
+      "recipe": "pickle-truncated",
+      "split": "development",
+      "stratum": "S2",
+      "label": "MALFORMED_STRUCTURE",
+      "artifact_digest": "sha256:c77277bc404cd6c09b55331899bd910686d191d127ff9a48eae1684342cd0189",
+      "files": [
+        {
+          "relpath": "config.json",
+          "sha256": "dc3d3ba3dfae5b3f52972f984c7c5527276dc2971d331beeb125133fb8e54391",
+          "size": 65
+        },
+        {
+          "relpath": "weights.pkl",
+          "sha256": "7f1588e9269271e85b024603f169850595cb12c841b11d96618b8d2f8cbc3632",
+          "size": 3
+        }
+      ],
+      "license": "MIT",
+      "provenance": "modelvet closed synthetic recipe v1",
+      "oracle_method": "stdlib-byte-oracle-v1",
+      "adjudication": "METHOD_CHECKED_NOT_INDEPENDENT_REVIEW",
+      "baseline_eligibility": "STANDALONE_PICKLE"
+    },
+    {
+      "fixture_id": "source-present",
+      "recipe": "source-present",
+      "split": "development",
+      "stratum": "S1",
+      "label": "SOURCE_PRESENT",
+      "artifact_digest": "sha256:0a273b703d094a4cf3ecc6a17f0fa066dc203d708e980ad3546d36cf62c31ac5",
+      "files": [
+        {
+          "relpath": "config.json",
+          "sha256": "dc3d3ba3dfae5b3f52972f984c7c5527276dc2971d331beeb125133fb8e54391",
+          "size": 65
+        },
+        {
+          "relpath": "modeling.py",
+          "sha256": "114a987144a48ba066463095a0630a2eb67f8e1c76ca9cb7af654cc4571d0e0e",
+          "size": 52
+        },
+        {
+          "relpath": "weights.safetensors",
+          "sha256": "d7d247482395f891ddf71b226570af49b59f304cc826ea43e9e73eb6ba63a943",
+          "size": 66
+        }
+      ],
+      "license": "MIT",
+      "provenance": "modelvet closed synthetic recipe v1",
+      "oracle_method": "stdlib-byte-oracle-v1",
+      "adjudication": "METHOD_CHECKED_NOT_INDEPENDENT_REVIEW",
+      "baseline_eligibility": "NOT_APPLICABLE"
+    },
+    {
+      "fixture_id": "license-conflict",
+      "recipe": "license-conflict",
+      "split": "development",
+      "stratum": "S1",
+      "label": "CONFLICTING_CLAIMS",
+      "artifact_digest": "sha256:0555396ce6488a2a7b1a69b2ae7f0228df031fbcf6620f601336805398844078",
+      "files": [
+        {
+          "relpath": "README.md",
+          "sha256": "93061ce3dcd2c09ca03d36838659cbae728a991f01228d429db38a9c7eb082c3",
+          "size": 59
+        },
+        {
+          "relpath": "config.json",
+          "sha256": "dc3d3ba3dfae5b3f52972f984c7c5527276dc2971d331beeb125133fb8e54391",
+          "size": 65
+        },
+        {
+          "relpath": "weights.safetensors",
+          "sha256": "d7d247482395f891ddf71b226570af49b59f304cc826ea43e9e73eb6ba63a943",
+          "size": 66
+        }
+      ],
+      "license": "MIT",
+      "provenance": "modelvet closed synthetic recipe v1",
+      "oracle_method": "stdlib-byte-oracle-v1",
+      "adjudication": "METHOD_CHECKED_NOT_INDEPENDENT_REVIEW",
+      "baseline_eligibility": "NOT_APPLICABLE"
+    },
+    {
+      "fixture_id": "unknown",
+      "recipe": "unknown",
+      "split": "development",
+      "stratum": "S1",
+      "label": "UNKNOWN_FORMAT",
+      "artifact_digest": "sha256:cb37b8c8ec42a3ef9af47581dfaf3dfa1b3231b76c42ad20acda7bee2c13545c",
+      "files": [
+        {
+          "relpath": "config.json",
+          "sha256": "dc3d3ba3dfae5b3f52972f984c7c5527276dc2971d331beeb125133fb8e54391",
+          "size": 65
+        },
+        {
+          "relpath": "opaque.bin",
+          "sha256": "f6480d6e04da89b411178b110415769e0276995e825ea8e8d2ea2b88d3183e52",
+          "size": 30
+        },
+        {
+          "relpath": "weights.safetensors",
+          "sha256": "d7d247482395f891ddf71b226570af49b59f304cc826ea43e9e73eb6ba63a943",
+          "size": 66
+        }
+      ],
+      "license": "MIT",
+      "provenance": "modelvet closed synthetic recipe v1",
+      "oracle_method": "stdlib-byte-oracle-v1",
+      "adjudication": "METHOD_CHECKED_NOT_INDEPENDENT_REVIEW",
+      "baseline_eligibility": "NOT_APPLICABLE"
+    }
+  ]
+}

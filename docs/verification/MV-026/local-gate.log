@@ -1,0 +1,16 @@
+Resolved 31 packages in 28ms
+All checks passed!
+71 files already formatted
+All checks passed!
+Success: no issues found in 46 source files
+........................................................................ [ 19%]
+........................................................................ [ 39%]
+........................................................................ [ 59%]
+........................................................................ [ 79%]
+...............s........................................................ [ 98%]
+....                                                                     [100%]
+363 passed, 1 skipped in 25.81s
+Building source distribution...
+Building wheel from source distribution...
+Successfully built dist/modelvet-0.1.0.tar.gz
+Successfully built dist/modelvet-0.1.0-py3-none-any.whl

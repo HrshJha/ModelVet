@@ -1,0 +1,12 @@
+[
+  {
+    "path": "dist/modelvet-0.1.0-py3-none-any.whl",
+    "sha256": "b9b6cc8442297380988f9ca1634ce6cf27dbdb28e31941637c12567fd7e1060a",
+    "bytes": 45361
+  },
+  {
+    "path": "dist/modelvet-0.1.0.tar.gz",
+    "sha256": "a838032baf35faaf087269fbef8b02a1a8f4e55dd542f4f0aa0b4e3702ed29cb",
+    "bytes": 71674
+  }
+]

@@ -1,0 +1,39 @@
+Building source distribution...
+Building wheel from source distribution...
+Successfully built dist/modelvet-0.1.0.tar.gz
+Successfully built dist/modelvet-0.1.0-py3-none-any.whl
+F......                                                                  [100%]
+=================================== FAILURES ===================================
+___________ test_candidate_archive_contents_and_installed_resources ____________
+
+installed_candidate = (PosixPath('/private/var/folders/dh/_5m7l0cd7gv5nypd9dv3lyyh0000gn/T/pytest-of-harshkumarjha/pytest-237/release-candid...dh/_5m7l0cd7gv5nypd9dv3lyyh0000gn/T/pytest-of-harshkumarjha/pytest-237/release-candidate0/dist/modelvet-0.1.0.tar.gz'))
+
+    def test_candidate_archive_contents_and_installed_resources(installed_candidate) -> None:
+        parent, python, wheel, archive = installed_candidate
+        with zipfile.ZipFile(wheel) as package:
+            names = package.namelist()
+            assert any(name.endswith(".dist-info/licenses/LICENSE") for name in names)
+            for source in (ROOT / "schemas").glob("*.json"):
+                assert package.read("modelvet/schemas/" + source.name) == source.read_bytes()
+            assert (
+                package.read("modelvet/policies/default.toml")
+                == (ROOT / "src/modelvet/policies/default.toml").read_bytes()
+            )
+        with tarfile.open(archive) as package:
+            names = package.getnames()
+            for suffix in (
+                "examples/create_fixture.py",
+                "examples/default.toml",
+                "docs/POLICY_SPEC.md",
+                ".github/workflows/ci.yml",
+                "uv.lock",
+            ):
+                assert any(name.endswith("/" + suffix) for name in names), suffix
+>           assert not any("/docs/verification/" in name or "/.venv/" in name for name in names)
+E           assert not True
+E            +  where True = any(<generator object test_candidate_archive_contents_and_installed_resources.<locals>.<genexpr> at 0x10a762f60>)
+
+tests/test_release.py:110: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_release.py::test_candidate_archive_contents_and_installed_resources
+1 failed, 6 passed in 2.57s

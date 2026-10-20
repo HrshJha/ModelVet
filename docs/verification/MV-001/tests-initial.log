@@ -1,0 +1,17 @@
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+___________________ test_installed_metadata_matches_package ____________________
+
+    def test_installed_metadata_matches_package() -> None:
+        package = distribution("modelvet")
+        assert package.version == modelvet.__version__
+>       assert package.metadata["Requires-Python"] == ">=3.12,<3.13"
+E       AssertionError: assert '<3.13,>=3.12' == '>=3.12,<3.13'
+E         
+E         - >=3.12,<3.13
+E         + <3.13,>=3.12
+
+tests/test_import_smoke.py:14: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_import_smoke.py::test_installed_metadata_matches_package - ...
+1 failed, 1 passed in 1.25s

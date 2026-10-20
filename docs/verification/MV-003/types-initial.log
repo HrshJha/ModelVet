@@ -1,0 +1,3 @@
+src/modelvet/core/limits.py:21: error: Unsupported operand types for <= ("int" and "Literal[_MISSING_TYPE.MISSING]")  [operator]
+src/modelvet/core/limits.py:21: note: Right operand is of type "Any | Literal[_MISSING_TYPE.MISSING]"
+Found 1 error in 1 file (checked 9 source files)

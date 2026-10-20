@@ -1,0 +1,1 @@
+{"decision": "CONTROLS", "exit_code": 10, "report": "7b1da1581e41/057d34a177ae4883913930baf966d476/report.json", "report_root": "<redacted>", "rule_ids": ["ISOLATE-MODEL"], "semantic_digest": "sha256:1beedca944e0c5f8b793303f590642689d079d5427033b0c8fb8e11dc9a113ef"}

@@ -1,0 +1,250 @@
+{
+  "$defs": {
+    "AdvisoryAssessment": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0",
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "artifact_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Artifact Digest",
+          "type": "string"
+        },
+        "report_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Report Digest",
+          "type": "string"
+        },
+        "snapshot_digest": {
+          "anyOf": [
+            {
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Snapshot Digest"
+        },
+        "snapshot_generated_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Snapshot Generated At"
+        },
+        "source_claim_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Claim Sha256"
+        },
+        "evaluated_at": {
+          "title": "Evaluated At",
+          "type": "string"
+        },
+        "max_age_days": {
+          "maximum": 365,
+          "minimum": 0,
+          "title": "Max Age Days",
+          "type": "integer"
+        },
+        "required": {
+          "title": "Required",
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "COMPLETE",
+            "INCONCLUSIVE",
+            "NOT_RUN"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "dependencies": {
+          "items": {
+            "$ref": "#/$defs/DependencyAdvisories"
+          },
+          "maxItems": 1000,
+          "title": "Dependencies",
+          "type": "array"
+        },
+        "admission_recomputed": {
+          "const": false,
+          "default": false,
+          "title": "Admission Recomputed",
+          "type": "boolean"
+        },
+        "limitations": {
+          "default": [
+            "Operator-supplied snapshot and completeness declarations are not authenticated.",
+            "Exact PyPI version strings only; ranges and other ecosystems remain unresolved.",
+            "No match applies only to supplied query evidence, not to all vulnerabilities.",
+            "Declared dependency pins do not establish installation, reachability or exploitability.",
+            "Supplementary evidence does not replace or promote the stored admission decision."
+          ],
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "artifact_digest",
+        "report_digest",
+        "snapshot_digest",
+        "snapshot_generated_at",
+        "source_claim_sha256",
+        "evaluated_at",
+        "max_age_days",
+        "required",
+        "status",
+        "dependencies"
+      ],
+      "title": "AdvisoryAssessment",
+      "type": "object"
+    },
+    "AdvisoryMatch": {
+      "additionalProperties": false,
+      "properties": {
+        "advisory_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Advisory Id",
+          "type": "string"
+        },
+        "source_ref": {
+          "title": "Source Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "advisory_id",
+        "source_ref"
+      ],
+      "title": "AdvisoryMatch",
+      "type": "object"
+    },
+    "DependencyAdvisories": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "ecosystem": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Ecosystem",
+          "type": "string"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Version"
+        },
+        "dependency_source_ref": {
+          "title": "Dependency Source Ref",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "COMPLETE",
+            "INCONCLUSIVE",
+            "UNSUPPORTED",
+            "NOT_RUN"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "result": {
+          "enum": [
+            "AFFECTED_VERSION",
+            "NO_MATCH_IN_SNAPSHOT",
+            "UNKNOWN"
+          ],
+          "title": "Result",
+          "type": "string"
+        },
+        "matches": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/AdvisoryMatch"
+          },
+          "maxItems": 1000,
+          "title": "Matches",
+          "type": "array"
+        },
+        "reasons": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "ecosystem",
+        "version",
+        "dependency_source_ref",
+        "status",
+        "result"
+      ],
+      "title": "DependencyAdvisories",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "assessment": {
+      "$ref": "#/$defs/AdvisoryAssessment"
+    },
+    "semantic_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Semantic Digest",
+      "type": "string"
+    },
+    "exit_code": {
+      "enum": [
+        0,
+        30
+      ],
+      "title": "Exit Code",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "assessment",
+    "semantic_digest",
+    "exit_code"
+  ],
+  "title": "AdvisoryDocument",
+  "type": "object"
+}

@@ -1,0 +1,85 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "check_refs": {
+      "default": [],
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Check Refs",
+      "type": "array"
+    },
+    "claim_ids": {
+      "default": [],
+      "items": {
+        "pattern": "^[0-9a-f]{64}$",
+        "type": "string"
+      },
+      "title": "Claim Ids",
+      "type": "array"
+    },
+    "conflict_id": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Conflict Id",
+      "type": "string"
+    },
+    "decision_relevant": {
+      "title": "Decision Relevant",
+      "type": "boolean"
+    },
+    "reason": {
+      "maxLength": 2048,
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "resolution_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resolution Ref"
+    },
+    "subject": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject"
+    },
+    "type": {
+      "enum": [
+        "LICENSE",
+        "PROVENANCE",
+        "DEPENDENCY",
+        "IDENTITY",
+        "CHECK_STATUS",
+        "EVIDENCE_ID"
+      ],
+      "title": "Type",
+      "type": "string"
+    }
+  },
+  "required": [
+    "conflict_id",
+    "type",
+    "decision_relevant",
+    "reason"
+  ],
+  "title": "ConflictRecord",
+  "type": "object"
+}

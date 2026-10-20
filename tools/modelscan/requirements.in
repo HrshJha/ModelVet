@@ -1,0 +1,2 @@
+# External scanner environment, deliberately separate from ModelVet runtime.
+modelscan==0.8.8

@@ -1,0 +1,18 @@
+Command: ['uv', 'venv', '--python', '3.12', '<temporary>/venv']
+Exit: 0
+Using CPython 3.12.15
+Creating virtual environment at: <temporary>/venv
+Activate with: source <temporary>/venv/bin/activate
+
+Command: ['uv', 'pip', 'install', '--python', '<temporary>/venv/bin/python', '--no-deps', '/Users/harshkumarjha/Desktop/ModelVet/dist/modelvet-0.1.0-py3-none-any.whl']
+Exit: 0
+Using Python 3.12.15 environment at: <temporary>/venv
+Resolved 1 package in 0.42ms
+Prepared 1 package in 1ms
+Installed 1 package in 0.88ms
+ + modelvet==0.1.0 (from file:///Users/harshkumarjha/Desktop/ModelVet/dist/modelvet-0.1.0-py3-none-any.whl)
+
+Command: ['<temporary>/venv/bin/python', '-I', '-c', "import importlib.util, modelvet; assert all(importlib.util.find_spec(n) is None for n in ('typer', 'pydantic', 'modelscan', 'torch')); print(modelvet.__version__)"]
+Exit: 0
+0.1.0
+

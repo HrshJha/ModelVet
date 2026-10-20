@@ -1,0 +1,9 @@
+# MV-010 adapter checkpoint — 2026-10-20
+
+macOS arm64/Python 3.12.15/uv 0.13.3, uncommitted against `e2f2bb2`. 17 targeted adapter tests and 157 total pass. Lint/format/types and dependency consistency for core and scanner environments pass. `task-verification.log`, `suite.log`, `lint.log`, `types.log`, `dependency-check.log` and `real-smoke.log` contain actual evidence.
+
+The separate ModelScan 0.8.8 environment resolves eight packages from a hash-pinned, wheel-only lock. Exact publisher metadata and OSV batch response are saved; both sources returned no advisory matches. Wheel LICENSE/NOTICE texts and hashes are retained, including NumPy's bundled component terms. Source publication/advisory absence does not prove package safety or legal clearance. No scanner environment binaries are distributed by the core package.
+
+Contracts cover 0/1/2/3/4/unknown exits, missing/mismatched version, malformed/missing/oversized/symlink report, skipped payload preservation, timeout, stdout limits, sanitized environment, enforceable CPU/file/FD caps, cleanup, literal executable arguments and rejecting an executable inside the artifact before probing it. A real generated inert None-pickle plus README scan returned process COMPLETE/0, with explicit `scanned_files` and `skipped_files`; raw report retained. This is not a malware benchmark or archive completeness test.
+
+Darwin RLIMIT_AS and RLIMIT_DATA each failed with `ValueError: current limit exceeds maximum limit` (data caps tested at 64/128/256/512/1024 MiB). CPU, file-size and FD limits succeed. The adapter records absent memory enforcement; required resource coverage must remain unresolved. OS network isolation is not enforced. Linux memory enforcement is implemented but unverified. No model is deserialized by ModelVet and no artifact Python source is imported.

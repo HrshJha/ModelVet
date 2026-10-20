@@ -1,0 +1,63 @@
+..............................................F...........               [100%]
+=================================== FAILURES ===================================
+____________ test_unsafe_policy_files_are_rejected[parent_symlink] _____________
+
+tmp_path = PosixPath('/private/var/folders/dh/_5m7l0cd7gv5nypd9dv3lyyh0000gn/T/pytest-of-harshkumarjha/pytest-208/test_unsafe_policy_files_are_r3')
+kind = 'parent_symlink'
+
+    @pytest.mark.parametrize(
+        "kind", ["missing", "directory", "symlink", "parent_symlink", "hardlink", "fifo", "oversized"]
+    )
+    def test_unsafe_policy_files_are_rejected(tmp_path, kind) -> None:
+        target = tmp_path / "selected.toml"
+        if kind == "directory":
+            target.mkdir()
+        elif kind == "symlink":
+            target.symlink_to(tmp_path / "real.toml")
+        elif kind == "parent_symlink":
+            real = tmp_path / "real"
+            real.mkdir()
+            (real / "selected.toml").write_bytes(default_bytes())
+            link = tmp_path / "linked"
+            link.symlink_to(real, target_is_directory=True)
+            target = link / "selected.toml"
+        elif kind == "hardlink":
+            real = tmp_path / "real.toml"
+            real.write_bytes(default_bytes())
+            os.link(real, target)
+        elif kind == "fifo":
+            os.mkfifo(target)
+        elif kind == "oversized":
+            target.write_bytes(b"#" * (MAX_POLICY_BYTES + 1))
+        with pytest.raises(InvalidInput):
+>           load_policy(target)
+
+tests/test_policy_config.py:234: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/modelvet/core/config.py:54: in load_policy
+    parent_fd = open_directory(selected.parent)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/private/var/folders/dh/_5m7l0cd7gv5nypd9dv3lyyh0000gn/T/pytest-of-harshkumarjha/pytest-208/test_unsafe_policy_files_are_r3/linked')
+allow_missing = False
+
+    def open_directory(path: Path, *, allow_missing: bool = False) -> int:
+        """Open every component with openat/O_NOFOLLOW; caller owns the returned FD."""
+        if not path.is_absolute() or ".." in path.parts:
+            raise PathEscape("Expected a canonical absolute path.")
+        if os.open not in os.supports_dir_fd or not hasattr(os, "O_NOFOLLOW"):
+            raise InvalidInput("Secure directory access is unsupported on this platform.")
+        flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC
+        fd = os.open(path.anchor, flags)
+        try:
+            for part in path.parts[1:]:
+                try:
+>                   child = os.open(part, flags, dir_fd=fd)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   NotADirectoryError: [Errno 20] Not a directory: 'linked'
+
+src/modelvet/inventory/gate.py:31: NotADirectoryError
+=========================== short test summary info ============================
+FAILED tests/test_policy_config.py::test_unsafe_policy_files_are_rejected[parent_symlink]
+1 failed, 57 passed in 0.58s

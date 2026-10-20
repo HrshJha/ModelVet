@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/Users/harshkumarjha/.local/share/uv/python/cpython-3.12.15-macos-aarch64-none/lib/python3.12/importlib/metadata/__init__.py", line 397, in from_name
+    return next(cls.discover(name=name))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<stdin>", line 23, in <module>
+  File "/Users/harshkumarjha/.local/share/uv/python/cpython-3.12.15-macos-aarch64-none/lib/python3.12/importlib/metadata/__init__.py", line 862, in distribution
+    return Distribution.from_name(distribution_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/harshkumarjha/.local/share/uv/python/cpython-3.12.15-macos-aarch64-none/lib/python3.12/importlib/metadata/__init__.py", line 399, in from_name
+    raise PackageNotFoundError(name)
+importlib.metadata.PackageNotFoundError: No package metadata was found for colorama

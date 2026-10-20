@@ -1,0 +1,18 @@
+Using CPython 3.12.15
+Creating virtual environment at: .scanner-venv
+Activate with: source .scanner-venv/bin/activate
+Using Python 3.12.15 environment at: .scanner-venv
+Resolved 8 packages in 13ms
+Downloading numpy (5.2MiB)
+ Downloaded numpy
+Prepared 5 packages in 795ms
+Installed 8 packages in 26ms
+ + click==8.5.0
+ + markdown-it-py==4.2.0
+ + mdurl==0.1.2
+ + modelscan==0.8.8
+ + numpy==2.5.4
+ + pygments==2.21.0
+ + rich==14.3.4
+ + tomlkit==0.13.3
+modelscan, version 0.8.8

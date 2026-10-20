@@ -1,0 +1,214 @@
+{
+  "queries": [
+    {
+      "package": {
+        "name": "annotated-doc",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.0.5"
+    },
+    {
+      "package": {
+        "name": "annotated-types",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.8.0"
+    },
+    {
+      "package": {
+        "name": "ast-serialize",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.13.1"
+    },
+    {
+      "package": {
+        "name": "colorama",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.4.6"
+    },
+    {
+      "package": {
+        "name": "coverage",
+        "ecosystem": "PyPI"
+      },
+      "version": "7.16.2"
+    },
+    {
+      "package": {
+        "name": "hatchling",
+        "ecosystem": "PyPI"
+      },
+      "version": "1.32.4"
+    },
+    {
+      "package": {
+        "name": "hypothesis",
+        "ecosystem": "PyPI"
+      },
+      "version": "6.170.5"
+    },
+    {
+      "package": {
+        "name": "iniconfig",
+        "ecosystem": "PyPI"
+      },
+      "version": "2.3.1"
+    },
+    {
+      "package": {
+        "name": "librt",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.16.0"
+    },
+    {
+      "package": {
+        "name": "markdown-it-py",
+        "ecosystem": "PyPI"
+      },
+      "version": "4.2.0"
+    },
+    {
+      "package": {
+        "name": "mdurl",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.1.2"
+    },
+    {
+      "package": {
+        "name": "mypy",
+        "ecosystem": "PyPI"
+      },
+      "version": "2.4.0"
+    },
+    {
+      "package": {
+        "name": "mypy-extensions",
+        "ecosystem": "PyPI"
+      },
+      "version": "1.1.0"
+    },
+    {
+      "package": {
+        "name": "packaging",
+        "ecosystem": "PyPI"
+      },
+      "version": "26.3"
+    },
+    {
+      "package": {
+        "name": "pathspec",
+        "ecosystem": "PyPI"
+      },
+      "version": "1.1.1"
+    },
+    {
+      "package": {
+        "name": "pluggy",
+        "ecosystem": "PyPI"
+      },
+      "version": "1.7.0"
+    },
+    {
+      "package": {
+        "name": "pydantic",
+        "ecosystem": "PyPI"
+      },
+      "version": "2.14.1"
+    },
+    {
+      "package": {
+        "name": "pydantic-core",
+        "ecosystem": "PyPI"
+      },
+      "version": "2.50.1"
+    },
+    {
+      "package": {
+        "name": "pygments",
+        "ecosystem": "PyPI"
+      },
+      "version": "2.21.0"
+    },
+    {
+      "package": {
+        "name": "pytest",
+        "ecosystem": "PyPI"
+      },
+      "version": "9.1.1"
+    },
+    {
+      "package": {
+        "name": "pytest-cov",
+        "ecosystem": "PyPI"
+      },
+      "version": "7.1.0"
+    },
+    {
+      "package": {
+        "name": "rich",
+        "ecosystem": "PyPI"
+      },
+      "version": "15.0.0"
+    },
+    {
+      "package": {
+        "name": "ruff",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.17.1"
+    },
+    {
+      "package": {
+        "name": "shellingham",
+        "ecosystem": "PyPI"
+      },
+      "version": "1.5.4"
+    },
+    {
+      "package": {
+        "name": "sortedcontainers",
+        "ecosystem": "PyPI"
+      },
+      "version": "2.4.0"
+    },
+    {
+      "package": {
+        "name": "tomlkit",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.15.2"
+    },
+    {
+      "package": {
+        "name": "trove-classifiers",
+        "ecosystem": "PyPI"
+      },
+      "version": "2026.9.21.13"
+    },
+    {
+      "package": {
+        "name": "typer",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.27.3"
+    },
+    {
+      "package": {
+        "name": "typing-extensions",
+        "ecosystem": "PyPI"
+      },
+      "version": "4.16.0"
+    },
+    {
+      "package": {
+        "name": "typing-inspection",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.4.4"
+    }
+  ]
+}

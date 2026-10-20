@@ -1,0 +1,44 @@
+E501 Line too long (110 > 100)
+  --> src/modelvet/benchmarks/metrics.py:93:101
+   |
+91 |         "incremental_detection_rate": None,
+92 |         "confidence_interval": None,
+93 |         "unmeasured_reason": "No independent adjudication, hidden holdout or reviewed discrepancy positives.",
+   |                                                                                                     ^^^^^^^^^^
+94 |     }
+   |
+
+E501 Line too long (113 > 100)
+  --> src/modelvet/benchmarks/runner.py:50:101
+   |
+48 |     limitations: tuple[str, ...] = (
+49 |         "Synthetic development pilot; independent review and hidden holdout are pending.",
+50 |         "ModelScan baseline uses the conservative version-pinned adapter interpretation; raw evidence retained.",
+   |                                                                                                     ^^^^^^^^^^^^^
+51 |         "ModelVet admission and scanner file assessment are different predicates; no detection superiority inference.",
+52 |         "Darwin required memory enforcement is unavailable; subprocesses are not containment.",
+   |
+
+E501 Line too long (119 > 100)
+  --> src/modelvet/benchmarks/runner.py:51:101
+   |
+49 |         "Synthetic development pilot; independent review and hidden holdout are pending.",
+50 |         "ModelScan baseline uses the conservative version-pinned adapter interpretation; raw evidence retained.",
+51 |         "ModelVet admission and scanner file assessment are different predicates; no detection superiority inference.",
+   |                                                                                                     ^^^^^^^^^^^^^^^^^^^
+52 |         "Darwin required memory enforcement is unavailable; subprocesses are not containment.",
+53 |         "Wall times include distinct pipelines/probes; peak RSS and comparative overhead are not measured.",
+   |
+
+E501 Line too long (108 > 100)
+  --> src/modelvet/benchmarks/runner.py:53:101
+   |
+51 |         "ModelVet admission and scanner file assessment are different predicates; no detection superiority inference.",
+52 |         "Darwin required memory enforcement is unavailable; subprocesses are not containment.",
+53 |         "Wall times include distinct pipelines/probes; peak RSS and comparative overhead are not measured.",
+   |                                                                                                     ^^^^^^^^
+54 |         "No loader execution, malware efficacy, legal clearance or public release validation.",
+55 |     )
+   |
+
+Found 4 errors.

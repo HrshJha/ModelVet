@@ -1,0 +1,12 @@
+E501 Line too long (102 > 100)
+  --> tests/test_import_smoke.py:29:101
+   |
+27 | import modelvet
+28 | forbidden = {'torch', 'transformers', 'modelscan', 'pickle', 'dill', 'joblib'}
+29 | print(json.dumps({'version': modelvet.__version__, 'loaded': sorted(forbidden & sys.modules.keys())}))
+   |                                                                                                     ^^
+30 | """
+31 |     result = subprocess.run(
+   |
+
+Found 1 error.

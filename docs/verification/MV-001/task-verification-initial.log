@@ -1,0 +1,5 @@
+Using CPython 3.12.15
+Resolved 31 packages in 5ms
+error: The lockfile at `uv.lock` needs to be updated, but `--check` was provided.
+
+hint: To update the lockfile, run `uv lock`.

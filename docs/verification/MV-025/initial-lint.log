@@ -1,0 +1,12 @@
+E501 Line too long (135 > 100)
+   --> tests/test_resource_limits.py:146:101
+    |
+144 | …
+145 | …ath) -> None:
+146 | …resource.getrlimit(resource.RLIMIT_AS),resource.getrlimit(resource.RLIMIT_DATA)]))"
+    |                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+147 | …), tmp_path, 3)
+148 | …
+    |
+
+Found 1 error.

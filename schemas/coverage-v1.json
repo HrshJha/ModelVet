@@ -1,0 +1,113 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "completed_check_ids": {
+      "default": [],
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Completed Check Ids",
+      "type": "array"
+    },
+    "expected_check_ids": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Expected Check Ids",
+      "type": "array"
+    },
+    "failed_check_ids": {
+      "default": [],
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Failed Check Ids",
+      "type": "array"
+    },
+    "file_id": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "File Id",
+      "type": "string"
+    },
+    "inconclusive_check_ids": {
+      "default": [],
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Inconclusive Check Ids",
+      "type": "array"
+    },
+    "mandatory_check_ids": {
+      "default": [],
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Mandatory Check Ids",
+      "type": "array"
+    },
+    "nonapplicable_check_ids": {
+      "default": [],
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Nonapplicable Check Ids",
+      "type": "array"
+    },
+    "not_run_check_ids": {
+      "default": [],
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Not Run Check Ids",
+      "type": "array"
+    },
+    "skipped_check_ids": {
+      "default": [],
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Skipped Check Ids",
+      "type": "array"
+    },
+    "unresolved_reasons": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Unresolved Reasons",
+      "type": "array"
+    },
+    "unsupported_check_ids": {
+      "default": [],
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Unsupported Check Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "file_id",
+    "expected_check_ids"
+  ],
+  "title": "CoverageRecord",
+  "type": "object"
+}

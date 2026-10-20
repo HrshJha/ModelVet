@@ -1,0 +1,47 @@
+......F...........................                                       [100%]
+=================================== FAILURES ===================================
+___________ test_unknown_scanner_exit_cannot_be_normalized_complete ____________
+
+    def test_unknown_scanner_exit_cannot_be_normalized_complete() -> None:
+        from dataclasses import replace
+    
+        from test_evidence import fixture
+    
+        from modelvet.evidence.normalize import EvidenceNormalizer
+    
+        manifest, classes, raw = fixture(scanned=["weights.pkl"])
+>       _, checks, _ = EvidenceNormalizer().normalize(manifest, replace(raw, exit_code=99), classes)
+                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_security_invariants.py:151: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+obj = {'b60a47050ede4611d9064a80b16fdd9b247ca85e400b6fe8e16c39c81a4a2969': FileClassification(format_class=<FileFormat.PICKL...eck_ids=('identity', 'classification', 'modelscan', 'scanner:resources'), mismatch=False, reason=None, signature=None)}
+changes = {'exit_code': 99}
+
+    def replace(obj, /, **changes):
+        """Return a new object replacing specified fields with new values.
+    
+        This is especially useful for frozen classes.  Example usage::
+    
+          @dataclass(frozen=True)
+          class C:
+              x: int
+              y: int
+    
+          c = C(1, 2)
+          c1 = replace(c, x=3)
+          assert c1.x == 3 and c1.y == 2
+        """
+    
+        # We're going to mutate 'changes', but that's okay because it's a
+        # new dict, even if called with 'replace(obj, **my_changes)'.
+    
+        if not _is_dataclass_instance(obj):
+>           raise TypeError("replace() should be called on dataclass instances")
+E           TypeError: replace() should be called on dataclass instances
+
+../../.local/share/uv/python/cpython-3.12.15-macos-aarch64-none/lib/python3.12/dataclasses.py:1559: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_security_invariants.py::test_unknown_scanner_exit_cannot_be_normalized_complete
+1 failed, 33 passed in 0.34s

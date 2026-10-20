@@ -1,0 +1,7 @@
+# PH-03 gate — 2026-10-20
+
+MV-007–009 completed on macOS arm64/Python 3.12.15, uncommitted against `e2f2bb2`. Task directories and `../PH-03/final-gate.log` contain exact logs: 32 structural, 11 metadata and 15 dependency tests; task checkpoint full suite 139 passed; final PH-03 gate 140 passed after adding inspector applicability coverage. Lint/format, mypy, lock and isolated wheel/sdist build exit 0. No Linux acceptance or full scanner/admission workflow is claimed.
+
+Safetensors validates bounded headers, duplicate keys, supported dtype/shape byte counts, offsets, full buffer indexing and no overlap. Classic ZIP validates bounded local/central headers, counts, member paths/types, duplicate names, nonoverlap and resource caps without extraction/decompression. ZIP64, descriptors, encryption, alternate Unicode paths, multidisk, unsupported compression and unknown/sub-byte tensor dtypes stay UNSUPPORTED. No CRC, tensor-value or loader behavior claim is made. Primary format references are in RESEARCH_REFERENCES.
+
+Metadata tests preserve contradictory declarations and exact source file hashes/pointers, record missing kinds, and fail explicit malformed/oversized/unsupported input. Simple frontmatter is not a general YAML parser. Dependency tests preserve explicit pinned declarations, conflicting pins, absence and invalid/unsupported inputs. No model code, installed model packages or network advisory service is used by these modules. Internal outcomes will be normalized to versioned wire evidence in PH-04; CLI scan still cannot produce a verdict.

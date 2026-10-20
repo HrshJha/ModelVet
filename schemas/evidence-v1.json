@@ -1,0 +1,652 @@
+{
+  "$defs": {
+    "CheckRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Artifact Digest",
+          "type": "string"
+        },
+        "check_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Check Id",
+          "type": "string"
+        },
+        "details": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Details",
+          "type": "object"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "executor_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Executor Id",
+          "type": "string"
+        },
+        "file_id": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "File Id",
+          "type": "string"
+        },
+        "limitations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        },
+        "normalizer_version": {
+          "const": "1",
+          "default": "1",
+          "title": "Normalizer Version",
+          "type": "string"
+        },
+        "raw_ref": {
+          "anyOf": [
+            {
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw Ref"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "maxLength": 2048,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "result": {
+          "$ref": "#/$defs/CheckResult"
+        },
+        "status": {
+          "$ref": "#/$defs/CheckStatus"
+        }
+      },
+      "required": [
+        "check_id",
+        "file_id",
+        "executor_id",
+        "status",
+        "result",
+        "artifact_digest"
+      ],
+      "title": "CheckRecord",
+      "type": "object"
+    },
+    "CheckResult": {
+      "enum": [
+        "FINDINGS",
+        "NO_FINDINGS",
+        "UNKNOWN"
+      ],
+      "title": "CheckResult",
+      "type": "string"
+    },
+    "CheckStatus": {
+      "enum": [
+        "COMPLETE",
+        "SKIPPED",
+        "FAILED",
+        "UNSUPPORTED",
+        "INCONCLUSIVE",
+        "NOT_RUN"
+      ],
+      "title": "CheckStatus",
+      "type": "string"
+    },
+    "DependencyRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "advisories": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/JsonValue"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Advisories"
+        },
+        "ecosystem": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Ecosystem",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "source_ref": {
+          "title": "Source Ref",
+          "type": "string"
+        },
+        "source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "DECLARED_PINNED",
+            "INCONCLUSIVE"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Version"
+        }
+      },
+      "required": [
+        "name",
+        "ecosystem",
+        "version",
+        "source_ref",
+        "source_sha256",
+        "status"
+      ],
+      "title": "DependencyRecord",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Category",
+          "type": "string"
+        },
+        "check_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Check Id",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "maxLength": 4096,
+          "title": "Description",
+          "type": "string"
+        },
+        "file_id": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "File Id",
+          "type": "string"
+        },
+        "finding_id": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Location"
+        },
+        "related_cve": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Related Cve"
+        },
+        "rule_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rule Id"
+        },
+        "severity": {
+          "$ref": "#/$defs/Severity"
+        },
+        "source_ref": {
+          "maxLength": 2048,
+          "title": "Source Ref",
+          "type": "string"
+        },
+        "verification_state": {
+          "$ref": "#/$defs/FindingVerification"
+        }
+      },
+      "required": [
+        "finding_id",
+        "file_id",
+        "check_id",
+        "category",
+        "severity",
+        "verification_state",
+        "source_ref"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "FindingVerification": {
+      "enum": [
+        "REPORTED",
+        "CORROBORATED",
+        "DISPUTED"
+      ],
+      "title": "FindingVerification",
+      "type": "string"
+    },
+    "JsonValue": {},
+    "MetadataClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "confidence": {
+          "default": "DECLARED",
+          "enum": [
+            "DECLARED",
+            "INFERRED",
+            "HUMAN_REVIEWED"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "LICENSE",
+            "PROVENANCE",
+            "DEPENDENCY"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "source_file_id": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source File Id",
+          "type": "string"
+        },
+        "source_line": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Line"
+        },
+        "source_ref": {
+          "title": "Source Ref",
+          "type": "string"
+        },
+        "source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "kind",
+        "value",
+        "source_ref",
+        "source_file_id",
+        "source_sha256"
+      ],
+      "title": "MetadataClaim",
+      "type": "object"
+    },
+    "Severity": {
+      "enum": [
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "INFO",
+        "UNKNOWN"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "ToolExecution": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Artifact Digest",
+          "type": "string"
+        },
+        "ended_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ended At"
+        },
+        "environment_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Environment Digest"
+        },
+        "execution_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Execution Id",
+          "type": "string"
+        },
+        "exit_code": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Exit Code"
+        },
+        "limitations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        },
+        "raw_report_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw Report Digest"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "started_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Started At"
+        },
+        "status": {
+          "enum": [
+            "COMPLETE",
+            "FAILED",
+            "NOT_RUN",
+            "INCONCLUSIVE"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "stderr_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stderr Digest"
+        },
+        "stdout_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stdout Digest"
+        },
+        "tool_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Tool Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "execution_id",
+        "tool_id",
+        "status",
+        "artifact_digest"
+      ],
+      "title": "ToolExecution",
+      "type": "object"
+    },
+    "ToolInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "binary_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Binary Sha256"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "tool_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Tool Id",
+          "type": "string"
+        },
+        "version": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tool_id",
+        "version",
+        "source"
+      ],
+      "title": "ToolInfo",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "checks": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/CheckRecord"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "claims": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/MetadataClaim"
+      },
+      "title": "Claims",
+      "type": "array"
+    },
+    "dependencies": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/DependencyRecord"
+      },
+      "title": "Dependencies",
+      "type": "array"
+    },
+    "executions": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ToolExecution"
+      },
+      "title": "Executions",
+      "type": "array"
+    },
+    "findings": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "limitations": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tools": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ToolInfo"
+      },
+      "title": "Tools",
+      "type": "array"
+    }
+  },
+  "title": "EvidenceBundle",
+  "type": "object"
+}

@@ -1,0 +1,22 @@
+Resolved 31 packages in 25ms
+All checks passed!
+47 files already formatted
+Success: no issues found in 34 source files
+........................................................................ [ 35%]
+................................F....................................... [ 71%]
+.........................................................                [100%]
+=================================== FAILURES ===================================
+__________________ test_nonfinite_normalized_details_rejected __________________
+
+    def test_nonfinite_normalized_details_rejected() -> None:
+        manifest, raw, classes = fixture(["weights.pkl"])
+        _, checks, _ = EvidenceNormalizer().normalize(manifest, raw, classes)
+        data = checks[0].model_dump(mode="json")
+>       with pytest.raises(ValidationError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValidationError
+
+tests/test_evidence.py:203: Failed
+=========================== short test summary info ============================
+FAILED tests/test_evidence.py::test_nonfinite_normalized_details_rejected - F...
+1 failed, 200 passed in 10.73s

@@ -1,0 +1,475 @@
+{
+  "observed_at": "2026-10-20T12:53:09.345972+00:00",
+  "source": "https://api.osv.dev/v1/querybatch",
+  "lock_sha256": "a46d68b74ef8036d8bdad809862d3e0fabf77e2f5e078b6f21a5cde8240eeba5",
+  "queries": [
+    {
+      "package": {
+        "name": "annotated-doc",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.0.5"
+    },
+    {
+      "package": {
+        "name": "annotated-types",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.8.0"
+    },
+    {
+      "package": {
+        "name": "ast-serialize",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.13.1"
+    },
+    {
+      "package": {
+        "name": "colorama",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.4.6"
+    },
+    {
+      "package": {
+        "name": "coverage",
+        "ecosystem": "PyPI"
+      },
+      "version": "7.16.2"
+    },
+    {
+      "package": {
+        "name": "hatchling",
+        "ecosystem": "PyPI"
+      },
+      "version": "1.32.4"
+    },
+    {
+      "package": {
+        "name": "hypothesis",
+        "ecosystem": "PyPI"
+      },
+      "version": "6.170.5"
+    },
+    {
+      "package": {
+        "name": "iniconfig",
+        "ecosystem": "PyPI"
+      },
+      "version": "2.3.1"
+    },
+    {
+      "package": {
+        "name": "librt",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.16.0"
+    },
+    {
+      "package": {
+        "name": "markdown-it-py",
+        "ecosystem": "PyPI"
+      },
+      "version": "4.2.0"
+    },
+    {
+      "package": {
+        "name": "mdurl",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.1.2"
+    },
+    {
+      "package": {
+        "name": "mypy",
+        "ecosystem": "PyPI"
+      },
+      "version": "2.4.0"
+    },
+    {
+      "package": {
+        "name": "mypy-extensions",
+        "ecosystem": "PyPI"
+      },
+      "version": "1.1.0"
+    },
+    {
+      "package": {
+        "name": "packaging",
+        "ecosystem": "PyPI"
+      },
+      "version": "26.3"
+    },
+    {
+      "package": {
+        "name": "pathspec",
+        "ecosystem": "PyPI"
+      },
+      "version": "1.1.1"
+    },
+    {
+      "package": {
+        "name": "pluggy",
+        "ecosystem": "PyPI"
+      },
+      "version": "1.7.0"
+    },
+    {
+      "package": {
+        "name": "pydantic",
+        "ecosystem": "PyPI"
+      },
+      "version": "2.14.1"
+    },
+    {
+      "package": {
+        "name": "pydantic-core",
+        "ecosystem": "PyPI"
+      },
+      "version": "2.50.1"
+    },
+    {
+      "package": {
+        "name": "pygments",
+        "ecosystem": "PyPI"
+      },
+      "version": "2.21.0"
+    },
+    {
+      "package": {
+        "name": "pytest",
+        "ecosystem": "PyPI"
+      },
+      "version": "9.1.1"
+    },
+    {
+      "package": {
+        "name": "pytest-cov",
+        "ecosystem": "PyPI"
+      },
+      "version": "7.1.0"
+    },
+    {
+      "package": {
+        "name": "rich",
+        "ecosystem": "PyPI"
+      },
+      "version": "15.0.0"
+    },
+    {
+      "package": {
+        "name": "ruff",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.17.1"
+    },
+    {
+      "package": {
+        "name": "shellingham",
+        "ecosystem": "PyPI"
+      },
+      "version": "1.5.4"
+    },
+    {
+      "package": {
+        "name": "sortedcontainers",
+        "ecosystem": "PyPI"
+      },
+      "version": "2.4.0"
+    },
+    {
+      "package": {
+        "name": "tomlkit",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.15.2"
+    },
+    {
+      "package": {
+        "name": "trove-classifiers",
+        "ecosystem": "PyPI"
+      },
+      "version": "2026.9.21.13"
+    },
+    {
+      "package": {
+        "name": "typer",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.27.3"
+    },
+    {
+      "package": {
+        "name": "typing-extensions",
+        "ecosystem": "PyPI"
+      },
+      "version": "4.16.0"
+    },
+    {
+      "package": {
+        "name": "typing-inspection",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.4.4"
+    },
+    {
+      "package": {
+        "name": "click",
+        "ecosystem": "PyPI"
+      },
+      "version": "8.5.0"
+    },
+    {
+      "package": {
+        "name": "modelscan",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.8.8"
+    },
+    {
+      "package": {
+        "name": "numpy",
+        "ecosystem": "PyPI"
+      },
+      "version": "2.5.4"
+    },
+    {
+      "package": {
+        "name": "rich",
+        "ecosystem": "PyPI"
+      },
+      "version": "14.3.4"
+    },
+    {
+      "package": {
+        "name": "tomlkit",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.13.3"
+    }
+  ],
+  "results": {
+    "results": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ]
+  },
+  "matches": [],
+  "core_licenses": [
+    {
+      "name": "annotated-doc",
+      "version": "0.0.5",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "ast-serialize",
+      "version": "0.13.1",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6",
+      "license": "See retained license files",
+      "source": "PyPI version metadata; platform-conditional package not installed on this host"
+    },
+    {
+      "name": "coverage",
+      "version": "7.16.2",
+      "license": "Apache-2.0",
+      "source": "installed metadata"
+    },
+    {
+      "name": "hatchling",
+      "version": "1.32.4",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "hypothesis",
+      "version": "6.170.5",
+      "license": "MPL-2.0",
+      "source": "installed metadata"
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.1",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "librt",
+      "version": "0.16.0",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "markdown-it-py",
+      "version": "4.2.0",
+      "license": "See retained license files",
+      "source": "installed metadata"
+    },
+    {
+      "name": "mdurl",
+      "version": "0.1.2",
+      "license": "See retained license files",
+      "source": "installed metadata"
+    },
+    {
+      "name": "mypy",
+      "version": "2.4.0",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "mypy-extensions",
+      "version": "1.1.0",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3",
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "source": "installed metadata"
+    },
+    {
+      "name": "pathspec",
+      "version": "1.1.1",
+      "license": "See retained license files",
+      "source": "installed metadata"
+    },
+    {
+      "name": "pluggy",
+      "version": "1.7.0",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.1",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "pydantic-core",
+      "version": "2.50.1",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "pygments",
+      "version": "2.21.0",
+      "license": "BSD-2-Clause",
+      "source": "installed metadata"
+    },
+    {
+      "name": "pytest",
+      "version": "9.1.1",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "pytest-cov",
+      "version": "7.1.0",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "rich",
+      "version": "15.0.0",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "ruff",
+      "version": "0.17.1",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "shellingham",
+      "version": "1.5.4",
+      "license": "ISC License",
+      "source": "installed metadata"
+    },
+    {
+      "name": "sortedcontainers",
+      "version": "2.4.0",
+      "license": "Apache 2.0",
+      "source": "installed metadata"
+    },
+    {
+      "name": "tomlkit",
+      "version": "0.15.2",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "trove-classifiers",
+      "version": "2026.9.21.13",
+      "license": "See retained license files",
+      "source": "installed metadata"
+    },
+    {
+      "name": "typer",
+      "version": "0.27.3",
+      "license": "MIT",
+      "source": "installed metadata"
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.16.0",
+      "license": "PSF-2.0",
+      "source": "installed metadata"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4",
+      "license": "MIT",
+      "source": "installed metadata"
+    }
+  ],
+  "limitation": "Point-in-time advisory matching and metadata review, not security certification. License texts/scanner notices retained in MV-001/MV-010."
+}

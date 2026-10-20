@@ -1,0 +1,3 @@
+src/modelvet/dependencies/advisories.py:301: error: Argument "status" to "DependencyAdvisories" has incompatible type "str"; expected "Literal['COMPLETE', 'INCONCLUSIVE', 'UNSUPPORTED', 'NOT_RUN']"  [arg-type]
+src/modelvet/dependencies/advisories.py:327: error: Argument "status" to "AdvisoryAssessment" has incompatible type "str"; expected "Literal['COMPLETE', 'INCONCLUSIVE', 'NOT_RUN']"  [arg-type]
+Found 2 errors in 1 file (checked 47 source files)

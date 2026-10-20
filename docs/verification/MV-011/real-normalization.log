@@ -1,0 +1,4 @@
+execution: COMPLETE exit: 0
+modelscan SKIPPED UNKNOWN Scanner explicitly skipped this file.
+modelscan COMPLETE NO_FINDINGS None
+scanner:resources UNSUPPORTED UNKNOWN Scanner resource contract unresolved.

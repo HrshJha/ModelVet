@@ -1,0 +1,5 @@
+# MV-014 verification — 2026-10-20
+
+Implemented typed policy/decision contracts and deterministic evaluator. Initial targeted command `uv run pytest -q tests/test_policy.py`: 27 passed (`task.log`, `task-final.log`). The status-combination test loops over all 1,296 four-check combinations for both plain and controlled policies. Broader suite: 228 passed (`suite.log`); Ruff passed and strict mypy passed for 37 source files (`types-final.log`). Initial mypy failure is retained in `types.log`; initial long-line lint diagnostics were seen in terminal and fixed before acceptance.
+
+Final PH-05 adds two integrity/optional-source regressions (29 evaluator cases within 287 suite tests); the exact targeted rerun also passed all 29 (`task-phase-final.log`). See `../PH-05/final-gate.log`. The evaluator requires owned classifications/checks/claims, recomputes coverage and checks core facts instead of trusting caller-supplied completion rows. BLOCK requires independent complete source-ban proof; missing mandatory evidence cannot approve or admit with controls. No LLM, model loader, network or new dependency is used. Full CLI scan/report integration remains pending.

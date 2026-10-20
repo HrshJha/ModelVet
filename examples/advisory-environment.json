@@ -1,0 +1,6 @@
+{
+  "schema_version": "1.0.0",
+  "dependencies": [
+    {"name": "modelvet-synthetic-demo", "ecosystem": "PyPI", "version": "1.0.0"}
+  ]
+}

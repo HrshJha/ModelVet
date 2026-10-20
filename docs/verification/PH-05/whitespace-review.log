@@ -1,0 +1,3 @@
+Whitespace review: 86 source/test/schema/config/doc files clean.
+Static prohibited model loader/eval/exec call scan: no matches (not a security audit).
+Final wheel includes current README, default TOML and five unchanged schemas.

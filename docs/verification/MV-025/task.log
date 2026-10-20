@@ -1,0 +1,4 @@
+{"case": "10001 empty files", "elapsed_s": 0.6403, "python_peak_bytes": 3613984}
+......{"case": "scanner timeout", "elapsed_s": 1.0094, "failure": "TIMEOUT"}
+.s.
+8 passed, 1 skipped in 2.40s

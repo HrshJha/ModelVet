@@ -1,0 +1,6 @@
+Resolved 31 packages in 3ms
+All checks passed!
+47 files already formatted
+src/modelvet/coverage/conflicts.py:123: error: Incompatible types in assignment (expression has type "list[CheckRecord]", variable has type "list[MetadataClaim]")  [assignment]
+src/modelvet/coverage/conflicts.py:131: error: Argument 1 to "check_reference" has incompatible type "MetadataClaim"; expected "CheckRecord"  [arg-type]
+Found 2 errors in 1 file (checked 34 source files)

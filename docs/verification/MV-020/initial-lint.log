@@ -1,0 +1,64 @@
+E501 Line too long (104 > 100)
+   --> src/modelvet/cli/main.py:147:101
+    |
+145 |     report: Annotated[Path, typer.Argument(help="Stored report with declared dependency pins.")],
+146 |     as_of: Annotated[str, typer.Option(help="Explicit evaluation time, UTC RFC3339.")],
+147 |     snapshot: Annotated[Path | None, typer.Option(help="Explicit local OSV snapshot envelope.")] = None,
+    |                                                                                                     ^^^^
+148 |     max_age_days: Annotated[int, typer.Option(min=0, max=365)] = 7,
+149 |     required: Annotated[bool, typer.Option("--required/--optional")] = True,
+    |
+
+E501 Line too long (101 > 100)
+   --> src/modelvet/dependencies/advisories.py:151:101
+    |
+149 |     def semantic_digest(self) -> str:
+150 |         encoded = json.dumps(self.model_dump(mode="json"), sort_keys=True, separators=(",", ":"))
+151 |         return "sha256:" + hashlib.sha256(b"modelvet-advisories-v1\0" + encoded.encode()).hexdigest()
+    |                                                                                                     ^
+
+E501 Line too long (101 > 100)
+   --> src/modelvet/dependencies/advisories.py:270:101
+    |
+268 |                         relevant = [
+269 |                             a for a in record.affected
+270 |                             if a.package.ecosystem == "PyPI" and package_name(a.package.name) == name
+    |                                                                                                     ^
+271 |                         ]
+272 |                         if not relevant:
+    |
+
+E501 Line too long (101 > 100)
+   --> src/modelvet/dependencies/advisories.py:280:101
+    |
+278 |                                 source_ref=f"{digest}#/queries/{index}/response/vulns/{number}",
+279 |                             ))
+280 |                         if any(a.ranges or a.ecosystem_specific or not a.versions for a in relevant):
+    |                                                                                                     ^
+281 |                             reasons.append("Affected range or ecosystem semantics are unsupported.")
+282 |                 if time_reason:
+    |
+
+E501 Line too long (102 > 100)
+   --> src/modelvet/dependencies/advisories.py:300:101
+    |
+298 |         return AdvisoryAssessment(
+299 |             artifact_digest=artifact_digest, report_digest=report_digest,
+300 |             snapshot_digest=digest, snapshot_generated_at=snapshot.generated_at if snapshot else None,
+    |                                                                                                     ^^
+301 |             source_claim_sha256=hashlib.sha256(snapshot.source.encode()).hexdigest() if snapshot else None,
+302 |             evaluated_at=now.isoformat(), max_age_days=max_age_days, required=required,
+    |
+
+E501 Line too long (107 > 100)
+   --> src/modelvet/dependencies/advisories.py:301:101
+    |
+299 |             artifact_digest=artifact_digest, report_digest=report_digest,
+300 |             snapshot_digest=digest, snapshot_generated_at=snapshot.generated_at if snapshot else None,
+301 |             source_claim_sha256=hashlib.sha256(snapshot.source.encode()).hexdigest() if snapshot else None,
+    |                                                                                                     ^^^^^^^
+302 |             evaluated_at=now.isoformat(), max_age_days=max_age_days, required=required,
+303 |             status=overall, dependencies=tuple(sorted(rows, key=lambda r: (
+    |
+
+Found 6 errors.

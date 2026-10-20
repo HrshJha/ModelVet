@@ -1,0 +1,364 @@
+[
+  {
+    "license_files": [
+      {
+        "path": "annotated_doc-0.0.5.dist-info/licenses/LICENSE",
+        "sha256": "fff170779a6acbf65abdb405c087f1cee1786691e4a96a4034517e4a504a0cdf"
+      }
+    ],
+    "name": "annotated-doc",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "0.0.5"
+  },
+  {
+    "license_files": [
+      {
+        "path": "annotated_types-0.8.0.dist-info/licenses/LICENSE",
+        "sha256": "fe1049884b1a0d9342901e88e07f32925d24b3121d9972b6a6805fb9824b095d"
+      }
+    ],
+    "name": "annotated-types",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "0.8.0"
+  },
+  {
+    "license_files": [
+      {
+        "path": "ast_serialize-0.13.1.dist-info/licenses/LICENSE",
+        "sha256": "db90b8fd0ae1748117ab467680a5193bfd057a3119846cb53ee3b64f16577b3b"
+      },
+      {
+        "path": "ast_serialize-0.13.1.dist-info/licenses/crates/LICENSE",
+        "sha256": "2597d854122b77ddc71971564ca2350a37608575ce324adc5650a2b2051c8f18"
+      }
+    ],
+    "name": "ast-serialize",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "0.13.1"
+  },
+  {
+    "license_files": [
+      {
+        "path": "colorama-0.4.6.dist-info/licenses/LICENSE.txt",
+        "sha256": "cac35c02686e5d04a5a7140bfb3b36e73aed496656e891102e428886d7930318"
+      }
+    ],
+    "name": "colorama",
+    "source": "https://files.pythonhosted.org/packages/d1/d6/3965ed04c63042e047cb6a3e6ed1a63a35087b6a609aa3a15ed8ac56c221/colorama-0.4.6-py2.py3-none-any.whl",
+    "version": "0.4.6"
+  },
+  {
+    "license_files": [
+      {
+        "path": "coverage-7.16.2.dist-info/licenses/LICENSE.txt",
+        "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+      },
+      {
+        "path": "coverage-7.16.2.dist-info/licenses/NOTICE.txt",
+        "sha256": "80e177ab397d5f332954693a52abc1b34b06c5792dd57297608b6d68a2f6af11"
+      }
+    ],
+    "name": "coverage",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "7.16.2"
+  },
+  {
+    "license_files": [
+      {
+        "path": "hatchling-1.32.4.dist-info/licenses/LICENSE.txt",
+        "sha256": "7f143a8127ad4873862d70854b5bd2abd0085aa73e64fd2b08704a3b9f5c07fc"
+      }
+    ],
+    "name": "hatchling",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "1.32.4"
+  },
+  {
+    "license_files": [
+      {
+        "path": "hypothesis-6.170.5.dist-info/licenses/LICENSE.txt",
+        "sha256": "ac89037bac63550644dce8cf32c6765e5fab9dc1a1ce94b89f8a805f341a6750"
+      }
+    ],
+    "name": "hypothesis",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "6.170.5"
+  },
+  {
+    "license_files": [
+      {
+        "path": "iniconfig-2.3.1.dist-info/licenses/LICENSE",
+        "sha256": "3409fa91f7ace557894632676656e32264fe5ef7581535725dc9a23774551bd4"
+      }
+    ],
+    "name": "iniconfig",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "2.3.1"
+  },
+  {
+    "license_files": [
+      {
+        "path": "librt-0.16.0.dist-info/licenses/LICENSE",
+        "sha256": "88f9e379c684580053c58e75e296ca2eb243b6edcc6e5357f247310e96eeef8a"
+      }
+    ],
+    "name": "librt",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "0.16.0"
+  },
+  {
+    "license_files": [
+      {
+        "path": "markdown_it_py-4.2.0.dist-info/licenses/LICENSE",
+        "sha256": "4a2260d6e2cd0f5a151a1e86dbfe7d3ed552b1e2beabf9941c1ba5c49cbce484"
+      },
+      {
+        "path": "markdown_it_py-4.2.0.dist-info/licenses/LICENSE.markdown-it",
+        "sha256": "792c48c5a849a15fdf9e37e8bcf9e6d1dd13b32b46c642a748a0a46a9919d473"
+      }
+    ],
+    "name": "markdown-it-py",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "4.2.0"
+  },
+  {
+    "license_files": [
+      {
+        "path": "mdurl-0.1.2.dist-info/LICENSE",
+        "sha256": "7c605df6e28667a9603118e98274f64a49ce3eed0d26fccce9534a345e0ef955"
+      }
+    ],
+    "name": "mdurl",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "0.1.2"
+  },
+  {
+    "license_files": [
+      {
+        "path": "mypy-2.4.0.dist-info/licenses/LICENSE",
+        "sha256": "fdf1cd17f50e1305ed8cfd37467312d27a984648dba622cef70573b5512e4e1b"
+      },
+      {
+        "path": "mypy-2.4.0.dist-info/licenses/mypy/typeshed/LICENSE",
+        "sha256": "295f8538c94ae5c3043301cf7cff1c852dab6a786a8ddee471e061b40d5ecabe"
+      }
+    ],
+    "name": "mypy",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "2.4.0"
+  },
+  {
+    "license_files": [
+      {
+        "path": "mypy_extensions-1.1.0.dist-info/licenses/LICENSE",
+        "sha256": "a50450da1d53cd777b80ced77c58ff96abe0ccd879706bd142c3ec20e245f0b4"
+      }
+    ],
+    "name": "mypy-extensions",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "1.1.0"
+  },
+  {
+    "license_files": [
+      {
+        "path": "packaging-26.3.dist-info/licenses/LICENSE",
+        "sha256": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48"
+      },
+      {
+        "path": "packaging-26.3.dist-info/licenses/LICENSE.APACHE",
+        "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+      },
+      {
+        "path": "packaging-26.3.dist-info/licenses/LICENSE.BSD",
+        "sha256": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5"
+      }
+    ],
+    "name": "packaging",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "26.3"
+  },
+  {
+    "license_files": [
+      {
+        "path": "pathspec-1.1.1.dist-info/licenses/LICENSE",
+        "sha256": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85"
+      }
+    ],
+    "name": "pathspec",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "1.1.1"
+  },
+  {
+    "license_files": [
+      {
+        "path": "pluggy-1.7.0.dist-info/licenses/LICENSE",
+        "sha256": "d6b65e6c213a5d0b577911d34d6e5949b9f59d76c238c5071a2f3fc16cfb2606"
+      }
+    ],
+    "name": "pluggy",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "1.7.0"
+  },
+  {
+    "license_files": [
+      {
+        "path": "pydantic-2.14.1.dist-info/licenses/LICENSE",
+        "sha256": "a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3"
+      }
+    ],
+    "name": "pydantic",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "2.14.1"
+  },
+  {
+    "license_files": [
+      {
+        "path": "pydantic_core-2.50.1.dist-info/licenses/LICENSE",
+        "sha256": "2afdd30d54b4d62b6f488a6bcc1546e84ec5061f13f4209c03d012348783795a"
+      }
+    ],
+    "name": "pydantic-core",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "2.50.1"
+  },
+  {
+    "license_files": [
+      {
+        "path": "pygments-2.21.0.dist-info/licenses/AUTHORS",
+        "sha256": "71a83872ad82f57be692cf827e048e2cd51d45169cfa1ea3f28706d97a872c0f"
+      },
+      {
+        "path": "pygments-2.21.0.dist-info/licenses/LICENSE",
+        "sha256": "a9d66f1d526df02e29dce73436d34e56e8632f46c275bbdffc70569e882f9f17"
+      }
+    ],
+    "name": "pygments",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "2.21.0"
+  },
+  {
+    "license_files": [
+      {
+        "path": "pytest-9.1.1.dist-info/licenses/LICENSE",
+        "sha256": "ca836a5f9ecca3b2f350230faa20a48fb8b145653b5568d784862df864706b9b"
+      }
+    ],
+    "name": "pytest",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "9.1.1"
+  },
+  {
+    "license_files": [
+      {
+        "path": "pytest_cov-7.1.0.dist-info/licenses/AUTHORS.rst",
+        "sha256": "d7390c793c73c36265497ffac90a886a235c8b50948454c9af98f1aef2a00d2a"
+      },
+      {
+        "path": "pytest_cov-7.1.0.dist-info/licenses/LICENSE",
+        "sha256": "835586ae156766a24e3c103fbc55d9af6b1a16df57ca932c97482a2737fd83d5"
+      }
+    ],
+    "name": "pytest-cov",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "7.1.0"
+  },
+  {
+    "license_files": [
+      {
+        "path": "rich-15.0.0.dist-info/licenses/LICENSE",
+        "sha256": "deed7c17a4318158190a3ea239cc879a5a50271cebb98ae7025f48fbe58dca15"
+      }
+    ],
+    "name": "rich",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "15.0.0"
+  },
+  {
+    "license_files": [
+      {
+        "path": "ruff-0.17.1.dist-info/licenses/LICENSE",
+        "sha256": "2597d854122b77ddc71971564ca2350a37608575ce324adc5650a2b2051c8f18"
+      }
+    ],
+    "name": "ruff",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "0.17.1"
+  },
+  {
+    "license_files": [
+      {
+        "path": "shellingham-1.5.4.dist-info/LICENSE",
+        "sha256": "f388fd38cad13112c1dc0f669bbe80e7f84541edbafb72f3030d2ca7642c3c9d"
+      }
+    ],
+    "name": "shellingham",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "1.5.4"
+  },
+  {
+    "license_files": [
+      {
+        "path": "sortedcontainers-2.4.0.dist-info/LICENSE",
+        "sha256": "1db7cae7fce6452e2e608e401a0f953e0133e4c2d75db69fb8ae851d2086f5b6"
+      }
+    ],
+    "name": "sortedcontainers",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "2.4.0"
+  },
+  {
+    "license_files": [
+      {
+        "path": "tomlkit-0.15.2.dist-info/licenses/LICENSE",
+        "sha256": "f2f9b460ba719da6626add264d3782f275a4ff7aab677beda08b330911e23adb"
+      }
+    ],
+    "name": "tomlkit",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "0.15.2"
+  },
+  {
+    "license_files": [
+      {
+        "path": "trove_classifiers-2026.9.21.13.dist-info/licenses/LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      }
+    ],
+    "name": "trove-classifiers",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "2026.9.21.13"
+  },
+  {
+    "license_files": [
+      {
+        "path": "typer-0.27.3.dist-info/licenses/LICENSE",
+        "sha256": "58992cebcf8dfb6e40c4e2112ed12126c243666dca3912a3d78b7ecac4859d49"
+      }
+    ],
+    "name": "typer",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "0.27.3"
+  },
+  {
+    "license_files": [
+      {
+        "path": "typing_extensions-4.16.0.dist-info/licenses/LICENSE",
+        "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+      }
+    ],
+    "name": "typing-extensions",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "4.16.0"
+  },
+  {
+    "license_files": [
+      {
+        "path": "typing_inspection-0.4.4.dist-info/licenses/LICENSE",
+        "sha256": "804b59b25f2c31bd278f9202a19ae49a3945aa2664387e2d0a128c7cacc61ec3"
+      }
+    ],
+    "name": "typing-inspection",
+    "source": "installed wheel metadata from uv.lock",
+    "version": "0.4.4"
+  }
+]

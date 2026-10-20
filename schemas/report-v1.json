@@ -1,0 +1,1349 @@
+{
+  "$defs": {
+    "AdmissionDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_refs": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "reason": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "required_controls": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Control"
+          },
+          "title": "Required Controls",
+          "type": "array"
+        },
+        "rule_ids": {
+          "items": {
+            "pattern": "^[A-Z][A-Z0-9_-]{0,63}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Rule Ids",
+          "type": "array"
+        },
+        "state": {
+          "$ref": "#/$defs/DecisionState"
+        }
+      },
+      "required": [
+        "state",
+        "rule_ids",
+        "reason",
+        "evidence_refs"
+      ],
+      "title": "AdmissionDecision",
+      "type": "object"
+    },
+    "ArtifactIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "file_count": {
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "File Count",
+          "type": "integer"
+        },
+        "hash_algorithm": {
+          "const": "sha256",
+          "default": "sha256",
+          "title": "Hash Algorithm",
+          "type": "string"
+        },
+        "manifest_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Manifest Digest",
+          "type": "string"
+        },
+        "total_bytes": {
+          "maximum": 2147483648,
+          "minimum": 0,
+          "title": "Total Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "manifest_digest",
+        "file_count",
+        "total_bytes"
+      ],
+      "title": "ArtifactIdentity",
+      "type": "object"
+    },
+    "CheckRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Artifact Digest",
+          "type": "string"
+        },
+        "check_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Check Id",
+          "type": "string"
+        },
+        "details": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Details",
+          "type": "object"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        },
+        "executor_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Executor Id",
+          "type": "string"
+        },
+        "file_id": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "File Id",
+          "type": "string"
+        },
+        "limitations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        },
+        "normalizer_version": {
+          "const": "1",
+          "default": "1",
+          "title": "Normalizer Version",
+          "type": "string"
+        },
+        "raw_ref": {
+          "anyOf": [
+            {
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw Ref"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "maxLength": 2048,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "result": {
+          "$ref": "#/$defs/CheckResult"
+        },
+        "status": {
+          "$ref": "#/$defs/CheckStatus"
+        }
+      },
+      "required": [
+        "check_id",
+        "file_id",
+        "executor_id",
+        "status",
+        "result",
+        "artifact_digest"
+      ],
+      "title": "CheckRecord",
+      "type": "object"
+    },
+    "CheckResult": {
+      "enum": [
+        "FINDINGS",
+        "NO_FINDINGS",
+        "UNKNOWN"
+      ],
+      "title": "CheckResult",
+      "type": "string"
+    },
+    "CheckStatus": {
+      "enum": [
+        "COMPLETE",
+        "SKIPPED",
+        "FAILED",
+        "UNSUPPORTED",
+        "INCONCLUSIVE",
+        "NOT_RUN"
+      ],
+      "title": "CheckStatus",
+      "type": "string"
+    },
+    "ConflictRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "check_refs": {
+          "default": [],
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Check Refs",
+          "type": "array"
+        },
+        "claim_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "title": "Claim Ids",
+          "type": "array"
+        },
+        "conflict_id": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Conflict Id",
+          "type": "string"
+        },
+        "decision_relevant": {
+          "title": "Decision Relevant",
+          "type": "boolean"
+        },
+        "reason": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "resolution_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resolution Ref"
+        },
+        "subject": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Subject"
+        },
+        "type": {
+          "enum": [
+            "LICENSE",
+            "PROVENANCE",
+            "DEPENDENCY",
+            "IDENTITY",
+            "CHECK_STATUS",
+            "EVIDENCE_ID"
+          ],
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "conflict_id",
+        "type",
+        "decision_relevant",
+        "reason"
+      ],
+      "title": "ConflictRecord",
+      "type": "object"
+    },
+    "Control": {
+      "additionalProperties": false,
+      "properties": {
+        "control_id": {
+          "enum": [
+            "ISOLATED_LOADING",
+            "NO_CODE_IMPORT"
+          ],
+          "title": "Control Id",
+          "type": "string"
+        },
+        "owner": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Owner",
+          "type": "string"
+        }
+      },
+      "required": [
+        "control_id",
+        "owner"
+      ],
+      "title": "Control",
+      "type": "object"
+    },
+    "ControlRule": {
+      "additionalProperties": false,
+      "properties": {
+        "condition": {
+          "enum": [
+            "REPOSITORY_CODE",
+            "SERIALIZED_MODEL",
+            "MODEL_PRESENT"
+          ],
+          "title": "Condition",
+          "type": "string"
+        },
+        "control_ids": {
+          "items": {
+            "enum": [
+              "ISOLATED_LOADING",
+              "NO_CODE_IMPORT"
+            ],
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "Control Ids",
+          "type": "array"
+        },
+        "rule_id": {
+          "pattern": "^[A-Z][A-Z0-9_-]{0,63}$",
+          "title": "Rule Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "rule_id",
+        "condition",
+        "control_ids"
+      ],
+      "title": "ControlRule",
+      "type": "object"
+    },
+    "CoverageRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "completed_check_ids": {
+          "default": [],
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Completed Check Ids",
+          "type": "array"
+        },
+        "expected_check_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Expected Check Ids",
+          "type": "array"
+        },
+        "failed_check_ids": {
+          "default": [],
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Failed Check Ids",
+          "type": "array"
+        },
+        "file_id": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "File Id",
+          "type": "string"
+        },
+        "inconclusive_check_ids": {
+          "default": [],
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Inconclusive Check Ids",
+          "type": "array"
+        },
+        "mandatory_check_ids": {
+          "default": [],
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Mandatory Check Ids",
+          "type": "array"
+        },
+        "nonapplicable_check_ids": {
+          "default": [],
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Nonapplicable Check Ids",
+          "type": "array"
+        },
+        "not_run_check_ids": {
+          "default": [],
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Not Run Check Ids",
+          "type": "array"
+        },
+        "skipped_check_ids": {
+          "default": [],
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Skipped Check Ids",
+          "type": "array"
+        },
+        "unresolved_reasons": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Unresolved Reasons",
+          "type": "array"
+        },
+        "unsupported_check_ids": {
+          "default": [],
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Unsupported Check Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "file_id",
+        "expected_check_ids"
+      ],
+      "title": "CoverageRecord",
+      "type": "object"
+    },
+    "DecisionState": {
+      "enum": [
+        "APPROVE",
+        "CONTROLS",
+        "BLOCK",
+        "INSUFFICIENT"
+      ],
+      "title": "DecisionState",
+      "type": "string"
+    },
+    "DependencyRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "advisories": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/JsonValue"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Advisories"
+        },
+        "ecosystem": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Ecosystem",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "source_ref": {
+          "title": "Source Ref",
+          "type": "string"
+        },
+        "source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "DECLARED_PINNED",
+            "INCONCLUSIVE"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Version"
+        }
+      },
+      "required": [
+        "name",
+        "ecosystem",
+        "version",
+        "source_ref",
+        "source_sha256",
+        "status"
+      ],
+      "title": "DependencyRecord",
+      "type": "object"
+    },
+    "FileFormat": {
+      "enum": [
+        "SAFETENSORS",
+        "PICKLE_LIKE",
+        "PYTORCH_ZIP",
+        "ZIP_OTHER",
+        "JSON",
+        "MARKDOWN",
+        "TEXT",
+        "PYTHON_SOURCE",
+        "BINARY_UNKNOWN",
+        "UNKNOWN"
+      ],
+      "title": "FileFormat",
+      "type": "string"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Category",
+          "type": "string"
+        },
+        "check_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Check Id",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "maxLength": 4096,
+          "title": "Description",
+          "type": "string"
+        },
+        "file_id": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "File Id",
+          "type": "string"
+        },
+        "finding_id": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Location"
+        },
+        "related_cve": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Related Cve"
+        },
+        "rule_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rule Id"
+        },
+        "severity": {
+          "$ref": "#/$defs/Severity"
+        },
+        "source_ref": {
+          "maxLength": 2048,
+          "title": "Source Ref",
+          "type": "string"
+        },
+        "verification_state": {
+          "$ref": "#/$defs/FindingVerification"
+        }
+      },
+      "required": [
+        "finding_id",
+        "file_id",
+        "check_id",
+        "category",
+        "severity",
+        "verification_state",
+        "source_ref"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "FindingVerification": {
+      "enum": [
+        "REPORTED",
+        "CORROBORATED",
+        "DISPUTED"
+      ],
+      "title": "FindingVerification",
+      "type": "string"
+    },
+    "JsonValue": {},
+    "MetadataClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "confidence": {
+          "default": "DECLARED",
+          "enum": [
+            "DECLARED",
+            "INFERRED",
+            "HUMAN_REVIEWED"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "LICENSE",
+            "PROVENANCE",
+            "DEPENDENCY"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "source_file_id": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source File Id",
+          "type": "string"
+        },
+        "source_line": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Line"
+        },
+        "source_ref": {
+          "title": "Source Ref",
+          "type": "string"
+        },
+        "source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "kind",
+        "value",
+        "source_ref",
+        "source_file_id",
+        "source_sha256"
+      ],
+      "title": "MetadataClaim",
+      "type": "object"
+    },
+    "Policy": {
+      "additionalProperties": false,
+      "properties": {
+        "applicability_version": {
+          "const": "2",
+          "title": "Applicability Version",
+          "type": "string"
+        },
+        "control_rules": {
+          "items": {
+            "$ref": "#/$defs/ControlRule"
+          },
+          "maxItems": 32,
+          "title": "Control Rules",
+          "type": "array"
+        },
+        "controls": {
+          "items": {
+            "$ref": "#/$defs/Control"
+          },
+          "maxItems": 2,
+          "title": "Controls",
+          "type": "array"
+        },
+        "mandatory_checks": {
+          "items": {
+            "enum": [
+              "identity",
+              "classification",
+              "structural:safetensors",
+              "structural:zip",
+              "metadata:local",
+              "dependencies:declared",
+              "source:presence",
+              "modelscan",
+              "scanner:resources"
+            ],
+            "type": "string"
+          },
+          "title": "Mandatory Checks",
+          "type": "array"
+        },
+        "optional_checks": {
+          "items": {
+            "enum": [
+              "identity",
+              "classification",
+              "structural:safetensors",
+              "structural:zip",
+              "metadata:local",
+              "dependencies:declared",
+              "source:presence",
+              "modelscan",
+              "scanner:resources"
+            ],
+            "type": "string"
+          },
+          "title": "Optional Checks",
+          "type": "array"
+        },
+        "policy_id": {
+          "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+          "title": "Policy Id",
+          "type": "string"
+        },
+        "policy_version": {
+          "pattern": "^[1-9][0-9]{0,8}$",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "prohibitions": {
+          "items": {
+            "$ref": "#/$defs/Prohibition"
+          },
+          "maxItems": 32,
+          "title": "Prohibitions",
+          "type": "array"
+        },
+        "required_claims": {
+          "default": [],
+          "items": {
+            "enum": [
+              "LICENSE",
+              "PROVENANCE",
+              "DEPENDENCY"
+            ],
+            "type": "string"
+          },
+          "title": "Required Claims",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "policy_id",
+        "policy_version",
+        "applicability_version",
+        "mandatory_checks",
+        "optional_checks",
+        "prohibitions",
+        "controls",
+        "control_rules"
+      ],
+      "title": "Policy",
+      "type": "object"
+    },
+    "Prohibition": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "const": "REPOSITORY_CODE",
+          "title": "Category",
+          "type": "string"
+        },
+        "rule_id": {
+          "pattern": "^[A-Z][A-Z0-9_-]{0,63}$",
+          "title": "Rule Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "rule_id",
+        "category"
+      ],
+      "title": "Prohibition",
+      "type": "object"
+    },
+    "RawEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Digest",
+          "type": "string"
+        },
+        "filename": {
+          "pattern": "^raw/[a-f0-9]{64}\\.bin$",
+          "title": "Filename",
+          "type": "string"
+        },
+        "size": {
+          "maximum": 4194304,
+          "minimum": 0,
+          "title": "Size",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "digest",
+        "size",
+        "filename"
+      ],
+      "title": "RawEvidence",
+      "type": "object"
+    },
+    "ReportFile": {
+      "additionalProperties": false,
+      "properties": {
+        "file_id": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "File Id",
+          "type": "string"
+        },
+        "format_class": {
+          "$ref": "#/$defs/FileFormat"
+        },
+        "mismatch": {
+          "default": false,
+          "title": "Mismatch",
+          "type": "boolean"
+        },
+        "relpath": {
+          "title": "Relpath",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size": {
+          "maximum": 1073741824,
+          "minimum": 0,
+          "title": "Size",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "file_id",
+        "relpath",
+        "size",
+        "sha256",
+        "format_class"
+      ],
+      "title": "ReportFile",
+      "type": "object"
+    },
+    "RunMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "finished_at": {
+          "title": "Finished At",
+          "type": "string"
+        },
+        "host_os_family": {
+          "enum": [
+            "Linux",
+            "Darwin"
+          ],
+          "title": "Host Os Family",
+          "type": "string"
+        },
+        "modelvet_version": {
+          "title": "Modelvet Version",
+          "type": "string"
+        },
+        "result_status": {
+          "enum": [
+            "COMPLETE",
+            "DEGRADED"
+          ],
+          "title": "Result Status",
+          "type": "string"
+        },
+        "run_id": {
+          "pattern": "^[a-f0-9]{32}$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "started_at": {
+          "title": "Started At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "started_at",
+        "finished_at",
+        "modelvet_version",
+        "host_os_family",
+        "result_status"
+      ],
+      "title": "RunMetadata",
+      "type": "object"
+    },
+    "Severity": {
+      "enum": [
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "INFO",
+        "UNKNOWN"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "ToolExecution": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Artifact Digest",
+          "type": "string"
+        },
+        "ended_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ended At"
+        },
+        "environment_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Environment Digest"
+        },
+        "execution_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Execution Id",
+          "type": "string"
+        },
+        "exit_code": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Exit Code"
+        },
+        "limitations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        },
+        "raw_report_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw Report Digest"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "started_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Started At"
+        },
+        "status": {
+          "enum": [
+            "COMPLETE",
+            "FAILED",
+            "NOT_RUN",
+            "INCONCLUSIVE"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "stderr_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stderr Digest"
+        },
+        "stdout_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stdout Digest"
+        },
+        "tool_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Tool Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "execution_id",
+        "tool_id",
+        "status",
+        "artifact_digest"
+      ],
+      "title": "ToolExecution",
+      "type": "object"
+    },
+    "ToolInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "binary_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Binary Sha256"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "tool_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Tool Id",
+          "type": "string"
+        },
+        "version": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tool_id",
+        "version",
+        "source"
+      ],
+      "title": "ToolInfo",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "artifact": {
+      "$ref": "#/$defs/ArtifactIdentity"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/CheckRecord"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "claims": {
+      "items": {
+        "$ref": "#/$defs/MetadataClaim"
+      },
+      "title": "Claims",
+      "type": "array"
+    },
+    "conflicts": {
+      "items": {
+        "$ref": "#/$defs/ConflictRecord"
+      },
+      "title": "Conflicts",
+      "type": "array"
+    },
+    "coverage": {
+      "items": {
+        "$ref": "#/$defs/CoverageRecord"
+      },
+      "title": "Coverage",
+      "type": "array"
+    },
+    "decision": {
+      "$ref": "#/$defs/AdmissionDecision"
+    },
+    "dependencies": {
+      "items": {
+        "$ref": "#/$defs/DependencyRecord"
+      },
+      "title": "Dependencies",
+      "type": "array"
+    },
+    "executions": {
+      "items": {
+        "$ref": "#/$defs/ToolExecution"
+      },
+      "title": "Executions",
+      "type": "array"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/ReportFile"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "manifest_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Manifest Digest",
+      "type": "string"
+    },
+    "policy": {
+      "$ref": "#/$defs/Policy"
+    },
+    "policy_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Policy Digest",
+      "type": "string"
+    },
+    "raw_evidence": {
+      "items": {
+        "$ref": "#/$defs/RawEvidence"
+      },
+      "title": "Raw Evidence",
+      "type": "array"
+    },
+    "references": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "References",
+      "type": "object"
+    },
+    "run": {
+      "$ref": "#/$defs/RunMetadata"
+    },
+    "schema_version": {
+      "const": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "semantic_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Semantic Digest",
+      "type": "string"
+    },
+    "tools": {
+      "items": {
+        "$ref": "#/$defs/ToolInfo"
+      },
+      "title": "Tools",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "artifact",
+    "manifest_digest",
+    "run",
+    "policy",
+    "policy_digest",
+    "tools",
+    "files",
+    "checks",
+    "executions",
+    "findings",
+    "coverage",
+    "claims",
+    "dependencies",
+    "conflicts",
+    "decision",
+    "limitations",
+    "raw_evidence",
+    "references",
+    "semantic_digest"
+  ],
+  "title": "Report",
+  "type": "object"
+}

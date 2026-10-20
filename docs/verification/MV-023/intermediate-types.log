@@ -1,0 +1,2 @@
+src/modelvet/benchmarks/runner.py:258: error: Return type "None" of "error" incompatible with return type "Never" in supertype "argparse.ArgumentParser"  [override]
+Found 1 error in 1 file (checked 51 source files)

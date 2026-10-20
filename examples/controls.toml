@@ -1,0 +1,25 @@
+# Scoped static assessment; declarations are not legal or provenance verification.
+schema_version = "1.0.0"
+policy_id = "default-policy-v1"
+policy_version = "1"
+applicability_version = "2"
+mandatory_checks = [
+  "identity", "classification", "structural:safetensors", "structural:zip",
+  "metadata:local", "dependencies:declared", "source:presence", "modelscan",
+  "scanner:resources",
+]
+optional_checks = []
+required_claims = ["LICENSE", "PROVENANCE"]
+
+[[prohibitions]]
+rule_id = "NO-REPOSITORY-CODE"
+category = "REPOSITORY_CODE"
+
+[[controls]]
+control_id = "ISOLATED_LOADING"
+owner = "Example deployment owner - replace before deployment"
+
+[[control_rules]]
+rule_id = "ISOLATE-MODEL"
+condition = "MODEL_PRESENT"
+control_ids = ["ISOLATED_LOADING"]

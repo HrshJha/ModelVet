@@ -1,0 +1,3 @@
+# Synthetic fixture contract
+
+`tests/fixture_factory.py` generates tiny clean, malformed, unknown, source-presence, declaration-conflict and inert serialized fixtures in temporary directories. The safetensors bytes contain one zero F32; they are not a trained model. The pickle-like bytes encode only None and are never deserialized by ModelVet. Repository source contains only a comment. No executable malicious sample is included. Generated fixture data and the generator are covered by the repository MIT license. CLI tests verify each generated file hash against the report, all four decision states, raw evidence privacy and repeatable semantics.

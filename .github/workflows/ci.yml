@@ -1,0 +1,56 @@
+name: Static MVP checks
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  static:
+    name: Python 3.12 / ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    env:
+      CI: "1"
+      NO_COLOR: "1"
+      UV_NO_PROGRESS: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          version: "0.13.3"
+          enable-cache: false
+      - name: Pinned Python and dependencies
+        run: |
+          uv python install 3.12.15
+          uv sync --locked --python 3.12.15
+          uv lock --check
+      - name: Static checks
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
+          uv run ruff check src --select S
+          uv run mypy src
+      - name: Safe unit, property, contract and CLI tests
+        run: uv run pytest -q
+      - name: Build and installed-package checks
+        run: |
+          uv build
+          uv run pytest -q tests/test_release.py
+      - name: Separate pinned scanner environment
+        run: |
+          uv venv --python 3.12.15 .scanner-venv
+          uv pip sync --python .scanner-venv/bin/python --require-hashes --only-binary :all: tools/modelscan/requirements.lock
+      - name: Real inert ModelScan contract
+        run: |
+          export PATH="$PWD/.scanner-venv/bin:$PATH"
+          uv run python tools/smoke_scanner.py

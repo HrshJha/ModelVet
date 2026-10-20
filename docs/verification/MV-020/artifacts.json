@@ -1,0 +1,37 @@
+{
+  "observed_at": "2026-10-20T15:55:16.779097+00:00",
+  "scope": "post-PH-10 optional MV-020 local candidate; uncommitted, hosted CI/public release pending",
+  "artifacts": [
+    {
+      "path": "dist/modelvet-0.1.0-py3-none-any.whl",
+      "size_bytes": 82175,
+      "sha256": "21d46ba0b1dc96dfc2b124bcf10467006ad314a8f46b7592b262b254c5c5dd18"
+    },
+    {
+      "path": "dist/modelvet-0.1.0.tar.gz",
+      "size_bytes": 219284,
+      "sha256": "a313c0710aaa3de03f30f7afc4e00961ae7ce1c2fe29ebe9bb9871ac849bfd0c"
+    }
+  ],
+  "uv_lock_sha256": "a46d68b74ef8036d8bdad809862d3e0fabf77e2f5e078b6f21a5cde8240eeba5",
+  "new_third_party_dependencies": 0,
+  "packaged_schemas": [
+    "modelvet/schemas/advisories-v1.json",
+    "modelvet/schemas/conflict-v1.json",
+    "modelvet/schemas/coverage-v1.json",
+    "modelvet/schemas/decision-v1.json",
+    "modelvet/schemas/evidence-v1.json",
+    "modelvet/schemas/policy-v1.json",
+    "modelvet/schemas/report-v1.json"
+  ],
+  "wheel_advisory_source_matches": true,
+  "sdist_final_docs_examples_match": true,
+  "sdist_excludes_operational_evidence": true,
+  "whitespace_files": 124,
+  "whitespace_problems": 0,
+  "full_tests_passed": 434,
+  "linux_only_skipped": 1,
+  "targeted_advisory_tests": 50,
+  "targeted_advisory_cli_release_tests": 77,
+  "post_docs_release_contract_tests": 11
+}

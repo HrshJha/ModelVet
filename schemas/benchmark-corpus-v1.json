@@ -1,0 +1,200 @@
+{
+  "$defs": {
+    "CorpusCase": {
+      "additionalProperties": false,
+      "properties": {
+        "fixture_id": {
+          "enum": [
+            "tensor-valid",
+            "tensor-truncated",
+            "zip-valid",
+            "zip-traversal",
+            "pickle-none",
+            "pickle-int",
+            "pickle-truncated",
+            "source-present",
+            "license-conflict",
+            "unknown"
+          ],
+          "title": "Fixture Id",
+          "type": "string"
+        },
+        "recipe": {
+          "enum": [
+            "tensor-valid",
+            "tensor-truncated",
+            "zip-valid",
+            "zip-traversal",
+            "pickle-none",
+            "pickle-int",
+            "pickle-truncated",
+            "source-present",
+            "license-conflict",
+            "unknown"
+          ],
+          "title": "Recipe",
+          "type": "string"
+        },
+        "split": {
+          "const": "development",
+          "default": "development",
+          "title": "Split",
+          "type": "string"
+        },
+        "stratum": {
+          "enum": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "title": "Stratum",
+          "type": "string"
+        },
+        "label": {
+          "enum": [
+            "VALID_STRUCTURE",
+            "MALFORMED_STRUCTURE",
+            "UNSAFE_MEMBER_PATH",
+            "SOURCE_PRESENT",
+            "CONFLICTING_CLAIMS",
+            "UNKNOWN_FORMAT"
+          ],
+          "title": "Label",
+          "type": "string"
+        },
+        "artifact_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Artifact Digest",
+          "type": "string"
+        },
+        "files": {
+          "items": {
+            "$ref": "#/$defs/FixtureFile"
+          },
+          "maxItems": 8,
+          "minItems": 1,
+          "title": "Files",
+          "type": "array"
+        },
+        "license": {
+          "const": "MIT",
+          "default": "MIT",
+          "title": "License",
+          "type": "string"
+        },
+        "provenance": {
+          "const": "modelvet closed synthetic recipe v1",
+          "default": "modelvet closed synthetic recipe v1",
+          "title": "Provenance",
+          "type": "string"
+        },
+        "oracle_method": {
+          "const": "stdlib-byte-oracle-v1",
+          "default": "stdlib-byte-oracle-v1",
+          "title": "Oracle Method",
+          "type": "string"
+        },
+        "adjudication": {
+          "const": "METHOD_CHECKED_NOT_INDEPENDENT_REVIEW",
+          "default": "METHOD_CHECKED_NOT_INDEPENDENT_REVIEW",
+          "title": "Adjudication",
+          "type": "string"
+        },
+        "baseline_eligibility": {
+          "enum": [
+            "STANDALONE_PICKLE",
+            "NOT_APPLICABLE"
+          ],
+          "title": "Baseline Eligibility",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fixture_id",
+        "recipe",
+        "stratum",
+        "label",
+        "artifact_digest",
+        "files",
+        "baseline_eligibility"
+      ],
+      "title": "CorpusCase",
+      "type": "object"
+    },
+    "FixtureFile": {
+      "additionalProperties": false,
+      "properties": {
+        "relpath": {
+          "title": "Relpath",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size": {
+          "maximum": 65536,
+          "minimum": 0,
+          "title": "Size",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "relpath",
+        "sha256",
+        "size"
+      ],
+      "title": "FixtureFile",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "corpus_id": {
+      "const": "modelvet-synthetic-development-v1",
+      "title": "Corpus Id",
+      "type": "string"
+    },
+    "generator_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Generator Sha256",
+      "type": "string"
+    },
+    "holdout_status": {
+      "const": "NOT_SUPPLIED",
+      "default": "NOT_SUPPLIED",
+      "title": "Holdout Status",
+      "type": "string"
+    },
+    "independent_review_status": {
+      "const": "PENDING",
+      "default": "PENDING",
+      "title": "Independent Review Status",
+      "type": "string"
+    },
+    "cases": {
+      "items": {
+        "$ref": "#/$defs/CorpusCase"
+      },
+      "maxItems": 100,
+      "minItems": 1,
+      "title": "Cases",
+      "type": "array"
+    }
+  },
+  "required": [
+    "corpus_id",
+    "generator_sha256",
+    "cases"
+  ],
+  "title": "CorpusManifest",
+  "type": "object"
+}

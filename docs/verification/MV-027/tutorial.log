@@ -1,0 +1,6 @@
+{"decision": "APPROVE", "exit_code": 0, "semantic_digest": "sha256:1442d35719a430a490fec11e7dfc87ec27564e9399550346c666679ce32e805f", "variant": "clean"}
+{"decision": "INSUFFICIENT", "exit_code": 30, "semantic_digest": "sha256:2571ea2594f4ba761b718ba6d51fba6eeb3c7512be9931404d534fae68724e43", "variant": "malformed"}
+{"decision": "BLOCK", "exit_code": 20, "semantic_digest": "sha256:b2d9cc1c3620cdaf6af5773c7836d3a49cd8e3d283cbed6a4f4c7584bffd5956", "variant": "source"}
+{"decision": "INSUFFICIENT", "exit_code": 30, "semantic_digest": "sha256:b21c343599a729ab5a029e0bf7b488309fc2df10e2f4dc7c8cfeacb8e24708bd", "variant": "unknown"}
+{"decision": "INSUFFICIENT", "exit_code": 30, "semantic_digest": "sha256:009622e7af96c82bea00849dab93c0557021acc20f9cf74f5220fc8c9240e645", "variant": "serialized"}
+All five documented synthetic outcomes, inspect, and non-overwrite example behavior passed.

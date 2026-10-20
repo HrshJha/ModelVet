@@ -1,0 +1,6 @@
+COMMAND: uv export --locked --no-dev --no-emit-project ... EXIT: 0
+COMMAND: uv venv --python /Users/harshkumarjha/Desktop/ModelVet/.venv/bin/python /var/folders/dh/_5m7l0cd7gv5nypd9dv3lyyh0000gn/T/modelvet-ph05-package-ywkpoiyp/venv ... EXIT: 0
+COMMAND: uv pip sync --python /var/folders/dh/_5m7l0cd7gv5nypd9dv3lyyh0000gn/T/modelvet-ph05-package-ywkpoiyp/venv/bin/python ... EXIT: 0
+COMMAND: uv pip install --python /var/folders/dh/_5m7l0cd7gv5nypd9dv3lyyh0000gn/T/modelvet-ph05-package-ywkpoiyp/venv/bin/python ... EXIT: 0
+ISOLATED WHEEL POLICY LOAD: default-policy-v1 sha256:d7de8bfeccfb859c8e0f790fc44602e36102b3a20f2351ea397428ced0900ab6 EXIT: 0
+Wheel and sdist include default policy; all five schema bytes match; fresh locked-runtime wheel install and isolated policy load passed.

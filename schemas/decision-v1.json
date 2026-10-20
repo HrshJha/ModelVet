@@ -1,0 +1,85 @@
+{
+  "$defs": {
+    "Control": {
+      "additionalProperties": false,
+      "properties": {
+        "control_id": {
+          "enum": [
+            "ISOLATED_LOADING",
+            "NO_CODE_IMPORT"
+          ],
+          "title": "Control Id",
+          "type": "string"
+        },
+        "owner": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Owner",
+          "type": "string"
+        }
+      },
+      "required": [
+        "control_id",
+        "owner"
+      ],
+      "title": "Control",
+      "type": "object"
+    },
+    "DecisionState": {
+      "enum": [
+        "APPROVE",
+        "CONTROLS",
+        "BLOCK",
+        "INSUFFICIENT"
+      ],
+      "title": "DecisionState",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "evidence_refs": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "reason": {
+      "maxLength": 4096,
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "required_controls": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Control"
+      },
+      "title": "Required Controls",
+      "type": "array"
+    },
+    "rule_ids": {
+      "items": {
+        "pattern": "^[A-Z][A-Z0-9_-]{0,63}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Rule Ids",
+      "type": "array"
+    },
+    "state": {
+      "$ref": "#/$defs/DecisionState"
+    }
+  },
+  "required": [
+    "state",
+    "rule_ids",
+    "reason",
+    "evidence_refs"
+  ],
+  "title": "AdmissionDecision",
+  "type": "object"
+}

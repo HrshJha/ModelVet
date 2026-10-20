@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-10-20T12:00:00Z",
+  "source": "ModelVet synthetic example, not an actual vulnerability feed",
+  "queries": [
+    {
+      "package": {"name": "modelvet-synthetic-demo", "ecosystem": "PyPI"},
+      "version": "1.0.0",
+      "complete": true,
+      "response": {
+        "vulns": [
+          {
+            "schema_version": "1.9.2",
+            "id": "x_MODELVET-SYNTHETIC-EXAMPLE",
+            "modified": "2026-10-20T12:00:00Z",
+            "affected": [
+              {
+                "package": {"name": "modelvet-synthetic-demo", "ecosystem": "PyPI"},
+                "versions": ["1.0.0"]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

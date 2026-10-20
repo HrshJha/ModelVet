@@ -1,0 +1,67 @@
+{"case": "10001 empty files", "elapsed_s": 0.6571, "python_peak_bytes": 3613984}
+......{"case": "scanner timeout", "elapsed_s": 1.0099, "failure": "TIMEOUT"}
+.s.
+8 passed, 1 skipped in 2.34s
+All checks passed!
+Success: no issues found in 46 source files
+........................................................................ [ 19%]
+........................................................................ [ 39%]
+........................................................................ [ 59%]
+........................................................................ [ 79%]
+..............s......................................................... [ 99%]
+...                                                                      [100%]
+================================ tests coverage ================================
+______________ coverage: platform darwin, python 3.12.15-final-0 _______________
+
+Name                                        Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------------------
+src/modelvet/__init__.py                        1      0      0      0   100%
+src/modelvet/__main__.py                        2      2      0      0     0%   3-5
+src/modelvet/application/__init__.py            0      0      0      0   100%
+src/modelvet/application/scan.py              104     16     20      3    78%   120, 143-151, 167-186
+src/modelvet/cli/__init__.py                    0      0      0      0   100%
+src/modelvet/cli/main.py                      104     27     20      3    65%   68, 105->107, 107->110, 120-139, 148-162, 172-177, 183-186, 195-196
+src/modelvet/core/__init__.py                   0      0      0      0   100%
+src/modelvet/core/bytes.py                     36      4      8      4    82%   22, 40, 43, 50
+src/modelvet/core/config.py                    60      0     18      0   100%
+src/modelvet/core/diagnostics.py               31      2      0      0    94%   32-33
+src/modelvet/core/errors.py                     5      0      0      0   100%
+src/modelvet/core/json_data.py                 55      1     38      1    98%   12
+src/modelvet/core/limits.py                    16      0      4      0   100%
+src/modelvet/core/snapshot.py                  39      3      4      2    88%   36, 42, 47
+src/modelvet/coverage/__init__.py               0      0      0      0   100%
+src/modelvet/coverage/conflicts.py             44      0     22      0   100%
+src/modelvet/coverage/reconciler.py            62      1     28      1    98%   23
+src/modelvet/dependencies/__init__.py           0      0      0      0   100%
+src/modelvet/dependencies/manifest.py          68      3     18      2    94%   63, 82, 140
+src/modelvet/evidence/__init__.py               0      0      0      0   100%
+src/modelvet/evidence/models.py               190      6     28      3    95%   30, 38, 174-176, 231
+src/modelvet/evidence/modelscan_schema.py      42      1      4      1    96%   66
+src/modelvet/evidence/normalize.py            107      4     46      4    95%   72-73, 103, 186->134, 193
+src/modelvet/inventory/__init__.py              0      0      0      0   100%
+src/modelvet/inventory/classify.py             64      1     22      1    98%   103
+src/modelvet/inventory/discover.py            107     10     44      9    87%   33-34, 36, 78, 114, 117, 125, 129, 136, 137->139, 147
+src/modelvet/inventory/gate.py                 74      4     18      2    93%   16-17, 23, 25
+src/modelvet/inventory/identity.py             66      0     10      0   100%
+src/modelvet/metadata/__init__.py               0      0      0      0   100%
+src/modelvet/metadata/claims.py               118      6     54      8    92%   51, 92, 99, 110, 111->171, 141->131, 144, 167->171, 206
+src/modelvet/policies/__init__.py               0      0      0      0   100%
+src/modelvet/policies/evaluator.py            141      2     80      3    98%   231->230, 269-270, 284->283
+src/modelvet/policies/models.py                98      0     22      0   100%
+src/modelvet/reports/__init__.py                0      0      0      0   100%
+src/modelvet/reports/json_report.py           210     16     78     14    89%   72, 100-102, 158, 187, 200, 206, 209, 214, 217, 220, 240, 245, 268, 424
+src/modelvet/reports/markdown.py               29      0      0      0   100%
+src/modelvet/reports/privacy.py                10      0      4      1    93%   8->7
+src/modelvet/reports/writer.py                 77      3     16      0    97%   31-33
+src/modelvet/scanners/__init__.py               0      0      0      0   100%
+src/modelvet/scanners/base.py                  31      0      0      0   100%
+src/modelvet/scanners/modelscan.py            110     11     30     10    85%   29, 41, 48, 67, 74, 84-85, 91->96, 100, 126, 132, 135
+src/modelvet/scanners/process.py               77     12     18      2    83%   50, 55-61, 88, 113-115
+src/modelvet/structural/__init__.py             0      0      0      0   100%
+src/modelvet/structural/base.py                 9      0      0      0   100%
+src/modelvet/structural/safetensors.py         62      6     32      6    87%   48, 51, 65, 82, 85, 98
+src/modelvet/structural/zip_index.py          122     23     56     16    75%   26-33, 60, 62, 65, 71, 79, 101, 105, 108, 124, 127, 131, 138, 147, 155, 170
+---------------------------------------------------------------------------------------
+TOTAL                                        2371    164    742     96    91%
+Coverage JSON written to file docs/verification/MV-025/coverage.json
+362 passed, 1 skipped in 31.79s
