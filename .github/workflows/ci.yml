@@ -34,6 +34,11 @@ jobs:
           uv python install 3.12.15
           uv sync --locked --python 3.12.15
           uv lock --check
+      - name: Prime hash-locked runtime cache for offline release tests
+        run: |
+          uv export --locked --no-dev --no-emit-project --format requirements-txt --output-file "$RUNNER_TEMP/modelvet-runtime.txt"
+          uv venv --python 3.12.15 "$RUNNER_TEMP/modelvet-cache-primer"
+          uv pip sync --python "$RUNNER_TEMP/modelvet-cache-primer/bin/python" --require-hashes --only-binary :all: "$RUNNER_TEMP/modelvet-runtime.txt"
       - name: Static checks
         run: |
           uv run ruff check .
