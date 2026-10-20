@@ -15,9 +15,16 @@ dependencies = ["typer==0.27.3", "pydantic==2.14.1"]
 [project.scripts]
 modelvet = "modelvet.cli.main:app"
 
+[project.optional-dependencies]
+ui = [
+    "fastapi==0.156.0",
+    "uvicorn==0.54.0",
+]
+
 [dependency-groups]
 dev = [
     "hatchling==1.32.4",
+    "httpx==0.28.1",
     "hypothesis==6.170.5",
     "mypy==2.4.0",
     "packaging==26.3",

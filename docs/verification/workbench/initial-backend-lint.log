@@ -1,0 +1,166 @@
+E501 Line too long (108 > 100)
+  --> src/modelvet/workbench/guidance.py:13:101
+   |
+11 |     "classification": (
+12 |         "Review the file format",
+13 |         "Check the actual format and any extension/signature mismatch. Unknown content remains unresolved.",
+   |                                                                                                     ^^^^^^^^
+14 |     ),
+15 |     "structural:safetensors": (
+   |
+
+E501 Line too long (108 > 100)
+  --> src/modelvet/workbench/guidance.py:17:101
+   |
+15 |     "structural:safetensors": (
+16 |         "Check safetensors structure",
+17 |         "Obtain a complete, well-formed artifact from its declared source; do not load it to troubleshoot.",
+   |                                                                                                     ^^^^^^^^
+18 |     ),
+19 |     "structural:zip": (
+   |
+
+E501 Line too long (102 > 100)
+  --> src/modelvet/workbench/guidance.py:21:101
+   |
+19 |     "structural:zip": (
+20 |         "Review archive support",
+21 |         "Use a supported archive subset. Unsupported members and archive coverage remain unresolved.",
+   |                                                                                                     ^^
+22 |     ),
+23 |     "metadata:local": (
+   |
+
+E501 Line too long (119 > 100)
+  --> src/modelvet/workbench/guidance.py:25:101
+   |
+23 |     "metadata:local": (
+24 |         "Review local declarations",
+25 |         "Supply accurate, sourced license and provenance declarations. A declaration is not independent verification.",
+   |                                                                                                     ^^^^^^^^^^^^^^^^^^^
+26 |     ),
+27 |     "dependencies:declared": (
+   |
+
+E501 Line too long (106 > 100)
+  --> src/modelvet/workbench/guidance.py:29:101
+   |
+27 |     "dependencies:declared": (
+28 |         "Review dependency declarations",
+29 |         "Provide explicit pinned dependency declarations when required; do not infer installed versions.",
+   |                                                                                                     ^^^^^^
+30 |     ),
+31 |     "source:presence": (
+   |
+
+E501 Line too long (105 > 100)
+  --> src/modelvet/workbench/guidance.py:33:101
+   |
+31 |     "source:presence": (
+32 |         "Review repository code",
+33 |         "Review the source-presence evidence against the selected policy. ModelVet does not execute it.",
+   |                                                                                                     ^^^^^
+34 |     ),
+35 |     "modelscan": (
+   |
+
+E501 Line too long (158 > 100)
+  --> src/modelvet/workbench/guidance.py:37:101
+   |
+35 | …
+36 | …
+37 | …d add its executable to PATH before launching ModelVet. Check skipped files and raw evidence.",
+   |                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+38 | …
+39 | …
+   |
+
+E501 Line too long (134 > 100)
+  --> src/modelvet/workbench/guidance.py:41:101
+   |
+39 |     "scanner:resources": (
+40 |         "Use a supported scanner environment",
+41 |         "Required scanner memory bounds are unavailable on macOS. Use the supported Linux workflow; this does not provide a sandbox.",
+   |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+42 |     ),
+43 | }
+   |
+
+E501 Line too long (128 > 100)
+  --> src/modelvet/workbench/guidance.py:47:101
+   |
+45 |     "MISSING-CLAIM": (
+46 |         "Supply accurate sourced declarations",
+47 |         "Resolve missing license/provenance claims using trustworthy source material; do not invent values to obtain approval.",
+   |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+48 |     ),
+49 |     "UNRESOLVED-CONFLICT": (
+   |
+
+E501 Line too long (153 > 100)
+  --> src/modelvet/workbench/guidance.py:51:101
+   |
+49 | …
+50 | …
+51 | …t or policy-supported evidence. Conflicts are not resolved by choosing the favorable claim.",
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+52 | …
+53 | …
+   |
+
+E501 Line too long (142 > 100)
+  --> src/modelvet/workbench/guidance.py:55:101
+   |
+53 | …
+54 | …
+55 | …ndent substantiation. A scanner allegation is not automatically a proven prohibition.",
+   |                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+56 | …
+57 | …
+   |
+
+E501 Line too long (102 > 100)
+  --> src/modelvet/workbench/guidance.py:63:101
+   |
+61 |     "INVALID-EVIDENCE": (
+62 |         "Repeat from a stable artifact",
+63 |         "Investigate identity or evidence inconsistencies before rescanning an unchanged local copy.",
+   |                                                                                                     ^^
+64 |     ),
+65 | }
+   |
+
+E501 Line too long (139 > 100)
+   --> src/modelvet/workbench/guidance.py:117:101
+    |
+115 | …applies",
+116 | …
+117 | … evidence. Do not treat a policy BLOCK as a demonstrated malicious-model detection.",
+    |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+118 | …
+119 | …
+    |
+
+E501 Line too long (136 > 100)
+   --> src/modelvet/workbench/guidance.py:126:101
+    |
+124 | …
+125 | …equires the recorded owners and controls.",
+126 | …enforce the listed conditions before deployment; ModelVet does not provision them.",
+    |                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+127 | …
+128 | …
+    |
+
+E501 Line too long (135 > 100)
+  --> src/modelvet/workbench/store.py:47:101
+   |
+45 |         )
+46 |         self.connection.execute(
+47 |             "CREATE TABLE IF NOT EXISTS reports (id TEXT PRIMARY KEY, path TEXT NOT NULL, sha256 TEXT NOT NULL, summary TEXT NOT NULL)"
+   |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+48 |         )
+49 |         self.connection.commit()
+   |
+
+Found 19 errors (4 fixed, 15 remaining).

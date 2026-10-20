@@ -1,9 +1,11 @@
 """Local static assessment from private input snapshot to completed report."""
 
 import hashlib
+import logging
 import platform
 import tempfile
 import uuid
+from collections.abc import Callable
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -63,18 +65,36 @@ class ScanOutcome:
 
 
 class ScanService:
-    def run(self, request: ScanRequest) -> ScanOutcome:
+    def run(
+        self,
+        request: ScanRequest,
+        *,
+        on_progress: Callable[[str], None] | None = None,
+        process_observer: Callable[[int, bool], None] | None = None,
+    ) -> ScanOutcome:
+        def progress(stage: str) -> None:
+            if on_progress is not None:
+                try:
+                    on_progress(stage)
+                except Exception:
+                    # Observational UI transport never alters evidence or admission.
+                    logging.getLogger(__name__).warning("Progress observer unavailable.")
+
+        progress("validation")
         started = datetime.now(UTC).isoformat()
         policy = load_policy(request.policy_path)
         source = InputGate().validate(request.artifact_dir, request.output_dir, request.limits)
         payloads: dict[str, bytes] = {}
+        progress("snapshot")
         with Snapshotter().create(source) as snapshot:
+            progress("inventory")
             manifest = InventoryService().collect(snapshot)
             classes = {
                 file.file_id: Classifier().classify(file, snapshot) for file in manifest.files
             }
             checks: list[CheckRecord] = []
             tools = [ToolInfo(tool_id="modelvet", version=__version__, source="installed package")]
+            progress("structural")
             for file in manifest.files:
                 kind = classes[file.file_id]
                 status = (
@@ -128,6 +148,7 @@ class ScanService:
                             details={"source_present": True},
                         )
                     )
+            progress("metadata")
             metadata = MetadataReader().assess(snapshot, manifest)
             by_id = {file.file_id: file for file in manifest.files}
             checks.extend(
@@ -163,6 +184,7 @@ class ScanService:
             scanner_needed = any(
                 "modelscan" in applicable_checks(kind.format_class) for kind in classes.values()
             )
+            progress("scanner")
             if scanner_needed:
                 if request.scanner == "none":
                     raw = RawScannerExecution(
@@ -173,7 +195,7 @@ class ScanService:
                     )
                 else:
                     with tempfile.TemporaryDirectory(prefix="modelvet-work-") as directory:
-                        raw = ModelScanAdapter().run(
+                        raw = ModelScanAdapter(process_observer=process_observer).run(
                             snapshot, request.limits.timeout_s, Path(directory).resolve()
                         )
                 executions, scanner_checks, findings = EvidenceNormalizer().normalize(
@@ -205,7 +227,9 @@ class ScanService:
                 )
                 return coverage, conflicts, decision
 
+            progress("policy")
             assess(checks)
+            progress("integrity")
             checks = final_identity_checks(snapshot, manifest, checks)
             coverage, conflicts, decision = assess(checks)
             evidence = EvidenceBundle(
@@ -246,6 +270,7 @@ class ScanService:
             )
             snapshot_root = snapshot.root
         # Cleanup must succeed before a completed report is published.
+        progress("report")
         json_path, markdown_path = ReportWriter().write(
             report,
             source.output_dir,

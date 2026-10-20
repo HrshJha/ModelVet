@@ -1,0 +1,58 @@
+..F.............                                                         [100%]
+=================================== FAILURES ===================================
+_______________ test_malformed_and_tampered_reports_do_not_open ________________
+
+ui = (<starlette.testclient.TestClient object at 0x10a813fb0>, PosixPath('/private/var/folders/dh/_5m7l0cd7gv5nypd9dv3lyyh0...hkumarjha/pytest-286/test_malformed_and_tampered_re0/workspace'), <fastapi.applications.FastAPI object at 0x10a7d7dd0>)
+
+    def test_malformed_and_tampered_reports_do_not_open(ui) -> None:
+        client, _, _, app = ui
+        assert client.post("/api/v1/reports/import", json={}).status_code == 400
+        key, outcome = saved(ui)
+        assert client.get(f"/api/v1/reports/{key}").status_code == 200
+        original = outcome.json_path.read_bytes()
+        outcome.json_path.write_bytes(original + b"\n")
+        for suffix in ("", "/download", "/evidence/files"):
+            assert client.get(f"/api/v1/reports/{key}{suffix}").status_code == 400
+        assert client.post(f"/api/v1/reports/{key}/verify", json={}).status_code == 400
+        assert (
+>           app.state.store.reports(0, 50).total == 1
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )  # Original historical summary, not a fresh verdict.
+
+tests/test_workbench_reports.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/modelvet/workbench/store.py:157: in reports
+    _, raw, summary = self.report(row[0], max_bytes=min(MAX_REPORT_BYTES, remaining))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <modelvet.workbench.store.Store object at 0x10a7d5730>
+key = '6c1debd34b0543e28dedd4216b155701', max_bytes = 33554432
+
+    def report(
+        self, key: str, *, max_bytes: int = MAX_REPORT_BYTES
+    ) -> tuple[Report, bytes, ReportSummary]:
+        rows = self.query(
+            "SELECT path, sha256, summary FROM reports WHERE id = ?", (opaque_id(key),)
+        )
+        if not rows:
+            raise InvalidInput("Report was not found.")
+        relative = relative_path(rows[0][0])
+        if relative.parts[0] not in {"reports", "imports"}:
+            raise InvalidInput("Invalid report storage path.")
+        path = self.workspace.root / relative
+        raw = read_private(path, max_bytes)
+        if hashlib.sha256(raw).hexdigest() != rows[0][1]:
+>           raise InvalidInput("Stored report bytes changed.")
+E           modelvet.core.errors.InvalidInput: Stored report bytes changed.
+
+src/modelvet/workbench/store.py:142: InvalidInput
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /Users/harshkumarjha/Desktop/ModelVet/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_workbench_reports.py::test_malformed_and_tampered_reports_do_not_open
+1 failed, 15 passed, 1 warning in 2.42s

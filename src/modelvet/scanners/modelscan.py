@@ -6,6 +6,7 @@ import shutil
 import stat
 import subprocess
 import tempfile
+from collections.abc import Callable
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -52,9 +53,16 @@ def _report_bytes(path: Path) -> bytes:
 class ModelScanAdapter:
     id = "modelscan"
 
-    def __init__(self, executable: Path | None = None, output_limit: int = 1024 * 1024) -> None:
+    def __init__(
+        self,
+        executable: Path | None = None,
+        output_limit: int = 1024 * 1024,
+        *,
+        process_observer: Callable[[int, bool], None] | None = None,
+    ) -> None:
         self.executable = executable
         self.output_limit = output_limit
+        self.process_observer = process_observer
 
     def _executable(self) -> Path | None:
         found = str(self.executable) if self.executable is not None else shutil.which("modelscan")
@@ -68,7 +76,11 @@ class ModelScanAdapter:
             digest = _binary_digest(binary)
             with tempfile.TemporaryDirectory(prefix="modelvet-probe-") as directory:
                 result = run_bounded(
-                    (str(binary), "--version"), Path(directory), 5, self.output_limit
+                    (str(binary), "--version"),
+                    Path(directory),
+                    5,
+                    self.output_limit,
+                    process_observer=self.process_observer,
                 )
             if result.failure or result.exit_code != 0:
                 return ToolUnavailable("ModelScan version probe failed.")
@@ -146,7 +158,13 @@ class ModelScanAdapter:
                     "--output-file",
                     str(target),
                 )
-                result = run_bounded(argv, private, timeout_s, self.output_limit)
+                result = run_bounded(
+                    argv,
+                    private,
+                    timeout_s,
+                    self.output_limit,
+                    process_observer=self.process_observer,
+                )
                 raw = _report_bytes(target)
             statuses: dict[int, ScannerStatus] = {
                 0: "COMPLETE",

@@ -137,3 +137,7 @@ application/scan.py owns ScanRequest/ScanOutcome/ScanService. ReportBuilder addi
 - `reports.batch.audit_batch(manifest_path, root, max_report_bytes=128 MiB, max_raw_bytes=128 MiB) -> BatchAudit`. Explicit relative manifest entries, no recursive discovery; report read/recheck charge and raw budget shared across rows.
 
 `read_report_bytes(path, max_bytes=32 MiB)` is the secure bounded reader shared with report validation. Limits can only decrease from their hard ceilings. Invalid inputs raise typed InvalidInput/BudgetExceeded; unresolved evidence remains result data. No API recalculates admission. Full wire and CLI semantics: [REPORT_AUDIT_SPEC](REPORT_AUDIT_SPEC.md).
+
+## Workbench extension — FR-025–027
+
+The optional workbench interface is /api/v1, defined in WORKBENCH_SPEC.md. ScanService.run gains an optional observational progress callback; existing request/outcome/report contracts do not change. Frontend types are generated from the local OpenAPI document. Never evaluate admission in the browser.

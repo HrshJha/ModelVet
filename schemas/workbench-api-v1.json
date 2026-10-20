@@ -1,0 +1,1945 @@
+{
+  "components": {
+    "schemas": {
+      "AttachmentAudit": {
+        "additionalProperties": false,
+        "properties": {
+          "bytes_read": {
+            "default": 0,
+            "maximum": 4194304.0,
+            "minimum": 0.0,
+            "title": "Bytes Read",
+            "type": "integer"
+          },
+          "digest": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Digest",
+            "type": "string"
+          },
+          "size": {
+            "maximum": 4194304.0,
+            "minimum": 0.0,
+            "title": "Size",
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "VERIFIED",
+              "MISSING",
+              "UNSAFE",
+              "SIZE_MISMATCH",
+              "HASH_MISMATCH",
+              "CHANGED",
+              "BUDGET_EXCEEDED"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "digest",
+          "size",
+          "status"
+        ],
+        "title": "AttachmentAudit",
+        "type": "object"
+      },
+      "Capabilities": {
+        "additionalProperties": false,
+        "properties": {
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Limitations",
+            "type": "array"
+          },
+          "models_root_label": {
+            "title": "Models Root Label",
+            "type": "string"
+          },
+          "scanner_available": {
+            "title": "Scanner Available",
+            "type": "boolean"
+          },
+          "scanner_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scanner Version"
+          },
+          "serialized_scan_ready": {
+            "title": "Serialized Scan Ready",
+            "type": "boolean"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "version",
+          "models_root_label",
+          "scanner_available",
+          "scanner_version",
+          "serialized_scan_ready",
+          "limitations"
+        ],
+        "title": "Capabilities",
+        "type": "object"
+      },
+      "CheckDifference": {
+        "additionalProperties": false,
+        "properties": {
+          "after_observations": {
+            "title": "After Observations",
+            "type": "integer"
+          },
+          "after_statuses": {
+            "items": {
+              "$ref": "#/components/schemas/CheckStatus"
+            },
+            "title": "After Statuses",
+            "type": "array"
+          },
+          "before_observations": {
+            "title": "Before Observations",
+            "type": "integer"
+          },
+          "before_statuses": {
+            "items": {
+              "$ref": "#/components/schemas/CheckStatus"
+            },
+            "title": "Before Statuses",
+            "type": "array"
+          },
+          "check_id": {
+            "title": "Check Id",
+            "type": "string"
+          },
+          "path_digest": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Path Digest",
+            "type": "string"
+          },
+          "relpath": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Relpath"
+          }
+        },
+        "required": [
+          "path_digest",
+          "relpath",
+          "check_id",
+          "before_observations",
+          "after_observations",
+          "before_statuses",
+          "after_statuses"
+        ],
+        "title": "CheckDifference",
+        "type": "object"
+      },
+      "CheckStatus": {
+        "enum": [
+          "COMPLETE",
+          "SKIPPED",
+          "FAILED",
+          "UNSUPPORTED",
+          "INCONCLUSIVE",
+          "NOT_RUN"
+        ],
+        "title": "CheckStatus",
+        "type": "string"
+      },
+      "CompareInput": {
+        "additionalProperties": false,
+        "properties": {
+          "after_id": {
+            "title": "After Id",
+            "type": "string"
+          },
+          "before_id": {
+            "title": "Before Id",
+            "type": "string"
+          },
+          "show_paths": {
+            "default": false,
+            "title": "Show Paths",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "before_id",
+          "after_id"
+        ],
+        "title": "CompareInput",
+        "type": "object"
+      },
+      "DecisionState": {
+        "enum": [
+          "APPROVE",
+          "CONTROLS",
+          "BLOCK",
+          "INSUFFICIENT"
+        ],
+        "title": "DecisionState",
+        "type": "string"
+      },
+      "DirectoryEntry": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "enum": [
+              "directory",
+              "unavailable"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "relpath": {
+            "title": "Relpath",
+            "type": "string"
+          },
+          "selectable": {
+            "title": "Selectable",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "relpath",
+          "selectable",
+          "kind"
+        ],
+        "title": "DirectoryEntry",
+        "type": "object"
+      },
+      "DirectoryPage": {
+        "additionalProperties": false,
+        "properties": {
+          "entries": {
+            "items": {
+              "$ref": "#/components/schemas/DirectoryEntry"
+            },
+            "title": "Entries",
+            "type": "array"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          },
+          "relpath": {
+            "title": "Relpath",
+            "type": "string"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "relpath",
+          "entries",
+          "total",
+          "offset",
+          "limit"
+        ],
+        "title": "DirectoryPage",
+        "type": "object"
+      },
+      "EvidencePage": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          },
+          "section": {
+            "title": "Section",
+            "type": "string"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          },
+          "truncated": {
+            "default": false,
+            "title": "Truncated",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "section",
+          "items",
+          "total",
+          "offset",
+          "limit"
+        ],
+        "title": "EvidencePage",
+        "type": "object"
+      },
+      "FileDifference": {
+        "additionalProperties": false,
+        "properties": {
+          "after_format": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FileFormat"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "after_mismatch": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "After Mismatch"
+          },
+          "after_sha256": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "After Sha256"
+          },
+          "before_format": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FileFormat"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "before_mismatch": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Before Mismatch"
+          },
+          "before_sha256": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Before Sha256"
+          },
+          "kind": {
+            "enum": [
+              "ADDED",
+              "REMOVED",
+              "CHANGED"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "path_digest": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Path Digest",
+            "type": "string"
+          },
+          "relpath": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Relpath"
+          }
+        },
+        "required": [
+          "path_digest",
+          "relpath",
+          "kind",
+          "before_sha256",
+          "after_sha256",
+          "before_format",
+          "after_format",
+          "before_mismatch",
+          "after_mismatch"
+        ],
+        "title": "FileDifference",
+        "type": "object"
+      },
+      "FileFormat": {
+        "enum": [
+          "SAFETENSORS",
+          "PICKLE_LIKE",
+          "PYTORCH_ZIP",
+          "ZIP_OTHER",
+          "JSON",
+          "MARKDOWN",
+          "TEXT",
+          "PYTHON_SOURCE",
+          "BINARY_UNKNOWN",
+          "UNKNOWN"
+        ],
+        "title": "FileFormat",
+        "type": "string"
+      },
+      "Guidance": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "title": "Action",
+            "type": "string"
+          },
+          "check_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Check Id"
+          },
+          "explanation": {
+            "title": "Explanation",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "rule_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rule Id"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "explanation",
+          "action"
+        ],
+        "title": "Guidance",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "JobRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "elapsed_seconds": {
+            "default": 0,
+            "title": "Elapsed Seconds",
+            "type": "number"
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Code"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "model_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Path"
+          },
+          "report_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Report Id"
+          },
+          "stage": {
+            "title": "Stage",
+            "type": "string"
+          },
+          "started_at": {
+            "title": "Started At",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "running",
+              "cancelling",
+              "completed",
+              "cancelled",
+              "failed",
+              "interrupted"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "status",
+          "stage",
+          "started_at"
+        ],
+        "title": "JobRecord",
+        "type": "object"
+      },
+      "PolicyRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "toml": {
+            "maxLength": 65536,
+            "minLength": 1,
+            "title": "Toml",
+            "type": "string"
+          }
+        },
+        "required": [
+          "toml"
+        ],
+        "title": "PolicyRequest",
+        "type": "object"
+      },
+      "PolicyResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "mandatory_checks": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Mandatory Checks",
+            "type": "array"
+          },
+          "policy_digest": {
+            "title": "Policy Digest",
+            "type": "string"
+          },
+          "policy_id": {
+            "title": "Policy Id",
+            "type": "string"
+          },
+          "required_claims": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Required Claims",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "policy_id",
+          "policy_digest",
+          "mandatory_checks",
+          "required_claims"
+        ],
+        "title": "PolicyResponse",
+        "type": "object"
+      },
+      "ReportAudit": {
+        "additionalProperties": false,
+        "properties": {
+          "admission_recomputed": {
+            "const": false,
+            "default": false,
+            "title": "Admission Recomputed",
+            "type": "boolean"
+          },
+          "artifact_digest": {
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "title": "Artifact Digest",
+            "type": "string"
+          },
+          "attachments": {
+            "items": {
+              "$ref": "#/components/schemas/AttachmentAudit"
+            },
+            "maxItems": 64,
+            "title": "Attachments",
+            "type": "array"
+          },
+          "declared_attachments": {
+            "minimum": 0.0,
+            "title": "Declared Attachments",
+            "type": "integer"
+          },
+          "notice": {
+            "const": "Stored byte consistency only; not a signature, source rescan or admission decision.",
+            "default": "Stored byte consistency only; not a signature, source rescan or admission decision.",
+            "title": "Notice",
+            "type": "string"
+          },
+          "omitted_attachments": {
+            "minimum": 0.0,
+            "title": "Omitted Attachments",
+            "type": "integer"
+          },
+          "raw_bytes_read": {
+            "maximum": 33554432.0,
+            "minimum": 0.0,
+            "title": "Raw Bytes Read",
+            "type": "integer"
+          },
+          "report_pin_matches": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Report Pin Matches"
+          },
+          "report_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Report Sha256",
+            "type": "string"
+          },
+          "report_unchanged": {
+            "title": "Report Unchanged",
+            "type": "boolean"
+          },
+          "schema_version": {
+            "const": "1.0.0",
+            "default": "1.0.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "semantic_digest": {
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "title": "Semantic Digest",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "VERIFIED",
+              "INCOMPLETE"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "unresolved_attachments": {
+            "minimum": 0.0,
+            "title": "Unresolved Attachments",
+            "type": "integer"
+          },
+          "verified_attachments": {
+            "minimum": 0.0,
+            "title": "Verified Attachments",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "report_sha256",
+          "artifact_digest",
+          "semantic_digest",
+          "status",
+          "report_pin_matches",
+          "report_unchanged",
+          "declared_attachments",
+          "verified_attachments",
+          "unresolved_attachments",
+          "omitted_attachments",
+          "raw_bytes_read",
+          "attachments"
+        ],
+        "title": "ReportAudit",
+        "type": "object"
+      },
+      "ReportComparison": {
+        "additionalProperties": false,
+        "properties": {
+          "admission_recomputed": {
+            "const": false,
+            "default": false,
+            "title": "Admission Recomputed",
+            "type": "boolean"
+          },
+          "after_artifact": {
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "title": "After Artifact",
+            "type": "string"
+          },
+          "after_policy": {
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "title": "After Policy",
+            "type": "string"
+          },
+          "after_report_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "After Report Sha256",
+            "type": "string"
+          },
+          "after_semantic": {
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "title": "After Semantic",
+            "type": "string"
+          },
+          "before_artifact": {
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "title": "Before Artifact",
+            "type": "string"
+          },
+          "before_policy": {
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "title": "Before Policy",
+            "type": "string"
+          },
+          "before_report_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Before Report Sha256",
+            "type": "string"
+          },
+          "before_semantic": {
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "title": "Before Semantic",
+            "type": "string"
+          },
+          "changed_check_count": {
+            "minimum": 0.0,
+            "title": "Changed Check Count",
+            "type": "integer"
+          },
+          "changed_file_count": {
+            "minimum": 0.0,
+            "title": "Changed File Count",
+            "type": "integer"
+          },
+          "changed_sections": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Changed Sections",
+            "type": "array"
+          },
+          "checks": {
+            "items": {
+              "$ref": "#/components/schemas/CheckDifference"
+            },
+            "maxItems": 200,
+            "title": "Checks",
+            "type": "array"
+          },
+          "files": {
+            "items": {
+              "$ref": "#/components/schemas/FileDifference"
+            },
+            "maxItems": 200,
+            "title": "Files",
+            "type": "array"
+          },
+          "notice": {
+            "const": "Stored assertions; raw bytes and authors are not authenticated. No admission recomputed.",
+            "default": "Stored assertions; raw bytes and authors are not authenticated. No admission recomputed.",
+            "title": "Notice",
+            "type": "string"
+          },
+          "omitted_check_changes": {
+            "minimum": 0.0,
+            "title": "Omitted Check Changes",
+            "type": "integer"
+          },
+          "omitted_file_changes": {
+            "minimum": 0.0,
+            "title": "Omitted File Changes",
+            "type": "integer"
+          },
+          "same_artifact": {
+            "title": "Same Artifact",
+            "type": "boolean"
+          },
+          "same_declared_raw": {
+            "title": "Same Declared Raw",
+            "type": "boolean"
+          },
+          "same_policy": {
+            "title": "Same Policy",
+            "type": "boolean"
+          },
+          "same_report_bytes": {
+            "title": "Same Report Bytes",
+            "type": "boolean"
+          },
+          "same_semantics": {
+            "title": "Same Semantics",
+            "type": "boolean"
+          },
+          "schema_version": {
+            "const": "1.0.0",
+            "default": "1.0.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "stored_decision_after": {
+            "$ref": "#/components/schemas/DecisionState"
+          },
+          "stored_decision_before": {
+            "$ref": "#/components/schemas/DecisionState"
+          }
+        },
+        "required": [
+          "before_report_sha256",
+          "after_report_sha256",
+          "before_artifact",
+          "after_artifact",
+          "before_policy",
+          "after_policy",
+          "before_semantic",
+          "after_semantic",
+          "stored_decision_before",
+          "stored_decision_after",
+          "same_report_bytes",
+          "same_artifact",
+          "same_policy",
+          "same_semantics",
+          "same_declared_raw",
+          "changed_sections",
+          "changed_file_count",
+          "changed_check_count",
+          "omitted_file_changes",
+          "omitted_check_changes",
+          "files",
+          "checks"
+        ],
+        "title": "ReportComparison",
+        "type": "object"
+      },
+      "ReportPage": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ReportSummary"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "offset",
+          "limit"
+        ],
+        "title": "ReportPage",
+        "type": "object"
+      },
+      "ReportSummary": {
+        "additionalProperties": false,
+        "properties": {
+          "conflicts_count": {
+            "title": "Conflicts Count",
+            "type": "integer"
+          },
+          "controls": {
+            "default": [],
+            "items": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "title": "Controls",
+            "type": "array"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          },
+          "decision": {
+            "title": "Decision",
+            "type": "string"
+          },
+          "demo": {
+            "default": false,
+            "title": "Demo",
+            "type": "boolean"
+          },
+          "file_count": {
+            "title": "File Count",
+            "type": "integer"
+          },
+          "findings_count": {
+            "title": "Findings Count",
+            "type": "integer"
+          },
+          "guidance": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Guidance"
+            },
+            "title": "Guidance",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "limitations": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Limitations",
+            "type": "array"
+          },
+          "manifest_digest": {
+            "title": "Manifest Digest",
+            "type": "string"
+          },
+          "model_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Path"
+          },
+          "policy_digest": {
+            "default": "",
+            "title": "Policy Digest",
+            "type": "string"
+          },
+          "policy_id": {
+            "title": "Policy Id",
+            "type": "string"
+          },
+          "policy_version": {
+            "default": "",
+            "title": "Policy Version",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "required_complete": {
+            "title": "Required Complete",
+            "type": "integer"
+          },
+          "required_total": {
+            "title": "Required Total",
+            "type": "integer"
+          },
+          "rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Rule Ids",
+            "type": "array"
+          },
+          "semantic_digest": {
+            "title": "Semantic Digest",
+            "type": "string"
+          },
+          "total_bytes": {
+            "title": "Total Bytes",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "created_at",
+          "decision",
+          "reason",
+          "rule_ids",
+          "manifest_digest",
+          "semantic_digest",
+          "policy_id",
+          "file_count",
+          "total_bytes",
+          "required_complete",
+          "required_total",
+          "findings_count",
+          "conflicts_count"
+        ],
+        "title": "ReportSummary",
+        "type": "object"
+      },
+      "ScanInput": {
+        "additionalProperties": false,
+        "properties": {
+          "max_file_mib": {
+            "default": 1024,
+            "maximum": 1024.0,
+            "minimum": 1.0,
+            "title": "Max File Mib",
+            "type": "integer"
+          },
+          "max_files": {
+            "default": 10000,
+            "maximum": 10000.0,
+            "minimum": 1.0,
+            "title": "Max Files",
+            "type": "integer"
+          },
+          "max_total_mib": {
+            "default": 2048,
+            "maximum": 2048.0,
+            "minimum": 1.0,
+            "title": "Max Total Mib",
+            "type": "integer"
+          },
+          "model_path": {
+            "maxLength": 4096,
+            "minLength": 1,
+            "title": "Model Path",
+            "type": "string"
+          },
+          "policy_id": {
+            "default": "default",
+            "maxLength": 80,
+            "title": "Policy Id",
+            "type": "string"
+          },
+          "scanner": {
+            "default": "auto",
+            "enum": [
+              "auto",
+              "modelscan",
+              "none"
+            ],
+            "title": "Scanner",
+            "type": "string"
+          },
+          "timeout_sec": {
+            "default": 120,
+            "maximum": 120.0,
+            "minimum": 1.0,
+            "title": "Timeout Sec",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "model_path"
+        ],
+        "title": "ScanInput",
+        "type": "object"
+      },
+      "SessionRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "token": {
+            "maxLength": 128,
+            "minLength": 32,
+            "title": "Token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "token"
+        ],
+        "title": "SessionRequest",
+        "type": "object"
+      },
+      "SessionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "api_version": {
+            "const": "1",
+            "default": "1",
+            "title": "Api Version",
+            "type": "string"
+          },
+          "csrf_token": {
+            "title": "Csrf Token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "csrf_token"
+        ],
+        "title": "SessionResponse",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "ModelVet Workbench",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/v1/capabilities": {
+      "get": {
+        "operationId": "capabilities_api_v1_capabilities_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Capabilities"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Capabilities"
+      }
+    },
+    "/api/v1/comparisons": {
+      "post": {
+        "operationId": "compare_api_v1_comparisons_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompareInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportComparison"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Compare"
+      }
+    },
+    "/api/v1/demos": {
+      "get": {
+        "operationId": "demos_api_v1_demos_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ReportSummary"
+                  },
+                  "title": "Response Demos Api V1 Demos Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Demos"
+      }
+    },
+    "/api/v1/directories": {
+      "get": {
+        "operationId": "directories_api_v1_directories_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "path",
+            "required": false,
+            "schema": {
+              "default": ".",
+              "title": "Path",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "maximum": 10000,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 100,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DirectoryPage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Directories"
+      }
+    },
+    "/api/v1/policies": {
+      "post": {
+        "operationId": "policy_import_api_v1_policies_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PolicyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Policy Import"
+      }
+    },
+    "/api/v1/policy": {
+      "get": {
+        "operationId": "default_policy_api_v1_policy_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Default Policy"
+      }
+    },
+    "/api/v1/reports": {
+      "get": {
+        "operationId": "history_api_v1_reports_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportPage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "History"
+      }
+    },
+    "/api/v1/reports/import": {
+      "post": {
+        "operationId": "import_report_api_v1_reports_import_post",
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportSummary"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Import Report"
+      }
+    },
+    "/api/v1/reports/{report_id}": {
+      "get": {
+        "operationId": "report_summary_api_v1_reports__report_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "report_id",
+            "required": true,
+            "schema": {
+              "title": "Report Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportSummary"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Report Summary"
+      }
+    },
+    "/api/v1/reports/{report_id}/download": {
+      "get": {
+        "operationId": "download_api_v1_reports__report_id__download_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "report_id",
+            "required": true,
+            "schema": {
+              "title": "Report Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "format",
+            "required": false,
+            "schema": {
+              "default": "json",
+              "enum": [
+                "json",
+                "markdown"
+              ],
+              "title": "Format",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Download"
+      }
+    },
+    "/api/v1/reports/{report_id}/evidence/{section}": {
+      "get": {
+        "operationId": "evidence_api_v1_reports__report_id__evidence__section__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "report_id",
+            "required": true,
+            "schema": {
+              "title": "Report Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "section",
+            "required": true,
+            "schema": {
+              "enum": [
+                "files",
+                "checks",
+                "coverage",
+                "findings",
+                "claims",
+                "conflicts",
+                "dependencies",
+                "executions",
+                "tools",
+                "references"
+              ],
+              "title": "Section",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "required": false,
+            "schema": {
+              "default": "",
+              "maxLength": 256,
+              "title": "Q",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "file_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "File Id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 32,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvidencePage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Evidence"
+      }
+    },
+    "/api/v1/reports/{report_id}/verify": {
+      "post": {
+        "operationId": "verify_api_v1_reports__report_id__verify_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "report_id",
+            "required": true,
+            "schema": {
+              "title": "Report Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportAudit"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Verify"
+      }
+    },
+    "/api/v1/scans": {
+      "post": {
+        "operationId": "start_scan_api_v1_scans_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScanInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobRecord"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Start Scan"
+      }
+    },
+    "/api/v1/scans/active": {
+      "get": {
+        "operationId": "active_scan_api_v1_scans_active_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/JobRecord"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Active Scan Api V1 Scans Active Get"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Active Scan"
+      }
+    },
+    "/api/v1/scans/{job_id}": {
+      "get": {
+        "operationId": "scan_status_api_v1_scans__job_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "job_id",
+            "required": true,
+            "schema": {
+              "title": "Job Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobRecord"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Scan Status"
+      }
+    },
+    "/api/v1/scans/{job_id}/cancel": {
+      "post": {
+        "operationId": "cancel_scan_api_v1_scans__job_id__cancel_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "job_id",
+            "required": true,
+            "schema": {
+              "title": "Job Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobRecord"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Cancel Scan"
+      }
+    },
+    "/api/v1/session": {
+      "get": {
+        "operationId": "current_session_api_v1_session_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Current Session"
+      },
+      "post": {
+        "operationId": "exchange_api_v1_session_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SessionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Exchange"
+      }
+    }
+  }
+}

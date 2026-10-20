@@ -558,6 +558,95 @@
 
 **Actual verification:** verification/MV-035/gate.log: 29 batch / 558 full-suite tests pass, one Linux-only skip; lock/lint/format/security/types (54 source files) pass. targeted.log: 98 combined phase/CLI/fresh-install cases pass before two final regressions were added; acceptance.log: 33 batch/doc cases pass. examples.log runs the documented clean workflow successfully. Batch limits reserve both report reads, preserve failed rows, reject root/manifest drift and never promote stored admission. Initial test import failure is retained in acceptance-initial.log. Final package identities and release checks are retained alongside these logs; no dependency added.
 
+### MV-036 — Define workbench contracts and lock optional dependencies
+
+- **Priority / status / phase:** P1; **COMPLETE**; `PH-15`. **Requirement(s):** FR-025.
+- **Prerequisites:** MV-035 and the user-authorized workbench plan.
+- **Procedure / failure modes:** Versioned interface, scope/ADR amendments, exact lockfiles and dependency license/advisory evidence. Smoke-test combined Python dependencies and frontend toolchain. Missing, malformed, conflicting, unsupported and interrupted paths must remain explicit; no model deserialization or policy weakening.
+- **Interfaces:** WORKBENCH_SPEC.md.
+- **Verification:** `tests/test_workbench_contract.py` plus lock/lint/types/full suite and build as applicable; commands/results recorded in PROGRESS. Planned checks are not verification.
+- **DoD:** implemented behavior and actual passing tests, reviewed diff/dependencies, updated source-of-truth documentation; independent release gates remain pending.
+
+**Actual verification:** verification/workbench/MV-036-tests.log: 9 contract/docs tests pass. Combined FastAPI/Pydantic/TestClient/Uvicorn and React/Vite/TypeScript smoke pass; Python and npm lockfiles resolved without peer overrides. TypeScript 7 peer incompatibility was caught and pinned to supported 5.9.3. License metadata/notices and point-in-time OSV/npm audit evidence retained in verification/workbench/.
+
+### MV-037 — Implement authenticated loopback application
+
+- **Priority / status / phase:** P1; **COMPLETE**; `PH-15`. **Requirement(s):** FR-025.
+- **Prerequisites:** MV-036.
+- **Procedure / failure modes:** Session exchange, exact Host/Origin and CSRF, safe rooted paths, bounded bodies, local assets and capability/policy endpoints. Missing, malformed, conflicting, unsupported and interrupted paths must remain explicit; no model deserialization or policy weakening.
+- **Interfaces:** WORKBENCH_SPEC.md.
+- **Verification:** `tests/test_workbench_api.py` plus lock/lint/types/full suite and build as applicable; commands/results recorded in PROGRESS. Planned checks are not verification.
+- **DoD:** implemented behavior and actual passing tests, reviewed diff/dependencies, updated source-of-truth documentation; independent release gates remain pending.
+
+**Actual verification:** verification/workbench/MV-037-tests.log: 6 authenticated API/security tests pass. Rooted listing, session replay/CSRF/origin/host/body boundaries, policy pins, workspace lock/modes and overlap tests pass; workbench mypy and security lint pass.
+
+### MV-038 — Implement scan workers and private persistent history
+
+- **Priority / status / phase:** P1; **COMPLETE**; `PH-15`. **Requirement(s):** FR-025.
+- **Prerequisites:** MV-037.
+- **Procedure / failure modes:** Single active worker, fixed own-module argv, observational stages, cancellation/cleanup, restart interruption, private SQLite/report byte pins and workspace lock. Missing, malformed, conflicting, unsupported and interrupted paths must remain explicit; no model deserialization or policy weakening.
+- **Interfaces:** WORKBENCH_SPEC.md.
+- **Verification:** `tests/test_workbench_jobs.py` plus lock/lint/types/full suite and build as applicable; commands/results recorded in PROGRESS. Planned checks are not verification.
+- **DoD:** implemented behavior and actual passing tests, reviewed diff/dependencies, updated source-of-truth documentation; independent release gates remain pending.
+
+**Actual verification:** verification/workbench/MV-038-tests.log: 17 API/worker cases pass; PH-15-gate.log: 599 full-suite pass / one Linux-only skip, lock/lint/format/security/types (64 source files) pass. Real worker scans cover four decisions, CLI semantic parity, callback failure, scanner cancellation/cleanup, index failure and restart/history. Initial security-lint failures are retained separately.
+
+### MV-039 — Build developer shell and scan setup
+
+- **Priority / status / phase:** P1; **COMPLETE**; `PH-16`. **Requirement(s):** FR-026.
+- **Prerequisites:** MV-038.
+- **Procedure / failure modes:** Responsive dark UI, restricted folder selection, policy setup, capabilities, actual stage/elapsed feedback and controlled errors. Missing, malformed, conflicting, unsupported and interrupted paths must remain explicit; no model deserialization or policy weakening.
+- **Interfaces:** WORKBENCH_SPEC.md.
+- **Verification:** `frontend/tests/workbench.spec.ts` plus lock/lint/types/full suite and build as applicable; commands/results recorded in PROGRESS. Planned checks are not verification.
+- **DoD:** implemented behavior and actual passing tests, reviewed diff/dependencies, updated source-of-truth documentation; independent release gates remain pending.
+
+**Actual verification:** verification/workbench/MV-039-build.log and MV-039-tests.log: TypeScript/production build and 6 component/format/safe-text tests pass. MV-039-browser.log: 2 real Chromium tests pass, covering actual authenticated dashboard/navigation and rooted folder → worker scan → report → history.
+
+### MV-040 — Build visual evidence workspace
+
+- **Priority / status / phase:** P1; **NOT STARTED**; `PH-16`. **Requirement(s):** FR-026.
+- **Prerequisites:** MV-039.
+- **Procedure / failure modes:** Decision/explanation, searchable file/check coverage, evidence details, findings/claims/conflicts, safe text, paging and accessible controls. Missing, malformed, conflicting, unsupported and interrupted paths must remain explicit; no model deserialization or policy weakening.
+- **Interfaces:** WORKBENCH_SPEC.md.
+- **Verification:** `frontend/tests/workbench.spec.ts` plus lock/lint/types/full suite and build as applicable; commands/results recorded in PROGRESS. Planned checks are not verification.
+- **DoD:** implemented behavior and actual passing tests, reviewed diff/dependencies, updated source-of-truth documentation; independent release gates remain pending.
+
+### MV-041 — Add history, import, comparison and guidance
+
+- **Priority / status / phase:** P1; **NOT STARTED**; `PH-16`. **Requirement(s):** FR-026.
+- **Prerequisites:** MV-040.
+- **Procedure / failure modes:** Persistent run navigation, exact-byte import/download, raw verification, existing comparison service, deterministic check/rule guidance, demo separation. Missing, malformed, conflicting, unsupported and interrupted paths must remain explicit; no model deserialization or policy weakening.
+- **Interfaces:** WORKBENCH_SPEC.md.
+- **Verification:** `tests/test_workbench_reports.py` plus lock/lint/types/full suite and build as applicable; commands/results recorded in PROGRESS. Planned checks are not verification.
+- **DoD:** implemented behavior and actual passing tests, reviewed diff/dependencies, updated source-of-truth documentation; independent release gates remain pending.
+
+### MV-042 — Complete workbench fault and browser acceptance
+
+- **Priority / status / phase:** P1; **NOT STARTED**; `PH-17`. **Requirement(s):** FR-027.
+- **Prerequisites:** MV-041.
+- **Procedure / failure modes:** CLI/UI semantic parity, all decisions, browser auth/path/XSS boundaries, interruption/disk/read errors, no false approval, responsive/keyboard/reduced-motion. Missing, malformed, conflicting, unsupported and interrupted paths must remain explicit; no model deserialization or policy weakening.
+- **Interfaces:** WORKBENCH_SPEC.md.
+- **Verification:** `tests/test_workbench_security.py` plus lock/lint/types/full suite and build as applicable; commands/results recorded in PROGRESS. Planned checks are not verification.
+- **DoD:** implemented behavior and actual passing tests, reviewed diff/dependencies, updated source-of-truth documentation; independent release gates remain pending.
+
+### MV-043 — Package assets and extend supported CI
+
+- **Priority / status / phase:** P1; **NOT STARTED**; `PH-17`. **Requirement(s):** FR-027.
+- **Prerequisites:** MV-042.
+- **Procedure / failure modes:** Frontend assets in wheel/sdist, no Node needed at runtime, optional-extra isolation, generated-type drift check, pinned Ubuntu/macOS frontend/browser gate. Missing, malformed, conflicting, unsupported and interrupted paths must remain explicit; no model deserialization or policy weakening.
+- **Interfaces:** WORKBENCH_SPEC.md.
+- **Verification:** `tests/test_workbench_release.py` plus lock/lint/types/full suite and build as applicable; commands/results recorded in PROGRESS. Planned checks are not verification.
+- **DoD:** implemented behavior and actual passing tests, reviewed diff/dependencies, updated source-of-truth documentation; independent release gates remain pending.
+
+### MV-044 — Document and hand off local preview
+
+- **Priority / status / phase:** P1; **NOT STARTED**; `PH-17`. **Requirement(s):** FR-027.
+- **Prerequisites:** MV-043.
+- **Procedure / failure modes:** Offline demonstration reports, launch/privacy/scanner/recovery tutorial, actual gate logs/hashes and clear external release/research/loader gates. Missing, malformed, conflicting, unsupported and interrupted paths must remain explicit; no model deserialization or policy weakening.
+- **Interfaces:** WORKBENCH_SPEC.md.
+- **Verification:** `tests/test_workbench_contract.py` plus lock/lint/types/full suite and build as applicable; commands/results recorded in PROGRESS. Planned checks are not verification.
+- **DoD:** implemented behavior and actual passing tests, reviewed diff/dependencies, updated source-of-truth documentation; independent release gates remain pending.
+
 ## Next task
 
-No further local-candidate P0 task remains in the selected scope. Hosted Ubuntu 24.04/macOS 15 Intel CI now passes. Next external gates: explicit project/security review before public release and independent benchmark/loader prerequisites. The requested three local extension phases **MV-033–035 / PH-12–14 are complete**. No additional local task is selected; existing external gates remain pending. MV-022/023 development corpus/pilot are implemented; independent review and hidden holdout remain pending. PH-11 prerequisites are documented in LOADER_REVIEW_PACKET.md; MV-030–032 remain gated and unimplemented. Project review, independent research and dedicated loader host evidence remain pending.
+MV-036 starts the authorized PH-15–17 workbench extension. Proceed one coherent task at a time through MV-044; optional loader/research gates remain pending.

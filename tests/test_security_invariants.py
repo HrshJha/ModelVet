@@ -66,7 +66,23 @@ def test_only_reviewed_process_boundary_can_launch_children() -> None:
                 assert ast.literal_eval(keywords["shell"]) is False
                 assert ast.literal_eval(keywords["close_fds"]) is True
                 assert ast.literal_eval(keywords["start_new_session"]) is True
-    assert launches == [ROOT / "src/modelvet/scanners/process.py"]
+    assert set(launches) == {
+        ROOT / "src/modelvet/scanners/process.py",
+        ROOT / "src/modelvet/workbench/jobs.py",
+    }
+    worker = ast.parse((ROOT / "src/modelvet/workbench/jobs.py").read_text())
+    call = next(
+        node
+        for node in ast.walk(worker)
+        if isinstance(node, ast.Call) and ast.unparse(node.func) == "subprocess.Popen"
+    )
+    assert isinstance(call.args[0], ast.Tuple)
+    assert [ast.literal_eval(value) for value in call.args[0].elts[1:4]] == [
+        "-I",
+        "-m",
+        "modelvet.workbench.worker",
+    ]
+    assert not any(keyword.arg == "preexec_fn" for keyword in call.keywords)
 
 
 def test_environment_excludes_ambient_secrets(tmp_path, monkeypatch) -> None:

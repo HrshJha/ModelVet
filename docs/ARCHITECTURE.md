@@ -146,3 +146,7 @@ MV-020 adds dependencies/advisories.py and a separate CLI path: read/validate st
 ## Static report audit extension — PH-12–14
 
 The reports boundary owns `audit.py`, `compare.py` and `batch.py`. They consume validated stored reports through the secure bounded JSON reader; they never call the scan service or policy evaluator. Batch reuses captured bytes and raw audit logic with shared budgets. CLI wrappers map typed results/errors to documented exits. Versioned result/manifest schemas ship with the wheel. Read-only operations retain best-effort identity checks; no filesystem transaction or signature is implied. See [REPORT_AUDIT_SPEC](REPORT_AUDIT_SPEC.md).
+
+## Workbench extension — FR-025–027
+
+The optional workbench adds a loopback FastAPI service serving bundled frontend assets, a private SQLite index, and one dedicated scan worker. Workers call the existing ScanService with observational progress; reports remain authoritative on disk. The server never forks scanner code from request threads. No database server or remote service is added.

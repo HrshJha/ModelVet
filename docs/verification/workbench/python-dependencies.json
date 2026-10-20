@@ -1,0 +1,101 @@
+[
+  {
+    "name": "anyio",
+    "version": "4.15.1",
+    "license": "MIT",
+    "notices": [
+      "licenses/anyio/LICENSE"
+    ],
+    "source": "https://pypi.org/project/anyio/4.15.1/"
+  },
+  {
+    "name": "certifi",
+    "version": "2026.10.19",
+    "license": "MPL-2.0",
+    "notices": [
+      "licenses/certifi/LICENSE"
+    ],
+    "source": "https://pypi.org/project/certifi/2026.10.19/"
+  },
+  {
+    "name": "click",
+    "version": "8.5.0",
+    "license": "BSD-3-Clause",
+    "notices": [
+      "licenses/click/LICENSE.txt"
+    ],
+    "source": "https://pypi.org/project/click/8.5.0/"
+  },
+  {
+    "name": "fastapi",
+    "version": "0.156.0",
+    "license": "MIT",
+    "notices": [
+      "licenses/fastapi/LICENSE"
+    ],
+    "source": "https://pypi.org/project/fastapi/0.156.0/"
+  },
+  {
+    "name": "h11",
+    "version": "0.16.0",
+    "license": "MIT",
+    "notices": [
+      "licenses/h11/LICENSE.txt"
+    ],
+    "source": "https://pypi.org/project/h11/0.16.0/"
+  },
+  {
+    "name": "httpcore",
+    "version": "1.0.9",
+    "license": "BSD-3-Clause",
+    "notices": [
+      "licenses/httpcore/LICENSE.md"
+    ],
+    "source": "https://pypi.org/project/httpcore/1.0.9/"
+  },
+  {
+    "name": "httpx",
+    "version": "0.28.1",
+    "license": "BSD-3-Clause",
+    "notices": [
+      "licenses/httpx/LICENSE.md"
+    ],
+    "source": "https://pypi.org/project/httpx/0.28.1/"
+  },
+  {
+    "name": "idna",
+    "version": "3.20",
+    "license": "BSD-3-Clause",
+    "notices": [
+      "licenses/idna/LICENSE.md"
+    ],
+    "source": "https://pypi.org/project/idna/3.20/"
+  },
+  {
+    "name": "opentelemetry-api",
+    "version": "1.45.1",
+    "license": "Apache-2.0",
+    "notices": [
+      "licenses/opentelemetry-api/LICENSE"
+    ],
+    "source": "https://pypi.org/project/opentelemetry-api/1.45.1/"
+  },
+  {
+    "name": "starlette",
+    "version": "1.9.0",
+    "license": "BSD-3-Clause",
+    "notices": [
+      "licenses/starlette/LICENSE.md"
+    ],
+    "source": "https://pypi.org/project/starlette/1.9.0/"
+  },
+  {
+    "name": "uvicorn",
+    "version": "0.54.0",
+    "license": "BSD-3-Clause",
+    "notices": [
+      "licenses/uvicorn/LICENSE.md"
+    ],
+    "source": "https://pypi.org/project/uvicorn/0.54.0/"
+  }
+]

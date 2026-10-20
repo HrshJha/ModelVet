@@ -184,3 +184,7 @@ Input: 1 local deliberately malformed synthetic safetensors fixture, default pol
 ## Local continuation phases — PH-12–14 implemented
 
 PH-12–14 extend the completed static report path independently of PH-11: MV-016 → MV-033 → MV-034 → MV-035. They handle stored-report audit workflows only. The original phase estimates remain historical and do not include this extension; no delivery estimate is invented. New IDs are appended, and the loader/research/public-release gates remain unchanged. Each task must pass its own targeted/full gate before advancing.
+
+## Workbench extension — FR-025–027
+
+PH-15 (MV-036–038): contracts/locked optional dependencies, authenticated local API, private worker/history. PH-16 (MV-039–041): developer shell/scan setup, evidence workspace, history/comparison/guidance. PH-17 (MV-042–044): security/browser fault acceptance, bundled distribution/CI, tutorial/demo/handoff. Each phase requires actual targeted and broader test evidence; public release and PH-11 remain independently gated.

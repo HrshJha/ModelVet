@@ -264,3 +264,7 @@ GitHub access now exposes prior hosted cache failures. Prime hash-locked runtime
 ## MV-011 Unicode object-key correction — 2026-10-20
 
 The normalized JSON validator already checked string values, but direct Python construction could admit unpaired surrogates in object keys. Under the pinned serializer, a high-surrogate key became three replacement characters. Validate object keys with the same strict UTF-8 encoding used for values, at every nested object in check details and dependency advisories. Preserve valid Unicode keys and existing structural budgets. JSON input already rejected the invalid keys; no admission bypass is established. This repairs the existing v1 UTF-8 contract without a schema, policy or dependency change. ADRs remain Proposed.
+
+## PH-15–17 workbench scope — user-authorized
+
+The user explicitly requested implementation of the local browser workbench plan. Amend the scope of proposed ADR-001/011 for this extension: permit loopback-only FastAPI/Uvicorn, a bundled React/TypeScript/Vite interface and a private stdlib SQLite index. Core CLI dependencies stay separate through the optional ui extra. ScanService remains authoritative; worker JSON progress is observational, not evidence. UI decisions are never evaluated in JavaScript. All ADRs remain Proposed; no independent review or loader gate is accepted by this change.
