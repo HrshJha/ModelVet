@@ -180,3 +180,7 @@ OQ-01: core and separate scanner locks install/build on macOS; hosted/Linux vali
 ## MV-020 evidence update — 2026-10-20
 
 OQ-07 has a conservative offline implementation: exact PyPI enumerated-version matching from explicit query snapshots, timestamp/size/schema/identity checks and missing/unsupported fail-closed supplemental gates. Authentic publisher freshness/completeness, version ranges, actual installation and exploitability remain unverified; no global vulnerability clearance is claimed. Project review is still pending.
+
+## MV-022/023 and PH-11 readiness update — 2026-10-20
+
+OQ-10/13 remain open: ten method-checked inert development recipes and a real pinned scanner pilot exist, but no hidden holdout/independent discrepancy adjudication or eligible alternative-tool experiment establishes incremental detection. Study status is INCONCLUSIVE. OQ-09 remains open: current host is Darwin without KVM/Firecracker/jailer; no reviewed dedicated Linux host was supplied. User selected leaving independent research/security/Linux gates pending while completing local validation. Proposed review preparation is LOADER_REVIEW_PACKET.md; no execution is enabled.

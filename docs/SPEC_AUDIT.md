@@ -65,3 +65,9 @@ User-selected scope: **finish the local candidate; leave hosted CI pending**. Ho
 ## Current optional P1 checkpoint — MV-020, 2026-10-20
 
 The offline advisory supplement now has bounded input validation, a separate v1 schema and an explicit CLI; 50 advisory / 434 full-suite tests pass with one Linux-only skip. No policy/applicability version change or admission promotion occurs. Fresh installed-package checks exercise the actual supplement with socket connections denied. Snapshot source/completeness remain unauthenticated operator declarations; ranges/other ecosystems remain unresolved. Benchmark evidence and PH-11 prerequisites remain pending. Exact commands and builds are in verification/MV-020/. Original PH-10 records above remain historical candidate evidence.
+
+## Current development corpus/pilot checkpoint — 2026-10-20
+
+28 manifest and 23 metrics/runner cases now verify local engineering; combined corpus/metrics/fresh-installed release selection passes 60 cases, with full gate 486 pass / one Linux-only skip, lock/lint/format/security/types pass. New corpus/run schemas and safe source-corpus packaging are validated. Actual pinned ModelScan pilot produced 40 observations over two repeats, six eligible joint input-context observations, no independently reviewed discrepancy denominator and study status INCONCLUSIVE. Raw operational results stay private/excluded from distributions; sanitized local summary is labeled development-only.
+
+Independent benchmark/security review, hidden holdout, dedicated Linux/KVM host and hosted/public release gates remain pending by explicit user selection. The proposed loader review packet enables no code or execution. A newer local Git checkpoint af86ffee was observed outside agent commands and preserved; final changes remain uncommitted. Exact commands/context/result hashes and final package validation: verification/MV-023/.

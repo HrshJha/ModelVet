@@ -88,3 +88,7 @@ Summary report paths are relative to the selected output root; report_root is <r
 ## MV-020 supplementary advisory command
 
 `advisories` is an optional P1 command described in [ADVISORY_SPEC](ADVISORY_SPEC.md). It reads declared pins from a validated stored report and an explicit local snapshot, emits a schema-validated JSON supplement, and preserves the stored report. It never recomputes admission. Required stale/absent/partial/unsupported evidence is unresolved/30; any affected-version match is 30. Optional unknown evidence may exit 0 with visible statuses. This success code is not APPROVE. UTC `--as-of` is mandatory for reproducibility; no runtime network access is implemented.
+
+## Optional synthetic development pilot
+
+`uv run python -m modelvet.benchmarks.runner --manifest benchmarks/manifest.json --out out/NEW_DIRECTORY [--repeats 2] [--timeout-sec 120]` runs only the validated closed inert recipes. The root must be new; output is private. Return 30 for the explicit INCONCLUSIVE research result; 40 invalid arguments/input, 50 failure before result publication, 130 interruption. The completed result marker is written last; failed runs may retain private partial evidence. Exact local execution/limitations are in BENCHMARK_PLAN and benchmarks/README.md. It is separate from admission and is not an independently adjudicated efficacy benchmark.

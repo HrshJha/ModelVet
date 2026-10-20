@@ -223,3 +223,7 @@ Every row in section 5 is authoritative mapping `FR-### → module → MV-### �
 ## FR-019 implementation checkpoint — 2026-10-20
 
 MV-020 implements a separate optional offline advisory supplement on stored dependency declarations. Exact enumerated PyPI versions are matched using explicit query-scoped snapshots; unsupported ranges/ecosystems remain unresolved. The command does not mutate/recompute static admission; an operational requirement must enforce both scan and advisory command exits. ADVISORY_SPEC and PROGRESS record the interface, limitations and passing T-OSV-01 cases. Benchmark and loader requirements remain unimplemented.
+
+## FR-017 development checkpoint — 2026-10-20
+
+MV-022/023 engineering now supplies ten inert development recipes, frozen identities/method labels, a validated pilot runner, raw evidence, fair input-context eligibility and null efficacy metrics where reviewed data is absent. A real ModelScan 0.8.8 two-repeat local pilot is explicitly INCONCLUSIVE. This does not complete the independent baseline benchmark requirement: hidden holdout, independent adjudication and broader eligible comparisons remain pending by user selection. No loader execution requirement is implemented; PH-11 gates remain in force.

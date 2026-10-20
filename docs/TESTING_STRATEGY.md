@@ -108,3 +108,7 @@ Every confirmed security failure: create harmless reproducer → assert fails on
 ## T-OSV-01 implemented supplement cases
 
 `tests/test_advisories.py` covers exact/no-match/withdrawn records, freshness boundary and future data, missing/partial/paginated queries, unsupported ranges/conditions/ecosystems/schema, unpinned/duplicate declarations, malformed/oversized/linked/special files, identity drift, no network, deterministic identity and CLI 0/30/40 behavior. `tests/test_release.py` also installs and runs the supplement with socket connections denied, verifying the original scan report is unchanged. This tests supplied-record matching, not live vulnerability detection efficacy.
+
+## T-BENCH-01 local engineering evidence
+
+`test_benchmark_manifest.py`: 28 cases cover deterministic identity/materialization, modes, alternative byte methods, bad inputs, links/limits, tampered paths/hashes/eligibility/labels and forbidden review/holdout promotion. `test_benchmark_metrics.py`: 23 cases separate NOT_APPLICABLE/unavailable from misses, keep zero-denominator rates null, reject contradictory/duplicate identities, validate complete accounting and fail without a completion marker on report failure/interruption. A fresh installed-package test runs the pilot offline with unavailable scanner injection. Real ModelScan development evidence is retained separately; no ordinary CI malicious execution or independent adjudication is claimed.
