@@ -1,0 +1,35 @@
+{
+  "observed_at": "2026-10-20T17:40:38.886059+00:00",
+  "scope": "Before the requested verification-evidence checkpoint; application source unchanged",
+  "pull_request": {
+    "additions": 680,
+    "baseRefOid": "9ec094fe560d8e11337d269cd72e8503db72768f",
+    "changedFiles": 39,
+    "deletions": 28,
+    "headRefOid": "d44092531c01fc3b8c359abdd2d68323e88f2767",
+    "mergeCommit": {
+      "oid": "fbf603c1f471d932cc109a3da4350dbeddb724ab"
+    },
+    "number": 1,
+    "state": "MERGED",
+    "url": "https://github.com/HrshJha/ModelVet/pull/1"
+  },
+  "local_head_before_checkpoint": "fbf603c1f471d932cc109a3da4350dbeddb724ab",
+  "remote_main_before_checkpoint": "fbf603c1f471d932cc109a3da4350dbeddb724ab",
+  "pr_head_tree_matches_merged_main": true,
+  "local_remote_ahead_behind_before_checkpoint": [
+    0,
+    0
+  ],
+  "remaining_records_reviewed": {
+    "docs/verification/MV-026/hosted-followup/exact-wheel-install.log": "b6c4332a247dcbdb45420175d1d56444c02e155a438468b66afd32ff2c7a4ac0",
+    "docs/verification/MV-026/hosted-followup/integration-state.json": "4a3fecf7bdfa33d3e6bceb69456b1c5d61406639ca013d4ab953b44b2ba1a863",
+    "docs/verification/MV-026/hosted-followup/main-results.json": "6bab3d92aa772b107e0ab42e9751c70d6409f4c673d3c76e8541534812ae7c12",
+    "docs/verification/MV-026/hosted-followup/merged-pr.json": "f8fc87873a5825c1a3b0e0b514532dc6fc3efc12523429fc131df0d03a010490"
+  },
+  "post_merge_ci_url": "https://github.com/HrshJha/ModelVet/actions/runs/39467012708",
+  "post_merge_ci_conclusion": "success",
+  "dependency_changes": false,
+  "loader_enabled": false,
+  "public_release": false
+}

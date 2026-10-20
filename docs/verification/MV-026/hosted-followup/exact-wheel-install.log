@@ -1,0 +1,9 @@
+{
+  "wheel_sha256": "3da7ed1bcb157f0528fab4645811d1d9242fee7595d49bafc91df180b582572a",
+  "hash_locked_fresh_install": "PASS",
+  "dependency_check": "PASS",
+  "network_denied_installed_scan_exit": 0,
+  "synthetic_decision": "APPROVE",
+  "stored_audit": "VERIFIED",
+  "merge_tree_matches_checked_pr_head": true
+}

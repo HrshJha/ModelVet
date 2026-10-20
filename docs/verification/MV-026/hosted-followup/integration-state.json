@@ -1,0 +1,39 @@
+{
+  "observed_at": "2026-10-20T17:37:17.199616+00:00",
+  "merged_main_commit": "fbf603c1f471d932cc109a3da4350dbeddb724ab",
+  "main_tree_matches_checked_pr": true,
+  "main_ci_run": 39467012708,
+  "main_ci_url": "https://github.com/HrshJha/ModelVet/actions/runs/39467012708",
+  "main_ci_conclusion": "success",
+  "logs": [
+    {
+      "file": "main-ubuntu.log",
+      "raw_sha256": "6d05dcf53569b97c4b60de67fb1d7107c81cbb1918a72cc417bb16744cd103b1",
+      "selected_actual_lines": [
+        "2026-10-20T17:32:53.6419343Z All checks passed!",
+        "2026-10-20T17:32:53.7111038Z All checks passed!",
+        "2026-10-20T17:32:56.3034494Z Success: no issues found in 54 source files",
+        "2026-10-20T17:33:33.9274050Z 560 passed in 37.02s",
+        "2026-10-20T17:33:41.8784011Z 10 passed in 7.01s",
+        "2026-10-20T17:33:43.3303076Z {\"checks\": [{\"id\": \"modelscan\", \"status\": \"COMPLETE\"}, {\"id\": \"scanner:resources\", \"status\": \"COMPLETE\"}], \"decision\": \"APPROVE\", \"fixture\": \"inert None bytes; never deserialized by ModelVet\", \"platform\": \"Linux\", \"tools\": [{\"binary_sha256\": \"da1b6ee8c3b1da9c7adfe86d67ce385b6a92ee7c622441709231c9db10347bf1\", \"source\": \"pypi:modelscan==0.8.8\", \"tool_id\": \"modelscan\", \"version\": \"0.8.8\"}, {\"binary_sha256\": null, \"source\": \"installed package\", \"tool_id\": \"modelvet\", \"version\": \"0.1.0\"}]}"
+      ]
+    },
+    {
+      "file": "main-macos.log",
+      "raw_sha256": "d5264d60b2e8690f33485a50935be70a1e24cda6d8f2a0a4a503afa035f06d97",
+      "selected_actual_lines": [
+        "2026-10-20T17:33:18.3351180Z All checks passed!",
+        "2026-10-20T17:33:18.5094680Z All checks passed!",
+        "2026-10-20T17:34:00.8291310Z Success: no issues found in 54 source files",
+        "2026-10-20T17:35:50.5136200Z 559 passed, 1 skipped in 107.93s (0:01:47)",
+        "2026-10-20T17:36:15.5795290Z 10 passed in 22.02s",
+        "2026-10-20T17:36:19.8688590Z {\"checks\": [{\"id\": \"modelscan\", \"status\": \"COMPLETE\"}, {\"id\": \"scanner:resources\", \"status\": \"UNSUPPORTED\"}], \"decision\": \"INSUFFICIENT\", \"fixture\": \"inert None bytes; never deserialized by ModelVet\", \"platform\": \"Darwin\", \"tools\": [{\"binary_sha256\": \"d3f8122a849cf33d7eaf26c7bb4263ac51692ddd45baa9e7a77b4e06bf43d0b2\", \"source\": \"pypi:modelscan==0.8.8\", \"tool_id\": \"modelscan\", \"version\": \"0.8.8\"}, {\"binary_sha256\": null, \"source\": \"installed package\", \"tool_id\": \"modelvet\", \"version\": \"0.1.0\"}]}"
+      ]
+    }
+  ],
+  "public_release_exists": false,
+  "independent_review_holdout_supplied": false,
+  "dedicated_linux_kvm_host_supplied": false,
+  "loader_enabled": false,
+  "new_records_are_local_verification_only": true
+}
