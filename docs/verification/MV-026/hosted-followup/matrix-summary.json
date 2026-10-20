@@ -1,0 +1,30 @@
+{
+  "run_id": 39465563101,
+  "source_commit": "3d24c0a3810664c4cab4b760df5f207ff95cdf9a",
+  "jobs": [
+    {
+      "job_id": 118775921030,
+      "raw_log_sha256": "9ee281c31e4aa56f2426707707655245f51e34d38387a3a1af5bbcc3d3845e5c",
+      "actual_selected_lines": [
+        "2026-10-20T17:23:02.3999900Z All checks passed!",
+        "2026-10-20T17:23:02.4572520Z All checks passed!",
+        "2026-10-20T17:23:04.3041832Z Success: no issues found in 54 source files",
+        "2026-10-20T17:23:37.7291768Z 560 passed in 32.93s",
+        "2026-10-20T17:23:44.5145575Z 10 passed in 5.97s",
+        "2026-10-20T17:23:45.6817971Z {\"checks\": [{\"id\": \"modelscan\", \"status\": \"COMPLETE\"}, {\"id\": \"scanner:resources\", \"status\": \"COMPLETE\"}], \"decision\": \"APPROVE\", \"fixture\": \"inert None bytes; never deserialized by ModelVet\", \"platform\": \"Linux\", \"tools\": [{\"binary_sha256\": \"da1b6ee8c3b1da9c7adfe86d67ce385b6a92ee7c622441709231c9db10347bf1\", \"source\": \"pypi:modelscan==0.8.8\", \"tool_id\": \"modelscan\", \"version\": \"0.8.8\"}, {\"binary_sha256\": null, \"source\": \"installed package\", \"tool_id\": \"modelvet\", \"version\": \"0.1.0\"}]}"
+      ]
+    },
+    {
+      "job_id": 118775921489,
+      "raw_log_sha256": "7212b4a147c3b9c9dfa5493a876644d377686053a95767f7e397176e4062fa6c",
+      "actual_selected_lines": [
+        "2026-10-20T17:23:04.8947290Z All checks passed!",
+        "2026-10-20T17:23:05.0015690Z All checks passed!",
+        "2026-10-20T17:23:23.0632320Z Success: no issues found in 54 source files",
+        "2026-10-20T17:24:25.4711010Z 559 passed, 1 skipped in 61.24s (0:01:01)",
+        "2026-10-20T17:24:38.1763120Z 10 passed in 10.95s",
+        "2026-10-20T17:24:40.5435710Z {\"checks\": [{\"id\": \"modelscan\", \"status\": \"COMPLETE\"}, {\"id\": \"scanner:resources\", \"status\": \"UNSUPPORTED\"}], \"decision\": \"INSUFFICIENT\", \"fixture\": \"inert None bytes; never deserialized by ModelVet\", \"platform\": \"Darwin\", \"tools\": [{\"binary_sha256\": \"d3f8122a849cf33d7eaf26c7bb4263ac51692ddd45baa9e7a77b4e06bf43d0b2\", \"source\": \"pypi:modelscan==0.8.8\", \"tool_id\": \"modelscan\", \"version\": \"0.8.8\"}, {\"binary_sha256\": null, \"source\": \"installed package\", \"tool_id\": \"modelvet\", \"version\": \"0.1.0\"}]}"
+      ]
+    }
+  ]
+}

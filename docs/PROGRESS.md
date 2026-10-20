@@ -1,6 +1,6 @@
 # ModelVet progress dashboard
 
-**Updated 2026-10-20. Overall: local static candidate complete through PH-10. Hosted CI/public release PENDING by user-selected scope.** The five MVP commands, optional offline advisory command and three stored-report audit commands work. PH-12–14 are complete. Work started against base `e2f2bb269683d79cd6a12757aa140357fef089ad`; a newer checkpoint `af86ffee5c7b4f1e990e9dbbdba6625e973acef0` appeared during this run outside the agent commands and was preserved. Further external checkpoints were observed and preserved; the prior pilot checkpoint is recorded in `verification/MV-023/`; current extension source/build identities are in `verification/MV-035/`. Only a synthetic development pilot ran; no model loading or independently adjudicated benchmark.
+**Updated 2026-10-20. Overall: local static candidate complete through PH-10. Hosted Ubuntu/macOS gates passed; public release PENDING review.** The five MVP commands, optional offline advisory command and three stored-report audit commands work. PH-12–14 are complete. Work started against base `e2f2bb269683d79cd6a12757aa140357fef089ad`; a newer checkpoint `af86ffee5c7b4f1e990e9dbbdba6625e973acef0` appeared during this run outside the agent commands and was preserved. Further external checkpoints were observed and preserved; the prior pilot checkpoint is recorded in `verification/MV-023/`; current extension source/build identities are in `verification/MV-035/`. Only a synthetic development pilot ran; no model loading or independently adjudicated benchmark.
 
 | Workstream | Actual state | Evidence |
 |---|---|---|
@@ -8,12 +8,12 @@
 | Architecture and threat model | Drafted, pending review | `ARCHITECTURE.md`, `THREAT_MODEL.md` |
 | Dependency resolution / lock | COMPLETE for foundation | `../pyproject.toml`, `../uv.lock`, `verification/MV-001/` |
 | Source implementation | Full local CLI, static checks, evidence/coverage/policy, reports and packaging | `../src/modelvet/` |
-| Tests/fixtures | 558 passed / one Linux-only skip | `verification/MV-035/gate.log` |
+| Tests/fixtures | 559 passed / one Linux-only skip locally; 560 passed on hosted Ubuntu | `verification/MV-026/hosted-followup/` |
 | Benchmarks | INCONCLUSIVE local development pilot; independent research PENDING | `../benchmarks/results/`, `verification/MV-023/` |
 | Isolated model-loading safety | DEFERRED | PH-11 / ADR-009 proposed |
-| Release | NOT RELEASED | Local wheel/sdist verified; hosted CI/public release pending |
+| Release | NOT RELEASED | Local wheel/sdist and hosted CI verified; public release pending review |
 
-**Active task:** none; the requested PH-12–14 / MV-033–035 local extension is complete. **Next gates:** independent corpus/security review and dedicated Linux/KVM prerequisites, left pending by user selection. **Next external gate:** hosted CI and explicit project review. ADRs remain Proposed; provisional toolchain choices and deviations are recorded in ADR-002.
+**Active task:** external review/laboratory prerequisites awaited; MV-026 and PH-12–14 are implemented and verified. **Next gates:** independent corpus/security review and dedicated Linux/KVM prerequisites, left pending by user selection. **Next external gate:** independent project/security review and research/loader prerequisites. ADRs remain Proposed; provisional toolchain choices and deviations are recorded in ADR-002.
 
 ## Milestones
 
@@ -27,7 +27,7 @@
 | PH-06 | COMPLETE | MV-016–018; 317 tests, macOS |
 | PH-07 | COMPLETE | MV-019/021; 345-test macOS gate |
 | PH-08 | LOCAL ENGINEERING IMPLEMENTED; research PENDING | MV-020 plus development corpus/pilot; no hidden holdout/independent adjudication |
-| PH-09 | LOCAL CANDIDATE COMPLETE; hosted CI PENDING | MV-024–026, scope explicitly selected by user |
+| PH-09 | COMPLETE — tested hosted targets | MV-024–026; Ubuntu 24.04 + macOS 15 Intel hosted gate; local arm64 evidence separate |
 | PH-10 | LOCAL CANDIDATE COMPLETE; public release PENDING | MV-027–029 verified; 381 pass / one Linux-only skip |
 | PH-11 | GATED; execution NOT STARTED | Proposed review packet prepared; no reviewed Linux/KVM environment |
 | PH-12 | COMPLETE | Raw evidence verification; 508 pass / one Linux-only skip |
@@ -41,7 +41,7 @@
 ## Known risks / blockers
 
 - ModelScan 0.8.8 named standalone-file coverage is observed and normalized. Archive/member completeness stays INCONCLUSIVE; Darwin memory enforcement is UNSUPPORTED required resource evidence.
-- Core and separate pinned ModelScan environments pass macOS checks. Linux portability and hardening remain unverified.
+- Core and separate pinned ModelScan environments pass local macOS and hosted Ubuntu checks. Broader platforms and dedicated loader isolation remain unverified.
 - Safe snapshot budget limits practicality for multi-GB real models; scope stays bounded.
 - Commercial scanner baselines and P2 isolation cannot be truthfully tested with current local static implementation.
 - License/provenance metadata cannot establish legal clearance; advisory snapshots may be stale.
@@ -124,3 +124,9 @@ On completing an individual task: edit only its status from NOT STARTED to COMPL
 - **2026-10-20 PH-13/MV-034 complete:** 13 targeted / 521 full-suite pass, one Linux-only skip; lock/lint/format/security/types (53 source files) pass (verification/MV-034/). Comparison distinguishes exact report bytes, raw declarations and semantic content, counts changed files/check groups and suppresses names/free text by default. Policy decisions are displayed as stored; no admission evaluation or raw-file authentication occurs. Explicit truncation, source drift and 0/30/40 CLI cases pass. Next MV-035.
 
 - **2026-10-20 PH-14/MV-035 complete:** 29 batch / 558 full-suite tests pass, one Linux-only skip; lock/lint/format/security/types (54 source files) pass (verification/MV-035/). Explicit manifests retain all rows, share finite report/raw budgets and reject unsafe paths/drift. Captured report JSON is conservatively charged twice to reserve read/recheck work. A byte-verified INSUFFICIENT report remains INSUFFICIENT; audits never evaluate admission. 98 combined audit/CLI/fresh-install checks passed before final regressions; 33 batch/doc acceptance checks and the documented synthetic examples pass. Initial test-only import failure is retained. Final distribution/source identities and post-documentation verification are recorded in the same evidence directory. The user explicitly chose to extend the local plan; no dependencies, loader capability or accepted ADRs were added. All three requested local phases are complete; hosted CI, independent review/holdout, Linux/KVM, public release and PH-11 remain pending.
+
+- **2026-10-20 hosted access restored:** User authorized GitHub CLI sign-in. Live Actions records show earlier Ubuntu/macOS runs failed on a cold offline runtime cache, correcting earlier no-hosted-run assumptions. MV-026 follow-up primes hash-locked dependencies during CI setup; a clean cache reproduces the failure and then passes 12 release/CI-contract cases after priming. Hosted rerun is pending; no platform/release/independent-review/loader gate is promoted. Evidence: verification/MV-026/hosted-followup/.
+
+- **2026-10-20 PH-09 hosted gate complete:** PR run 39465563101 at source 3d24c0a passes both Ubuntu 24.04 and macOS 15 Intel, including lint/format/security/types/full tests/build/fresh installation and the real inert scanner smoke. Ubuntu: 560 pass; macOS Intel: 559 pass / one Linux-only skip; local arm64: 559 pass / one Linux-only skip. ARM hosted jobs were queued and superseded, not counted as passing. The CI now tests pull requests and main pushes without redundant feature-branch push matrices. GitHub access is authenticated; no dependency/loader capability or ADR acceptance changed. PH-08 independent review/hidden holdout, PH-10 project/risk/public release and PH-11 dedicated Linux/KVM/review remain pending. Evidence: verification/MV-026/hosted-followup/.
+
+- **2026-10-20 candidate refresh:** Final local gate passes 559 tests / one Linux-only skip, lock/lint/format/security/types and wheel/sdist build (verification/MV-026/hosted-followup/final-local-gate.log). Agent commits/pushes now exist on codex/ci-release-gates with PR 1; these changes correct hosted validation and prepare concrete review material. No public tag/package or loader execution is authorized by passing static CI alone. PH-08, PH-10 release acceptance and PH-11 remain dependent on the explicitly requested external records.

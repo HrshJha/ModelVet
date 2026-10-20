@@ -51,3 +51,7 @@ A passing green line-coverage number never substitutes for security behavior. Be
 ## Local candidate checkpoint — 2026-10-20
 
 The user selected local candidate completion with hosted CI pending. The local task evidence through MV-029 is recorded in PROGRESS and verification/PH-10: 381 tests pass, one Linux-only test is skipped, and lock/lint/format/security/types/build and fresh installation pass on macOS. This satisfies the selected local candidate scope. The unchecked public-release checklist above remains the release gate; hosted Linux/macOS execution, project review/risk acceptance and a version-controlled release checkpoint are pending. PH-08 and PH-11 are not achieved.
+
+## Hosted static checkpoint — 2026-10-20
+
+MV-026 now passes the declared Ubuntu 24.04/macOS 15 Intel hosted matrix; full tests, static gates, builds, fresh installation and real inert scanner contracts succeed at 3d24c0a (run 39465563101). Hosted target evidence is separate from local arm64. The release checklist still requires project review/residual-risk acceptance and publication; PH-08 independent holdout/adjudication and PH-11 dedicated host/isolation review are not satisfied by static CI. See RELEASE_REVIEW_PACKET.md for the concrete candidate and missing records.

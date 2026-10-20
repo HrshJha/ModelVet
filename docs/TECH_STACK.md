@@ -1,6 +1,6 @@
 # Technology stack and compatibility decisions
 
-**Status: local static candidate implemented; hosted CI pending**, 2026-10-20. `pyproject.toml` and `uv.lock` resolve 30 third-party packages. Python 3.12.15, uv 0.13.3, Typer 0.27.3, Pydantic 2.14.1, Hatchling 1.32.4, pytest 9.1.1, pytest-cov 7.1.0, Hypothesis 6.170.5, Ruff 0.17.1, mypy 2.4.0 and packaging 26.3 are pinned. macOS packaging evidence and license/advisory review are in `verification/MV-001/`; ModelScan 0.8.8 compatibility is observed on macOS in a separate environment; Linux remains unverified. The register below retains the original proposal as historical context; the actual manifest and lock control installed versions.
+**Status: static candidate implemented; Ubuntu/macOS Intel hosted gates passed**, 2026-10-20. `pyproject.toml` and `uv.lock` resolve 30 third-party packages. Python 3.12.15, uv 0.13.3, Typer 0.27.3, Pydantic 2.14.1, Hatchling 1.32.4, pytest 9.1.1, pytest-cov 7.1.0, Hypothesis 6.170.5, Ruff 0.17.1, mypy 2.4.0 and packaging 26.3 are pinned. macOS packaging evidence and license/advisory review are in `verification/MV-001/`; ModelScan 0.8.8 compatibility is observed on macOS in a separate environment; Ubuntu 24.04/macOS 15 Intel hosted validation now passes; actual results are tracked in verification/MV-026/hosted-followup/. The register below retains the original proposal as historical context; the actual manifest and lock control installed versions.
 
 ## Concrete baseline
 

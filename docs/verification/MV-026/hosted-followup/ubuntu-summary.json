@@ -1,0 +1,14 @@
+{
+  "run_id": 39464969407,
+  "job_id": 118773868942,
+  "url": "https://github.com/HrshJha/ModelVet/actions/runs/39464969407/job/118773868942",
+  "raw_log_sha256": "39ea5041e88d0d68c467672be6fc03b3f69c5353147829920f9c5f2bea37f75e",
+  "selected_actual_log_lines": [
+    "2026-10-20T17:18:59.9523009Z All checks passed!",
+    "2026-10-20T17:19:00.0090535Z All checks passed!",
+    "2026-10-20T17:19:02.3672722Z Success: no issues found in 54 source files",
+    "2026-10-20T17:19:38.1266068Z 560 passed in 35.21s",
+    "2026-10-20T17:19:45.6606379Z 10 passed in 6.63s",
+    "2026-10-20T17:19:46.9620776Z {\"checks\": [{\"id\": \"modelscan\", \"status\": \"COMPLETE\"}, {\"id\": \"scanner:resources\", \"status\": \"COMPLETE\"}], \"decision\": \"APPROVE\", \"fixture\": \"inert None bytes; never deserialized by ModelVet\", \"platform\": \"Linux\", \"tools\": [{\"binary_sha256\": \"da1b6ee8c3b1da9c7adfe86d67ce385b6a92ee7c622441709231c9db10347bf1\", \"source\": \"pypi:modelscan==0.8.8\", \"tool_id\": \"modelscan\", \"version\": \"0.8.8\"}, {\"binary_sha256\": null, \"source\": \"installed package\", \"tool_id\": \"modelvet\", \"version\": \"0.1.0\"}]}"
+  ]
+}
