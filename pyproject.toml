@@ -31,7 +31,7 @@ packages = ["src/modelvet"]
 
 [tool.hatch.build.targets.sdist]
 include = ["src/modelvet", "tests", "schemas", "pyproject.toml", "uv.lock", ".python-version", "README.md", "LICENSE", "PRD.md", "AGENTS.md", "docs/*.md", "examples", "tools/modelscan", "tools/smoke_scanner.py", ".github/workflows/ci.yml", "benchmarks/*.json", "benchmarks/*.md", "benchmarks/freeze_manifest.py"]
-exclude = ["docs/verification"]
+exclude = ["docs/verification", "benchmarks/results", "out"]
 
 [tool.hatch.build.targets.wheel.force-include]
 "schemas" = "modelvet/schemas"

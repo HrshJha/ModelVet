@@ -176,3 +176,34 @@ def test_pilot_schema_export():
     assert PilotResult.model_json_schema() == json.loads(
         (ROOT / "schemas/benchmark-run-v1.json").read_text()
     )
+
+
+@pytest.mark.parametrize("error", [RuntimeError("injected report failure"), KeyboardInterrupt()])
+def test_faults_never_publish_complete_result(tmp_path, monkeypatch, error):
+    from modelvet.application.scan import ScanService
+
+    def failed(self, request):
+        raise error
+
+    monkeypatch.setattr(ScanService, "run", failed)
+    out = tmp_path / "failed"
+    with pytest.raises(type(error)):
+        run(MANIFEST, out, repeats=1)
+    assert not (out / "result.json").exists()
+
+
+@pytest.mark.parametrize("error,expected", [(RuntimeError(), 50), (KeyboardInterrupt(), 130)])
+def test_cli_fault_exit_classes(tmp_path, monkeypatch, capsys, error, expected):
+    from modelvet.benchmarks import runner
+
+    def failed(*args):
+        raise error
+
+    monkeypatch.setattr(runner, "run", failed)
+    monkeypatch.setattr(
+        sys, "argv", ["runner", "--manifest", str(MANIFEST), "--out", str(tmp_path)]
+    )
+    with pytest.raises(SystemExit) as status:
+        runner.main()
+    assert status.value.code == expected
+    assert "Traceback" not in capsys.readouterr().err

@@ -1,0 +1,52 @@
+{
+  "study_status": "INCONCLUSIVE",
+  "scope": "synthetic development pilot, not independently adjudicated",
+  "corpus_digest": "sha256:acd887d879d99a66fd740400673f21c98724b0ae9fd885fe7a515e0a8e2f8b35",
+  "result_sha256": "cc42401e1c73eb4ca488565c0139fabf551abf7733edee1005c9e82f9911f1e6",
+  "repeats": 2,
+  "fixture_count": 10,
+  "observations": 40,
+  "joint_context_observations": 6,
+  "tools": {
+    "modelvet": {
+      "observations": 20,
+      "eligible_observations": 20,
+      "not_applicable": 0,
+      "unavailable": 0,
+      "unresolved": 16,
+      "complete_no_findings": 2,
+      "reported_findings": 0,
+      "policy_blocks": 2
+    },
+    "modelscan": {
+      "observations": 20,
+      "eligible_observations": 6,
+      "not_applicable": 14,
+      "unavailable": 0,
+      "unresolved": 2,
+      "complete_no_findings": 4,
+      "reported_findings": 0,
+      "policy_blocks": 0
+    }
+  },
+  "repeated_groups": 13,
+  "stable_repeated_groups": 13,
+  "false_clean_rate": null,
+  "incremental_detection_rate": null,
+  "confidence_interval": null,
+  "independent_review": "PENDING",
+  "hidden_holdout": "NOT_SUPPLIED",
+  "alternatives": {
+    "PickleBall": "NOT_RUN: no reviewed adapter configured; not counted as failure.",
+    "Layerfault": "NOT_RUN: no reviewed adapter configured; not counted as failure.",
+    "commercial_tools": "NOT_RUN: no access/configuration supplied; no comparison made."
+  },
+  "limitations": [
+    "Synthetic development pilot; independent review and hidden holdout are pending.",
+    "ModelScan uses the conservative pinned adapter interpretation; raw evidence retained.",
+    "Admission and scanner assessment differ; no detection superiority inference.",
+    "Darwin required memory enforcement is unavailable; subprocesses are not containment.",
+    "Distinct pipelines/probes are timed; peak RSS and comparative overhead are unmeasured.",
+    "No loader execution, malware efficacy, legal clearance or public release validation."
+  ]
+}

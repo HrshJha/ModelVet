@@ -69,7 +69,7 @@ def test_version_support_and_claim_boundaries_are_explicit() -> None:
     readme = (ROOT / "README.md").read_text()
     assert "public release pending" in readme.lower()
     assert "Linux remains unverified" in readme
-    assert "No benchmark or model-loading experiment" in readme
+    assert "No independently reviewed benchmark or model-loading experiment" in readme
     decisions = (ROOT / "docs/DECISIONS.md").read_text()
     assert len(re.findall(r"\*\*Status:\*\* Proposed", decisions)) == 12
     assert (

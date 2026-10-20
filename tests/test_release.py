@@ -103,11 +103,19 @@ def test_candidate_archive_contents_and_installed_resources(installed_candidate)
             "examples/create_fixture.py",
             "examples/default.toml",
             "docs/POLICY_SPEC.md",
+            "benchmarks/manifest.json",
+            "benchmarks/freeze_manifest.py",
             ".github/workflows/ci.yml",
             "uv.lock",
         ):
             assert any(name.endswith("/" + suffix) for name in names), suffix
-        assert not any("/docs/verification/" in name or "/.venv/" in name for name in names)
+        assert not any(
+            "/docs/verification/" in name
+            or "/.venv/" in name
+            or "/benchmarks/results/" in name
+            or "/out/" in name
+            for name in names
+        )
     result = command(
         [
             str(python),
@@ -226,3 +234,40 @@ def test_installed_advisory_supplement_offline(installed_candidate) -> None:
     assert output["assessment"]["dependencies"][0]["result"] == "AFFECTED_VERSION"
     assert output["assessment"]["admission_recomputed"] is False
     assert report.read_bytes() == original
+
+
+def test_installed_benchmark_pilot_without_network(installed_candidate) -> None:
+    parent, python, _, _ = installed_candidate
+    script = """
+import socket, runpy, sys
+def denied(*args, **kwargs): raise AssertionError("Runtime networking attempted")
+socket.socket.connect = denied
+socket.create_connection = denied
+from modelvet.scanners.modelscan import ModelScanAdapter
+from modelvet.scanners.base import RawScannerExecution
+from modelvet.inventory.identity import InventoryService
+def unavailable(self, snapshot, timeout_s, workdir):
+    identity = InventoryService().collect(snapshot).manifest_digest
+    return RawScannerExecution(identity, None, "NOT_RUN")
+ModelScanAdapter.run = unavailable
+sys.argv = ["pilot", "--manifest", sys.argv[1], "--out", sys.argv[2], "--repeats", "1"]
+runpy.run_module("modelvet.benchmarks.runner", run_name="__main__")
+"""
+    result = subprocess.run(
+        [
+            str(python),
+            "-I",
+            "-c",
+            script,
+            str(ROOT / "benchmarks/manifest.json"),
+            str(parent / "installed-pilot"),
+        ],
+        cwd=parent,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert result.returncode == 30, result.stderr
+    summary = json.loads(result.stdout)
+    assert summary["study_status"] == "INCONCLUSIVE" and summary["observations"] == 20
+    assert (parent / "installed-pilot/result.json").is_file()

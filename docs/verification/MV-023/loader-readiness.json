@@ -1,0 +1,14 @@
+{
+  "platform": "Darwin",
+  "machine": "arm64",
+  "kvm_device_present": false,
+  "firecracker_path": null,
+  "jailer_path": null,
+  "dedicated_linux_host_supplied": false,
+  "independent_review_supplied": false,
+  "hidden_holdout_supplied": false,
+  "hosted_ci_executed": false,
+  "loader_enabled": false,
+  "result": "NOT_READY",
+  "reason": "PH-11 prerequisites are not met; static design only, no model execution."
+}

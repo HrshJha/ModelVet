@@ -1,6 +1,6 @@
 # Local v0.1.0 candidate and release gates
 
-The user selected **“Finish local candidate; leave hosted CI pending.”** PH-06/07 and the local portions of PH-09/10 are implemented. This is not a public release, hosted CI pass or independent security certification. Work remains uncommitted in the shared checkout; base commit e2f2bb269683d79cd6a12757aa140357fef089ad.
+The user selected **“Finish local candidate; leave hosted CI pending.”** PH-06/07 and the local portions of PH-09/10 are implemented. This is not a public release, hosted CI pass or independent security certification. Work started at e2f2bb269683d79cd6a12757aa140357fef089ad. A newer local checkpoint af86ffee5c7b4f1e990e9dbbdba6625e973acef0 appeared outside agent commands; subsequent validation/docs changes remain uncommitted.
 
 ## Local evidence
 
@@ -20,9 +20,11 @@ Exact final commands, counts, failed attempts and artifact checksums are in `ver
 | Hosted Ubuntu/macOS CI | Workflow prepared and locally parsed; never dispatched. GitHub CLI is not authenticated. |
 | Linux execution and resource limits | Implemented target; unverified locally; Linux-only memory test explicitly skipped on macOS. |
 | Project review and risk acceptance | ADRs remain Proposed. Scanner is not containment, and memory/network/format limitations need explicit review before broader claims. |
-| Version-controlled release checkpoint | Local source/docs are saved uncommitted; no new commit, tag or push made. |
+| Version-controlled release checkpoint | A local checkpoint af86ffee exists; subsequent changes remain uncommitted. Final reviewed release checkpoint is pending; no agent commit/tag/push made. |
 | Public package/release | Not published; no automatic deployment/release workflow. |
 
 Run the pinned hosted matrix and review the actual results before widening supported-platform claims. Review source, dependency notices, privacy and residual risks, then make a version-controlled release checkpoint and publish only when the public release checklist passes. No credentials or raw model artifacts should enter CI.
 
-The PH-10 evidence above is the historical local candidate checkpoint. Subsequent PH-08/MV-020 work adds an optional offline advisory supplement; current build/test evidence is retained in verification/MV-020/. Benchmark research remains deferred. PH-11 loader execution remains gated and unimplemented. The local candidate has no benchmark superiority, legal clearance or universal model-safety claim.
+The PH-10 evidence above is the historical local candidate checkpoint. Subsequent PH-08/MV-020 work adds an optional offline advisory supplement; current build/test evidence is retained in verification/MV-020/. A synthetic development pilot is INCONCLUSIVE; hidden holdout and independent adjudication remain pending. PH-11 loader execution remains gated and unimplemented. The local candidate has no benchmark superiority, legal clearance or universal model-safety claim.
+
+The user explicitly selected leaving independent benchmark/security review and dedicated Linux/KVM gates pending while local validation finishes. PH-11 review preparation is documented in LOADER_REVIEW_PACKET.md; it enables no capability. Latest local corpus/pilot/package evidence is in verification/MV-023/.

@@ -1,6 +1,6 @@
 # Dependency-aware implementation roadmap
 
-Status: **PLANNED**, 2026-10-20. PH-01–07 and local PH-09/10 candidate work are implemented with macOS evidence; hosted CI/public release remain pending by user-selected scope. PH-08 has started with MV-020 offline advisory enrichment; benchmark tasks remain pending and PH-11 gated. All hour ranges are rough solo-developer *focused effort*, not guaranteed calendar times. Security research is explicitly separate from writing code. See `TASKS.md` for executable steps/paths.
+Status: **PLANNED**, 2026-10-20. PH-01–07 and local PH-09/10 candidate work are implemented with macOS evidence; hosted CI/public release remain pending by user-selected scope. PH-08 local advisory/corpus/pilot engineering is implemented; independent benchmark acceptance remains pending. PH-11 has a proposed review packet and remains gated without execution. All hour ranges are rough solo-developer *focused effort*, not guaranteed calendar times. Security research is explicitly separate from writing code. See `TASKS.md` for executable steps/paths.
 
 ## Phase overview
 

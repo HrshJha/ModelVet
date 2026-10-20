@@ -2,7 +2,7 @@
 
 Local static assessment of model artifacts, with independent coverage, deterministic admission rules and private JSON/Markdown reports.
 
-**Status:** local v0.1.0 candidate; public release pending. macOS arm64/Python 3.12.15 has local evidence. Hosted Ubuntu/macOS CI is configured but has not run; Linux remains unverified and Windows unsupported. No benchmark or model-loading experiment has been performed.
+**Status:** local v0.1.0 candidate; public release pending. macOS arm64/Python 3.12.15 has local evidence. Hosted Ubuntu/macOS CI is configured but has not run; Linux remains unverified and Windows unsupported. No independently reviewed benchmark or model-loading experiment has been performed. A local synthetic development pilot is explicitly INCONCLUSIVE.
 
 ## What it does
 
@@ -85,6 +85,6 @@ uv run pytest -q
 uv build
 ```
 
-Actual commands/results, including initial failures, are in [PROGRESS](docs/PROGRESS.md) and `docs/verification/`. Hosted CI and public release remain pending under the explicitly selected local-candidate scope. PH-08 offline advisory enrichment is implemented separately; benchmark research and gated PH-11 loading remain pending. No superiority claim is supported by synthetic tests.
+Actual commands/results, including initial failures, are in [PROGRESS](docs/PROGRESS.md) and `docs/verification/`. Hosted CI and public release remain pending under the explicitly selected local-candidate scope. PH-08 offline advisory enrichment is implemented separately; independent benchmark acceptance and gated PH-11 loading remain pending. A ten-case development corpus and local pilot are documented in [benchmarks](benchmarks/README.md); no superiority claim is supported by synthetic tests. The [PH-11 review packet](docs/LOADER_REVIEW_PACKET.md) records pending prerequisites and enables no execution.
 
 Start with [PRD](PRD.md), [architecture](docs/ARCHITECTURE.md), [threat model](docs/THREAT_MODEL.md), [security handling](docs/SECURITY_POLICY.md) and [ADRs](docs/DECISIONS.md). ADRs remain Proposed until explicit project review. MIT licensed; dependency metadata/notices are retained in verification evidence. The external scanner is not redistributed in the core wheel.

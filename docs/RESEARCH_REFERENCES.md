@@ -203,3 +203,11 @@ Version-pinned [ModelScan 0.8.8 publisher metadata](https://pypi.org/pypi/models
 
 - R-25: [Official OSV schema specification](https://github.com/ossf/osv-schema/blob/main/docs/schema.md), observed version 1.9.2; affected versions/ranges, withdrawn and schema compatibility semantics. The rendered schema URL failed to fetch; the official raw repository document was read. This is a format specification, not independent vulnerability evidence.
 - [Official OSV query API](https://google.github.io/osv.dev/post-v1-query/) documents query input and vulnerability responses. ModelVet consumes operator-supplied offline envelopes only, with explicit per-query completeness. No runtime query client or live advisory feed is implemented. Example IDs/package/version records are synthetic and are not OSV findings.
+
+## PH-11 review preparation — accessed 2026-10-20
+
+R-26: official Firecracker [host setup](https://github.com/firecracker-microvm/firecracker/blob/main/docs/prod-host-setup.md), [jailer](https://github.com/firecracker-microvm/firecracker/blob/main/docs/jailer.md) and [design](https://github.com/firecracker-microvm/firecracker/blob/main/docs/design.md) documents were read for a proposed review packet. These are project guidance, not independent tests or ModelVet containment evidence. No hypervisor/framework/kernel/rootfs version is selected or installed, and no loader capability is enabled. The main-branch documents must be refreshed/pinned during actual independent review.
+
+## MV-023 pilot interpretation
+
+The real ModelScan 0.8.8 run used only locally generated inert bytes. Raw vendor output/report metadata is retained privately. It is direct execution evidence about this configuration and these development cases, not independent benchmark ground truth, malware detection efficacy or loader equivalence. No published vulnerability payload was reproduced.

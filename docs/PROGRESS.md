@@ -1,6 +1,6 @@
 # ModelVet progress dashboard
 
-**Updated 2026-10-20. Overall: local static candidate complete through PH-10. Hosted CI/public release PENDING by user-selected scope.** The five MVP commands and optional offline advisory command work. Source/evidence remain uncommitted against base `e2f2bb269683d79cd6a12757aa140357fef089ad`; existing user documentation was preserved. No benchmark/model loading performed.
+**Updated 2026-10-20. Overall: local static candidate complete through PH-10. Hosted CI/public release PENDING by user-selected scope.** The five MVP commands and optional offline advisory command work. Work started against base `e2f2bb269683d79cd6a12757aa140357fef089ad`; a newer checkpoint `af86ffee5c7b4f1e990e9dbbdba6625e973acef0` appeared during this run outside the agent commands and was preserved. Subsequent changes remain uncommitted. Only a synthetic development pilot ran; no model loading or independently adjudicated benchmark.
 
 | Workstream | Actual state | Evidence |
 |---|---|---|
@@ -8,12 +8,12 @@
 | Architecture and threat model | Drafted, pending review | `ARCHITECTURE.md`, `THREAT_MODEL.md` |
 | Dependency resolution / lock | COMPLETE for foundation | `../pyproject.toml`, `../uv.lock`, `verification/MV-001/` |
 | Source implementation | Full local CLI, static checks, evidence/coverage/policy, reports and packaging | `../src/modelvet/` |
-| Tests/fixtures | 434 passed / one Linux-only skip | `verification/MV-020/gate.log` |
-| Benchmarks | NOT RUN | no benchmark results or corpus generated |
+| Tests/fixtures | 486 passed / one Linux-only skip | `verification/MV-023/gate.log` |
+| Benchmarks | INCONCLUSIVE local development pilot; independent research PENDING | `../benchmarks/results/`, `verification/MV-023/` |
 | Isolated model-loading safety | DEFERRED | PH-11 / ADR-009 proposed |
 | Release | NOT RELEASED | Local wheel/sdist verified; hosted CI/public release pending |
 
-**Active task:** none; MV-020 complete. **Next implementation task:** MV-022, optional benchmark corpus. **Next external gate:** hosted CI and explicit project review. ADRs remain Proposed; provisional toolchain choices and deviations are recorded in ADR-002.
+**Active task:** none eligible locally; MV-022/023 engineering implemented. **Next gates:** independent corpus/security review and dedicated Linux/KVM prerequisites, left pending by user selection. **Next external gate:** hosted CI and explicit project review. ADRs remain Proposed; provisional toolchain choices and deviations are recorded in ADR-002.
 
 ## Milestones
 
@@ -26,10 +26,10 @@
 | PH-05 | COMPLETE | MV-014–015; 287-test macOS final gate |
 | PH-06 | COMPLETE | MV-016–018; 317 tests, macOS |
 | PH-07 | COMPLETE | MV-019/021; 345-test macOS gate |
-| PH-08 | IN PROGRESS | MV-020 complete; MV-022/023 benchmark work not started |
+| PH-08 | LOCAL ENGINEERING IMPLEMENTED; research PENDING | MV-020 plus development corpus/pilot; no hidden holdout/independent adjudication |
 | PH-09 | LOCAL CANDIDATE COMPLETE; hosted CI PENDING | MV-024–026, scope explicitly selected by user |
 | PH-10 | LOCAL CANDIDATE COMPLETE; public release PENDING | MV-027–029 verified; 381 pass / one Linux-only skip |
-| PH-11 | NOT STARTED | Gated isolated loading research |
+| PH-11 | GATED; execution NOT STARTED | Proposed review packet prepared; no reviewed Linux/KVM environment |
 
 ## Decisions awaiting approval
 
@@ -111,3 +111,7 @@ On completing an individual task: edit only its status from NOT STARTED to COMPL
 - **2026-10-20 PH-08 started:** MV-020 complete with 50 advisory tests / 434 full-suite pass, one Linux-only skip; lock/lint/format/security rules/mypy (47 source files) pass (`verification/MV-020/gate.log`). Combined advisory/CLI/fresh-install release selection: 77 pass (`targeted-final.log`). Exact PyPI enumerated-version matches are supplementary supplied-record assertions; stale/missing/partial/unsupported data cannot complete a required supplement. Output schema/digest binds report/artifact/snapshot/as-of identity and preserves the source admission report. No network client, version-range evaluator, dependencies, benchmark results or loader execution added. Initial formatting/type failures and successful reruns retained. Final documentation/build/package records and new artifact hashes are in `verification/MV-020/`; original PH-10 distributions preserved under ignored `dist/checkpoints/PH-10/`. Next unblocked task MV-022; hosted CI/public release/project review still pending.
 
 - **2026-10-20 MV-022 development corpus implemented:** 28 targeted / 462 full-suite pass, one Linux-only skip; lint/types pass (`verification/MV-022/`). Ten inert recipes freeze generator/file/artifact identity, MIT provenance and development labels checked through alternative stdlib byte methods. Independent human review and hidden holdout are not supplied; the full benchmark research gate remains pending. Next: MV-023 development pilot, with no superiority claim.
+
+- **2026-10-20 MV-023 local pilot/validation:** 60 targeted / 486 full-suite pass, one Linux-only skip; lock/lint/format/security/types (51 source files) pass. Fresh installed benchmark module runs with socket connections denied and an injected unavailable scanner; no completed result survives report failure/interruption. Real ModelScan 0.8.8 pilot on ten inert development cases, two repeats: 40 observations; six eligible joint input-context observations; fourteen baseline observations NOT_APPLICABLE. Outcome/policy/version tuples agree across 13 repeated eligible available groups, including unresolved outcomes. No efficacy/error rates or intervals are reported because independent adjudication and hidden holdout are absent. Complete private result/raw hashes and sanitized summary are retained; public study status INCONCLUSIVE.
+
+- **2026-10-20 later-phase readiness:** Proposed PH-11 review packet prepared; read-only checks confirm Darwin arm64, no KVM device/Firecracker/jailer. No loader code or execution added. User explicitly selected **leave those gates pending; finish local validation** for independent benchmark/security review and a dedicated Linux/KVM host. PH-11 and public release remain gated. A newer external Git checkpoint af86ffee5c7b4f1e990e9dbbdba6625e973acef0 was observed during work; no agent commit/push/tag was performed, and subsequent changes are saved uncommitted.

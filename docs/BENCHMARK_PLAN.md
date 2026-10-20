@@ -1,6 +1,6 @@
 # Benchmark plan — scanner coverage and loader interpretation
 
-**Status:** study design only. No dataset downloaded, fixtures constructed, benchmark run, numeric rates calculated or competing tool superiority established. Primary purpose: **falsify** ModelVet's proposed incremental value if existing alternatives already handle the relevant cases.
+**Status:** local development corpus and pilot implemented; independent research acceptance PENDING. No hidden holdout, independently adjudicated efficacy result or competing tool superiority is established. The sections below remain the broader study design; current evidence is recorded at the end. Primary purpose: **falsify** ModelVet's proposed incremental value if existing alternatives already handle the relevant cases.
 
 ## Research questions
 
@@ -16,7 +16,7 @@
 - Don't compare a GGUF-only test to a pickle-only scanner as if unsupported were a miss. Comparisons are paired **only within jointly supported format/context**; otherwise state `NOT_APPLICABLE/UNSUPPORTED`.
 - Log CLI command, scanner version, rule config, model fixture SHA-256, host OS, runtime, timeouts, report digest and tool availability. No commercial vendor claims without direct runs.
 
-## Corpus plan (NOT yet created)
+## Full research corpus plan (development subset implemented)
 
 | Stratum | Type | Ground-truth procedure | Ordinary CI safety |
 |---|---|---|---|
@@ -80,4 +80,14 @@ uv run pytest -q tests/test_benchmark_manifest.py tests/test_benchmark_metrics.p
 uv run python -m modelvet.benchmarks.runner --manifest benchmarks/manifest.json --out benchmarks/results/
 ```
 
-The exact runner's flags are a **proposed contract**, not a verified command. Public results must include dataset hashes and tool versions, unknown counts, a methodology change log, and limitations. No scan output here proves a general "safe to load" property.
+The module runner now implements an explicitly INCONCLUSIVE development pilot; the full independent comparison remains pending. Public results must include dataset hashes and tool versions, unknown counts, a methodology change log, and limitations. No scan output here proves a general "safe to load" property.
+
+## Executed development pilot — 2026-10-20
+
+Ten closed inert recipes and manifest/schema are implemented. Alternative stdlib methods check structural/declaration labels; this same-author method separation is not independent human review. All cases remain development-only; the loader and malware discrepancy strata are absent. The parser refuses to relabel this corpus as hidden/reviewed. Record source/license/file/artifact/generator identities in benchmarks/manifest.json.
+
+The actual pinned ModelScan 0.8.8 and ModelVet ran two repeats on macOS: 40 observations, six joint eligible input-context observations. Other baseline cases are NOT_APPLICABLE under the predeclared standalone-pickle comparison, not counted as misses. PickleBall/Layerfault/commercial comparators are NOT_RUN because no reviewed configuration was supplied. ModelScan file coverage and ModelVet admission are distinct predicates; these counts cannot establish detection superiority. Darwin mandatory memory bounds remain unresolved.
+
+The pilot reports INCONCLUSIVE, zero reviewed discrepancy denominator and null false-clean/false-positive/incremental-detection rates/intervals. No claim of a zero error rate follows. Repeated outcome/policy/version agreement includes unresolved cases and does not establish report-digest reproducibility. Wall durations are raw pipeline observations; comparative overhead/peak RSS are unmeasured. Private complete records are retained under ignored out/development-pilot-20261020; sanitized counts in benchmarks/results/. Tests, exact commands and hash inventory: verification/MV-023/.
+
+Independent hidden corpus/adjudication and public study acceptance remain pending by explicit user selection. This pilot does not satisfy PH-11 research/review prerequisites. Proposed readiness packet: LOADER_REVIEW_PACKET.md.

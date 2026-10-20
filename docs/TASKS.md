@@ -1,6 +1,6 @@
 # Executable implementation backlog
 
-**As of 2026-10-20 P0 tasks through MV-029 are complete for the local candidate. Hosted CI/public release remain pending; PH-08/MV-020 is complete; its benchmark tasks and gated PH-11 tasks are NOT STARTED.** Task IDs stable; completion means implementation + test evidence + updated PROGRESS, never existence of planned filename alone. **Scheduling order follows P0 phase dependencies rather than numeric task IDs**: MV-021 (PH-07/P0) precedes optional MV-020 (PH-08/P1) in the recommended release path. There is no remaining local-candidate P0 implementation task in the selected scope. Task estimates are focused hours, not time-to-delivery promises. Command patterns remain planned until their task evidence records successful execution.
+**As of 2026-10-20 P0 tasks through MV-029 are complete for the local candidate. Hosted CI/public release remain pending; PH-08/MV-020 is complete; MV-022/023 local development engineering is implemented with independent research gates PENDING; gated PH-11 execution tasks are NOT STARTED.** Task IDs stable; completion means implementation + test evidence + updated PROGRESS, never existence of planned filename alone. **Scheduling order follows P0 phase dependencies rather than numeric task IDs**: MV-021 (PH-07/P0) precedes optional MV-020 (PH-08/P1) in the recommended release path. There is no remaining local-candidate P0 implementation task in the selected scope. Task estimates are focused hours, not time-to-delivery promises. Command patterns remain planned until their task evidence records successful execution.
 
 ## Backlog index
 
@@ -374,7 +374,7 @@
 
 ### MV-023 — Run fair baseline comparison and result audit
 
-- **Priority / status / phase:** P1; **NOT STARTED**; `PH-08`. **Requirement(s):** FR-017. **Estimated focused effort:** 7–12 hours.
+- **Priority / status / phase:** P1; **IMPLEMENTED — local pilot; independent research acceptance PENDING**; `PH-08`. **Requirement(s):** FR-017. **Estimated focused effort:** 7–12 hours.
 - **Purpose/context:** Deliver a bounded, independently testable part of the ModelVet evidence/admission workflow. Preserve the fail-closed invariant in PRD §7 and threat constraints in `THREAT_MODEL.md`.
 - **Prerequisites/dependencies:** MV-022,MV-010; no work should begin before dependent acceptance evidence exists.
 - **Expected files:** `benchmarks/results/`, `docs/BENCHMARK_PLAN.md`, `tests/test_benchmark_metrics.py`. Paths are proposed and may be created only during implementation.
@@ -384,6 +384,8 @@
 - **Planned verification:** `uv run pytest -q tests/test_benchmark_metrics.py`; additionally run `uv run pytest -q` and `uv run ruff check .` after broader suite exists. Commands are unverified until code and environment exist.
 - **Acceptance / task DoD:** Unsupported baseline excluded rather than counted failure; raw experiment metadata retained. Actual command exit/status and test log recorded in `PROGRESS.md`, diff reviewed, security invariants checked, and all relevant source-of-truth docs updated. Do not mark complete on prose alone.
 
+
+**Actual local verification:** `verification/MV-023/targeted.log`: 60 corpus/metrics/fresh-install release cases pass. Final gate: 486 total pass / one Linux-only skip, lock/lint/format/security/types pass. Real pinned ModelScan 0.8.8 pilot: ten inert cases, two repeats, 40 observations; six eligible joint input-context observations, fourteen baseline NOT_APPLICABLE observations. All results remain INCONCLUSIVE. No reviewed discrepancy positives or hidden holdout exist; efficacy/error rates/intervals remain null. Alternative tools are NOT_RUN, not penalized. Private raw metadata/reports retained in ignored out/development-pilot-20261020; sanitized summary in benchmarks/results. User explicitly selected leaving independent review/Linux prerequisites pending and finishing local validation. This does not complete the PH-08 research gate or unlock PH-11.
 
 ### MV-024 — Review security-sensitive code and dependencies
 
@@ -515,4 +517,4 @@
 
 ## Next task
 
-No further local-candidate P0 task remains in the selected scope. Next external gates: hosted Ubuntu/macOS CI and explicit project review before public release. Next unblocked implementation task: **MV-022**, optional provenance-tracked benchmark corpus and ground-truth manifest. MV-020 is complete. PH-11 remains gated and unimplemented.
+No further local-candidate P0 task remains in the selected scope. Next external gates: hosted Ubuntu/macOS CI and explicit project review before public release. No eligible local task remains within the selected scope. MV-022/023 development corpus/pilot are implemented; independent review and hidden holdout remain pending. PH-11 prerequisites are documented in LOADER_REVIEW_PACKET.md; MV-030–032 remain gated and unimplemented. Hosted CI and project review remain pending by user selection.

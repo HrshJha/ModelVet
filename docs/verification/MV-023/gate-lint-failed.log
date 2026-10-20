@@ -1,0 +1,13 @@
+Resolved 31 packages in 26ms
+E501 Line too long (101 > 100)
+   --> tests/test_release.py:250:101
+    |
+248 | from modelvet.inventory.identity import InventoryService
+249 | def unavailable(self, snapshot, timeout_s, workdir):
+250 |     return RawScannerExecution(InventoryService().collect(snapshot).manifest_digest, None, "NOT_RUN")
+    |                                                                                                     ^
+251 | ModelScanAdapter.run = unavailable
+252 | sys.argv = ["pilot", "--manifest", sys.argv[1], "--out", sys.argv[2], "--repeats", "1"]
+    |
+
+Found 1 error.
