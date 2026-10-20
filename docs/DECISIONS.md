@@ -256,3 +256,7 @@ Closed inert recipes, generator/file/artifact hashes and alternative stdlib byte
 ## PH-12–14 local implementation scope
 
 The user explicitly selected “Extend the local feature plan.” Extend static report auditing while independent review/Linux prerequisites remain pending. Add stable FR-022–024/MV-033–035 IDs and three local phases: declared raw-attachment verification, report comparison, explicit-manifest batch audit. These commands use existing reports and never call admission evaluation or model loaders. Verification means local byte/hash consistency, not author authentication or artifact safety. No dependency addition. All ADRs remain Proposed; no external gate is implicitly accepted.
+
+## MV-026 hosted runner follow-up — 2026-10-20
+
+GitHub access now exposes prior hosted cache failures. Prime hash-locked runtime dependencies before offline installed-package tests; do not remove offline installation/runtime guards. Ubuntu 24.04 now passes the full gate at feb9e8d. Hosted macos-15 ARM jobs remain queued; select the documented standard macos-15-intel target for the macOS hosted gate, with local arm64 evidence labeled separately. All OS checks are retained; this does not claim hosted ARM validation or dedicated Linux/KVM containment. No dependency change; ADRs remain Proposed.

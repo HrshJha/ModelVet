@@ -10,7 +10,7 @@ def test_workflow_has_pinned_actions_least_privilege_and_both_platform_targets()
     )
     assert "contents: read" in workflow and "persist-credentials: false" in workflow
     assert "pull_request_target" not in workflow and "secrets." not in workflow
-    assert "ubuntu-24.04" in workflow and "macos-15" in workflow
+    assert "ubuntu-24.04" in workflow and "macos-15-intel" in workflow
     assert "timeout-minutes: 25" in workflow
     assert "--require-hashes" in workflow and "--only-binary :all:" in workflow
     assert "uv sync --locked --python 3.12.15" in workflow

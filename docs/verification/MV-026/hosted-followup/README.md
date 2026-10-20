@@ -7,3 +7,5 @@ The workflow now primes only hash-locked runtime dependencies in a separate temp
 Hosted rerun results must be inspected before marking MV-026 complete beyond local scope. PH-08 independent review/hidden holdout, public release/risk acceptance and PH-11 dedicated Linux/KVM/isolation review remain outstanding. A GitHub-hosted static Linux runner does not satisfy the dedicated loader laboratory requirement.
 
 Local follow-up gate passes 559 tests / one Linux-only skip, lock/lint/format/security/types (54 source files). Exact combined output: local-gate.log. No dependency changes; hosted results still require inspection.
+
+Ubuntu job 118773868942 at candidate feb9e8d passes all steps: 560 full-suite tests, 10 release tests, and real inert ModelScan with COMPLETE scanner resources/scoped APPROVE. Its original log SHA and selected lines are in ubuntu-summary.json; job/step metadata is in hosted-results.json. macos-15 ARM remains queued; the workflow selects the documented standard macos-15-intel runner for the same full macOS gate, while local arm64 evidence remains separately labeled. This is an OS/architecture target choice, not a claim that queued work passed.

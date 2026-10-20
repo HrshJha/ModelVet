@@ -211,3 +211,7 @@ R-26: official Firecracker [host setup](https://github.com/firecracker-microvm/f
 ## MV-023 pilot interpretation
 
 The real ModelScan 0.8.8 run used only locally generated inert bytes. Raw vendor output/report metadata is retained privately. It is direct execution evidence about this configuration and these development cases, not independent benchmark ground truth, malware detection efficacy or loader equivalence. No published vulnerability payload was reproduced.
+
+## Hosted runner labels — 2026-10-20
+
+[GitHub-hosted runners reference](https://docs.github.com/en/actions/reference/runners/github-hosted-runners) documents macos-15 as ARM and macos-15-intel as the standard Intel macOS 15 target. This is vendor operational documentation, not independent security evidence or a completed execution. MV-026 actual Ubuntu/macOS results are stored separately under verification/MV-026/hosted-followup/.
