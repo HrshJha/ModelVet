@@ -1,6 +1,6 @@
 # PH-11 proposed review packet — capability disabled
 
-**Status: PROPOSED, NOT READY.** This packet prepares review; it does not complete MV-030 or authorize implementation/execution. PH-08 independent research acceptance and PH-09/10 external readiness gates remain pending. No loader runner, guest image or model execution is enabled.
+**Status: PROPOSED, NOT READY.** This packet prepares review; it does not complete MV-030 or authorize implementation/execution. PH-08 independent research acceptance and PH-10 review/public-release gates remain pending. PH-09 hosted static validation passes on Ubuntu 24.04/macOS 15 Intel. No loader runner, guest image or model execution is enabled.
 
 ## Observed prerequisites — 2026-10-20
 
@@ -47,3 +47,7 @@ Teardown evidence must cover VMM termination, empty workload cgroup, no survivin
 Review path substitution, malicious profile fields, resource exhaustion, stdout/log overflow, missing telemetry, attempted egress, artifact identity drift, process survival and teardown failure using approved inert controls. Record exact source/config hashes, observed commands/results, reviewer identity/date and residual risk acceptance. An independent reviewer must be able to reject this design before a loader API exists.
 
 No implementation acceptance boxes are checked here. MV-031 depends on completed MV-030; MV-032 additionally requires independently adjudicated observations. No PH-11 safety or discrepancy claim follows from the static development pilot.
+
+## Updated static readiness — 2026-10-20
+
+GitHub CLI is authenticated. The Ubuntu 24.04/macOS 15 Intel static matrix now passes at 3d24c0a (run 39465563101). This supersedes earlier CI-access observations only; it supplies neither independent review/hidden holdout nor a dedicated loader host. Human isolation review, fixed runtime identities, controlled trials and teardown acceptance remain unsupplied. All PH-11 execution gates remain in force.

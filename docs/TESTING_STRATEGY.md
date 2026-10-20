@@ -1,6 +1,6 @@
 # Testing strategy — evidence correctness before code coverage
 
-**Status: local unit/property/contract/CLI/E2E/resource/package tests implemented; hosted matrix pending.** Testing targets *prevention of false clean decisions*, not just happy-path parsing. Normal suite must never unpickle or load arbitrary models. P2 guest tests are separate, opt-in, never on typical CI.
+**Status: local unit/property/contract/CLI/E2E/resource/package tests implemented; hosted Ubuntu 24.04/macOS 15 Intel matrix passed.** Testing targets *prevention of false clean decisions*, not just happy-path parsing. Normal suite must never unpickle or load arbitrary models. P2 guest tests are separate, opt-in, never on typical CI.
 
 ## Test layers
 

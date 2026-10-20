@@ -6,7 +6,7 @@ The user requested completion of PH-08–11. This packet separates actual candid
 
 - Repository: private HrshJha/ModelVet, candidate commit `feb9e8d2d980615af4b376a5bd26d89fd9f7f233` (CI cache correction on top of the full local static candidate).
 - Review: [draft PR 1](https://github.com/HrshJha/ModelVet/pull/1).
-- Hosted validation: [candidate Actions run](https://github.com/HrshJha/ModelVet/actions/runs/39464969407). Inspect its actual final jobs/steps before accepting platform support; queued/running is not passed.
+- Hosted validation: [passing candidate Actions run](https://github.com/HrshJha/ModelVet/actions/runs/39465563101) at source 3d24c0a3810664c4cab4b760df5f207ff95cdf9a. Ubuntu 24.04 and macOS 15 Intel pass every step; actual job evidence is in verification/MV-026/hosted-followup/intel-results.json.
 - Local gate: 559 passed, one explicit Linux-only skip; lock/lint/format/security/types pass. New-cache reproduction and 12 passing release/CI contracts are retained under verification/MV-026/hosted-followup/.
 - No dependency addition or admission change. CI primes exported hash-locked runtime dependencies during setup; installation/runtime release checks remain offline/network-denied.
 

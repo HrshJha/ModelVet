@@ -1,6 +1,6 @@
 # Executable implementation backlog
 
-**As of 2026-10-20 P0 tasks through MV-029 are complete for the local candidate. Hosted CI/public release remain pending; PH-08/MV-020 is complete; MV-022/023 local development engineering is implemented with independent research gates PENDING; gated PH-11 execution tasks are NOT STARTED.** PH-12–14 local report audits are complete with evidence in verification/MV-033 through MV-035. Task IDs stable; completion means implementation + test evidence + updated PROGRESS, never existence of planned filename alone. **Scheduling order follows P0 phase dependencies rather than numeric task IDs**: MV-021 (PH-07/P0) precedes optional MV-020 (PH-08/P1) in the recommended release path. There is no remaining local-candidate P0 implementation task in the selected scope. Task estimates are focused hours, not time-to-delivery promises. Command patterns remain planned until their task evidence records successful execution.
+**As of 2026-10-20 P0 tasks through MV-029 are complete for the local candidate. Hosted Ubuntu/macOS verification passes; public release remains pending; PH-08/MV-020 is complete; MV-022/023 local development engineering is implemented with independent research gates PENDING; gated PH-11 execution tasks are NOT STARTED.** PH-12–14 local report audits are complete with evidence in verification/MV-033 through MV-035. Task IDs stable; completion means implementation + test evidence + updated PROGRESS, never existence of planned filename alone. **Scheduling order follows P0 phase dependencies rather than numeric task IDs**: MV-021 (PH-07/P0) precedes optional MV-020 (PH-08/P1) in the recommended release path. There is no remaining local-candidate P0 implementation task in the selected scope. Task estimates are focused hours, not time-to-delivery promises. Command patterns remain planned until their task evidence records successful execution.
 
 ## Backlog index
 
@@ -422,7 +422,7 @@
 
 ### MV-026 — Implement CI and supported-platform verification
 
-- **Priority / status / phase:** P0; **COMPLETE — local candidate scope; hosted verification PENDING**; `PH-09`. **Requirement(s):** FR-014,FR-016. **Estimated focused effort:** 5–9 hours.
+- **Priority / status / phase:** P0; **COMPLETE — local and hosted Ubuntu/macOS targets**; `PH-09`. **Requirement(s):** FR-014,FR-016. **Estimated focused effort:** 5–9 hours.
 - **Purpose/context:** Deliver a bounded, independently testable part of the ModelVet evidence/admission workflow. Preserve the fail-closed invariant in PRD §7 and threat constraints in `THREAT_MODEL.md`.
 - **Prerequisites/dependencies:** MV-024,MV-025; no work should begin before dependent acceptance evidence exists.
 - **Expected files:** `.github/workflows/ci.yml`, `docs/COMMANDS.md`. Paths are proposed and may be created only during implementation.
@@ -434,6 +434,8 @@
 
 
 **Actual verification:** `verification/MV-026/local-gate.log`: 363 pass / 1 explicit Linux-only skip; lock/lint/format/security/types/build pass on macOS arm64. Workflow YAML parsed locally, action commit/license definitions retained, real ModelScan smoke passes with required Darwin resource insufficiency. User explicitly selected “Finish local candidate; leave hosted CI pending.” CI execution and Linux support remain unverified; this scoped completion permits local PH-10 preparation, not public release.
+
+**Hosted follow-up:** verification/MV-026/hosted-followup/ records the cache failure, clean-cache reproduction, hash-locked setup correction and successful Ubuntu 24.04/macOS 15 Intel matrix at 3d24c0a (run 39465563101). Full checks, fresh installed package and real inert ModelScan pass on both. Local arm64 evidence remains separate; no hosted ARM pass is claimed. CI is now authenticated; independent review/public release and dedicated loader host gates remain pending.
 
 ### MV-027 — Produce tutorial examples and reproducibility guide
 
@@ -556,4 +558,4 @@
 
 ## Next task
 
-No further local-candidate P0 task remains in the selected scope. Next external gates: hosted Ubuntu/macOS CI and explicit project review before public release. The requested three local extension phases **MV-033–035 / PH-12–14 are complete**. No additional local task is selected; existing external gates remain pending. MV-022/023 development corpus/pilot are implemented; independent review and hidden holdout remain pending. PH-11 prerequisites are documented in LOADER_REVIEW_PACKET.md; MV-030–032 remain gated and unimplemented. Hosted CI and project review remain pending by user selection.
+No further local-candidate P0 task remains in the selected scope. Hosted Ubuntu 24.04/macOS 15 Intel CI now passes. Next external gates: explicit project/security review before public release and independent benchmark/loader prerequisites. The requested three local extension phases **MV-033–035 / PH-12–14 are complete**. No additional local task is selected; existing external gates remain pending. MV-022/023 development corpus/pilot are implemented; independent review and hidden holdout remain pending. PH-11 prerequisites are documented in LOADER_REVIEW_PACKET.md; MV-030–032 remain gated and unimplemented. Project review, independent research and dedicated loader host evidence remain pending.

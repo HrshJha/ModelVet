@@ -1,0 +1,44 @@
+{
+  "observed_at": "2026-10-20T17:28:52.015068+00:00",
+  "head_observed": "3d24c0a3810664c4cab4b760df5f207ff95cdf9a",
+  "source_state": "worktree source hashes below; final reviewed release approval pending",
+  "artifacts": [
+    {
+      "path": "dist/modelvet-0.1.0-py3-none-any.whl",
+      "size": 107687,
+      "sha256": "3da7ed1bcb157f0528fab4645811d1d9242fee7595d49bafc91df180b582572a"
+    },
+    {
+      "path": "dist/modelvet-0.1.0.tar.gz",
+      "size": 266898,
+      "sha256": "3ececc792bd4a1c5333a1d91728ae1247afe9cfb1507e2e1c826ce26e1555013"
+    }
+  ],
+  "uv_lock_sha256": "a46d68b74ef8036d8bdad809862d3e0fabf77e2f5e078b6f21a5cde8240eeba5",
+  "third_party_dependencies_added": 0,
+  "reviewed_whitespace_files": 147,
+  "whitespace_problems": [],
+  "packaged_schemas": 13,
+  "wheel_sources_policy_schemas_match": true,
+  "sdist_sources_tests_docs_examples_workflow_match": true,
+  "operational_evidence_excluded": true,
+  "local_tests_passed": 559,
+  "local_linux_only_skip": 1,
+  "targeted_doc_ci_release_tests": 16,
+  "hosted_matrix_run": 39465563101,
+  "hosted_source_commit": "3d24c0a3810664c4cab4b760df5f207ff95cdf9a",
+  "hosted_targets": {
+    "ubuntu-24.04": {
+      "passed": 560,
+      "skipped": 0
+    },
+    "macos-15-intel": {
+      "passed": 559,
+      "skipped": 1
+    }
+  },
+  "public_release": false,
+  "independent_review_supplied": false,
+  "dedicated_linux_kvm_host_supplied": false,
+  "loader_enabled": false
+}

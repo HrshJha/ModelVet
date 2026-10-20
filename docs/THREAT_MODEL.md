@@ -1,6 +1,6 @@
 # ModelVet threat model — static MVP and gated future execution
 
-**Proposed security design**, 2026-10-20. Not audited or implemented. ModelVet is itself exposed to attacker-controlled files and metadata. No guarantee of malicious-model detection or host safety is made.
+**Proposed security design**, 2026-10-20. Static controls are implemented and tested; independent review is pending. PH-11 isolation remains unimplemented. ModelVet is itself exposed to attacker-controlled files and metadata. No guarantee of malicious-model detection or host safety is made.
 
 ## Trust assumptions and protected assets
 

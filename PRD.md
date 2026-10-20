@@ -3,9 +3,9 @@
 | Field | Value |
 |---|---|
 | Document version | `0.1.0-draft` |
-| Status | **PROPOSED requirements; local static candidate through PH-10; hosted CI/public release pending** |
+| Status | **PROPOSED requirements; local static candidate through PH-10; hosted Ubuntu/macOS validation passed; public release pending** |
 | Updated | 2026-10-20 |
-| Development stage | P0 local workflow implemented; macOS checked, Linux/hosted CI pending |
+| Development stage | P0 local workflow implemented; Ubuntu 24.04/macOS 15 Intel hosted gates passed; public release pending review |
 | Product | Open-source local AI model artifact security and admission verification |
 | Authority | Primary source of truth for requirements; `docs/DECISIONS.md` for why |
 | Scope | Local artifact assessment MVP; isolated loading is a gated future experiment |

@@ -34,7 +34,7 @@ Permitted: accurate description of executed tests and supported formats/versions
 
 ## Platform support / threat caveats
 
-Pure static MVP targets Linux/macOS subject to CI verification; Windows remains unverified. P2 microVM requires Linux/KVM/Firecracker with security hardening and independent review; it is not covered by current MVP claims. See `THREAT_MODEL.md` for 20 attack scenarios and residual risks.
+Pure static MVP has hosted validation on Ubuntu 24.04/macOS 15 Intel, plus local macOS arm64 evidence; Windows remains unsupported. P2 microVM requires Linux/KVM/Firecracker with security hardening and independent review; it is not covered by current MVP claims. See `THREAT_MODEL.md` for 20 attack scenarios and residual risks.
 
 ## Release response
 

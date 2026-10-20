@@ -2,7 +2,7 @@
 
 Local static assessment of model artifacts, with independent coverage, deterministic admission rules and private JSON/Markdown reports.
 
-**Status:** local v0.1.0 candidate; public release pending. macOS arm64/Python 3.12.15 has local evidence. Hosted Ubuntu/macOS CI is configured but has not run; Linux remains unverified and Windows unsupported. No independently reviewed benchmark or model-loading experiment has been performed. A local synthetic development pilot is explicitly INCONCLUSIVE.
+**Status:** local v0.1.0 candidate; public release pending. macOS arm64/Python 3.12.15 has local evidence. Hosted Ubuntu 24.04 and macOS 15 Intel pass the full static gate. Windows is unsupported. No independently reviewed benchmark or model-loading experiment has been performed. A local synthetic development pilot is explicitly INCONCLUSIVE.
 
 ## What it does
 
@@ -19,7 +19,7 @@ Local static assessment of model artifacts, with independent coverage, determini
 
 ## Run locally
 
-Prerequisites: [uv 0.13.3](https://github.com/astral-sh/uv/releases/tag/0.13.3), Python 3.12 (checked: 3.12.15), POSIX Linux/macOS. Only the documented local macOS configuration is validated so far.
+Prerequisites: [uv 0.13.3](https://github.com/astral-sh/uv/releases/tag/0.13.3), Python 3.12 (checked: 3.12.15), POSIX Linux/macOS. Ubuntu 24.04 has hosted validation; macOS arm64 has local validation. macOS 15 Intel also has hosted validation.
 
 ```sh
 uv sync --locked
@@ -73,7 +73,7 @@ Hard ceilings: 10,000 entries including directories, 1 GiB/file, 2 GiB total, 16
 Current limitations:
 
 - ZIP64, streaming descriptors, encryption and other ZIP subsets are unsupported; archive/member scanner completeness remains unproven.
-- The tested macOS host cannot enforce scanner OS memory bounds. Required resource evidence stays UNSUPPORTED even when named file proof completes. Linux caps are implemented but unverified locally.
+- The tested macOS host cannot enforce scanner OS memory bounds. Required resource evidence stays UNSUPPORTED even when named file proof completes. Linux caps and the real inert scanner contract pass on hosted Ubuntu 24.04; this does not establish containment for arbitrary scanner code.
 - An external scanner is not a sandbox; OS network isolation is not enforced.
 - Metadata/dependency fields are declarations, not legal clearance, verified lineage, actual installed versions or vulnerability clearance. Optional [offline advisory enrichment](docs/ADVISORY_SPEC.md) is supplementary; ranges and unsupported semantics remain unresolved.
 - Final source/snapshot rechecks are best-effort mutation detection, not an atomic filesystem transaction.
@@ -91,6 +91,6 @@ uv run pytest -q
 uv build
 ```
 
-Actual commands/results, including initial failures, are in [PROGRESS](docs/PROGRESS.md) and `docs/verification/`. Hosted CI and public release remain pending under the explicitly selected local-candidate scope. PH-08 offline advisory enrichment is implemented separately; independent benchmark acceptance and gated PH-11 loading remain pending. A ten-case development corpus and local pilot are documented in [benchmarks](benchmarks/README.md); no superiority claim is supported by synthetic tests. The [PH-11 review packet](docs/LOADER_REVIEW_PACKET.md) records pending prerequisites and enables no execution.
+Actual commands/results, including initial failures, are in [PROGRESS](docs/PROGRESS.md) and `docs/verification/`. The [hosted Ubuntu/macOS matrix passes](https://github.com/HrshJha/ModelVet/actions/runs/39465563101); public release remains pending independent project/security review. PH-08 offline advisory enrichment is implemented separately; independent benchmark acceptance and gated PH-11 loading remain pending. A ten-case development corpus and local pilot are documented in [benchmarks](benchmarks/README.md); no superiority claim is supported by synthetic tests. The [PH-11 review packet](docs/LOADER_REVIEW_PACKET.md) records pending prerequisites and enables no execution.
 
 Start with [PRD](PRD.md), [architecture](docs/ARCHITECTURE.md), [threat model](docs/THREAT_MODEL.md), [security handling](docs/SECURITY_POLICY.md) and [ADRs](docs/DECISIONS.md). ADRs remain Proposed until explicit project review. MIT licensed; dependency metadata/notices are retained in verification evidence. The external scanner is not redistributed in the core wheel.

@@ -27,7 +27,7 @@ uv pip sync --python .scanner-venv/bin/python --require-hashes --only-binary :al
 PATH="$PWD/.scanner-venv/bin:$PATH" uv run python tools/smoke_scanner.py
 ```
 
-The real inert scanner smoke currently returns INSUFFICIENT on macOS: named pickle-file proof completes, while mandatory OS memory-bound evidence is unavailable. Linux execution is not verified locally. The external process is not a sandbox and OS network isolation is not enforced. No example enables model loading or PH-11 research.
+The real inert scanner smoke currently returns INSUFFICIENT on macOS: named pickle-file proof completes, while mandatory OS memory-bound evidence is unavailable. Ubuntu 24.04 hosted CI verifies the inert scanner and required resource contract; this local example retains the macOS limitation. The external process is not a sandbox and OS network isolation is not enforced. No example enables model loading or PH-11 research.
 
 ## Semantic repeatability
 
