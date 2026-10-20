@@ -4,6 +4,8 @@ The user requested completion of PH-08–11. This packet separates actual candid
 
 ## Candidate under review
 
+**Subsequent correction (2026-10-20):** The MV-011 follow-up on branch `codex/evidence-unicode-keys`, based on `bdab77502cbb32591d1625de4e3afcc1abe28b1b`, rejects invalid Unicode keys in Python-created evidence. Review this source correction and its [verification records](verification/MV-011/unicode-keys/README.md) before accepting a candidate; `identities.json` records source and rebuilt distribution hashes. Its local suite passes 577 tests with one Linux-only skip. The hosted counts and commits below describe the earlier candidate and do not validate this correction.
+
 - Repository: private HrshJha/ModelVet, candidate commit `feb9e8d2d980615af4b376a5bd26d89fd9f7f233` (CI cache correction on top of the full local static candidate).
 - Review: [draft PR 1](https://github.com/HrshJha/ModelVet/pull/1).
 - Hosted validation: [passing candidate Actions run](https://github.com/HrshJha/ModelVet/actions/runs/39465563101) at source 3d24c0a3810664c4cab4b760df5f207ff95cdf9a. Ubuntu 24.04 and macOS 15 Intel pass every step; actual job evidence is in verification/MV-026/hosted-followup/intel-results.json.

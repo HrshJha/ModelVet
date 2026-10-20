@@ -210,6 +210,8 @@
 
 **Verification (2026-10-20):** 21 schema/normalization tests; 178 total; lint/format/types/lock/build pass. Real ModelScan JSON normalization smoke passes, with named standalone coverage COMPLETE and macOS resource coverage UNSUPPORTED. Raw hashes retained; unsupported/unknown/invalid evidence never becomes NO_FINDINGS. Logs: `verification/MV-011/`.
 
+**Unicode-key follow-up (2026-10-20):** Reopened the existing UTF-8 contract after direct Python construction accepted invalid object keys. Twelve regression cases failed before the correction; all 40 evidence tests now pass, including 18 added Python/JSON/valid-Unicode cases. Full local gate: 577 passed / one Linux-only skip; lock, lint, formatting, security lint, types, build and 10 installed-package release tests pass. Key validation covers nested check details and dependency advisories; schema/lock unchanged. Logs: `verification/MV-011/unicode-keys/`. Task remains COMPLETE; independent release/loader gates remain pending.
+
 ### MV-012 — Reconcile per-file required check coverage
 
 - **Priority / status / phase:** P0; **COMPLETE**; `PH-04`. **Requirement(s):** FR-010. **Estimated focused effort:** 6–10 hours.

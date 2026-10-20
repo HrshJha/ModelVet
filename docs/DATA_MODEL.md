@@ -2,6 +2,8 @@
 
 **Status:** evidence/coverage/conflict/policy/decision/report v1 records implemented for the local static candidate. All JSON example values below illustrative. `schema_version: "1.0.0"`; semantic versioning: additive optional fields in minor versions, changes in required fields/enums/meaning are major. Unknown `schema_version` major must fail validation; unknown enum is not assumed clean. All serialized timestamps use UTC RFC3339; creation times are **not** included in semantic decision digest. JSON uses UTF-8, sorted canonical keys for hashing, no NaN/Infinity. Unknown top-level keys are forbidden in implemented v1; no extensions container is accepted.
 
+Nested JSON in check details and dependency advisories must have UTF-8-encodable object keys and string values, including when constructed through the Python API. Unpaired Unicode surrogates are rejected before serialization. Valid Unicode keys retain their exact spelling; this validation does not normalize them or change the v1 schema shape.
+
 ## Entity contracts
 
 | Entity / responsible module | Required fields (types) | Optional fields | Invariants / relationships | Missing data |

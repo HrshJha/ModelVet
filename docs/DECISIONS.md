@@ -260,3 +260,7 @@ The user explicitly selected “Extend the local feature plan.” Extend static 
 ## MV-026 hosted runner follow-up — 2026-10-20
 
 GitHub access now exposes prior hosted cache failures. Prime hash-locked runtime dependencies before offline installed-package tests; do not remove offline installation/runtime guards. Ubuntu 24.04 now passes the full gate at feb9e8d. Hosted macos-15 ARM jobs remain queued; select the documented standard macos-15-intel target for the macOS hosted gate, with local arm64 evidence labeled separately. All OS checks are retained; this does not claim hosted ARM validation or dedicated Linux/KVM containment. No dependency change; ADRs remain Proposed.
+
+## MV-011 Unicode object-key correction — 2026-10-20
+
+The normalized JSON validator already checked string values, but direct Python construction could admit unpaired surrogates in object keys. Under the pinned serializer, a high-surrogate key became three replacement characters. Validate object keys with the same strict UTF-8 encoding used for values, at every nested object in check details and dependency advisories. Preserve valid Unicode keys and existing structural budgets. JSON input already rejected the invalid keys; no admission bypass is established. This repairs the existing v1 UTF-8 contract without a schema, policy or dependency change. ADRs remain Proposed.

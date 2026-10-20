@@ -1,0 +1,256 @@
+......................FFFFFFFFFFFF......                                 [100%]
+=================================== FAILURES ===================================
+_ test_python_evidence_rejects_invalid_unicode_keys[root-high-surrogate-check] _
+
+record_kind = 'check', bad_key = '\ud800', nesting = 'root'
+
+    @pytest.mark.parametrize("record_kind", ["check", "dependency"])
+    @pytest.mark.parametrize("bad_key", ["\ud800", "\udfff"], ids=["high-surrogate", "low-surrogate"])
+    @pytest.mark.parametrize("nesting", ["root", "object", "array"])
+    def test_python_evidence_rejects_invalid_unicode_keys(
+        record_kind: str, bad_key: str, nesting: str
+    ) -> None:
+        payload: dict[str, JsonValue] = {bad_key: "untrusted-key"}
+        if nesting == "object":
+            payload = {"nested": payload}
+        elif nesting == "array":
+            payload = {"nested": [payload]}
+>       with pytest.raises(ValidationError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValidationError
+
+tests/test_evidence.py:241: Failed
+_ test_python_evidence_rejects_invalid_unicode_keys[root-high-surrogate-dependency] _
+
+record_kind = 'dependency', bad_key = '\ud800', nesting = 'root'
+
+    @pytest.mark.parametrize("record_kind", ["check", "dependency"])
+    @pytest.mark.parametrize("bad_key", ["\ud800", "\udfff"], ids=["high-surrogate", "low-surrogate"])
+    @pytest.mark.parametrize("nesting", ["root", "object", "array"])
+    def test_python_evidence_rejects_invalid_unicode_keys(
+        record_kind: str, bad_key: str, nesting: str
+    ) -> None:
+        payload: dict[str, JsonValue] = {bad_key: "untrusted-key"}
+        if nesting == "object":
+            payload = {"nested": payload}
+        elif nesting == "array":
+            payload = {"nested": [payload]}
+>       with pytest.raises(ValidationError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValidationError
+
+tests/test_evidence.py:241: Failed
+_ test_python_evidence_rejects_invalid_unicode_keys[root-low-surrogate-check] __
+
+record_kind = 'check', bad_key = '\udfff', nesting = 'root'
+
+    @pytest.mark.parametrize("record_kind", ["check", "dependency"])
+    @pytest.mark.parametrize("bad_key", ["\ud800", "\udfff"], ids=["high-surrogate", "low-surrogate"])
+    @pytest.mark.parametrize("nesting", ["root", "object", "array"])
+    def test_python_evidence_rejects_invalid_unicode_keys(
+        record_kind: str, bad_key: str, nesting: str
+    ) -> None:
+        payload: dict[str, JsonValue] = {bad_key: "untrusted-key"}
+        if nesting == "object":
+            payload = {"nested": payload}
+        elif nesting == "array":
+            payload = {"nested": [payload]}
+>       with pytest.raises(ValidationError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValidationError
+
+tests/test_evidence.py:241: Failed
+_ test_python_evidence_rejects_invalid_unicode_keys[root-low-surrogate-dependency] _
+
+record_kind = 'dependency', bad_key = '\udfff', nesting = 'root'
+
+    @pytest.mark.parametrize("record_kind", ["check", "dependency"])
+    @pytest.mark.parametrize("bad_key", ["\ud800", "\udfff"], ids=["high-surrogate", "low-surrogate"])
+    @pytest.mark.parametrize("nesting", ["root", "object", "array"])
+    def test_python_evidence_rejects_invalid_unicode_keys(
+        record_kind: str, bad_key: str, nesting: str
+    ) -> None:
+        payload: dict[str, JsonValue] = {bad_key: "untrusted-key"}
+        if nesting == "object":
+            payload = {"nested": payload}
+        elif nesting == "array":
+            payload = {"nested": [payload]}
+>       with pytest.raises(ValidationError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValidationError
+
+tests/test_evidence.py:241: Failed
+_ test_python_evidence_rejects_invalid_unicode_keys[object-high-surrogate-check] _
+
+record_kind = 'check', bad_key = '\ud800', nesting = 'object'
+
+    @pytest.mark.parametrize("record_kind", ["check", "dependency"])
+    @pytest.mark.parametrize("bad_key", ["\ud800", "\udfff"], ids=["high-surrogate", "low-surrogate"])
+    @pytest.mark.parametrize("nesting", ["root", "object", "array"])
+    def test_python_evidence_rejects_invalid_unicode_keys(
+        record_kind: str, bad_key: str, nesting: str
+    ) -> None:
+        payload: dict[str, JsonValue] = {bad_key: "untrusted-key"}
+        if nesting == "object":
+            payload = {"nested": payload}
+        elif nesting == "array":
+            payload = {"nested": [payload]}
+>       with pytest.raises(ValidationError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValidationError
+
+tests/test_evidence.py:241: Failed
+_ test_python_evidence_rejects_invalid_unicode_keys[object-high-surrogate-dependency] _
+
+record_kind = 'dependency', bad_key = '\ud800', nesting = 'object'
+
+    @pytest.mark.parametrize("record_kind", ["check", "dependency"])
+    @pytest.mark.parametrize("bad_key", ["\ud800", "\udfff"], ids=["high-surrogate", "low-surrogate"])
+    @pytest.mark.parametrize("nesting", ["root", "object", "array"])
+    def test_python_evidence_rejects_invalid_unicode_keys(
+        record_kind: str, bad_key: str, nesting: str
+    ) -> None:
+        payload: dict[str, JsonValue] = {bad_key: "untrusted-key"}
+        if nesting == "object":
+            payload = {"nested": payload}
+        elif nesting == "array":
+            payload = {"nested": [payload]}
+>       with pytest.raises(ValidationError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValidationError
+
+tests/test_evidence.py:241: Failed
+_ test_python_evidence_rejects_invalid_unicode_keys[object-low-surrogate-check] _
+
+record_kind = 'check', bad_key = '\udfff', nesting = 'object'
+
+    @pytest.mark.parametrize("record_kind", ["check", "dependency"])
+    @pytest.mark.parametrize("bad_key", ["\ud800", "\udfff"], ids=["high-surrogate", "low-surrogate"])
+    @pytest.mark.parametrize("nesting", ["root", "object", "array"])
+    def test_python_evidence_rejects_invalid_unicode_keys(
+        record_kind: str, bad_key: str, nesting: str
+    ) -> None:
+        payload: dict[str, JsonValue] = {bad_key: "untrusted-key"}
+        if nesting == "object":
+            payload = {"nested": payload}
+        elif nesting == "array":
+            payload = {"nested": [payload]}
+>       with pytest.raises(ValidationError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValidationError
+
+tests/test_evidence.py:241: Failed
+_ test_python_evidence_rejects_invalid_unicode_keys[object-low-surrogate-dependency] _
+
+record_kind = 'dependency', bad_key = '\udfff', nesting = 'object'
+
+    @pytest.mark.parametrize("record_kind", ["check", "dependency"])
+    @pytest.mark.parametrize("bad_key", ["\ud800", "\udfff"], ids=["high-surrogate", "low-surrogate"])
+    @pytest.mark.parametrize("nesting", ["root", "object", "array"])
+    def test_python_evidence_rejects_invalid_unicode_keys(
+        record_kind: str, bad_key: str, nesting: str
+    ) -> None:
+        payload: dict[str, JsonValue] = {bad_key: "untrusted-key"}
+        if nesting == "object":
+            payload = {"nested": payload}
+        elif nesting == "array":
+            payload = {"nested": [payload]}
+>       with pytest.raises(ValidationError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValidationError
+
+tests/test_evidence.py:241: Failed
+_ test_python_evidence_rejects_invalid_unicode_keys[array-high-surrogate-check] _
+
+record_kind = 'check', bad_key = '\ud800', nesting = 'array'
+
+    @pytest.mark.parametrize("record_kind", ["check", "dependency"])
+    @pytest.mark.parametrize("bad_key", ["\ud800", "\udfff"], ids=["high-surrogate", "low-surrogate"])
+    @pytest.mark.parametrize("nesting", ["root", "object", "array"])
+    def test_python_evidence_rejects_invalid_unicode_keys(
+        record_kind: str, bad_key: str, nesting: str
+    ) -> None:
+        payload: dict[str, JsonValue] = {bad_key: "untrusted-key"}
+        if nesting == "object":
+            payload = {"nested": payload}
+        elif nesting == "array":
+            payload = {"nested": [payload]}
+>       with pytest.raises(ValidationError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValidationError
+
+tests/test_evidence.py:241: Failed
+_ test_python_evidence_rejects_invalid_unicode_keys[array-high-surrogate-dependency] _
+
+record_kind = 'dependency', bad_key = '\ud800', nesting = 'array'
+
+    @pytest.mark.parametrize("record_kind", ["check", "dependency"])
+    @pytest.mark.parametrize("bad_key", ["\ud800", "\udfff"], ids=["high-surrogate", "low-surrogate"])
+    @pytest.mark.parametrize("nesting", ["root", "object", "array"])
+    def test_python_evidence_rejects_invalid_unicode_keys(
+        record_kind: str, bad_key: str, nesting: str
+    ) -> None:
+        payload: dict[str, JsonValue] = {bad_key: "untrusted-key"}
+        if nesting == "object":
+            payload = {"nested": payload}
+        elif nesting == "array":
+            payload = {"nested": [payload]}
+>       with pytest.raises(ValidationError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValidationError
+
+tests/test_evidence.py:241: Failed
+_ test_python_evidence_rejects_invalid_unicode_keys[array-low-surrogate-check] _
+
+record_kind = 'check', bad_key = '\udfff', nesting = 'array'
+
+    @pytest.mark.parametrize("record_kind", ["check", "dependency"])
+    @pytest.mark.parametrize("bad_key", ["\ud800", "\udfff"], ids=["high-surrogate", "low-surrogate"])
+    @pytest.mark.parametrize("nesting", ["root", "object", "array"])
+    def test_python_evidence_rejects_invalid_unicode_keys(
+        record_kind: str, bad_key: str, nesting: str
+    ) -> None:
+        payload: dict[str, JsonValue] = {bad_key: "untrusted-key"}
+        if nesting == "object":
+            payload = {"nested": payload}
+        elif nesting == "array":
+            payload = {"nested": [payload]}
+>       with pytest.raises(ValidationError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValidationError
+
+tests/test_evidence.py:241: Failed
+_ test_python_evidence_rejects_invalid_unicode_keys[array-low-surrogate-dependency] _
+
+record_kind = 'dependency', bad_key = '\udfff', nesting = 'array'
+
+    @pytest.mark.parametrize("record_kind", ["check", "dependency"])
+    @pytest.mark.parametrize("bad_key", ["\ud800", "\udfff"], ids=["high-surrogate", "low-surrogate"])
+    @pytest.mark.parametrize("nesting", ["root", "object", "array"])
+    def test_python_evidence_rejects_invalid_unicode_keys(
+        record_kind: str, bad_key: str, nesting: str
+    ) -> None:
+        payload: dict[str, JsonValue] = {bad_key: "untrusted-key"}
+        if nesting == "object":
+            payload = {"nested": payload}
+        elif nesting == "array":
+            payload = {"nested": [payload]}
+>       with pytest.raises(ValidationError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValidationError
+
+tests/test_evidence.py:241: Failed
+=========================== short test summary info ============================
+FAILED tests/test_evidence.py::test_python_evidence_rejects_invalid_unicode_keys[root-high-surrogate-check]
+FAILED tests/test_evidence.py::test_python_evidence_rejects_invalid_unicode_keys[root-high-surrogate-dependency]
+FAILED tests/test_evidence.py::test_python_evidence_rejects_invalid_unicode_keys[root-low-surrogate-check]
+FAILED tests/test_evidence.py::test_python_evidence_rejects_invalid_unicode_keys[root-low-surrogate-dependency]
+FAILED tests/test_evidence.py::test_python_evidence_rejects_invalid_unicode_keys[object-high-surrogate-check]
+FAILED tests/test_evidence.py::test_python_evidence_rejects_invalid_unicode_keys[object-high-surrogate-dependency]
+FAILED tests/test_evidence.py::test_python_evidence_rejects_invalid_unicode_keys[object-low-surrogate-check]
+FAILED tests/test_evidence.py::test_python_evidence_rejects_invalid_unicode_keys[object-low-surrogate-dependency]
+FAILED tests/test_evidence.py::test_python_evidence_rejects_invalid_unicode_keys[array-high-surrogate-check]
+FAILED tests/test_evidence.py::test_python_evidence_rejects_invalid_unicode_keys[array-high-surrogate-dependency]
+FAILED tests/test_evidence.py::test_python_evidence_rejects_invalid_unicode_keys[array-low-surrogate-check]
+FAILED tests/test_evidence.py::test_python_evidence_rejects_invalid_unicode_keys[array-low-surrogate-dependency]
+12 failed, 28 passed in 0.21s
