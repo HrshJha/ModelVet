@@ -1,0 +1,239 @@
+{
+  "source": "767aa18560d41e7afc77de0a07a232c1746d7675",
+  "tasks": [
+    {
+      "id": "MV-001",
+      "title": "Scaffold Python packaging and locked toolchain",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-01`. **Requirement(s):** FR-014. **Estimated focused effort:** 5\u20138 hours."
+    },
+    {
+      "id": "MV-002",
+      "title": "Wire CLI help, output and status skeleton",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-01`. **Requirement(s):** FR-014. **Estimated focused effort:** 3\u20134 hours."
+    },
+    {
+      "id": "MV-003",
+      "title": "Validate local input and output separation",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-02`. **Requirement(s):** FR-001. **Estimated focused effort:** 4\u20136 hours."
+    },
+    {
+      "id": "MV-004",
+      "title": "Implement bounded safe discovery and snapshot",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-02`. **Requirement(s):** FR-002. **Estimated focused effort:** 7\u201310 hours."
+    },
+    {
+      "id": "MV-005",
+      "title": "Compute canonical file and manifest identity",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-02`. **Requirement(s):** FR-003,FR-015. **Estimated focused effort:** 6\u201310 hours."
+    },
+    {
+      "id": "MV-006",
+      "title": "Implement bounded format classifier",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-02`. **Requirement(s):** FR-004. **Estimated focused effort:** 5\u20138 hours."
+    },
+    {
+      "id": "MV-007",
+      "title": "Build non-executing structural inspectors",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-03`. **Requirement(s):** FR-005. **Estimated focused effort:** 7\u201310 hours."
+    },
+    {
+      "id": "MV-008",
+      "title": "Collect declared provenance/license evidence",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-03`. **Requirement(s):** FR-006. **Estimated focused effort:** 4\u20137 hours."
+    },
+    {
+      "id": "MV-009",
+      "title": "Read explicit pinned dependency manifest",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-03`. **Requirement(s):** FR-007. **Estimated focused effort:** 5\u20138 hours."
+    },
+    {
+      "id": "MV-010",
+      "title": "Implement ModelScan CLI adapter",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-04`. **Requirement(s):** FR-008. **Estimated focused effort:** 7\u201312 hours."
+    },
+    {
+      "id": "MV-011",
+      "title": "Define typed evidence models and normalizer",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-04`. **Requirement(s):** FR-009. **Estimated focused effort:** 5\u20138 hours."
+    },
+    {
+      "id": "MV-012",
+      "title": "Reconcile per-file required check coverage",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-04`. **Requirement(s):** FR-010. **Estimated focused effort:** 6\u201310 hours."
+    },
+    {
+      "id": "MV-013",
+      "title": "Detect metadata and evidence conflicts",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-04`. **Requirement(s):** FR-011. **Estimated focused effort:** 4\u20136 hours."
+    },
+    {
+      "id": "MV-014",
+      "title": "Implement deterministic four-state evaluator",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-05`. **Requirement(s):** FR-012. **Estimated focused effort:** 8\u201312 hours."
+    },
+    {
+      "id": "MV-015",
+      "title": "Parse and validate policy TOML",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-05`. **Requirement(s):** FR-012. **Estimated focused effort:** 6\u201310 hours."
+    },
+    {
+      "id": "MV-016",
+      "title": "Produce schema-valid JSON and Markdown reports",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-06`. **Requirement(s):** FR-013. **Estimated focused effort:** 7\u201311 hours."
+    },
+    {
+      "id": "MV-017",
+      "title": "Verify repeatability and post-scan drift",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-06`. **Requirement(s):** FR-015. **Estimated focused effort:** 5\u20138 hours."
+    },
+    {
+      "id": "MV-018",
+      "title": "Complete doctor/inspect/version CLI commands",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-06`. **Requirement(s):** FR-020,FR-014. **Estimated focused effort:** 4\u20137 hours."
+    },
+    {
+      "id": "MV-019",
+      "title": "Add safe fixtures and end-to-end scan acceptance",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-07`. **Requirement(s):** FR-016. **Estimated focused effort:** 6\u201310 hours."
+    },
+    {
+      "id": "MV-020",
+      "title": "Support local advisory snapshot enrichment",
+      "status": "- **Priority / status / phase:** P1; **COMPLETE**; `PH-08`. **Requirement(s):** FR-019. **Estimated focused effort:** 5\u20138 hours."
+    },
+    {
+      "id": "MV-021",
+      "title": "Complete fail-closed fault injection matrix",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-07`. **Requirement(s):** FR-016. **Estimated focused effort:** 4\u20138 hours."
+    },
+    {
+      "id": "MV-022",
+      "title": "Implement benchmark corpus and ground truth manifest",
+      "status": "- **Priority / status / phase:** P1; **IMPLEMENTED \u2014 development corpus; independent holdout/review PENDING**; `PH-08`. **Requirement(s):** FR-017. **Estimated focused effort:** 8\u201314 hours."
+    },
+    {
+      "id": "MV-023",
+      "title": "Run fair baseline comparison and result audit",
+      "status": "- **Priority / status / phase:** P1; **IMPLEMENTED \u2014 local pilot; independent research acceptance PENDING**; `PH-08`. **Requirement(s):** FR-017. **Estimated focused effort:** 7\u201312 hours."
+    },
+    {
+      "id": "MV-024",
+      "title": "Review security-sensitive code and dependencies",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-09`. **Requirement(s):** FR-002,FR-008. **Estimated focused effort:** 5\u20139 hours."
+    },
+    {
+      "id": "MV-025",
+      "title": "Stress test resource/path boundaries",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-09`. **Requirement(s):** FR-002,FR-005. **Estimated focused effort:** 6\u201310 hours."
+    },
+    {
+      "id": "MV-026",
+      "title": "Implement CI and supported-platform verification",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE \u2014 local and hosted Ubuntu/macOS targets**; `PH-09`. **Requirement(s):** FR-014,FR-016. **Estimated focused effort:** 5\u20139 hours."
+    },
+    {
+      "id": "MV-027",
+      "title": "Produce tutorial examples and reproducibility guide",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE**; `PH-10`. **Requirement(s):** FR-013,FR-014. **Estimated focused effort:** 4\u20137 hours."
+    },
+    {
+      "id": "MV-028",
+      "title": "Build distribution and public release candidate",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE \u2014 local candidate scope; public release PENDING**; `PH-10`. **Requirement(s):** FR-014. **Estimated focused effort:** 4\u20137 hours."
+    },
+    {
+      "id": "MV-029",
+      "title": "Audit licenses, docs, specifications and claims",
+      "status": "- **Priority / status / phase:** P0; **COMPLETE \u2014 local candidate scope; public release PENDING**; `PH-10`. **Requirement(s):** FR-006,FR-017. **Estimated focused effort:** 2\u20134 hours."
+    },
+    {
+      "id": "MV-030",
+      "title": "Design and independently review isolated loader runner",
+      "status": "- **Priority / status / phase:** P2; **NOT STARTED**; `PH-11`. **Requirement(s):** FR-018. **Estimated focused effort:** 15\u201330 hours."
+    },
+    {
+      "id": "MV-031",
+      "title": "Implement scoped version-specific loader test",
+      "status": "- **Priority / status / phase:** P2; **NOT STARTED**; `PH-11`. **Requirement(s):** FR-021. **Estimated focused effort:** 12\u201325 hours."
+    },
+    {
+      "id": "MV-032",
+      "title": "Independently adjudicate discrepancy findings",
+      "status": "- **Priority / status / phase:** P2; **NOT STARTED**; `PH-11`. **Requirement(s):** FR-018,FR-021. **Estimated focused effort:** 8\u201315 hours."
+    },
+    {
+      "id": "MV-033",
+      "title": "Verify stored raw evidence",
+      "status": "- **Priority / status / phase:** P1; **COMPLETE**; `PH-12`. **Requirement(s):** FR-022."
+    },
+    {
+      "id": "MV-034",
+      "title": "Compare stored reports",
+      "status": "- **Priority / status / phase:** P1; **COMPLETE**; `PH-13`. **Requirement(s):** FR-023."
+    },
+    {
+      "id": "MV-035",
+      "title": "Audit an explicit report batch",
+      "status": "- **Priority / status / phase:** P1; **COMPLETE**; `PH-14`. **Requirement(s):** FR-024."
+    },
+    {
+      "id": "MV-036",
+      "title": "Define workbench contracts and lock optional dependencies",
+      "status": "- **Priority / status / phase:** P1; **COMPLETE**; `PH-15`. **Requirement(s):** FR-025."
+    },
+    {
+      "id": "MV-037",
+      "title": "Implement authenticated loopback application",
+      "status": "- **Priority / status / phase:** P1; **COMPLETE**; `PH-15`. **Requirement(s):** FR-025."
+    },
+    {
+      "id": "MV-038",
+      "title": "Implement scan workers and private persistent history",
+      "status": "- **Priority / status / phase:** P1; **COMPLETE**; `PH-15`. **Requirement(s):** FR-025."
+    },
+    {
+      "id": "MV-039",
+      "title": "Build developer shell and scan setup",
+      "status": "- **Priority / status / phase:** P1; **COMPLETE**; `PH-16`. **Requirement(s):** FR-026."
+    },
+    {
+      "id": "MV-040",
+      "title": "Build visual evidence workspace",
+      "status": "- **Priority / status / phase:** P1; **COMPLETE**; `PH-16`. **Requirement(s):** FR-026."
+    },
+    {
+      "id": "MV-041",
+      "title": "Add history, import, comparison and guidance",
+      "status": "- **Priority / status / phase:** P1; **COMPLETE**; `PH-16`. **Requirement(s):** FR-026."
+    },
+    {
+      "id": "MV-042",
+      "title": "Complete workbench fault and browser acceptance",
+      "status": "- **Priority / status / phase:** P1; **COMPLETE**; `PH-17`. **Requirement(s):** FR-027."
+    },
+    {
+      "id": "MV-043",
+      "title": "Package assets and extend supported CI",
+      "status": "- **Priority / status / phase:** P1; **COMPLETE**; `PH-17`. **Requirement(s):** FR-027."
+    },
+    {
+      "id": "MV-044",
+      "title": "Document and hand off local preview",
+      "status": "- **Priority / status / phase:** P1; **COMPLETE (local preview)**; `PH-17`. **Requirement(s):** FR-027."
+    }
+  ],
+  "host": {
+    "system": "Darwin",
+    "machine": "arm64",
+    "dev_kvm": false,
+    "tools": {
+      "firecracker": false,
+      "jailer": false,
+      "docker": false,
+      "colima": false,
+      "limactl": false,
+      "qemu-system-x86_64": false
+    }
+  },
+  "scope": "Local engineering completion audit; not independent security/research acceptance or publication approval"
+}

@@ -75,7 +75,7 @@ Report JSON and Markdown in a user-designated report directory, raw reports in a
 
 ## Implemented classifier applicability v1 — MV-006
 
-All files require `identity` and `classification`. Safetensors additionally uses `structural:safetensors`; ZIP/PyTorch ZIP uses `structural:zip` and `modelscan`; pickle-like uses `modelscan`; JSON/Markdown/text uses `metadata:local`; repository Python files use `source:presence`. Unknown formats retain classification uncertainty; extension/signature disagreements remain explicit. These are applicability expectations, not completed coverage. Policy and normalized evidence are not implemented at this checkpoint.
+All files require `identity` and `classification`. Safetensors additionally uses `structural:safetensors`; ZIP/PyTorch ZIP uses `structural:zip` and `modelscan`; pickle-like uses `modelscan`; JSON/Markdown/text uses `metadata:local`; repository Python files use `source:presence`. Unknown formats retain classification uncertainty; extension/signature disagreements remain explicit. These are applicability expectations, not completed coverage. This applicability description originated before policy/normalization implementation; both are now implemented and tested. See PROGRESS for current evidence.
 
 ## Explicit environment input v1 — MV-009
 
