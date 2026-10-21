@@ -1,5 +1,6 @@
 """FR-028: Mac scope removes research dependencies without weakening admission."""
 
+import subprocess
 import sys
 from pathlib import Path
 
@@ -48,3 +49,24 @@ def test_mac_memory_limitations_stay_unresolved() -> None:
 
     assert PROCESS_LIMITATIONS
     assert any("memory" in value.lower() for value in PROCESS_LIMITATIONS)
+
+
+@pytest.mark.skipif(not (ROOT / ".git").exists(), reason="Source archive has no Git index")
+def test_release_tree_excludes_dependency_caches_and_browser_sessions() -> None:
+    result = subprocess.run(
+        [
+            "git",
+            "ls-files",
+            "-z",
+            "--",
+            "frontend/node_modules",
+            "frontend/test-results",
+            "frontend/playwright-report",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        timeout=15,
+        check=True,
+    )
+    assert result.stdout == "", "Generated dependencies/browser state must not be tracked"

@@ -1,4 +1,14 @@
-# Local static/workbench v0.1.0 preview and release gates
+# Mac preview v0.1.0-mac-preview.1
+
+**Mac product complete:** static CLI and local Workbench meet the scoped FR-028/MV-045 gate. Local arm64 and hosted macOS 15 Intel acceptance pass: 628 Python tests, one Linux-only skip, seven components, 15 browser workflows and 13 repeated installed-package checks. Source hygiene is verified at 5cd322d in [run 39622723371](https://github.com/HrshJha/ModelVet/actions/runs/39622723371). Generated dependencies and browser session files are excluded from the release tree; the original external commit remains in history.
+
+**Distribution record:** [Mac preview release](https://github.com/HrshJha/ModelVet/releases/tag/v0.1.0-mac-preview.1) is the designated handoff location for the wheel, source archive, bundle, installation notes and checksums. The release manifest records the exact merged source and byte identities. This is a limited GitHub prerelease, with no PyPI upload. Repository visibility remains unchanged (public when checked). Internal engineering acceptance is not independent certification.
+
+**Deferred scope:** PH-08 independent comparative research and PH-11 Linux/KVM loader research remain deferred, not completed. They do not block the Mac static product. No model loading, containment or benchmark superiority is claimed. Required missing scanner/resource proof still yields INSUFFICIENT. See [Mac release specification](MAC_RELEASE_SPEC.md).
+
+## Historical checkpoints
+
+The dated records below describe earlier scopes and candidates; the Mac scope above governs this delivery.
 
 **Mac preview acceptance passed:** FR-028/MV-045 is complete locally and on hosted macOS 15 Intel (run 39620134875, implementation a415a2d). Independent benchmark comparison and Linux/KVM loader research are deferred, not current delivery gates. The limited Mac preview may be published in the existing repository after integration; no independent certification or broader platform support is claimed.
 
