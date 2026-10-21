@@ -1,6 +1,6 @@
 # Open questions and uncertainty register
 
-**Mac preview scope update:** OQ-09/10/13 remain unanswered research questions and are deferred; they do not block FR-028/MV-045 Mac completion. Current product acceptance is defined in [MAC_RELEASE_SPEC](MAC_RELEASE_SPEC.md). No independent review result is inferred from the scope change.
+**Mac preview scope update:** OQ-09/10/13 remain unanswered research questions and are deferred; they do not block FR-028/MV-045 Mac completion. A separate Hugging Face URL feature is now proposed for the next release under PH-19/20; its client/network questions OQ-15–17 now have a local implementation decision recorded in HUB_ASSESSMENT_SPEC; external review/publication are separate. Current preview acceptance remains defined in [MAC_RELEASE_SPEC](MAC_RELEASE_SPEC.md). No independent review result is inferred from the scope change.
 
 **Updated 2026-10-21.** This table is the current disposition. Original proposal cards and dated checkpoints below are historical evidence; they do not reopen resolved implementation questions. Independent review/research/loader questions remain open. All ADRs remain Proposed.
 
@@ -20,8 +20,13 @@
 | OQ-12 | Sufficient scanner confinement? | PARTIAL; risk acceptance pending | Process caps tested; required Darwin memory evidence remains unsupported, and OS network isolation is not enforced. A subprocess is not a sandbox. |
 | OQ-13 | Independently true discrepancy? | OPEN; independent research | Development byte-method agreement does not replace independent discrepancy/holdout adjudication. |
 | OQ-14 | Dependency/fixture licenses? | INVENTORIED; scoped Mac prerelease published | Core/scanner/UI license metadata/notices retained; runtime notices bundled; generated inert fixtures use project MIT license. Broader product/risk review remains open if release claims expand. |
+| OQ-15 | Can the selected official Hub client enforce endpoint/redirect/DNS/IP restrictions and byte/time ceilings? | RESOLVED LOCALLY; stdlib transport/1 | Reviewed official client 2.2.0; implemented direct stdlib HTTPS with tested exact-host/public-IP/DNS-pinning/stream limits instead of its auto-redirect/Xet/cache helpers. Independent certification is not claimed. |
+| OQ-16 | Which retrieval and inventory limits are usable on supported Macs? | PARTIAL; conservative local settings tested | Byte/count/deadline/storage bounds pass synthetic failure tests and a small live 1/2 MiB run. Workbench defaults to 64/128 MiB; general multi-GB performance/usability remains unmeasured. |
+| OQ-17 | Which Hub metadata identifiers establish revision/file identity and what do they cryptographically guarantee? | IMPLEMENTED CONSERVATIVELY; publisher trust unresolved | Full commit pin, native Git blob SHA-1 and documented LFS content SHA-256 checks, plus local SHA-256, are tested against fixtures/live transfers. Upstream assertions remain unauthenticated source claims; no publisher/safety attestation is inferred. |
 
-Current hosted evidence: run [39613283917](https://github.com/HrshJha/ModelVet/actions/runs/39613283917) at `767aa18560d41e7afc77de0a07a232c1746d7675`. See PROGRESS, THIRD_PARTY, RELEASE_REVIEW_PACKET and `verification/completion/` for the exact remaining gates. No question is closed by merely editing this register.
+Current published Mac release evidence: run [39624146859](https://github.com/HrshJha/ModelVet/actions/runs/39624146859) at `7e722c7c379bda6ec3dbc31feb38f3c7dc08e17e`; the earlier run 39613283917 is historical. See PROGRESS, THIRD_PARTY, RELEASE_REVIEW_PACKET and `verification/completion/` for the external research/loader gates. For the proposed Hub feature, see OQ-15–17. No question is closed by merely editing this register.
+
+The working-tree Hub candidate implements MV-046–053. Local transport tests address OQ-15; OQ-16 remains a large-model performance/usability uncertainty, and OQ-17 preserves upstream trust limits. Official documentation and local tests do not establish independent security certification. No API credential was collected.
 
 ## Detailed uncertainty cards — historical proposal
 
@@ -188,3 +193,6 @@ OQ-07 has a conservative offline implementation: exact PyPI enumerated-version m
 ## MV-022/023 and PH-11 readiness update — 2026-10-20
 
 OQ-10/13 remain open: ten method-checked inert development recipes and a real pinned scanner pilot exist, but no hidden holdout/independent discrepancy adjudication or eligible alternative-tool experiment establishes incremental detection. Study status is INCONCLUSIVE. OQ-09 remains open: current host is Darwin without KVM/Firecracker/jailer; no reviewed dedicated Linux host was supplied. User selected leaving independent research/security/Linux gates pending while completing local validation. Proposed review preparation is LOADER_REVIEW_PACKET.md; no execution is enabled.
+
+
+Hub local candidate update: no cache is enabled; no third-party Hub dependency is added and Python 3.12 remains supported. The current working tree implements CLI and Workbench URL input; the published preview remains local-folder-only. HF_TOKEN is used only after explicit selection; no credentials were collected.

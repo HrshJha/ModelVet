@@ -72,6 +72,54 @@ def main() -> None:
             origin,
             launch_token="browser-fixture-launch-token-" + "a" * 32,
         )
+        # Frozen inert v2 report for browser import/source-inventory acceptance.
+        import hashlib
+
+        from modelvet.application.scan import ScanRequest, ScanService
+        from modelvet.hub.models import HubFile, HubSource
+
+        fixture_root = models / "tiny-safetensors"
+        rows = []
+        for path in sorted(fixture_root.iterdir()):
+            raw = path.read_bytes()
+            rows.append(
+                HubFile(
+                    path=path.name,
+                    size=len(raw),
+                    sha256=hashlib.sha256(raw).hexdigest(),
+                    blob_id=hashlib.sha1(
+                        b"blob " + str(len(raw)).encode() + b"\0" + raw, usedforsecurity=False
+                    ).hexdigest(),
+                    status="RETRIEVED",
+                )
+            )
+        rows.append(
+            HubFile(
+                path="z-large.safetensors",
+                size=2**30 + 1,
+                blob_id="b" * 40,
+                status="OVERSIZED",
+                reason="Per-file byte limit.",
+                required_checks=("identity", "classification", "structural:safetensors"),
+            )
+        )
+        source = HubSource(
+            url="https://huggingface.co/synthetic/browser-fixture",
+            repo_id="synthetic/browser-fixture",
+            requested_revision=None,
+            resolved_commit="a" * 40,
+            metadata_digest="b" * 64,
+            files=tuple(rows),
+            max_file_bytes=2**30,
+            max_total_bytes=2**31,
+            wall_time_s=600,
+        )
+        sample = ScanService().run(
+            ScanRequest(fixture_root, root / "hub-fixture-report"), remote_source=source
+        )
+        target = Path(__file__).parents[1] / "frontend/test-results/hub-report.json"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(sample.json_path.read_bytes())
         uvicorn.run(
             app,
             host="127.0.0.1",

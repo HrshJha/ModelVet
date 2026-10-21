@@ -74,8 +74,14 @@ def root(ctx: typer.Context) -> None:
 
 @cli.command()
 def scan(
-    artifact_dir: Annotated[Path, typer.Argument(help="Untrusted local artifact directory.")],
+    artifact_dir: Annotated[
+        str, typer.Argument(help="Local folder or HTTPS Hugging Face model URL.")
+    ],
     policy: Annotated[Path | None, typer.Option(help="Local policy TOML.")] = None,
+    revision: Annotated[str | None, typer.Option(help="Hub branch, tag or commit.")] = None,
+    use_hf_token: Annotated[
+        bool, typer.Option(help="Explicitly use local HF_TOKEN for Hub access.")
+    ] = False,
     out: Annotated[Path | None, typer.Option(help="Reports outside artifact directory.")] = None,
     scanner: ScannerChoice = ScannerChoice.AUTO,
     timeout_sec: Annotated[int, typer.Option(min=1)] = 120,
@@ -93,9 +99,27 @@ def scan(
         max_total_bytes=max_total_mib * MIB,
         timeout_s=timeout_sec,
     )
-    outcome = ScanService().run(
-        ScanRequest(artifact_dir, out, policy, scanner.value, limits, format != ReportFormat.JSON)
-    )
+    if "://" in artifact_dir or artifact_dir.startswith("https:"):
+        from modelvet.hub.assessment import scan_hub
+
+        outcome = scan_hub(
+            artifact_dir,
+            revision=revision,
+            use_hf_token=use_hf_token,
+            output_dir=out,
+            policy_path=policy,
+            scanner=scanner.value,
+            limits=limits,
+            markdown=format != ReportFormat.JSON,
+        )
+    else:
+        if revision is not None or use_hf_token:
+            raise InvalidInput("Hub revision/auth options require a Hugging Face URL.")
+        outcome = ScanService().run(
+            ScanRequest(
+                Path(artifact_dir), out, policy, scanner.value, limits, format != ReportFormat.JSON
+            )
+        )
     states = {"APPROVE": 0, "CONTROLS": 10, "BLOCK": 20, "INSUFFICIENT": 30}
     decision = outcome.report.decision
     summary = {
@@ -267,7 +291,9 @@ def ui(
 def version(json_output: Annotated[bool, typer.Option("--json")] = False) -> None:
     """Show package version and implemented schema support."""
     if json_output:
-        typer.echo(json.dumps({"modelvet_version": __version__, "schema_versions": ["1.0.0"]}))
+        typer.echo(
+            json.dumps({"modelvet_version": __version__, "schema_versions": ["1.0.0", "2.0.0"]})
+        )
     else:
         typer.echo(f"ModelVet {__version__} (static report schema 1.0.0)")
 

@@ -317,6 +317,16 @@ export interface components {
         };
         /** Capabilities */
         Capabilities: {
+            /**
+             * Hub Available
+             * @default true
+             */
+            hub_available: boolean;
+            /**
+             * Hub Token Configured
+             * @default false
+             */
+            hub_token_configured: boolean;
             /** Limitations */
             limitations: string[];
             /** Models Root Label */
@@ -472,6 +482,8 @@ export interface components {
             elapsed_seconds: number;
             /** Error Code */
             error_code?: string | null;
+            /** Hub Url */
+            hub_url?: string | null;
             /** Id */
             id: string;
             /** Label */
@@ -659,6 +671,10 @@ export interface components {
              * @default []
              */
             guidance: components["schemas"]["Guidance"][];
+            /** Hub Source */
+            hub_source?: {
+                [key: string]: unknown;
+            } | null;
             /** Id */
             id: string;
             /** Label */
@@ -699,6 +715,8 @@ export interface components {
         };
         /** ScanInput */
         ScanInput: {
+            /** Hub Url */
+            hub_url?: string | null;
             /**
              * Max File Mib
              * @default 1024
@@ -714,13 +732,18 @@ export interface components {
              * @default 2048
              */
             max_total_mib: number;
-            /** Model Path */
+            /**
+             * Model Path
+             * @default
+             */
             model_path: string;
             /**
              * Policy Id
              * @default default
              */
             policy_id: string;
+            /** Revision */
+            revision?: string | null;
             /**
              * Scanner
              * @default auto
@@ -732,6 +755,11 @@ export interface components {
              * @default 120
              */
             timeout_sec: number;
+            /**
+             * Use Hf Token
+             * @default false
+             */
+            use_hf_token: boolean;
         };
         /** SessionRequest */
         SessionRequest: {
@@ -1058,7 +1086,7 @@ export interface operations {
             header?: never;
             path: {
                 report_id: string;
-                section: "files" | "checks" | "coverage" | "findings" | "claims" | "conflicts" | "dependencies" | "executions" | "tools" | "references";
+                section: "retrieval" | "files" | "checks" | "coverage" | "findings" | "claims" | "conflicts" | "dependencies" | "executions" | "tools" | "references";
             };
             cookie?: never;
         };

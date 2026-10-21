@@ -29,6 +29,7 @@ from modelvet.evidence.models import (
     ToolInfo,
     WireModel,
 )
+from modelvet.hub.models import HubSource
 from modelvet.inventory.classify import FileClassification, FileFormat, applicable_checks
 from modelvet.inventory.discover import FileObservation, stat_identity
 from modelvet.inventory.gate import absolute_path, open_directory
@@ -102,6 +103,8 @@ def semantic_content(data: dict[str, Any]) -> dict[str, Any]:
         if ref.startswith("sha256:") and "#" in ref:
             finding["source_ref"] = "raw:modelscan#" + ref.split("#", 1)[1]
     data["references"] = {k: v for k, v in data["references"].items() if not k.startswith("raw:")}
+    if data.get("source") is not None:
+        data["source"].pop("metadata_digest", None)
     for field in ("prohibitions", "controls", "control_rules"):
         data["policy"][field] = sorted(
             data["policy"][field], key=lambda row: json.dumps(row, sort_keys=True)
@@ -113,11 +116,22 @@ def semantic_digest(data: dict[str, Any]) -> str:
     encoded = json.dumps(
         semantic_content(data), sort_keys=True, separators=(",", ":"), allow_nan=False
     )
-    return "sha256:" + hashlib.sha256(b"modelvet-report-v1\0" + encoded.encode()).hexdigest()
+    return (
+        "sha256:"
+        + hashlib.sha256(
+            (
+                b"modelvet-report-v2\0"
+                if data["schema_version"] == "2.0.0"
+                else b"modelvet-report-v1\0"
+            )
+            + encoded.encode()
+        ).hexdigest()
+    )
 
 
 class Report(WireModel):
-    schema_version: Literal["1.0.0"]
+    schema_version: Literal["1.0.0", "2.0.0"]
+    source: HubSource | None = Field(default=None, exclude_if=lambda value: value is None)
     artifact: ArtifactIdentity
     manifest_digest: ArtifactDigest
     run: RunMetadata
@@ -152,6 +166,19 @@ class Report(WireModel):
             or self.policy.semantic_digest != self.policy_digest
         ):
             raise ValueError("Report artifact/policy identity mismatch.")
+        if (self.schema_version == "2.0.0") != (self.source is not None):
+            raise ValueError("Remote reports require schema v2 and a source record.")
+        if self.source is not None:
+            actual_files = {f.relpath: (f.size, f.sha256) for f in self.files}
+            retrieved = {
+                f.path: (f.size, f.sha256) for f in self.source.files if f.status == "RETRIEVED"
+            }
+            if actual_files != retrieved:
+                raise ValueError("Remote inventory differs from the assessed bytes.")
+            if not self.source.complete and self.decision.state in {"APPROVE", "CONTROLS"}:
+                raise ValueError("Incomplete retrieval cannot admit a repository.")
+            if any(f.status == "INVENTORIED" for f in self.source.files):
+                raise ValueError("Remote retrieval has not finished.")
         ids = {f.file_id for f in self.files}
         if any(
             c.file_id not in ids or c.artifact_digest != self.manifest_digest for c in self.checks
@@ -168,6 +195,17 @@ class Report(WireModel):
             expectations_for(manifest, classes, frozenset(self.policy.mandatory_checks)),
             list(self.checks),
         )
+        if self.source is not None:
+            required_by_id = {row.file_id: set(row.mandatory_check_ids) for row in actual}
+            required_by_path = {f.relpath: required_by_id[f.file_id] for f in self.files}
+            if any(
+                set(f.required_checks) != required_by_path[f.path]
+                for f in self.source.files
+                if f.status == "RETRIEVED"
+            ):
+                raise ValueError(
+                    "Remote required-check references differ from policy applicability."
+                )
         if sorted(c.model_dump_json() for c in actual) != sorted(
             c.model_dump_json() for c in self.coverage
         ):
@@ -263,6 +301,7 @@ class ReportBuilder:
         conflicts: list[ConflictRecord],
         raw_payloads: dict[str, bytes] | None = None,
         private_roots: tuple[str, ...] = (),
+        source: HubSource | None = None,
     ) -> Report:
         payloads = raw_payloads or {}
         if any(hashlib.sha256(value).hexdigest() != key for key, value in payloads.items()):
@@ -306,7 +345,7 @@ class ReportBuilder:
             {"raw:" + r.digest: f"/raw_evidence/{i}" for i, r in enumerate(raw_records)}
         )
         data = dict(
-            schema_version="1.0.0",
+            schema_version="2.0.0" if source is not None else "1.0.0",
             artifact=ArtifactIdentity(
                 manifest_digest=manifest.manifest_digest,
                 file_count=len(manifest.files),
@@ -381,6 +420,9 @@ class ReportBuilder:
             "limitations",
         ):
             data[field] = sanitize(data[field])
+        if source is not None:
+            data["source"] = source.model_dump(mode="json")
+            references["hub:source"] = "/source"
         data["semantic_digest"] = semantic_digest(data)
         return parse_report(json.dumps(data, sort_keys=True, allow_nan=False).encode())
 

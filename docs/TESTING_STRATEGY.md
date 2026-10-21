@@ -122,3 +122,26 @@ Every confirmed security failure: create harmless reproducer → assert fails on
 API/worker tests use inert fixtures and authenticated sessions, preserve CLI semantic parity and exercise path/Host/Origin/CSRF/token replay, budgets, cancellation, restart, pin tampering, disk failures and report imports. Frontend tests use exact generated API types. Chromium tests cover all decisions, setup/history/import/compare/download, hostile text, connection loss, keyboard/reduced motion and 375/768/1024/1440 widths with measured overflow and axe checks. Frozen demos are schema/digest/byte-pin checked and excluded from real history.
 
 `tests/test_workbench_release.py` builds a wheel/sdist offline, installs hash-locked UI dependencies into a fresh environment, confirms package-owned resources and exclusion of session state, launches the installed application with an empty PATH, and scans/compares/imports/verifies through the authenticated API. A disposable site-packages guard denies nonloopback connections in the server and own worker; a separate Playwright driver aborts external browser requests and opens installed history. This test does not provide scanner OS network isolation. CI requires the exact Node/browser development tooling; only a local checkout without browser dependencies may skip that development-driver case. The ordinary core-only release tests continue independently. Exact observed counts and initial failures are recorded in PROGRESS.
+
+## Proposed Hugging Face URL contract — PH-19/20
+
+The following are **planned tests, not current tests**. Most Hub tests use mocked official-client responses; no token or large model download is required. Use a local controlled HTTP test double for redirect/stream behavior where the client permits it, and prohibit requests to public endpoints in ordinary CI. A live public tiny fixture may be a separately opt-in smoke and must pin a full commit; no live credential test belongs in CI.
+
+| Test ID | Required cases |
+|---|---|
+| T-HF-URL-01 | exact public model URL, optional `/tree/REV`, revision option conflict, invalid scheme/host/subdomain/port/user-info/query/fragment/encoding/path/repo types |
+| T-HF-AUTH-01 | public no-token; explicit locally configured token; missing/invalid/private/gated; no prompt; secrets absent from argv, stdout/stderr, errors, reports, raw payloads and digest |
+| T-HF-INV-01 | full resolved commit; branch moves; deleted/unavailable revision; file sizes/blob/LFS metadata missing/present; pagination/count caps; hostile path, Unicode/case duplicates, unsupported format; deterministic ordering |
+| T-HF-NET-01 | unsafe redirect host/scheme, cross-origin auth stripping, loopback/private/link-local/reserved IP, DNS rebinding, proxy/endpoint override rejection, TLS failure, redirect loop |
+| T-HF-FETCH-01 | explicitly selected paths only; no whole-repo call; bytes at pinned commit; missing/changed path; 404/403/429/5xx; partial body, interrupted response, retry limits, cleanup |
+| T-HF-RESOURCE-01 | file/total/count/path/metadata/time/storage caps, actual streamed bytes exceeding advertised size, disk-full and cancellation; configured ceilings cannot exceed hard maximum |
+| T-HF-INTEGRITY-01 | local SHA-256 stable; wrong upstream digest or wrong revision rejected; upstream identifier semantics labeled; cache disabled initially; future cache corruption/invalidation |
+| T-HF-COV-01 | inventoried but not selected/retrieved; retrieved but not assessed; scanner fail/skip; unsupported; same bytes/policy local vs URL semantics; required gaps cannot produce APPROVE/CONTROLS |
+| T-HF-REPORT-01 | source/revision/inventory/hash/transfer states; schema major compatibility; redaction; deterministic semantic digest; hostile names rendered as text |
+| T-HF-CLI-01 / T-HF-E2E-01 | URL/local command compatibility, phase progress, every exit class, all four outcomes, valid reports for partial cases, no fake scan or model load |
+
+The network boundary is a release blocker: if the pinned Hub client cannot permit explicit path-only bounded downloads while allowing reviewed redirects and preventing private-address access, return unsupported/error rather than weakening controls. No model code execution tests are included; PH-11 remains separately gated.
+
+## Hub local candidate verification
+
+T-HF-URL/AUTH/INV/FETCH/NET/RESOURCE/INTEGRITY/COV/CLI/REPORT/E2E/SEC-01 are implemented across `tests/test_hub_*.py`, `tests/test_cli_hub_scan.py`, `tests/test_workbench_hub.py` and the browser suite. Cases cover exact URL grammar, no implicit credentials, private/mapped addresses, redirects/auth stripping, pinned sockets/TLS hostname, path/count/page violations, partial/wrong-size/wrong-commit/wrong-hash bytes, storage failure/cancel/deadline cleanup, v1/v2 readers and comparisons, four-state/local engine parity, no omitted-file approval, worker environment privacy and URL-form/report behavior. Routine CI uses inert doubles/synthetic data; it requires neither live Hugging Face nor real tokens. The live public tiny-repository observation is recorded separately and does not establish universal network or model compatibility.

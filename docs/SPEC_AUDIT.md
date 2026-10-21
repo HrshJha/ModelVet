@@ -2,6 +2,8 @@
 
 **Current Mac-first scope (2026-10-21):** The maintainer narrowed the deliverable to the local static Mac CLI/Workbench. [MAC_RELEASE_SPEC](MAC_RELEASE_SPEC.md) controls this limited preview: required engineering/package checks apply; independent benchmark and Linux/KVM loader research are deferred and do not block it. Historical broader-release gates below remain applicable only if that broader scope is resumed. No independent review or loader validation is claimed.
 
+**New proposed scope:** Hugging Face model-repository URLs are the proposed primary input for a future local CLI version; local directories remain supported. This is not in the published preview. Detailed contract and current specification audit are below.
+
 **Historical blueprint audit date:** 2026-10-20. **Historical scope:** Markdown/design consistency only. At that initial checkpoint no application code/tests/scanner had run. Later implementation evidence is recorded below; this historical table is not the current product state.
 
 ## Mac preview closeout — 2026-10-21
@@ -99,3 +101,23 @@ The explicit user choice “Extend the local feature plan” adds stable FR-022�
 ## Hosted static gate — 2026-10-20
 
 Authenticated live CI supersedes the earlier access/unverified-platform checkpoints. The cache prerequisite was reproduced in a new environment, fixed with hash-locked setup priming, and checked without weakening offline release/runtime guards. Run 39465563101 at 3d24c0a passes Ubuntu 24.04 (560 tests) and macOS 15 Intel (559 tests / one Linux-only skip), plus 10 installed-package cases and real inert scanner contracts on each. Actual metadata and log hashes are retained in verification/MV-026/hosted-followup/. Local macOS arm64 remains separately evidenced; Windows and hosted ARM are not certified. Phase/task IDs and all 12 Proposed ADRs remain stable. Release and independent research/loader gates still require external evidence.
+
+## Hugging Face URL specification audit — 2026-10-21
+
+This table assesses documentation completeness for the proposed extension. It does not certify the future network implementation. Official Hub source details and limitations are recorded as R-27–R-30; implementation tasks are MV-046–053.
+
+| Audit item | Status | Evidence or unresolved gap |
+|---|---|---|
+| URL workflow | PASS | Exact model-host URL grammar, optional revision, local auth opt-in, metadata-first/selective workflow and controlled errors are specified. Feature is not implemented. |
+| Revision identity | PARTIAL | Full immutable commit, original/canonical refs, inventory and local hashes are required. Exact client/API response semantics and consistency across all Hub storage backends still need implementation verification. |
+| Selective retrieval | PARTIAL | Explicit path-only fetch, private staging, hash, retry/partial behavior and cache disabled are specified. The official client’s redirect and transport behavior is not yet proven. |
+| Resource controls | PARTIAL | Count/file/total/time/concurrency/retry/storage limits and fail-closed behavior are specified as provisional defaults; usability and enforcement are unmeasured. |
+| Coverage reconciliation | PASS | Every inventoried `(path, required check)` pair remains represented; un-retrieved/unassessed/unsupported files cannot be characterized as clean. Implementation is pending. |
+| Security boundaries | PARTIAL | SSRF, DNS/redirect, path, size, token, cache and temporary-file threats have explicit mitigations/tests. OQ-15 leaves the central pinned-client network-enforcement question open and blocks retrieval implementation. |
+| Admission semantics | PASS | Existing deterministic four-state precedence remains unchanged; required remote coverage gaps are `INSUFFICIENT`, while separately substantiated policy bans may `BLOCK`. |
+| Roadmap and task traceability | PASS | FR-029–034 map to PH-19/20 and MV-046–053; MV-046 is the first unblocked proposed task. Contract test checks IDs. |
+| Test strategy | PASS | Mocked URL/auth/revision/inventory/retrieval/integrity/coverage/report/CLI/security cases and no-live-secret/large-download rules are listed; tests are planned and not run. |
+| Documentation consistency | PASS | Cross-document references and local links pass `tests/test_docs_contract.py` (5 passed); `git diff --check` succeeds. |
+| Implementation status accuracy | PASS | PRD, README, progress and task docs state that URL assessment, network retrieval and Hub test files do not exist yet; published v0.1.0 remains unchanged. |
+
+Actual documentation checks: `uv run pytest -q tests/test_docs_contract.py` → 5 passed; `git diff --check` → exit 0. No application code, network calls, dependency changes or token inspection occurred. The first proposed implementation task is MV-046; no remote-fetch release may proceed until OQ-15 is resolved.

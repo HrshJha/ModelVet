@@ -22,6 +22,8 @@ from modelvet.workbench.store import Store, opaque_id
 
 STAGES = {
     "validation",
+    "hub_inventory",
+    "hub_retrieval",
     "snapshot",
     "inventory",
     "structural",
@@ -84,7 +86,12 @@ class Jobs:
             if self.stopping or self.active_id is not None:
                 raise Busy("A scan is already running or the workbench is stopping.")
             workspace = self.store.workspace
-            workspace.model_path(request.model_path)
+            if request.hub_url:
+                from modelvet.hub.reference import selected_token
+
+                selected_token(request.use_hf_token)
+            else:
+                workspace.model_path(request.model_path)
             if request.policy_id != "default":
                 import hashlib
 
@@ -101,10 +108,12 @@ class Jobs:
             stage.mkdir(mode=0o700)
             record = JobRecord(
                 id=key,
-                model_path=request.model_path,
-                label=workspace.models_root.name
-                if request.model_path == "."
-                else request.model_path,
+                model_path=None if request.hub_url else request.model_path,
+                hub_url=request.hub_url,
+                label=request.hub_url
+                or (
+                    workspace.models_root.name if request.model_path == "." else request.model_path
+                ),
                 status="running",
                 stage="validation",
                 started_at=datetime.now(UTC).isoformat(),
@@ -134,6 +143,10 @@ class Jobs:
                     "OPENBLAS_NUM_THREADS": "1",
                     "OMP_NUM_THREADS": "1",
                 }
+                if request.hub_url and request.use_hf_token:
+                    from modelvet.hub.reference import selected_token
+
+                    environment["HF_TOKEN"] = selected_token(True) or ""
                 # Fixed own-module worker; argv/descriptor contract tested independently.
                 process = subprocess.Popen(  # noqa: S603 - trusted installed module, not artifact code.
                     (sys.executable, "-I", "-m", "modelvet.workbench.worker", str(task)),
@@ -262,6 +275,7 @@ class Jobs:
                                     code
                                     if code
                                     in {
+                                        "HUB_ACCESS_FAILED",
                                         "SCAN_FAILED",
                                         "BUDGET_EXCEEDED",
                                         "INVALID_INPUT",

@@ -96,7 +96,13 @@ def compare_reports(
     old, new = parse_report(old_bytes), parse_report(new_bytes)
     old_semantic = semantic_content(old.model_dump(mode="json"))
     new_semantic = semantic_content(new.model_dump(mode="json"))
-    sections = tuple(sorted(k for k in old_semantic if old_semantic[k] != new_semantic[k]))
+    sections = tuple(
+        sorted(
+            k
+            for k in old_semantic.keys() | new_semantic.keys()
+            if old_semantic.get(k) != new_semantic.get(k)
+        )
+    )
     old_files = {f.relpath: f for f in old.files}
     new_files = {f.relpath: f for f in new.files}
     file_rows: list[FileDifference] = []

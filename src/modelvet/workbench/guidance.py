@@ -111,7 +111,19 @@ def summarize(report: Report, key: str, label: str, *, demo: bool = False) -> Re
     completed = sum(
         len(set(row.mandatory_check_ids) & set(row.completed_check_ids)) for row in report.coverage
     )
+    if report.source is not None:
+        total += sum(len(f.required_checks) for f in report.source.files if f.status != "RETRIEVED")
     advice: list[Guidance] = []
+    if report.source is not None and not report.source.complete:
+        advice.append(
+            Guidance(
+                id="hub:retrieval",
+                title="Resolve repository retrieval gaps",
+                explanation="Some inventoried files were not retrieved and assessed.",
+                action="Inspect the source inventory. Adjust limits within supported ceilings or "
+                "obtain a complete local copy; partial downloads cannot approve a repository.",
+            )
+        )
     for rule in report.decision.rule_ids:
         if rule in RULE_ADVICE:
             title, action = RULE_ADVICE[rule]
@@ -175,6 +187,15 @@ def summarize(report: Report, key: str, label: str, *, demo: bool = False) -> Re
         )
     return ReportSummary(
         id=key,
+        hub_source=(
+            report.source.model_dump(mode="json", exclude={"files"})
+            | {
+                "inventory_count": len(report.source.files),
+                "retrieved_count": sum(f.status == "RETRIEVED" for f in report.source.files),
+            }
+        )
+        if report.source
+        else None,
         label=label,
         created_at=report.run.finished_at,
         decision=report.decision.state.value,

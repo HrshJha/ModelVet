@@ -12,10 +12,12 @@ Local-only, predictable, zero untrusted-code execution in the standard process, 
 flowchart LR
   U[Developer or AppSec reviewer] --> CLI[ModelVet CLI]
   L[Untrusted local model directory] --> CLI
+  HF[Exact Hugging Face model URL] -. proposed PH-19/20 .-> HUB[Validated Hub client]
+  HUB -->|pinned selected bytes| CLI
   CLI --> R[JSON and Markdown reports]
   P[Local policy TOML] --> CLI
   S[Optional pinned ModelScan CLI] --> CLI
-  CLI -. no network by default .- NET[External services out of scope]
+  CLI -. v0.1.0 no network .- NET[External services out of scope]
 ```
 
 ## Logical components and trust boundaries
@@ -47,6 +49,14 @@ flowchart TD
 
 ```text
 src/modelvet/
+  hub/                              # implemented local candidate; not in published preview
+    reference.py                    # exact URL grammar, repo identity, explicit auth selection
+    client.py                       # documented REST API boundary, commit resolution
+    inventory.py                    # bounded commit-pinned repository tree
+    retrieval.py                     # explicit paths, bounded streaming to private stage
+    transport.py                    # pinned public-IP HTTPS and exact redirects
+    models.py                       # remote source/retrieval records
+    assessment.py                   # existing-engine orchestration and deadline
   __init__.py
   cli/main.py                      # CLI command registration / IO policy
   core/config.py                   # TOML safe policy/config loader
@@ -155,3 +165,31 @@ The optional workbench adds a loopback FastAPI service serving bundled frontend 
 ## Mac-first release scope — FR-028
 
 The local static CLI/Workbench is the current Mac deliverable. Required release CI targets macOS; local arm64 execution is recorded separately from hosted Intel execution. Future comparative research and Linux/KVM loading are outside this preview and do not block it. No engine, default policy, applicability, schema or subprocess isolation claim changes. See MAC_RELEASE_SPEC.md.
+
+## Proposed Hugging Face URL assessment — FR-029–034 / PH-19–20
+
+The next proposed product version adds `HubReference`, a narrow repository client, revision resolver, metadata-first inventory and selective retriever in front of the existing `InputGate`/snapshot pipeline. Only the exact Hugging Face model host is accepted; Hub client endpoint and storage redirects remain a separately validated network boundary. No generic URL fetcher, hosted API, runtime model load or whole-repository download is added. Public metadata and files are untrusted; private/gated access uses only an explicit local read credential. The fully specified sequence, budgets and unresolved client constraints are in [HUB_ASSESSMENT_SPEC](HUB_ASSESSMENT_SPEC.md).
+
+```mermaid
+sequenceDiagram
+ participant D as Developer
+ participant C as CLI URL gate
+ participant H as Pinned Hub client
+ participant I as Commit-bound inventory
+ participant S as Private selected-file snapshot
+ participant E as Existing scan/evidence/coverage/policy
+ participant R as Report writer
+ D->>C: HTTPS model repository URL + optional revision
+ C->>H: canonical repo_id + explicit local token if selected
+ H-->>C: immutable resolved commit
+ C->>H: list repository tree at that commit
+ H-->>I: untrusted paths/sizes/upstream IDs
+ I->>H: retrieve exact selected file path only
+ H-->>S: bounded streamed bytes
+ S->>E: local SHA-256 identities and files
+ E->>R: deterministic outcome including every coverage gap
+ R-->>D: JSON and Markdown; token never serialized
+```
+
+
+Current Hub candidate: PH-19/20 is implemented using the direct stdlib transport described in HUB_ASSESSMENT_SPEC. Authenticated Workbench requests launch the same fixed own-module worker; remote staging remains private and outside model roots. Only explicit HF_TOKEN is copied to a selected remote worker, and scanner environments exclude it. No new dependency or loader is introduced. Report v2 carries remote inventory including omissions; local v1 serialization and policy rules remain available.

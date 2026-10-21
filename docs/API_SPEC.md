@@ -141,3 +141,38 @@ application/scan.py owns ScanRequest/ScanOutcome/ScanService. ReportBuilder addi
 ## Workbench extension — FR-025–027
 
 The optional workbench interface is /api/v1, defined in WORKBENCH_SPEC.md. ScanService.run gains an optional observational progress callback; existing request/outcome/report contracts do not change. Frontend types are generated from the local OpenAPI document. Never evaluate admission in the browser.
+
+## Proposed Hugging Face client boundary — FR-029–034
+
+This is an internal Python interface proposal, not an HTTP API and not implemented. Network/retrieval responsibilities remain separate from local artifact inspection; `ScanService` should receive a verified private staged snapshot and source identity, then reuse the existing scanner/evidence/coverage/policy path.
+
+```python
+class HubReferenceParser:
+    def parse(self, value: str, revision: str | None = None) -> HubReference: ...
+
+class HubRepositoryClient(Protocol):
+    def resolve(self, ref: HubReference, *, credential: HubCredential | None) -> ResolvedHubRevision: ...
+    def inventory(self, revision: ResolvedHubRevision, *, limits: HubLimits) -> HubInventory: ...
+    def retrieve(self, revision: ResolvedHubRevision, paths: Sequence[HubPath], *,
+                 destination: PrivateStage, limits: HubLimits) -> RetrievalBundle: ...
+
+class HubSnapshotter:
+    def freeze(self, inventory: HubInventory, retrieved: RetrievalBundle) -> VerifiedSnapshot: ...
+```
+
+`HubCredential` is an opaque secret handle; never str/repr/serialize it, include it in argv, or put it in a `HubReference`. Its source must be explicit local token selection or the user's `HF_TOKEN`. No password/token gathering command is defined. Adapter must expose resolved commit, endpoint/redirect observations, bounded response metadata, transfer status, byte counts, locally computed SHA-256 and controlled failures. No policy engine network dependency.
+
+Typed failures include `InvalidHubReference`, `UnsupportedHubRoute`, `HubAccessDenied`, `HubRevisionNotFound`, `HubRateLimited`, `HubNetworkError`, `HubRedirectRejected`, `HubAddressRejected`, `HubMetadataInvalid`, `HubBudgetExceeded`, `HubContentMismatch`, `HubPartialTransfer`, and `HubClientUnavailable`. No remote exception text is copied into a report without redaction and size/control-character filtering. A service outage or inaccessible repo cannot produce an approval. `HubSnapshotter` rejects duplicate normalized paths, missing required bytes, hash mismatch and any commit inconsistency. Cache support is deliberately absent from the first interface implementation; later cache APIs require a separately versioned security contract.
+
+| Interface | Contract tests | IDs |
+|---|---|---|
+| URL parser / auth selector | exact host/path grammar, revision conflicts, secret redaction, no prompt | T-HF-URL-01, T-HF-AUTH-01 |
+| Hub client / inventory | full commit, moving refs, file metadata, hostile path/count, pagination, inaccessible repo | T-HF-INV-01 |
+| Retrieval | explicit paths, redirects/DNS/IP, streaming caps, retries/timeouts, partial/disk-full cleanup | T-HF-FETCH-01, T-HF-NET-01, T-HF-RESOURCE-01 |
+| Local hash / snapshot | exact bytes, wrong commit, upstream identifier claims, drift and cache disabled | T-HF-INTEGRITY-01 |
+| Scan/Coverage join | every remote inventory file and required check reconciled; local parity | T-HF-COV-01 |
+| CLI/Report | every decision, failure exit, schema compatibility, redaction/digest | T-HF-CLI-01, T-HF-REPORT-01, T-HF-E2E-01 |
+
+## Current Hub implementation candidate
+
+The proposed interfaces above were reconciled into `HubReference.parse`, `HubClient.inventory`, `retrieve`, `scan_hub` and transport `modelvet-https/1`; no new third-party client is installed. The authenticated Workbench API now accepts exactly one local `model_path` or `hub_url`, optional `revision` and `use_hf_token`; it launches the existing dedicated worker. The token itself never crosses the browser API or task descriptor. `Capabilities.hub_token_configured` is boolean. `ReportSummary.hub_source` is a small identity/count projection; `/reports/{id}/evidence/retrieval` returns paged/searchable source rows. New report v2 parsing binds downloaded source hashes to assessed files and rejects incomplete-source admission. Legacy v1 consumers remain supported by the current reader. Concrete generated contract: `schemas/workbench-api-v1.json`; normative implemented behavior: HUB_ASSESSMENT_SPEC.

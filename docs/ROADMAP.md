@@ -24,6 +24,8 @@ Status: **Mac-first static CLI and Workbench preview published**, 2026-10-21, at
 | PH-16 | Evidence-first browser workspace | MV-039–MV-041 | not calibrated | P1 local extension, complete | T-UI-FLOW-01 |
 | PH-17 | Packaged Workbench acceptance | MV-042–MV-044 | not calibrated | P1 local extension, complete | T-UI-RELEASE-01 |
 | PH-18 | Mac-first delivery and publication | MV-045 | not calibrated | Mac scope, complete | T-MAC-01 |
+| PH-19 | Hugging Face URL vertical slice: resolve, inventory, retrieve one selected file, assess, report | MV-046–MV-049 | not estimated | P1 next release, proposed | T-HF-URL-01/T-HF-E2E-01 |
+| PH-20 | Hub coverage, resource/security hardening and acceptance | MV-050–MV-053 | not estimated | P1 next release, proposed | T-HF-COV-01/T-HF-SEC-01 |
 
 ## Dependency graph
 
@@ -40,9 +42,13 @@ flowchart TD
  I --> J[PH-10 release]
  H --> K[PH-11 P2 isolated loader]
  J --> K
+ J --> L[PH-19 Hub URL vertical slice]
+ L --> M[PH-20 Hub hardening and acceptance]
 ```
 
 The **smallest useful vertical slice** is PH-01/02 plus a hardcoded *test fixture* providing evidence to the policy/report interface as contract test—not a pretend finished app. The first genuine MVP release requires PH-01–PH-07 and PH-09–PH-10. PH-08 improves evidence and differentiator validation but is **not required to ship the conservative static MVP**. PH-11 is future research gated independently.
+
+**Next proposed implementation scope:** PH-19/20 adds local Hugging Face model-repository URLs as the primary input for a future release, with local directories still supported. PH-19 is intentionally small: safe public fixture/reference, immutable commit, deterministic inventory, one explicitly selected small static-check file, local hash, coverage and report. PH-20 expands failure/security coverage and preserves all required omissions. First unblocked task after this documentation update is MV-046; it evaluates URL grammar, authentication and official-client controls before any fetch implementation. Client security questions are blockers, not details to skip. See `HUB_ASSESSMENT_SPEC.md`.
 
 ## Effort estimate
 
@@ -200,3 +206,6 @@ PH-15–17 tasks MV-036–044 are implemented and tested. The Mac release CI als
 ## PH-18 — Mac-first local completion · FR-028 / MV-045
 
 The maintainer revised the deliverable to the available Mac. Complete the CLI/Workbench, Mac readiness guidance, required macOS CI and installed-package preview. PH-08 independent comparison and PH-11 Linux/KVM loading are **DEFERRED** and do not block this release scope; no research result or loader capability is claimed. Preserve historical platform evidence and all mandatory-evidence semantics. Exit: actual Mac code/schema/browser/package gates pass and the scoped preview is installable and published. This exit passed at main 7e722c7 (CI run 39624146859). See MAC_RELEASE_SPEC.md.
+
+
+PH-19/20 local candidate implementation (2026-10-21): MV-046–052 implemented; MV-053 local acceptance complete; new hosted execution and publication remain pending. Includes user-requested Workbench URL input alongside CLI. See HUB_ASSESSMENT_SPEC for the stdlib transport/client deviation, actual limits and report-v2 migration. Published preview and external research gates are unchanged.

@@ -1,0 +1,54 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "--prefix",
+      "frontend",
+      "format:check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.614,
+    "log": "frontend-format.log",
+    "finished_at": "2026-10-21T17:43:01.519921+00:00"
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "--prefix",
+      "frontend",
+      "typecheck"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.123,
+    "log": "frontend-types.log",
+    "finished_at": "2026-10-21T17:43:02.643227+00:00"
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "--prefix",
+      "frontend",
+      "test"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.439,
+    "log": "frontend-components.log",
+    "finished_at": "2026-10-21T17:43:03.082643+00:00"
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "--prefix",
+      "frontend",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.301,
+    "log": "frontend-build.log",
+    "finished_at": "2026-10-21T17:43:04.383530+00:00"
+  }
+]

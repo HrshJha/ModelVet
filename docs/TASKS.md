@@ -1,6 +1,6 @@
 # Executable implementation backlog
 
-**Current selected scope (2026-10-21): the Mac-first static CLI and Workbench preview is published as `v0.1.0-mac-preview.1` from main `7e722c7`. PH-01–07, PH-09/10 and local Mac product extensions PH-12–18 are complete for this delivery. Final hosted macOS 15 Intel CI passed (run 39624146859); local arm64 evidence is recorded separately. PH-08 independent comparison and PH-11 Linux/KVM loading are DEFERRED, not complete. No local Mac product task remains unblocked.** Task IDs and historical checkpoints below remain unchanged. Completion still requires evidence and progress records; deferred research must not be represented as achieved.
+**Published scope (2026-10-21):** the Mac-first static CLI/Workbench preview is released as `v0.1.0-mac-preview.1`. The maintainer has now proposed a distinct next-version feature: Hugging Face model-repository URL input, with the local-directory workflow preserved. PH-19/20 and MV-046–052 are **implemented locally** in the working tree; MV-053 local acceptance is complete. This candidate is not the published preview. PH-08 independent comparison and PH-11 Linux/KVM loading remain deferred. The first unblocked proposed task was MV-046; MV-053 completed the local acceptance gate. No release/tag or existing implementation changes are implied by this documentation update.
 
 ## Backlog index
 
@@ -41,6 +41,14 @@
 | MV-033 | Verify stored raw evidence | P1 | PH-12 | FR-022 | MV-016 | not calibrated |
 | MV-034 | Compare stored reports | P1 | PH-13 | FR-023 | MV-033 | not calibrated |
 | MV-035 | Audit an explicit report batch | P1 | PH-14 | FR-024 | MV-033,MV-034 | not calibrated |
+| MV-046 | Specify strict Hub URL parsing and opt-in authentication contract | P1 | PH-19 | FR-029 | MV-045 | 3–5 h |
+| MV-047 | Resolve commit and inventory Hub repository metadata | P1 | PH-19 | FR-030 | MV-046 | 5–8 h |
+| MV-048 | Retrieve explicit files into bounded private staging | P1 | PH-19 | FR-031 | MV-047 | 6–10 h |
+| MV-049 | Verify content identity and decide cache contract | P1 | PH-19 | FR-032 | MV-048 | 4–7 h |
+| MV-050 | Map remote inventory to existing scan and coverage records | P1 | PH-20 | FR-033 | MV-049,MV-012 | 5–8 h |
+| MV-051 | Integrate URL/local CLI scan orchestration and failure exits | P1 | PH-20 | FR-033 | MV-050,MV-018 | 5–8 h |
+| MV-052 | Version report fields and document compatibility/migration | P1 | PH-20 | FR-034 | MV-050,MV-016 | 4–7 h |
+| MV-053 | Run Hub fault/security/E2E acceptance and document readiness | P1 | PH-20 | FR-034 | MV-051,MV-052 | 8–14 h |
 
 ## Detailed task cards (normative)
 
@@ -664,4 +672,89 @@
 
 ## Current scope status
 
-MV-045 and the scoped Mac release are complete. There is no unblocked implementation task for the delivered Mac product. PH-08 independent benchmark comparison and PH-11 loader research remain deferred outside this delivery; if that scope resumes, the existing holdout, independent review and Linux/KVM gates still apply. Missing mandatory evidence still prevents admission.
+MV-045 and the scoped Mac release are complete. For the Hugging Face feature, MV-046 was the first unblocked task. URL parsing, a reviewed narrow stdlib transport, inventory, retrieval, v2 reports, CLI and user-requested Workbench integration are now implemented; MV-053 completes local acceptance. See HUB_ASSESSMENT_SPEC for the actual interfaces and client deviation. PH-08 independent benchmark comparison and PH-11 loader research remain deferred outside this delivery; if resumed, their existing holdout, independent review and Linux/KVM gates still apply. Missing mandatory evidence still prevents admission.
+
+### MV-046 — Specify strict Hub URL parsing and opt-in authentication contract
+
+- **Priority / status / phase:** P1 next release; **IMPLEMENTED LOCALLY**; `PH-19`. **Requirement(s):** FR-029. **Estimated effort:** 3–5 focused hours.
+- **Prerequisites:** MV-045 Mac preview source and current URL/credential threat model reviewed.
+- **Expected files:** Hub assessment spec, CLI/API/architecture/security docs, `src/modelvet/hub/reference.py`, `tests/test_hub_reference.py` (implementation paths are proposed only).
+- **Procedure / failure modes:** Define and implement an exact HTTPS Hugging Face model-repository URL grammar; reject alternate hosts/routes, credentials, query/fragment, ambiguous encodings and unsupported repo types. Separate URL revision from `--revision`; preserve full repo ID spelling. Public requests do not require credentials. Add explicitly selected local token or `HF_TOKEN` only for user-authorized private/gated access. Never scrape credentials or expose them. If token redaction and fixed endpoint behavior cannot be guaranteed, block.
+- **Tests:** `T-HF-URL-01` and `T-HF-AUTH-01` (planned): valid canonical URL forms; malformed/unsupported forms; credentials and percent encoding rejected; no implicit login; no secret in logs/errors/report/argv; missing/invalid auth classification.
+- **Verification command:** `uv run pytest -q tests/test_hub_reference.py` (passed; see PROGRESS).
+- **DoD:** Full grammar/error contract, official-client surface and endpoint behavior reviewed; tests pass; no API key required or gathered for public repos; exact client dependency assessment documented. This task does not fetch content.
+
+### MV-047 — Resolve commit and inventory Hub repository metadata
+
+- **Priority / status / phase:** P1 next release; **IMPLEMENTED LOCALLY**; `PH-19`. **Requirement(s):** FR-030. **Estimated effort:** 5–8 h.
+- **Prerequisites:** MV-046.
+- **Expected files:** `src/modelvet/hub/client.py`, `src/modelvet/hub/inventory.py`, `tests/test_hub_inventory.py` (proposed); report/data contracts.
+- **Procedure / failure modes:** Use the documented REST API through the tested stdlib transport to resolve requested/default ref to a full commit, then list complete bounded model repo tree at that exact commit. Preserve file path, size and upstream identifiers as source claims; bound pages, response bytes/count/path length; reject duplicates/traversal; no fetch yet. Inaccessible/deleted/private/unknown repo and unresolved commit are controlled failure, no silent `main` fallback.
+- **Tests:** `T-HF-INV-01` (planned), mocked metadata, moving branch, missing revision, pagination/caps, unsafe paths, unknown file type, deterministic ordering.
+- **Verification command:** `uv run pytest -q tests/test_hub_inventory.py` (see PROGRESS for actual results).
+- **DoD:** Same revision gives deterministic inventory; changing moving reference changes resolved identity; every response field has source/provenance and missing-data semantics. No content downloaded.
+
+### MV-048 — Retrieve explicit files into bounded private staging
+
+- **Priority / status / phase:** P1 next release; **IMPLEMENTED LOCALLY**; `PH-19`. **Requirement(s):** FR-031. **Estimated effort:** 6–10 h.
+- **Prerequisites:** MV-047 plus tested redirect/IP controls for transport modelvet-https/1.
+- **Expected files:** `src/modelvet/hub/retrieval.py`, `tests/test_hub_retrieval.py`, resource config/contracts (proposed).
+- **Procedure / failure modes:** Select exact canonical inventory paths from check applicability; download individually at pinned commit with streaming caps, one transfer at a time, fixed request deadlines and bounded retries. Use private temp files, hash during write, atomically expose complete bytes only. Preserve omitted/excluded/oversized/unavailable rows and reasons. Do not use whole-repository download or extract archives.
+- **Tests:** `T-HF-FETCH-01`, `T-HF-RESOURCE-01` (planned), including redirects, internal IP/DNS cases, mid-stream truncation, timeouts, retry exhaustion, size mismatch, disk-full and cancellation.
+- **Verification command:** `uv run pytest -q tests/test_hub_retrieval.py` (see PROGRESS for actual results).
+- **DoD:** No partial bytes enter scan; every failure maps to explicit retrieval/coverage state; tested byte/time ceilings cannot be enlarged beyond reviewed hard maxima.
+
+### MV-049 — Verify content identity and decide cache contract
+
+- **Priority / status / phase:** P1 next release; **IMPLEMENTED LOCALLY**; `PH-19`. **Requirement(s):** FR-032. **Estimated effort:** 4–7 h.
+- **Prerequisites:** MV-048.
+- **Expected files:** `src/modelvet/hub/retrieval.py`, `tests/test_hub_retrieval.py` (proposed); identity/report docs.
+- **Procedure / failure modes:** Compute SHA-256 over retrieved bytes; compare an upstream digest only after its algorithm/meaning are verified. Reject transfer/revision inconsistency. Cache remains disabled for the initial implementation; define later key, quota, invalidation, permission and purge tests before enabling it. Do not trust ETags/blob IDs as equivalent to file content SHA-256 without documented semantics.
+- **Tests:** `T-HF-INTEGRITY-01` (planned): exact byte identity, mismatch, missing upstream digest, path/commit confusion, cache disabled and future stale/corrupt entry cases.
+- **Verification command:** `uv run pytest -q tests/test_hub_retrieval.py` (see PROGRESS for actual results).
+- **DoD:** Report binds immutable commit, path and local byte hash; limitations for upstream identity stated. No cache capability ships until separate review.
+
+### MV-050 — Map remote inventory to existing scan and coverage records
+
+- **Priority / status / phase:** P1 next release; **IMPLEMENTED LOCALLY**; `PH-20`. **Requirement(s):** FR-033. **Estimated effort:** 5–8 h.
+- **Prerequisites:** MV-049, existing MV-006/011/012 acceptance.
+- **Expected files:** `src/modelvet/hub/assessment.py`, tests for remote coverage parity (proposed), `DATA_MODEL.md`, `API_SPEC.md`.
+- **Procedure / failure modes:** Reuse the same classifier/static inspectors/scanner/policy for a private selected snapshot. Account for every discovered file and applicable check including not-retrieved items. Do not let incomplete inventory or retrieval reduce the applicable set or promote status.
+- **Tests:** `T-HF-COV-01` (planned): local-vs-remote same bytes/policy semantic parity; not fetched, changed, unsupported, skipped scanner file and missing per-file proof all unresolved.
+- **Verification command:** `uv run pytest -q tests/test_hub_coverage.py` (see PROGRESS for actual results).
+- **DoD:** Same exact file bytes and policy use unchanged evaluation rules; all inventory pairs reconcile; no missing mandatory proof can return APPROVE or CONTROLS.
+
+### MV-051 — Integrate URL/local CLI scan orchestration and failure exits
+
+- **Priority / status / phase:** P1 next release; **IMPLEMENTED LOCALLY**; `PH-20`. **Requirement(s):** FR-033. **Estimated effort:** 5–8 h.
+- **Prerequisites:** MV-050.
+- **Expected files:** `src/modelvet/cli/main.py`, scan service integration and `tests/test_cli_hub_scan.py` (proposed).
+- **Procedure / failure modes:** Accept canonical URL with optional `--revision`; preserve current local-directory command. Add explicit `--max-file-mib`, `--max-total-mib`, `--max-files`, wall-time and transfer settings only within global ceilings. Noninteractive progress distinguishes metadata/retrieval/scanning. Errors use existing exit contract; incomplete evidence returns decision exit 30 when reportable.
+- **Tests:** `T-HF-CLI-01` (planned): public URL syntax, local backward compatibility, revisions, no prompt, malformed input, auth/access, timeout/cancel, scanner missing, report failure and all decisions.
+- **Verification command:** `uv run pytest -q tests/test_cli_hub_scan.py tests/test_cli.py` (see PROGRESS for actual results).
+- **DoD:** A real URL goes through the same one CLI scan contract as local path, with honest partial statuses and no false success. The maintainer explicitly requested Workbench integration; the versioned `/api/v1/scans` addition, source form, worker routing, progress and paged source evidence are included under the existing Workbench requirements.
+
+### MV-052 — Version report fields and document compatibility/migration
+
+- **Priority / status / phase:** P1 next release; **IMPLEMENTED LOCALLY**; `PH-20`. **Requirement(s):** FR-034. **Estimated effort:** 4–7 h.
+- **Prerequisites:** MV-050 and report-v1 consumer review.
+- **Expected files:** report/data schemas, writer/readers, `DATA_MODEL.md`, `API_SPEC.md`, `CLI_SPEC.md`, `tests/test_hub_report.py` (proposed).
+- **Procedure / failure modes:** Add source URL/repo/revisions, upstream metadata source/digest, full inventory, local hashes/retrieval results and omissions. If report v1 cannot add these compatibly under current strict unknown-field validation, publish explicit report v2 and migration/compatibility tests. Redact secrets and host/cache paths; keep run time outside semantic digest.
+- **Tests:** `T-HF-REPORT-01` (planned): schema evolution, old report read/inspect/compare, remote IDs, hostile metadata escaping, credential/path redaction, semantic digest determinism.
+- **Verification command:** `uv run pytest -q tests/test_hub_report.py tests/test_reports.py tests/test_report_compare.py` (see PROGRESS for actual results).
+- **DoD:** Reports identify exact source/revision/bytes actually assessed and all known gaps; legacy reports retain documented behavior.
+
+### MV-053 — Run Hub fault/security/E2E acceptance and document readiness
+
+- **Priority / status / phase:** P1 next release; **LOCAL ACCEPTANCE COMPLETE; HOSTED/PUBLICATION PENDING**; `PH-20`. **Requirement(s):** FR-034. **Estimated effort:** 8–14 h.
+- **Prerequisites:** MV-051/052, client and dependency review, Mac supported-runtime decision.
+- **Expected files:** tests/integration fixtures, `SECURITY_POLICY.md`, `TESTING_STRATEGY.md`, `BENCHMARK_PLAN.md`, `PROGRESS.md`, release instructions (proposed).
+- **Procedure / failure modes:** Complete mocked protocol and local-test-double acceptance without large downloads/tokens; adversarial redirect/DNS/path/budget/identity cases; local parity; schema/report consistency; package without new Hub dependencies; offline/local workflows still work. Do not run model code.
+- **Tests:** `T-HF-SEC-01`, `T-HF-E2E-01` (planned), all local fault/coverage test IDs; actual installed package and network-boundary checks on supported macOS.
+- **Verification command:** `uv run --extra ui pytest -q` (Hub uses stdlib; no extra is required); plus lock, lint, type, build and fresh installed package checks (see PROGRESS for actual results).
+- **DoD:** Actual observed evidence and source/package identities recorded. No claims about generic SSRF immunity, Hub safety badges, full repo compatibility, superiority or loader safety. Release decision remains separate from this documentation task.
+
+
+### Hub implementation reconciliation (2026-10-21)
+
+The per-task procedure above is the original plan; HUB_ASSESSMENT_SPEC records the implemented interfaces and tested scope. The official 2.2.0 client was reviewed but not added: automatic redirects, cache and separate Xet transfer stack are replaced by the narrow direct HTTPS transport. Integrity is implemented alongside streaming in retrieval.py; report-v2 is explicit and legacy local output remains v1. Authentication initially supports explicit HF_TOKEN only. No new dependency, cache, model loader, release tag or independent review is introduced. Actual verification supersedes the original planned-command labels only where PROGRESS records successful execution.

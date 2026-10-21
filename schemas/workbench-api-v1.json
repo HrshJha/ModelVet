@@ -47,6 +47,16 @@
       "Capabilities": {
         "additionalProperties": false,
         "properties": {
+          "hub_available": {
+            "default": true,
+            "title": "Hub Available",
+            "type": "boolean"
+          },
+          "hub_token_configured": {
+            "default": false,
+            "title": "Hub Token Configured",
+            "type": "boolean"
+          },
           "limitations": {
             "items": {
               "type": "string"
@@ -518,6 +528,17 @@
             ],
             "title": "Error Code"
           },
+          "hub_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hub Url"
+          },
           "id": {
             "title": "Id",
             "type": "string"
@@ -983,6 +1004,18 @@
             "title": "Guidance",
             "type": "array"
           },
+          "hub_source": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hub Source"
+          },
           "id": {
             "title": "Id",
             "type": "string"
@@ -1079,6 +1112,18 @@
       "ScanInput": {
         "additionalProperties": false,
         "properties": {
+          "hub_url": {
+            "anyOf": [
+              {
+                "maxLength": 512,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hub Url"
+          },
           "max_file_mib": {
             "default": 1024,
             "maximum": 1024.0,
@@ -1101,8 +1146,8 @@
             "type": "integer"
           },
           "model_path": {
+            "default": "",
             "maxLength": 4096,
-            "minLength": 1,
             "title": "Model Path",
             "type": "string"
           },
@@ -1111,6 +1156,18 @@
             "maxLength": 80,
             "title": "Policy Id",
             "type": "string"
+          },
+          "revision": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revision"
           },
           "scanner": {
             "default": "auto",
@@ -1128,11 +1185,13 @@
             "minimum": 1.0,
             "title": "Timeout Sec",
             "type": "integer"
+          },
+          "use_hf_token": {
+            "default": false,
+            "title": "Use Hf Token",
+            "type": "boolean"
           }
         },
-        "required": [
-          "model_path"
-        ],
         "title": "ScanInput",
         "type": "object"
       },
@@ -1598,6 +1657,7 @@
             "required": true,
             "schema": {
               "enum": [
+                "retrieval",
                 "files",
                 "checks",
                 "coverage",

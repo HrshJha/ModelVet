@@ -1,0 +1,15 @@
+{
+  "published": false,
+  "artifacts": [
+    {
+      "filename": "modelvet-0.1.0-py3-none-any.whl",
+      "bytes": 285241,
+      "sha256": "f8702e6a83a175a0c8867bab2bf04ff91e2b05dc76ddd72893eb59c0f993a017"
+    },
+    {
+      "filename": "modelvet-0.1.0.tar.gz",
+      "bytes": 571942,
+      "sha256": "90a22efdefc5784b410b70da6d64e3bf0252cf60318a50b7fa4885222a9330ae"
+    }
+  ]
+}

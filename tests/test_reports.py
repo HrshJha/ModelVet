@@ -100,7 +100,7 @@ def test_schema_roundtrip_and_reference_index() -> None:
     assert parse_report(serialize_report(report)) == report
     assert report.references[report.decision.evidence_refs[0]] == "/artifact"
     assert Report.model_json_schema() == json.loads(
-        (Path(__file__).parents[1] / "schemas/report-v1.json").read_text()
+        (Path(__file__).parents[1] / "schemas/report-v2.json").read_text()
     )
 
 

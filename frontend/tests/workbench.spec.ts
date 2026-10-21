@@ -35,10 +35,10 @@ test("overview has real empty state and working navigation", async ({
 }, info) => {
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { name: "Evidence before execution." }),
+    page.getByRole("heading", { name: "Your local review bench." }),
   ).toBeVisible();
   await expect(
-    page.getByText("Your first evidence trail starts here."),
+    page.getByRole("heading", { name: "No scans saved yet" }),
   ).toBeVisible();
   await expect(page.locator(".root-label")).toContainText("models");
   await page.screenshot({
@@ -60,12 +60,17 @@ test("folder browser runs a genuine supported static scan", async ({
   page,
 }, info) => {
   await page.goto("/#/scan");
+  await page.getByRole("button", { name: "Local folder", exact: true }).click();
   await page.getByRole("button", { name: "Browse folders" }).click();
   await page
     .getByRole("button", { name: "tiny-safetensors", exact: true })
     .click();
   await page.getByRole("button", { name: "Use this folder" }).click();
   await expect(page.getByLabel("Model folder")).toHaveValue("tiny-safetensors");
+  const scanSetupA11y = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+    .analyze();
+  expect(scanSetupA11y.violations).toEqual([]);
   await page.screenshot({
     path: info.outputPath("scan-setup-desktop.png"),
     fullPage: true,
@@ -86,13 +91,12 @@ test("folder browser runs a genuine supported static scan", async ({
   });
   await page.getByRole("button", { name: /weights.safetensors/ }).click();
   await page.getByRole("button", { name: "Inspect record" }).first().click();
-  await expect(
-    page.getByRole("dialog", { name: "Evidence detail" }),
-  ).toBeVisible();
-  await expect(page.getByRole("dialog").locator("pre")).toContainText(
-    "file_id",
-  );
-  await page.keyboard.press("Escape");
+  const inspector = page.getByLabel("Evidence inspector");
+  await expect(inspector).toBeVisible();
+  await expect(inspector).toContainText("Execution status");
+  await expect(inspector).toContainText("Result");
+  await inspector.getByText("Open raw JSON").click();
+  await expect(inspector.locator("pre")).toContainText("file_id");
   await page.getByRole("tab", { name: "Findings", exact: true }).click();
   await expect(
     page.getByRole("heading", { name: "No findings recorded." }),
@@ -105,6 +109,7 @@ test("folder browser runs a genuine supported static scan", async ({
 });
 
 async function selectFolder(page: Page, name: string) {
+  await page.getByRole("button", { name: "Local folder", exact: true }).click();
   await page.getByRole("button", { name: "Browse folders" }).click();
   await page.getByRole("button", { name, exact: true }).click();
   await page.getByRole("button", { name: "Use this folder" }).click();
@@ -241,6 +246,10 @@ test("comparison exposes exact changes without recomputing decisions", async ({
     fullPage: true,
   });
   await expect(page.getByText(/No admission recomputed/)).toBeVisible();
+  const comparisonA11y = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+    .analyze();
+  expect(comparisonA11y.violations).toEqual([]);
 });
 
 test("cancellation stops a real worker and never produces an admission result", async ({
@@ -260,14 +269,21 @@ test("cancellation stops a real worker and never produces an admission result", 
   await expect(page.locator(".verdict-panel")).toHaveCount(0);
 });
 
-for (const width of [375, 768, 1024, 1440]) {
-  test(`responsive and accessible review at ${width}px`, async ({
+for (const { width, height } of [
+  { width: 375, height: 812 },
+  { width: 390, height: 844 },
+  { width: 768, height: 1024 },
+  { width: 1024, height: 768 },
+  { width: 1280, height: 800 },
+  { width: 1440, height: 900 },
+]) {
+  test(`responsive and accessible review at ${width}×${height}`, async ({
     page,
   }, info) => {
-    await page.setViewportSize({ width, height: 1000 });
+    await page.setViewportSize({ width, height });
     await page.goto("/#/");
     await expect(
-      page.getByRole("heading", { name: "Evidence before execution." }),
+      page.getByRole("heading", { name: "Your local review bench." }),
     ).toBeVisible();
     await expect(page.locator(".root-label")).toContainText("models");
     await expect(page.locator(".recent-panel tbody tr")).toHaveCount(5);
@@ -326,6 +342,11 @@ for (const width of [375, 768, 1024, 1440]) {
       fullPage: true,
     });
     await page.getByRole("link", { name: "Scan history", exact: true }).click();
+    await expect(page.locator(".history-panel .pagination")).toBeVisible();
+    await page.screenshot({
+      path: info.outputPath(`history-${width}.png`),
+      fullPage: true,
+    });
     await page
       .getByRole("link", { name: /unknown-content/ })
       .first()
@@ -336,6 +357,12 @@ for (const width of [375, 768, 1024, 1440]) {
     await expect(
       page.getByRole("button", { name: /opaque.bin/ }),
     ).toBeVisible();
+    if (width === 1024) {
+      const decision = await page.locator(".verdict-panel").boundingBox();
+      const identity = await page.locator(".identity-strip").boundingBox();
+      expect(decision?.y).toBeLessThan(height);
+      expect(identity && identity.y + identity.height).toBeLessThan(height);
+    }
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,
@@ -347,6 +374,18 @@ for (const width of [375, 768, 1024, 1440]) {
     expect(report.violations).toEqual([]);
     await page.screenshot({
       path: info.outputPath(`report-${width}.png`),
+      fullPage: true,
+    });
+    await page.getByRole("tab", { name: "Files & coverage" }).click();
+    await page.getByRole("button", { name: /opaque.bin/ }).click();
+    await page.getByRole("button", { name: "Inspect record" }).first().click();
+    await page.evaluate(() => {
+      window.scrollTo(0, 0);
+      if (document.activeElement instanceof HTMLElement)
+        document.activeElement.blur();
+    });
+    await page.screenshot({
+      path: info.outputPath(`report-inspector-${width}.png`),
       fullPage: true,
     });
   });
@@ -425,6 +464,9 @@ test("keyboard and coarse-pointer controls remain usable", async ({
     await expect(
       page.getByRole("heading", { name: "Start with the evidence." }),
     ).toBeVisible();
+    await page
+      .getByRole("button", { name: "Local folder", exact: true })
+      .click();
     for (const locator of [
       page.getByRole("button", { name: "Browse folders" }),
       page.getByRole("button", { name: "Start scan" }),
@@ -460,7 +502,9 @@ test("bundled demonstrations explain all outcomes without entering scan history"
       .getByRole("button")
       .filter({ hasText: state })
       .click();
-    await expect(page.locator(".verdict-panel .badge")).toHaveText(state);
+    await expect(
+      page.locator(".verdict-panel .decision-mark strong"),
+    ).toHaveText(state);
     await expect(
       page.getByText("SYNTHETIC DEMONSTRATION", { exact: true }),
     ).toBeVisible();
@@ -472,6 +516,7 @@ test("bundled demonstrations explain all outcomes without entering scan history"
 test("Mac readiness explains usable static scans without requiring a Linux host", async ({
   page,
 }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/#/environment");
   await expect(
     page.getByRole("heading", { name: "Know your environment." }),
@@ -488,4 +533,200 @@ test("Mac readiness explains usable static scans without requiring a Linux host"
   await expect(page.locator("main")).not.toContainText(
     "Use the supported Linux workflow",
   );
+  const environmentA11y = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+    .analyze();
+  expect(environmentA11y.violations).toEqual([]);
+  await page.screenshot({
+    path: test.info().outputPath("environment-1440.png"),
+    fullPage: true,
+  });
+});
+
+test("Paper and Night themes use local preference without affecting evidence", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/#/");
+  const appearance = page.getByRole("combobox", { name: "Appearance" });
+  await appearance.selectOption("paper");
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () => getComputedStyle(document.documentElement).backgroundColor,
+      ),
+    )
+    .toBe("rgb(243, 241, 234)");
+  await page.screenshot({
+    path: test.info().outputPath("overview-paper.png"),
+    fullPage: true,
+  });
+  await appearance.selectOption("night");
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () => getComputedStyle(document.documentElement).backgroundColor,
+      ),
+    )
+    .toBe("rgb(14, 19, 25)");
+  await expect(
+    page.getByRole("heading", { name: "Your local review bench." }),
+  ).toBeVisible();
+  await page.screenshot({
+    path: test.info().outputPath("overview-night.png"),
+    fullPage: true,
+  });
+  const nightA11y = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+    .analyze();
+  expect(nightA11y.violations).toEqual([]);
+  expect(await page.evaluate(() => Object.keys(localStorage))).toEqual([
+    "modelvet-theme",
+  ]);
+});
+
+test("Hugging Face URL setup submits explicit source and rejects unsupported hosts", async ({
+  page,
+}, info) => {
+  await page.goto("/#/scan");
+  await expect(
+    page.getByRole("button", { name: "Hugging Face URL", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByLabel("Hugging Face model URL")).toBeVisible();
+  await expect(
+    page.getByText("Public repositories need no API key.", { exact: false }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("checkbox", { name: /Use the server/ }),
+  ).toBeDisabled();
+  await page
+    .getByLabel("Hugging Face model URL")
+    .fill("https://evil.example/owner/model");
+  await page.getByRole("button", { name: "Start scan", exact: true }).click();
+  await expect(
+    page.getByText("Check the request fields and reviewed limits."),
+  ).toBeVisible();
+  await expect(page.locator(".verdict-panel")).toHaveCount(0);
+  await page
+    .getByLabel("Hugging Face model URL")
+    .fill("https://huggingface.co/example/model");
+  await page.getByLabel("Revision", { exact: false }).fill("refs/pr/1");
+  const a11y = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+    .analyze();
+  expect(a11y.violations).toEqual([]);
+  await page.evaluate(() => {
+    (document.activeElement as HTMLElement)?.blur();
+    window.scrollTo(0, 0);
+  });
+  await page.screenshot({
+    path: info.outputPath("hugging-face-setup-1440.png"),
+    fullPage: true,
+  });
+  await page.route("**/api/v1/scans", async (route) => {
+    const body = route.request().postDataJSON();
+    expect(body.hub_url).toBe("https://huggingface.co/example/model");
+    expect(body.model_path).toBe("");
+    expect(body.revision).toBe("refs/pr/1");
+    expect(body.use_hf_token).toBe(false);
+    await route.fulfill({
+      status: 202,
+      json: {
+        id: "a".repeat(32),
+        label: body.hub_url,
+        hub_url: body.hub_url,
+        status: "running",
+        stage: "hub_inventory",
+        started_at: new Date().toISOString(),
+        elapsed_seconds: 0,
+      },
+    });
+  });
+  await page.route("**/api/v1/scans/" + "a".repeat(32), (route) =>
+    route.fulfill({
+      json: {
+        id: "a".repeat(32),
+        label: "https://huggingface.co/example/model",
+        hub_url: "https://huggingface.co/example/model",
+        status: "failed",
+        stage: "hub_inventory",
+        error_code: "HUB_ACCESS_FAILED",
+        started_at: new Date().toISOString(),
+        elapsed_seconds: 1,
+      },
+    }),
+  );
+  await page.getByRole("button", { name: "Start scan", exact: true }).click();
+  await expect(
+    page.getByText(/repository or revision could not be accessed/),
+  ).toBeVisible();
+  await expect(page.locator(".verdict-panel")).toHaveCount(0);
+});
+
+test("v2 Hub report imports with pinned source and every retrieval gap", async ({
+  page,
+}, info) => {
+  await page.goto("/#/history");
+  await page
+    .getByLabel("Choose report JSON")
+    .setInputFiles(
+      new URL("../test-results/hub-report.json", import.meta.url).pathname,
+    );
+  await expect(page.getByLabel("Hugging Face source")).toContainText(
+    "synthetic/browser-fixture",
+  );
+  await expect(page.getByLabel("Hugging Face source")).toContainText(
+    "a".repeat(40),
+  );
+  await expect(page.locator(".verdict-panel")).toContainText("INSUFFICIENT");
+  await page.getByRole("tab", { name: "Hub retrieval", exact: true }).click();
+  await expect(
+    page.getByText("z-large.safetensors", { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText("OVERSIZED", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Inspect record" }).last().click();
+  await page.getByText("Open raw JSON", { exact: true }).click();
+  await expect(page.getByLabel("Evidence inspector")).toContainText(
+    "structural:safetensors",
+  );
+  await page.screenshot({
+    path: info.outputPath("hugging-face-report-1440.png"),
+    fullPage: true,
+  });
+  const a11y = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+    .analyze();
+  expect(a11y.violations).toEqual([]);
+  await page.setViewportSize({ width: 1024, height: 768 });
+  await page.evaluate(() => window.scrollTo(0, 0));
+  const decisionBox = await page.locator(".verdict-panel").boundingBox();
+  expect(decisionBox!.y + decisionBox!.height).toBeLessThanOrEqual(768);
+});
+
+test("Hugging Face source form fits mobile and tablet without overflow", async ({
+  page,
+}, info) => {
+  for (const width of [375, 768]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/#/scan");
+    await expect(page.getByLabel("Hugging Face model URL")).toBeVisible();
+    await page
+      .getByLabel("Hugging Face model URL")
+      .fill("https://huggingface.co/example/model");
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth),
+    ).toBeLessThanOrEqual(width);
+    const a11y = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+    expect(a11y.violations).toEqual([]);
+    await page.evaluate(() => {
+      (document.activeElement as HTMLElement)?.blur();
+      window.scrollTo(0, 0);
+    });
+    await page.screenshot({
+      path: info.outputPath(`hugging-face-setup-${width}.png`),
+      fullPage: true,
+    });
+  }
 });

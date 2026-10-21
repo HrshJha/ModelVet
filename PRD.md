@@ -3,16 +3,16 @@
 | Field | Value |
 |---|---|
 | Document version | `0.1.0-draft` |
-| Status | **Mac-first local preview; engineering gates apply; research is deferred** |
+| Status | **Mac preview published; Hub URL CLI/Workbench candidate implemented locally** |
 | Updated | 2026-10-21 |
 | Development stage | Mac-first static CLI and Workbench preview published as v0.1.0-mac-preview.1; merged-main macOS CI passed; PH-08 independent comparison and PH-11 loader research deferred |
 | Product | Open-source local AI model artifact security and admission verification |
 | Authority | Primary source of truth for requirements; `docs/DECISIONS.md` for why |
-| Scope | Mac-first local static CLI and Workbench; benchmark/loader research deferred |
+| Scope | Published Mac-first local static CLI and Workbench. Proposed next release: local CLI with Hugging Face model-repository URL as primary input and local directory as secondary input. Benchmark/loader research deferred. |
 
 ## 1. Executive summary
 
-ModelVet is to be a local Python CLI that inventories an untrusted model directory, assesses bounded local formats and local claims, runs an optional but policy-required existing scanner, **independently accounts for required-check coverage**, and produces an auditable policy decision. It does not promise to certify model safety or determine license legality. Its experimental differentiator is whether independently recorded file coverage and, later, loader-context evidence identify materially missed assessments. This is a **research hypothesis**, not a demonstrated competitive advantage.
+The published preview is a local Python CLI and optional Workbench that assesses a user-supplied local directory. The proposed next release makes a Hugging Face model-repository URL the primary input: resolve and pin a repository commit, inventory before retrieving content, selectively fetch bounded files, and hand the private snapshot to the existing static assessment pipeline. Local directories remain a secondary input. Both paths independently account for required-check coverage and produce the same deterministic policy contract. ModelVet does not promise to certify model safety or determine license legality. Its experimental differentiator remains a **research hypothesis**, not a demonstrated competitive advantage.
 
 ## 2. Problem, users and evidence
 
@@ -26,7 +26,7 @@ ModelVet is to be a local Python CLI that inventories an untrusted model directo
 
 **Release goals:** stable local identity; zero silent promotions of mandatory failed checks; attributable per-file evidence; deterministic policy evaluation; safe bounded structural parsers; output fit for humans and CI; reproducible benign/adversarial *non-executable* tests; benchmark capable of disproving incremental advantage.
 
-**Not in MVP:** universal malware detection, malicious model execution, remote Hub downloads, hosted service, web UI, database server, Kubernetes, model poisoning/backdoor inference evaluation, real-time feed polling, an LLM judge, automatic legal clearance, team billing or startup metrics. P1 adds optional offline advisory enrichment and external benchmark. P2 may add *explicitly authorized, isolated* loader testing after a security gate; P2 is not part of the first release.
+**Not in the published v0.1.0 Mac preview:** remote Hub downloads, hosted service, model execution, universal malware detection, Kubernetes, model poisoning/backdoor inference evaluation, real-time feed polling, an LLM judge or automatic legal clearance. The proposed next release adds bounded Hugging Face model-repository retrieval in the local CLI only; it does not add remote execution, hosted scanning, a dashboard requirement, or automatic full-repository downloads. P1 offline advisory enrichment and independent benchmark work remain separate. P2 may add *explicitly authorized, isolated* loader testing only after its security gate.
 
 ## 4. Target user journeys
 
@@ -39,6 +39,7 @@ ModelVet is to be a local Python CLI that inventories an untrusted model directo
 | Conflicting license | README vs config | Two sourced declarations + conflict record | Decision depends on policy; no false legal claim |
 | Reviewer decision | Policy + evidence | Deterministic rule IDs and precedence | Unknown mandatory predicate is insufficient |
 | Benchmark researcher | Fixed fixture set + baselines | Compare coverage/detection with ground truth | Unsupported baseline omitted from paired analysis |
+| Hugging Face preflight (proposed) | Exact Hugging Face model URL, optional revision, policy | Resolve commit → inventory → selective bounded retrieval → existing static assessment → report | Auth/access, revision, limits, unsupported files or incomplete scanner proof remain explicit; no approval from missing evidence |
 
 **Normal flow:** validate canonical input and output separation → create bounded read-only snapshot → inventory + content hashes → classify → structural/metadata/dependency checks → optional ModelScan subprocess → normalize raw evidence → reconcile expected/applied/completed checks → conflict resolution → evaluate policy → serialize reports → verify original identity unchanged. **Degraded flow:** scanner unavailable or unsupported file records explicit coverage gaps and `INSUFFICIENT`. **Failure flow:** untrusted input/exhausted resources yields a controlled error; if an evidence report can be safely produced, its status is insufficient, never fabricated approval.
 
@@ -76,6 +77,12 @@ P0 = essential first release, P1 = validated follow-up, P2 = gated research. The
 | FR-026 | Visual developer review | P1 | Setup, actual progress, coverage/evidence, deterministic guidance, imports and comparison | `Workbench UI` | `MV-039–041` | `T-UI-FLOW-01` |
 | FR-027 | Packaged workbench acceptance | P1 | Bundled offline assets, browser/fault tests, supported CI and installed-package acceptance | `Distribution` | `MV-042–044` | `T-UI-RELEASE-01` |
 | FR-028 | Mac-first completion scope | P1 | Complete local macOS product without Linux/KVM or research gates; retain mandatory evidence semantics | `Distribution` | `MV-045` | `T-MAC-01` |
+| FR-029 | Validate Hugging Face model URL and optional local authentication | P1 next release | Exact-host model URLs only; reject ambiguity; never expose credentials | `HubReference` | `MV-046` | `T-HF-URL-01` |
+| FR-030 | Resolve immutable revision and inventory repository | P1 next release | Resolve a full commit before listing; record file inventory and upstream metadata claims | `HubInventory` | `MV-047` | `T-HF-INV-01` |
+| FR-031 | Selectively retrieve with bounded resources | P1 next release | Explicit inventory paths only; bounded streaming, temporary storage, retries and omissions | `HubRetrieval` | `MV-048` | `T-HF-FETCH-01` |
+| FR-032 | Verify retrieved bytes and revision-aware cache | P1 next release | Hash received bytes; reject partial/mismatched content; cache disabled until separately accepted | `HubIntegrity` | `MV-049` | `T-HF-INTEGRITY-01` |
+| FR-033 | Assess remote snapshot with existing checks and coverage | P1 next release | Same static checks and policy as local scans; account for every required `(file, check)` | `ScanService/Coverage` | `MV-050–051` | `T-HF-COV-01` |
+| FR-034 | Report remote identity, retrieval and limitations | P1 next release | Include URL/repo/revisions, inventory, local hashes, failures, coverage and limitation | `Reports/CLI` | `MV-052–053` | `T-HF-E2E-01` |
 
 ### Requirement contracts
 
@@ -143,6 +150,10 @@ P0 = essential first release, P1 = validated follow-up, P2 = gated research. The
 **Responsible:** ModelVet core/CLI maintainer; consumer: local developer or security reviewer. **Preconditions:** artifact directory available, dependency and configuration validated; for P2, isolated runner explicitly provisioned. **Inputs:** bounded local bytes, typed policy and optional tool/metadata records applicable to this check. **Behavior:** Show observed v1/v2 behavioral differences on independently checked controlled fixtures. **Outputs:** versioned evidence with source, check status and any limitation. **Failure:** record the reason with an `ERROR`, `FAILED`, `SKIPPED`, `UNSUPPORTED`, or `INCONCLUSIVE` status; a mandatory failure cannot become an approval. **Acceptance:** `T-VERSION-01` contains positive, negative and partial-result cases; output validates schema; re-running with identical frozen inputs has the same semantic result. **Implementation component:** `Verification`; **task:** `MV-031`. **Dependencies:** inventory/identity and evidence contracts for applicable consumers; see TASKS for precise ordering.
 
 
+### Proposed next-release requirements — Hugging Face model repositories
+
+FR-029–FR-034 describe a new local URL-ingestion capability, not behavior of published v0.1.0. Normative URL/auth/revision/retrieval/resource/evidence/acceptance details are in [HUB_ASSESSMENT_SPEC](docs/HUB_ASSESSMENT_SPEC.md). Missing required inventory or scanner proof remains `INSUFFICIENT`; URL retrieval cannot relax existing policy. Task and test IDs are proposed until implementation. Public repositories need no token. Private/gated access may use only the user's explicitly selected local Hugging Face token or `HF_TOKEN`; no API key is gathered or disclosed by this specification update.
+
 ## 6. Non-functional requirements
 
 | NFR | Quality bar | Verification |
@@ -150,7 +161,7 @@ P0 = essential first release, P1 = validated follow-up, P2 = gated research. The
 | NFR-01 security | Zero model deserialization or arbitrary repo-code import in ordinary process; no shell interpolation | Static review + hostile-fixture integration test |
 | NFR-02 fail closed | Mandatory status other than `COMPLETE` prevents `APPROVE` and `CONTROLS`, absent explicit independent blocking evidence | Property tests of all status combinations |
 | NFR-03 integrity | File and repository digest bound to output; input mutation detected before decision is finalized | Induced mid-scan modification test |
-| NFR-04 budgets | Proposed defaults: ≤10,000 files, ≤1 GiB individual file, ≤2 GiB aggregate, ≤16 MiB metadata read, 120s scanner timeout; all configurable below hard ceilings | Synthetic sizes + timeout tests; performance to be measured |
+| NFR-04 budgets | Local limits remain ≤10,000 files, ≤1 GiB individual file, ≤2 GiB aggregate, ≤16 MiB metadata read, 120s scanner timeout. Proposed Hub transfer limits are separately specified and explicitly unmeasured in `HUB_ASSESSMENT_SPEC.md`; values may not exceed reviewed hard ceilings | Synthetic sizes + timeout tests; transfer performance to be measured |
 | NFR-05 determinism | Canonical semantic report excluding observation timestamps/run IDs byte-identical from frozen evidence/policy | Repeat-evaluation digest test |
 | NFR-06 portability | POSIX Linux/macOS for pure static MVP; Windows unsupported until tested; P2 Linux KVM only | OS CI matrix and doctor capability matrix |
 | NFR-07 maintainability | No mandatory paid API/cloud/database; strict type boundaries; modular monolith | Dependency review and import-cycle check |
@@ -159,6 +170,7 @@ P0 = essential first release, P1 = validated follow-up, P2 = gated research. The
 | NFR-10 observability | Bounded structured logs with secrets/path redaction; debug does not dump model contents | Log privacy fixtures |
 | NFR-11 testability | Unit + property + adapter contract + E2E + fixture integrity checks; targets proposed not achieved | Coverage measured at gate; security cases assessed separately |
 | NFR-12 dependency safety | Lockfile committed after resolution, scanner pinned and smoke-tested; report exact versions | `uv lock --check`, vulnerability scan, compatibility test |
+| NFR-13 remote ingestion (proposed P1) | Local-only CLI, exact Hub model URLs, immutable commit, explicit selected-file downloads, per-hop network controls, local hashes, no secret exposure; disabled unless all controls are testable | `T-HF-NET-01`, `T-HF-RESOURCE-01`, `T-HF-E2E-01` |
 
 **Targets are engineering budgets, not measured throughput or security guarantees.** Reject over-budget input deterministically rather than silently truncating evidence. For larger real models, re-evaluate budgets before expanding scope.
 
@@ -203,6 +215,8 @@ Illustrative, **not a real scan result**:
 | Condition | Output/check status | Decision/error |
 |---|---|---|
 | Missing input / not directory | No scan | exit 40 |
+| Invalid/unsupported Hub URL, revision conflict, unresolved/inaccessible repository or explicit-auth failure | No completed remote assessment; do not silently switch identity/account | exit 40; never approval |
+| Hub inventory/download cap, unavailable file, partial transfer, revision/hash mismatch, or network controls unavailable | Preserve discovered row/reason where possible; unresolved required pairs | report `INSUFFICIENT`, exit 30; if no trustworthy report, exit 50 |
 | Symlink, FIFO, socket, device / path escape | Input rejection | exit 40 or insufficient report if safely attributable |
 | Too many files / bytes | Input rejection | exit 40; no partial approval |
 | Hash changes during snapshot/scan | `FAILED` identity | `INSUFFICIENT`, exit 30 |
@@ -249,3 +263,8 @@ PH-15–17 add a local browser application for ML developers, backed by the exis
 The maintainer explicitly requested focusing on the available Mac and changing requirements that block that delivery. The current deliverable is the local static CLI and Workbench on macOS, with local arm64 and hosted Intel evidence. Linux/KVM loader research (FR-018/021, PH-11) and independently adjudicated benchmark comparison (FR-017, PH-08 research) are deferred and do not block this limited preview. They are not completed or supported features. Historical Linux static results remain evidence of those runs, not a requirement to acquire a Linux host.
 
 FR-028 requires a Mac-only release CI gate, scoped readiness/guidance, an installed-package synthetic workflow and truthful completion records. Required unavailable scanner resource checks remain unresolved; serialized inputs cannot APPROVE merely because this is a Mac release. No host model execution, default-policy weakening, fabricated review/benchmark evidence or broad safety claim is permitted. The limited Mac preview uses internal engineering review and explicit documented limitations; independent certification and a later general public release remain separate. See docs/MAC_RELEASE_SPEC.md and MV-045.
+
+
+## FR-029–034 implementation candidate — 2026-10-21
+
+The maintainer explicitly requested implementation and a direct Workbench URL input. The working tree now supports Hub URLs in CLI and authenticated local Workbench through a strict stdlib HTTPS transport, commit-pinned bounded inventory/retrieval, existing static engine and report v2. No new dependency is required; explicit environment HF_TOKEN is the initial private/gated credential source. Local-folder reports retain v1. The published Mac preview does not acquire this feature until separately packaged/released. HUB_ASSESSMENT_SPEC is the current implemented contract; PROGRESS records observed acceptance. No loader, benchmark certification, hosted service or new public release is implied.

@@ -20,6 +20,7 @@ from modelvet.workbench.paths import write_private
 from modelvet.workbench.store import Store
 
 Section = Literal[
+    "retrieval",
     "files",
     "checks",
     "coverage",
@@ -68,7 +69,9 @@ def evidence_page(
     ):
         raise InvalidInput("Invalid evidence file identifier.")
     rows: list[dict[str, Any]]
-    if section == "references":
+    if section == "retrieval":
+        rows = [row.model_dump(mode="json") for row in report.source.files] if report.source else []
+    elif section == "references":
         rows = [{"id": key, "pointer": value} for key, value in sorted(report.references.items())]
     else:
         rows = [row.model_dump(mode="json") for row in getattr(report, section)]

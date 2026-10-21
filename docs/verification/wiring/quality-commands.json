@@ -1,0 +1,90 @@
+[
+  {
+    "command": [
+      "uv",
+      "lock",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.016,
+    "log": "lock.log",
+    "finished_at": "2026-10-21T17:43:07.291047+00:00"
+  },
+  {
+    "command": [
+      "uv",
+      "run",
+      "--extra",
+      "ui",
+      "ruff",
+      "check",
+      "."
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.032,
+    "log": "lint.log",
+    "finished_at": "2026-10-21T17:43:07.323631+00:00"
+  },
+  {
+    "command": [
+      "uv",
+      "run",
+      "--extra",
+      "ui",
+      "ruff",
+      "format",
+      "--check",
+      "."
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.025,
+    "log": "format.log",
+    "finished_at": "2026-10-21T17:43:07.348849+00:00"
+  },
+  {
+    "command": [
+      "uv",
+      "run",
+      "--extra",
+      "ui",
+      "ruff",
+      "check",
+      "src",
+      "--select",
+      "S"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.023,
+    "log": "security.log",
+    "finished_at": "2026-10-21T17:43:07.371798+00:00"
+  },
+  {
+    "command": [
+      "uv",
+      "run",
+      "--extra",
+      "ui",
+      "mypy",
+      "src"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.29,
+    "log": "mypy.log",
+    "finished_at": "2026-10-21T17:43:07.661814+00:00"
+  },
+  {
+    "command": [
+      "uv",
+      "run",
+      "--extra",
+      "ui",
+      "python",
+      "tools/workbench_schema.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.292,
+    "log": "schema.log",
+    "finished_at": "2026-10-21T17:43:07.954123+00:00"
+  }
+]

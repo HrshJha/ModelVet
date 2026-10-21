@@ -1,5 +1,7 @@
 # ModelVet
 
+**Current release:** `v0.1.0-mac-preview.1` scans local model directories only. Hugging Face model-repository URL scanning is a proposed next-release workflow documented in [the Hub assessment specification](docs/HUB_ASSESSMENT_SPEC.md); it is not implemented in this release. Public Hub repositories do not require an API key. Private/gated access, if implemented, will use only explicit local Hugging Face authentication and will never ask contributors to collect or publish token values.
+
 Local static assessment of model artifacts, with independent coverage, deterministic admission rules and private JSON/Markdown reports.
 
 **Status:** Mac-first local static CLI and Workbench preview. Current targets are local macOS arm64 and hosted macOS 15 Intel with Python 3.12.15. Windows is unsupported; Linux is outside the current release support promise. Independent benchmark validation and Linux/KVM loader research are deferred and do not block this scoped preview. No independently reviewed benchmark or model-loading experiment has been performed. The synthetic development pilot remains INCONCLUSIVE.
@@ -111,3 +113,7 @@ Start with [PRD](PRD.md), [architecture](docs/ARCHITECTURE.md), [threat model](d
 ## Current completion boundary
 
 The maintainer explicitly narrowed this delivery to the available Mac. Engineering/package acceptance completes the local preview; PH-08 independent comparison and PH-11 Linux/KVM trials are deferred future research, not prerequisites to using this product. Internal review is not independent certification. Existing unsafe-path, missing-evidence and scanner-resource behavior remains unchanged. See [Mac release contract](docs/MAC_RELEASE_SPEC.md).
+
+### Hugging Face URL scanning — working-tree candidate
+
+The current source also accepts a model-repository URL: `uv run modelvet scan https://huggingface.co/owner/model --out /safe/reports`. In Workbench select **New scan → Hugging Face URL**. Public repositories need no API key; private/gated access supports explicitly selected local HF_TOKEN. It resolves a commit, inventories and downloads bounded files, then runs the same static engine. Report v2 retains every retrieval gap; incomplete required evidence remains INSUFFICIENT. Local-folder output stays v1. See [the implemented Hub contract](docs/HUB_ASSESSMENT_SPEC.md) and [Workbench instructions](docs/WORKBENCH_GUIDE.md). This addition has not been published in the earlier Mac preview release.

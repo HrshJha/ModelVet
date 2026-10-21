@@ -1,9 +1,6 @@
 import {
-  Activity,
   ArrowRight,
   ArrowUpRight,
-  CircleAlert,
-  Command,
   Cpu,
   FolderOpen,
   GitCompareArrows,
@@ -21,15 +18,14 @@ import {
   api,
   connect,
   navigate,
-  formatBytes,
   type Capabilities,
   type HistoryPage,
   type Job,
   type Summary,
 } from "./api";
 import {
-  Badge,
   Brand,
+  DecisionMark,
   Empty,
   Notice,
   PageHeading,
@@ -60,6 +56,120 @@ function useRoute() {
   return route;
 }
 
+type ThemeChoice = "system" | "paper" | "night";
+
+function useTheme(): [ThemeChoice, (value: ThemeChoice) => void] {
+  const [choice, setChoice] = useState<ThemeChoice>(() => {
+    try {
+      const stored = localStorage.getItem("modelvet-theme");
+      return stored === "paper" || stored === "night" ? stored : "system";
+    } catch {
+      return "system";
+    }
+  });
+  useEffect(() => {
+    document.documentElement.dataset.theme = choice;
+    try {
+      if (choice === "system") localStorage.removeItem("modelvet-theme");
+      else localStorage.setItem("modelvet-theme", choice);
+    } catch {
+      // Theme selection still works for this page when storage is unavailable.
+    }
+  }, [choice]);
+  return [choice, setChoice];
+}
+
+function OverviewSpecimen({ onOpen }: { onOpen: (id: string) => void }) {
+  const [sample, setSample] = useState<Summary | null>(null);
+  useEffect(() => {
+    const controller = new AbortController();
+    api<Summary[]>("/demos", undefined, controller.signal)
+      .then((reports) =>
+        setSample(
+          reports.find((report) => report.decision === "INSUFFICIENT") || null,
+        ),
+      )
+      .catch(() => setSample(null));
+    return () => controller.abort();
+  }, []);
+  if (!sample) {
+    return (
+      <div className="specimen-unavailable" role="status">
+        Synthetic demonstration details are unavailable. No sample evidence is
+        being substituted.
+      </div>
+    );
+  }
+  return (
+    <section className="specimen-card" aria-label="Synthetic report specimen">
+      <div className="specimen-head">
+        <span>SPECIMEN / INERT DEMONSTRATION</span>
+        <span>V1 REPORT</span>
+      </div>
+      <div className="specimen-rail" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+        <i />
+      </div>
+      <button
+        className="specimen-slice specimen-manifest"
+        onClick={() => onOpen(sample.id)}
+      >
+        <span className="slice-index">01</span>
+        <span className="slice-copy">
+          <small>MANIFEST</small>
+          <strong>{sample.label}</strong>
+          <code>
+            sha256:{sample.manifest_digest.replace(/^sha256:/, "").slice(0, 16)}
+            …
+          </code>
+        </span>
+      </button>
+      <button
+        className="specimen-slice specimen-inventory"
+        onClick={() => onOpen(sample.id)}
+      >
+        <span className="slice-index">02</span>
+        <span className="slice-copy">
+          <small>INVENTORY</small>
+          <strong>{sample.file_count} files recorded</strong>
+          <code>Identity and format claims</code>
+        </span>
+      </button>
+      <button
+        className="specimen-slice specimen-coverage"
+        onClick={() => onOpen(sample.id)}
+      >
+        <span className="slice-index">03</span>
+        <span className="slice-copy">
+          <small>REQUIRED COVERAGE</small>
+          <strong>
+            {sample.required_complete} / {sample.required_total} complete
+          </strong>
+          <code>Remaining evidence is unresolved</code>
+        </span>
+      </button>
+      <button
+        className="specimen-slice specimen-decision"
+        onClick={() => onOpen(sample.id)}
+      >
+        <span className="slice-index">04</span>
+        <span className="slice-copy">
+          <small>POLICY DECISION</small>
+          <DecisionMark state={sample.decision} />
+        </span>
+      </button>
+      <div className="specimen-foot">
+        <span>Generated inert bytes · not a trained model</span>
+        <button onClick={() => onOpen(sample.id)}>
+          Open this report <ArrowUpRight size={13} />
+        </button>
+      </div>
+    </section>
+  );
+}
+
 function Overview({
   history,
   capabilities,
@@ -73,113 +183,62 @@ function Overview({
   return (
     <>
       <div className="overview-kicker">
-        <span className="live-dot" />
-        YOUR LOCAL MODEL WORKBENCH
-        <span className="version-tag">STATIC · V1</span>
+        <span className="index-marker">01</span>
+        LOCAL REVIEW BENCH
+        <span className="version-tag">STATIC ASSESSMENT</span>
       </div>
       <section className="hero">
         <div>
-          <h1>
-            Evidence before
-            <br />
-            <span>execution.</span>
-          </h1>
+          <h1>Your local review bench.</h1>
           <p>
-            Know what was checked, what wasn’t,
-            <br className="desktop-break" /> and why. Every verdict, backed by a
-            trail.
+            Static evidence, not a safety certificate. See what was checked,
+            what wasn’t, and why the recorded policy decided as it did.
           </p>
           <div className="hero-actions">
             <button className="primary" onClick={() => navigate("/scan")}>
               <Plus size={16} />
-              New scan
+              Start a scan
               <ArrowRight size={16} />
             </button>
-            <span className="hero-note">
-              <ShieldCheck size={15} />
-              Your files stay local
-            </span>
+            <button
+              className="text-button"
+              onClick={() =>
+                document
+                  .getElementById("demonstrations")
+                  ?.scrollIntoView({ behavior: "auto" })
+              }
+            >
+              Explore the four outcomes <ArrowRight size={14} />
+            </button>
           </div>
+          <p className="overview-boundary">
+            No model loading · Hub or local files · no legal clearance
+          </p>
         </div>
-        <div className="evidence-card">
-          <div className="evidence-card-top">
-            <span className="mono">THE REVIEW CHAIN</span>
-            <span className="tiny-dots">
-              <i />
-              <i />
-              <i />
-            </span>
-          </div>
-          <div className="evidence-artifact">
-            <span className="artifact-glyph">
-              <ScanLine size={26} />
-            </span>
-            <div>
-              <strong>One artifact. Every required check.</strong>
-              <p>Exact bytes · explicit scope</p>
-            </div>
-          </div>
-          <div className="review-chain">
-            <div>
-              <span>01</span>
-              <strong>Identity</strong>
-              <small>SHA-256 manifest</small>
-            </div>
-            <div>
-              <span>02</span>
-              <strong>Evidence</strong>
-              <small>Structure + declarations</small>
-            </div>
-            <div>
-              <span>03</span>
-              <strong>Decision</strong>
-              <small>Versioned policy</small>
-            </div>
-          </div>
-          <div className="evidence-card-footer">
-            <CircleAlert size={13} />
-            Unresolved evidence stays unresolved.
-          </div>
-        </div>
+        <OverviewSpecimen onOpen={(id) => navigate("/reports/" + id)} />
       </section>
-      <div className="metrics-grid">
-        <div className="metric">
-          <span>
-            Saved reports
-            <History size={15} />
-          </span>
-          <strong>{ready ? history.total.toLocaleString() : "—"}</strong>
-          <small>Private, persistent local history</small>
-        </div>
-        <div className="metric">
-          <span>
-            Latest decision
-            <Activity size={15} />
-          </span>
-          <strong className="metric-decision">
-            {latest ? <Badge state={latest.decision} /> : "—"}
+      <div className="overview-facts">
+        <div>
+          <span>LOCAL FILES</span>
+          <strong>
+            {capabilities?.models_root_label || "Restricted model root"}
           </strong>
-          <small>
-            {latest ? latest.label : "Run a scan to start your evidence trail"}
-          </small>
         </div>
-        <div className="metric">
-          <span>
-            Scanner availability
-            <Cpu size={15} />
-          </span>
-          <strong className="scanner-label">
+        <div>
+          <span>MODELSCAN</span>
+          <strong>
             {capabilities
               ? capabilities.scanner_available
-                ? "Available"
-                : "Not found"
-              : "Checking…"}
+                ? `Available · ${capabilities.scanner_version}`
+                : "Not installed"
+              : "Checking readiness…"}
           </strong>
-          <small>
-            {capabilities?.scanner_available
-              ? `ModelScan ${capabilities.scanner_version}`
-              : "Safetensors checks do not require ModelScan"}
-          </small>
+        </div>
+        <div>
+          <span>SAVED REPORTS</span>
+          <strong>
+            {ready ? history.total.toLocaleString() : "Reading local history…"}
+          </strong>
         </div>
       </div>
       <section className="panel recent-panel">
@@ -199,17 +258,19 @@ function Overview({
           <ReportTable reports={history.items.slice(0, 5)} />
         ) : (
           <Empty
-            title="Your first evidence trail starts here."
-            description="Select a local model folder to create a reproducible static assessment."
+            title="No scans saved yet"
+            description="Paste a Hugging Face model URL or choose a local folder to create a report. You can also explore an inert demonstration."
           >
             <button className="secondary" onClick={() => navigate("/scan")}>
-              Choose a model folder
+              Choose a model source
               <ArrowRight size={15} />
             </button>
           </Empty>
         )}
       </section>
-      <DemoGallery />
+      <div id="demonstrations">
+        <DemoGallery />
+      </div>
       <section className="bottom-notes">
         <div>
           <span className="note-icon">
@@ -370,6 +431,7 @@ function JumpDialog({ onClose }: { onClose: () => void }) {
 
 export default function App() {
   const route = useRoute();
+  const [theme, setTheme] = useTheme();
   const [connected, setConnected] = useState(false);
   const [sessionError, setSessionError] = useState("");
   const [error, setError] = useState("");
@@ -527,6 +589,9 @@ export default function App() {
       ) : (
         <ScanSetup
           capabilities={capabilities}
+          initialUrl={
+            new URLSearchParams(route.split("?")[1] || "").get("url") || ""
+          }
           initialPath={
             new URLSearchParams(route.split("?")[1] || "").get("model") || ""
           }
@@ -627,6 +692,20 @@ export default function App() {
             </strong>
           </span>
           <div className="topbar-actions">
+            <label className="theme-control">
+              <span className="sr-only">Appearance</span>
+              <select
+                aria-label="Appearance"
+                value={theme}
+                onChange={(event) =>
+                  setTheme(event.target.value as ThemeChoice)
+                }
+              >
+                <option value="system">System</option>
+                <option value="paper">Paper</option>
+                <option value="night">Night</option>
+              </select>
+            </label>
             <button
               className="jump-button"
               aria-label={`Jump to… ${shortcut}`}

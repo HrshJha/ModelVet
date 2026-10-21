@@ -27,9 +27,11 @@ try {
   });
   await page.goto(origin);
   await page
-    .getByRole("heading", { name: "Evidence before execution." })
+    .getByRole("heading", { name: "Your local review bench." })
     .waitFor();
   await page.getByRole("link", { name: "New scan N", exact: true }).click();
+  await expect(page.getByLabel("Hugging Face model URL")).toBeVisible();
+  await page.getByRole("button", { name: "Local folder", exact: true }).click();
   await page.getByRole("button", { name: "Browse folders" }).click();
   await page.getByRole("button", { name: "tiny", exact: true }).click();
   await page.getByRole("button", { name: "Use this folder" }).click();

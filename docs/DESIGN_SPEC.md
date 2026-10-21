@@ -65,3 +65,9 @@ A dashboard adds authentication, storage, browser sanitization and operational r
 ## Journey acceptance checks
 
 For each `scan`, `inspect`, `policy validate`, `doctor`, `version`: verify interactive and `CI=1` output; on success and failure show exact source of decision; verify JSON parseability with `--json-summary`; no prompts; errors on stderr; no untrusted code loaded; preserved policy/version/identity. Tests `T-CLI-01`, `T-E2E-01`, `T-REPORT-01`.
+
+## Proposed primary Hub journey — PH-19/20
+
+The next proposed CLI experience is `modelvet scan https://huggingface.co/owner/model-name --revision <ref>`; the existing directory argument remains secondary and backward-compatible. The UI remains optional and is not expanded to remote scanning by this proposal. User-facing stages must be truthful and ordered: validate reference → resolve immutable revision → inventory → selected retrieval → local checks → coverage/policy → report. Show the resolved commit and list omitted/unsupported/unavailable files. Only display retrieved/assessed after that exact step completed; decision is independent and may be any of four states.
+
+Public URL requires no secret. Private/gated repositories show an actionable local-authentication message without prompting or exposing credentials. Never offer “collect all API keys.” Each retrieval limit and skipped file is visible; recommended next actions cannot silently widen fetch scope or synthesize checks. Full interaction/errors/limits are in `HUB_ASSESSMENT_SPEC.md` and proposed CLI syntax in `CLI_SPEC.md`.

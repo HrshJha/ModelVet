@@ -114,3 +114,25 @@ The separate `advisories-v1.json` schema defines `AdvisoryDocument`: assessment 
 ## Stored-report audit records — v1
 
 Four additional packaged schemas describe separate audit data, without changing report-v1: `report-audit-v1.json`, `report-comparison-v1.json`, `report-batch-manifest-v1.json`, `report-batch-audit-v1.json`. ReportAudit binds exact report bytes, artifact and semantic identities to attachment states/counts. ReportComparison separates byte/semantic/policy/artifact equality and bounded changed-file/check rows. BatchAudit retains input-order hashed path IDs, per-row evidence/errors and aggregate budgets/counts. Validators reject aggregate success inconsistent with row evidence. Each result explicitly fixes admission_recomputed to false; byte verification is distinct from an admission state or author attestation.
+
+## Proposed Hub source and retrieval records — FR-029–034
+
+The current report-v1 strict closed shape does not yet define remote inventory/retrieval rows. Do not squeeze ad hoc remote fields into it without compatibility analysis. Before implementation, choose either additive optional `source`/file retrieval structures proven compatible with all readers or a new report schema major with explicit old-report inspect/compare/audit fixtures. The semantic digest must bind source kind, canonical repository ID, resolved full commit, ordered inventory identities, local hashes for fetched files, coverage states, policy/effective digest, tool versions and normalized results. Timestamp/run ID stays outside as implemented today; original URL is provenance context, not artifact identity.
+
+Proposed records:
+
+| Entity | Required fields | Semantics / missing data |
+|---|---|---|
+| `HubReference` | `source_url`, `repo_id`, `repo_type='model'`, `requested_revision` | strict canonical URL; user-supplied reference is a claim; no credentials in fields |
+| `ResolvedHubRevision` | `repo_id`, `resolved_commit`, `resolver_id`, `resolver_version`, `endpoint_id` | full immutable commit when Hub supplies one; null/unresolved aborts assessment |
+| `HubInventoryFile` | `path`, `retrieval_status`, `assessment_status`, `applicable_check_ids` | preserve every listed file, upstream `size/blob_id/lfs/xet` as nullable source metadata, exclusion/failure reasons |
+| `RetrievedArtifactFile` | `path`, `commit`, `bytes_received`, `sha256`, `transfer_status` | local SHA-256 of complete bytes is authoritative for what ModelVet inspected; partial data never forms an ArtifactFile |
+| `HubAssessment` | reference, resolved revision, inventory digest, budgets, client version, request outcome | public metadata is untrusted source evidence; secret omitted; limitations are explicit |
+
+`retrieval_status` is separate from existing `CheckStatus`: `NOT_SELECTED`, `PENDING`, `COMPLETE`, `FAILED`, `LIMIT_EXCEEDED`, `INACCESSIBLE`, `INTEGRITY_MISMATCH`, `INTERRUPTED`. `assessment_status` continues to use existing check/coverage statuses. The report lists every inventory item and joins all required `(path, check_id)` pairs; remote omission cannot remove applicability. Content hashes exist only for successfully retrieved complete bytes. Upstream identifiers are claims and must not be relabeled as SHA-256 unless the upstream algorithm is explicitly SHA-256 and the byte semantics match. No credentials, bearer headers, token hashes or user account identity enter the report or semantic digest.
+
+## Implemented Hub records — report 2.0.0
+
+The proposed record table above is historical. The implementation uses HubSource (`url`, `repo_id`, requested revision, resolved commit, metadata response digest, transport/version, inventory completeness, limits, cache disabled) and ordered HubFile rows (`path`, advertised size, Git blob ID, optional LFS SHA-256, optional local SHA-256, retrieval status/reason, required check IDs). Retrieval statuses are INVENTORIED (never accepted in a completed report), RETRIEVED, OVERSIZED, BUDGET and FAILED. Omitted-file required pairs are unassessed; downloaded-file coverage remains in the existing typed check/coverage records. No fabricated content hash is assigned to an omitted file.
+
+Remote reports require schema 2.0.0 and a source; local reports remain 1.0.0 without a source key. `schemas/report-v1.json` is retained unchanged; `schemas/report-v2.json` describes the current reader supporting both. V2 source hashes/sizes/paths must exactly bind to assessed files, and required-check IDs must agree with policy applicability. Report digest v2 binds the source/inventory/outcomes but excludes raw metadata-response digest as an observation. Comparisons use the union of v1/v2 semantic section keys and disclose source changes in both directions. Existing raw-attachment audits remain byte consistency checks, not publisher authentication.

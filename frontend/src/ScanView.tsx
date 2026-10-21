@@ -25,12 +25,20 @@ import { Badge, Notice, PageHeading } from "./components";
 export function ScanSetup({
   capabilities,
   initialPath = "",
+  initialUrl = "",
   onStarted,
 }: {
   capabilities: Capabilities | null;
   initialPath?: string;
+  initialUrl?: string;
   onStarted: (job: Job) => void;
 }) {
+  const [source, setSource] = useState<"hub" | "local">(
+    initialPath ? "local" : "hub",
+  );
+  const [hubUrl, setHubUrl] = useState(initialUrl);
+  const [revision, setRevision] = useState("");
+  const [useToken, setUseToken] = useState(false);
   const [path, setPath] = useState(initialPath);
   const [browsing, setBrowsing] = useState(false);
   const [folder, setFolder] = useState(".");
@@ -43,8 +51,8 @@ export function ScanSetup({
   const file = useRef<HTMLInputElement>(null);
   const [limits, setLimits] = useState({
     max_files: 10000,
-    max_file_mib: 1024,
-    max_total_mib: 2048,
+    max_file_mib: initialPath ? 1024 : 64,
+    max_total_mib: initialPath ? 2048 : 128,
     timeout_sec: 120,
   });
   const [scanner, setScanner] = useState<"auto" | "none" | "modelscan">("auto");
@@ -68,14 +76,21 @@ export function ScanSetup({
   async function submit(event: FormEvent) {
     event.preventDefault();
     setError("");
-    if (!path) {
-      setError("Choose a model folder before starting the scan.");
+    if (source === "local" ? !path : !hubUrl) {
+      setError(
+        source === "local"
+          ? "Choose a model folder before starting the scan."
+          : "Paste a Hugging Face model repository URL.",
+      );
       return;
     }
     setBusy(true);
     try {
       const input: ScanInput = {
-        model_path: path,
+        model_path: source === "local" ? path : "",
+        hub_url: source === "hub" ? hubUrl : undefined,
+        revision: source === "hub" && revision ? revision : undefined,
+        use_hf_token: source === "hub" && useToken,
         policy_id: policy?.id || "default",
         scanner,
         ...limits,
@@ -110,9 +125,9 @@ export function ScanSetup({
   return (
     <>
       <PageHeading
-        eyebrow="LOCAL ARTIFACT ASSESSMENT"
+        eyebrow="STATIC ARTIFACT ASSESSMENT"
         title="Start with the evidence."
-        description="Select a model folder. ModelVet inspects its bytes and declarations without loading it."
+        description="Paste a Hugging Face model URL or select a local folder. ModelVet inspects files without loading the model."
       />
       {initialPath && (
         <Notice>
@@ -127,131 +142,229 @@ export function ScanSetup({
             <div>
               <h2>Choose your artifact</h2>
               <p>
-                Only folders inside your configured model root are available.
+                Pin a Hub repository revision or choose a folder inside your
+                configured root.
               </p>
             </div>
           </div>
-          <label htmlFor="model-folder">Model folder</label>
-          <div className="folder-field">
-            <FolderOpen size={18} />
-            <input
-              id="model-folder"
-              value={path}
-              readOnly
-              placeholder="Choose a local model folder"
-            />
+          <div
+            className="source-choice"
+            role="group"
+            aria-label="Artifact source"
+          >
             <button
               type="button"
-              className="secondary"
+              aria-pressed={source === "hub"}
               onClick={() => {
-                setBrowsing(!browsing);
+                setSource("hub");
+                setBrowsing(false);
                 setError("");
+                setLimits({ ...limits, max_file_mib: 64, max_total_mib: 128 });
               }}
             >
-              Browse folders
+              Hugging Face URL
+            </button>
+            <button
+              type="button"
+              aria-pressed={source === "local"}
+              onClick={() => {
+                setSource("local");
+                setError("");
+                setLimits({
+                  ...limits,
+                  max_file_mib: 1024,
+                  max_total_mib: 2048,
+                });
+              }}
+            >
+              Local folder
             </button>
           </div>
-          <p className="field-hint">
-            Root:{" "}
-            <span className="mono">
-              {capabilities?.models_root_label || "Configured local folder"}
-            </span>
-            . Files stay on this computer.
-          </p>
-          {browsing && (
-            <section
-              className="folder-browser"
-              aria-label="Model folder browser"
-            >
-              <div className="folder-browser-head">
+          {source === "hub" ? (
+            <div className="hub-fields">
+              <label htmlFor="hub-url">Hugging Face model URL</label>
+              <input
+                id="hub-url"
+                type="url"
+                required
+                maxLength={512}
+                placeholder="https://huggingface.co/owner/model"
+                value={hubUrl}
+                onChange={(event) => {
+                  setHubUrl(event.target.value);
+                  setError("");
+                }}
+                autoComplete="off"
+                spellCheck={false}
+              />
+              <p className="field-note">
+                Public repositories need no API key. ModelVet resolves an
+                immutable commit before downloading files.
+              </p>
+              <label htmlFor="hub-revision">
+                Revision <span className="muted">(optional)</span>
+              </label>
+              <input
+                id="hub-revision"
+                value={revision}
+                maxLength={200}
+                placeholder="Default branch, tag or commit"
+                autoComplete="off"
+                spellCheck={false}
+                onChange={(event) => {
+                  setRevision(event.target.value);
+                  setError("");
+                }}
+              />
+              <label className="hub-auth">
+                <input
+                  type="checkbox"
+                  checked={useToken}
+                  disabled={!capabilities?.hub_token_configured}
+                  onChange={(event) => setUseToken(event.target.checked)}
+                />
+                Use the server’s HF_TOKEN for private or gated access
+              </label>
+              <p className="field-note">
+                {capabilities?.hub_token_configured
+                  ? "A local token is configured. It is used only when you enable this option."
+                  : "For private/gated models, set a read-only HF_TOKEN before launching ModelVet. Do not paste credentials into the URL."}
+              </p>
+              <Notice>
+                Downloads are limited to {limits.max_file_mib} MiB per file and{" "}
+                {limits.max_total_mib} MiB total. Files beyond these limits
+                remain listed as unassessed; missing required evidence prevents
+                approval.
+              </Notice>
+            </div>
+          ) : (
+            <>
+              <label htmlFor="model-folder">Model folder</label>
+              <div className="folder-field">
+                <FolderOpen size={18} />
+                <input
+                  id="model-folder"
+                  value={path}
+                  readOnly
+                  placeholder="Choose a local model folder"
+                />
                 <button
                   type="button"
-                  className="icon-button"
-                  aria-label="Parent folder"
-                  disabled={folder === "."}
+                  className="secondary"
                   onClick={() => {
-                    setFolder(folder.split("/").slice(0, -1).join("/") || ".");
-                    setOffset(0);
+                    setBrowsing(!browsing);
+                    setError("");
                   }}
                 >
-                  <ArrowLeft size={17} />
-                </button>
-                <span className="mono">
-                  {folder === "." ? "Model root" : folder}
-                </span>
-                <button
-                  type="button"
-                  className="text-button"
-                  onClick={() => setBrowsing(false)}
-                >
-                  Close
+                  Browse folders
                 </button>
               </div>
-              {!directories ? (
-                <p className="muted loading-text">Reading directories…</p>
-              ) : (
-                <>
-                  {directories.entries.length === 0 && (
-                    <p className="muted loading-text">
-                      No child folders. You can select this folder.
-                    </p>
-                  )}
-                  {directories.entries.map((entry) => (
+              <p className="field-hint">
+                Root:{" "}
+                <span className="mono">
+                  {capabilities?.models_root_label || "Configured local folder"}
+                </span>
+                . Files stay on this computer.
+              </p>
+              {browsing && (
+                <section
+                  className="folder-browser"
+                  aria-label="Model folder browser"
+                >
+                  <div className="folder-browser-head">
                     <button
                       type="button"
-                      key={entry.relpath}
-                      className="directory-row"
-                      disabled={!entry.selectable}
+                      className="icon-button"
+                      aria-label="Parent folder"
+                      disabled={folder === "."}
                       onClick={() => {
-                        setFolder(entry.relpath);
+                        setFolder(
+                          folder.split("/").slice(0, -1).join("/") || ".",
+                        );
                         setOffset(0);
                       }}
                     >
-                      <FolderOpen size={17} />
-                      <span>{entry.name}</span>
-                      {entry.selectable ? (
-                        <ChevronRight size={16} />
-                      ) : (
-                        <small>Unavailable link or special entry</small>
-                      )}
+                      <ArrowLeft size={17} />
                     </button>
-                  ))}
-                  {directories.total > 100 && (
-                    <div className="pagination">
-                      <button
-                        type="button"
-                        disabled={offset === 0}
-                        onClick={() => setOffset(offset - 100)}
-                      >
-                        Previous
-                      </button>
-                      <span>
-                        {offset + 1}–{Math.min(offset + 100, directories.total)}{" "}
-                        of {directories.total}
-                      </span>
-                      <button
-                        type="button"
-                        disabled={offset + 100 >= directories.total}
-                        onClick={() => setOffset(offset + 100)}
-                      >
-                        Next
-                      </button>
-                    </div>
+                    <span className="mono">
+                      {folder === "." ? "Model root" : folder}
+                    </span>
+                    <button
+                      type="button"
+                      className="text-button"
+                      onClick={() => setBrowsing(false)}
+                    >
+                      Close
+                    </button>
+                  </div>
+                  {!directories ? (
+                    <p className="muted loading-text">Reading directories…</p>
+                  ) : (
+                    <>
+                      {directories.entries.length === 0 && (
+                        <p className="muted loading-text">
+                          No child folders. You can select this folder.
+                        </p>
+                      )}
+                      {directories.entries.map((entry) => (
+                        <button
+                          type="button"
+                          key={entry.relpath}
+                          className="directory-row"
+                          disabled={!entry.selectable}
+                          onClick={() => {
+                            setFolder(entry.relpath);
+                            setOffset(0);
+                          }}
+                        >
+                          <FolderOpen size={17} />
+                          <span>{entry.name}</span>
+                          {entry.selectable ? (
+                            <ChevronRight size={16} />
+                          ) : (
+                            <small>Unavailable link or special entry</small>
+                          )}
+                        </button>
+                      ))}
+                      {directories.total > 100 && (
+                        <div className="pagination">
+                          <button
+                            type="button"
+                            disabled={offset === 0}
+                            onClick={() => setOffset(offset - 100)}
+                          >
+                            Previous
+                          </button>
+                          <span>
+                            {offset + 1}–
+                            {Math.min(offset + 100, directories.total)} of{" "}
+                            {directories.total}
+                          </span>
+                          <button
+                            type="button"
+                            disabled={offset + 100 >= directories.total}
+                            onClick={() => setOffset(offset + 100)}
+                          >
+                            Next
+                          </button>
+                        </div>
+                      )}
+                    </>
                   )}
-                </>
+                  <button
+                    type="button"
+                    className="primary folder-select"
+                    onClick={() => {
+                      setPath(folder);
+                      setBrowsing(false);
+                    }}
+                  >
+                    <Check size={15} />
+                    Use this folder
+                  </button>
+                </section>
               )}
-              <button
-                type="button"
-                className="primary folder-select"
-                onClick={() => {
-                  setPath(folder);
-                  setBrowsing(false);
-                }}
-              >
-                <Check size={15} />
-                Use this folder
-              </button>
-            </section>
+            </>
           )}
           <div className="form-divider" />
           <div className="section-heading">
@@ -428,7 +541,10 @@ export function ProgressView({
   onCancel: () => void;
 }) {
   const active = job.status === "running" || job.status === "cancelling";
-  const position = stages.indexOf(job.stage);
+  const currentStages = job.hub_url
+    ? stages
+    : stages.filter((stage) => !stage.startsWith("hub_"));
+  const position = currentStages.indexOf(job.stage);
   return (
     <>
       <PageHeading
@@ -446,7 +562,9 @@ export function ProgressView({
         <Notice error>
           No completed report was indexed.{" "}
           {job.error_code
-            ? `Reference: ${job.error_code}.`
+            ? job.error_code === "HUB_ACCESS_FAILED"
+              ? "The repository or revision could not be accessed. Check the URL, network, and explicit HF_TOKEN setting for private/gated models."
+              : `Reference: ${job.error_code}.`
             : "The scan was cancelled."}
         </Notice>
       )}
@@ -478,7 +596,7 @@ export function ProgressView({
             )}
           </div>
           <ol className="stage-list">
-            {stages.map((stage, i) => (
+            {currentStages.map((stage, i) => (
               <li
                 key={stage}
                 className={

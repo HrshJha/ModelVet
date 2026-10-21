@@ -44,6 +44,74 @@ export function Badge({ state }: { state: string }) {
   );
 }
 
+const decisionScopes: Record<string, string> = {
+  APPROVE:
+    "Configured static checks completed under this exact policy and artifact identity. This is not proof of malware freedom, loader safety, legal rights or verified provenance.",
+  CONTROLS:
+    "Static checks completed, but named conditions and owners apply. ModelVet did not test deployment enforcement.",
+  BLOCK: "A configured prohibition has independently supported evidence.",
+  INSUFFICIENT:
+    "Required evidence is missing or unresolved. This is neither an approval nor a finding of malicious behavior.",
+};
+
+export function DecisionMark({
+  state,
+  compact = false,
+}: {
+  state: string;
+  compact?: boolean;
+}) {
+  const scope = decisionScopes[state];
+  return (
+    <div className={`decision-mark decision-${state.toLowerCase()}`}>
+      <span className="decision-shape" aria-hidden="true">
+        {state === "APPROVE"
+          ? "✓"
+          : state === "BLOCK"
+            ? "×"
+            : state === "CONTROLS"
+              ? "Ⅱ"
+              : "–"}
+      </span>
+      <div>
+        <strong>{state}</strong>
+        {scope && !compact && <p>{scope}</p>}
+      </div>
+    </div>
+  );
+}
+
+const checkGlyphs: Record<string, string> = {
+  COMPLETE: "✓",
+  SKIPPED: "╱",
+  FAILED: "!",
+  UNSUPPORTED: "▨",
+  INCONCLUSIVE: "?",
+  NOT_RUN: "·",
+  NOT_APPLICABLE: "—",
+};
+
+export function CheckGlyph({
+  status,
+  required,
+}: {
+  status: string;
+  required: boolean;
+}) {
+  const label = status === "NOT_APPLICABLE" ? "Not applicable" : status;
+  return (
+    <span className={`check-glyph check-${status.toLowerCase()}`}>
+      <span aria-hidden="true">{checkGlyphs[status] || "?"}</span>
+      <span>{label}</span>
+      {status !== "NOT_APPLICABLE" && (
+        <small aria-label={required ? "Mandatory check" : "Optional check"}>
+          {required ? "M" : "O"}
+        </small>
+      )}
+    </span>
+  );
+}
+
 export function Notice({
   children,
   error = false,

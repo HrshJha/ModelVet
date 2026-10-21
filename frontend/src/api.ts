@@ -98,6 +98,8 @@ export function dateLabel(value: string) {
 }
 export const stages = [
   "validation",
+  "hub_inventory",
+  "hub_retrieval",
   "snapshot",
   "inventory",
   "structural",
@@ -109,6 +111,8 @@ export const stages = [
 ];
 export const stageLabels: Record<string, string> = {
   validation: "Validate inputs",
+  hub_inventory: "Resolve revision and inventory repository",
+  hub_retrieval: "Retrieve bounded files and verify content",
   snapshot: "Freeze local snapshot",
   inventory: "Record file identities",
   structural: "Inspect file structure",

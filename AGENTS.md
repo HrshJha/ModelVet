@@ -13,6 +13,8 @@
 7. Inspect the diff and dependency lock changes; update `DECISIONS.md` for design deviations, `PROGRESS.md` with verifiable results, and task status only if DoD is met.
 8. Report change, tests executed, security impact, remaining limitations and next unblocked task. Never claim the entire repository is finished after a single task.
 
+**Next-version scope note (2026-10-21):** The published `v0.1.0-mac-preview.1` is local-directory-only. The maintainer has proposed Hugging Face model-repository URLs as the primary input for a future local CLI release, keeping local paths supported. This is documented as FR-029–034 / PH-19–20 / MV-046–053 and is not implemented. Since all prior P0 tasks are complete for the published scope, select MV-046 as the first unblocked task for this proposed feature; do not restart completed tasks. Follow `docs/HUB_ASSESSMENT_SPEC.md` and resolve OQ-15 before any content-fetch implementation.
+
 ## Security invariants (cannot be relaxed casually)
 
 - Treat user paths, all artifact bytes, repository metadata, license claims, and scanner JSON as **untrusted**.
@@ -23,6 +25,8 @@
 - Preserve raw scanner evidence and normalized evidence; never conflate scanner exit code with final admission decision.
 - Never use an LLM for the deterministic admission engine.
 - No behavior sandbox until PH-11 security gate, isolation threat review and controlled fixtures are satisfied.
+- Remote Hub input is not generic URL fetching. Validate exact HTTPS Hugging Face model URLs; resolve immutable revision; inventory before fetching; retrieve explicit files only within hard caps; validate every redirect/address; hash local bytes; keep every omission in coverage. If the pinned client cannot enforce endpoint/redirect/IP/byte/time controls, stop the remote-fetch task rather than relaxing controls.
+- Never search, enumerate, create, request the user to paste, or reveal API keys/tokens. Public Hugging Face repositories need no token. Private/gated access may use only an explicitly selected user-owned local credential or `HF_TOKEN`; do not serialize or log it, put it in a URL/argv, or send it anywhere beyond the official Hub auth request.
 
 ## Change protocol
 

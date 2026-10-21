@@ -1,6 +1,7 @@
 """Authenticated optional HTTP adapter for the local static engine."""
 
 import hashlib
+import os
 import sqlite3
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
@@ -150,6 +151,7 @@ def create_app(
             scanner_available=result["scanner_available"],
             scanner_version=result["scanner_version"],
             serialized_scan_ready=result["serialized_scan_ready"],
+            hub_token_configured=bool(os.environ.get("HF_TOKEN")),
             limitations=result["limitations"],
         )
 

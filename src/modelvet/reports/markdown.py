@@ -42,6 +42,30 @@ def render_markdown(report: Report) -> str:
         f"- {escape(c.control_id)} — owner: {escape(c.owner)}"
         for c in report.decision.required_controls
     )
+    if report.source is not None:
+        source = report.source
+        lines += [
+            "",
+            "## Hugging Face source",
+            "",
+            escape(source.url),
+            "",
+            f"Pinned commit: {source.resolved_commit}",
+            "",
+            f"Requested revision: {escape(source.requested_revision or 'default')}",
+            "",
+            f"Metadata digest: {source.metadata_digest}",
+            "",
+            "Transfer completion is not check coverage. Upstream IDs are source claims.",
+            "",
+            "| Repository file | Bytes | Retrieval | Required checks | Reason |",
+            "|---|---:|---|---|---|",
+        ]
+        lines.extend(
+            f"| {escape(f.path)} | {f.size} | {f.status} | "
+            f"{escape(', '.join(f.required_checks))} | {escape(f.reason or '')} |"
+            for f in source.files
+        )
     lines += [
         "",
         "## File identity",

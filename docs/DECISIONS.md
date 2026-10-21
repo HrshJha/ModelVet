@@ -18,6 +18,7 @@
 | ADR-010 | Evidence-first benchmark, no USP claims | Proposed | FR-016, FR-017 | reliable head-to-head result available |
 | ADR-011 | No server/database/web dashboard | Proposed | FR-014 | multi-user need demonstrated |
 | ADR-012 | Report exit codes and fail-closed errors | Proposed | FR-012–FR-014 | CLI compatibility demands change |
+| ADR-013 | Hugging Face URL input, local retrieval | Proposed | FR-029–FR-034 | client cannot enforce boundary/resource controls |
 
 The common ADR template is supplied for **every entry** below; implementation must record review outcome, references and replacement linkage.
 
@@ -191,6 +192,20 @@ The common ADR template is supplied for **every entry** below; implementation mu
 - **Evidence and references:** `RESEARCH_REFERENCES.md` references R-01–R-12; project baseline in `../PRD.md`.
 - **Revisit conditions:** compatibility discussion
 
+## ADR-013: Hugging Face URL input and local retrieval
+
+- **Status:** Proposed · **Date:** 2026-10-21
+- **Context:** The published Mac preview is local-directory-only. The proposed next release makes exact Hugging Face model-repository URLs the primary CLI input while preserving local directories.
+- **Problem:** Resolve remote identity and selectively obtain exact bytes without turning a URL into arbitrary fetch/execute capability or overstating metadata.
+- **Options considered:** keep local-only; use direct custom HTTP/download code; use the official `huggingface_hub` client with a narrow validated repo/path interface; download whole repositories.
+- **Decision:** Proposed use of official client APIs for a local CLI, full immutable commit resolution, metadata-first inventory, explicit selected-file downloads into a private snapshot, and the existing static assessment engine. No hosted service or model loading.
+- **Rationale:** Reuse documented Hub API/revision/download behavior; keep existing local inspectors as the authority for bytes actually assessed.
+- **Consequences:** New runtime network trust boundary, optional dependency/license and lock review, new report identity fields and budgets, private/gated authentication support only when explicitly configured. Whole-repository download is not the default. Cache stays disabled until a separately reviewed task.
+- **Security implications:** Strict exact-host URL parsing, fixed endpoint, per-request redirect/DNS/IP validation, no cross-origin credential forwarding, bounded inventory and streaming, local hashes, no token in report/log/URL, fail-closed coverage. If the pinned client cannot enforce these, do not ship the fetch path.
+- **Alternatives rejected:** arbitrary URLs, direct unbounded requests, implicit account credential scraping, `snapshot_download` of a whole repository, trusting Hub badges as ModelVet evidence, automatic model execution.
+- **Evidence and references:** `RESEARCH_REFERENCES.md` R-21–R-24 and `HUB_ASSESSMENT_SPEC.md`; vendor documentation claims are limited to documented API surface.
+- **Revisit conditions:** redirect/IP controls or revision consistency cannot be established for the pinned client; dependency/security review fails; default budgets prevent the testable use case.
+
 ## MV-002 implementation note — 2026-10-20
 
 The pinned Typer release bundles Click internally. The CLI boundary catches its `typer._click.exceptions.UsageError` and public `typer.exceptions.Abort` to translate errors to 40/130. This private exception import is covered by CLI tests and must be rechecked on Typer updates. Commands whose pipeline is absent return 50 without a decision; version advertises no report-schema support yet. ADRs remain Proposed.
@@ -281,3 +296,10 @@ Commit compiled frontend assets and complete upstream runtime notices so wheel/s
 ## Mac-first product scope — maintainer direction, 2026-10-21
 
 The maintainer explicitly instructed focusing on the Mac and changing blockers tied to unavailable platforms. Add FR-028/MV-045/PH-18 for scoped completion: the local static Mac CLI/Workbench is the deliverable; independent benchmark and Linux/KVM loader research are deferred, not product-release prerequisites. Mac preview acceptance uses internal review, bounded safe fixtures, local arm64/hosted Intel checks and installed assets. Preserve all scanner-resource/check/decision semantics and host non-execution invariants. Independent review is not claimed, and the future loader gate remains unchanged if that research is resumed. Earlier ADRs remain Proposed; this note records the explicit scope instruction without approving unrelated architecture or security claims.
+
+
+## PH-19/20 local Hub implementation — 2026-10-21
+
+The maintainer requested the actual URL feature and its Workbench input. Reviewed official huggingface_hub 2.2.0 file_download.py and utils/_http.py (SHA-256 records in verification/hub/client-review); default auto-redirect HTTP clients and separate Xet/cache transfers do not expose the required single streaming/DNS-pinning boundary at the high-level helpers. Use the documented REST metadata/resolve API through modelvet-https/1, implemented with Python stdlib HTTPS and per-hop exact-host/public-IP validation, direct numeric sockets and original-host TLS verification. No dependency addition or lock update is needed. The allowed storage host set is explicit and upgrade review is required. Authentication initially reads only explicitly selected HF_TOKEN, never saved credentials.
+
+Integrity runs inside retrieval.py to hash streamed bytes and avoid a second copy. Remote reports use schema 2.0.0 with required source/inventory bindings; local v1 bytes/digests remain compatible, and the current reader supports both. Incomplete repository retrieval is a deterministic additional admission prerequisite (INVALID-EVIDENCE/INSUFFICIENT), preserving independently substantiated BLOCK. Metadata response bytes are observational; their digest is excluded from semantic identity. CLI transfer caps remain bounded; Workbench defaults to 64/128 MiB and allows conservative changes within 1/2 GiB ceilings. Total assessment is limited to 600 seconds; no automatic retry/cache. This is local engineering review and tests, not independent certification or a newly published release. All ADRs remain Proposed.

@@ -100,3 +100,23 @@ Summary report paths are relative to the selected output root; report_root is <r
 ## Optional local workbench — FR-025–027
 
 `modelvet ui --models-root DIR [--workspace DIR] [--port 0] [--no-browser]` launches the private numeric-loopback browser application. The `ui` extra is required; the ordinary CLI stays standalone. The default port is OS-assigned and workspace is `~/.local/state/modelvet/workbench`, outside model inputs. Manual launch prints a private one-use capability; do not share or capture it in verification logs. Job completion and admission are separate; the UI command's process lifetime is not a scan decision exit code. See [complete guide](WORKBENCH_GUIDE.md) and [versioned contract](WORKBENCH_SPEC.md). Existing command exit semantics are unchanged.
+
+## Proposed Hugging Face URL command — FR-029–034
+
+The following syntax is proposed for a future release; it is not implemented by the published v0.1.0 CLI:
+
+```text
+modelvet scan https://huggingface.co/{namespace}/{model} [--revision REV]
+                 [--policy POLICY.toml] [--out OUT_DIR]
+                 [--max-files N] [--max-file-mib N] [--max-total-mib N]
+                 [--timeout-sec N] [--network-timeout-sec N]
+                 [--use-hf-token]
+```
+
+Local directory input stays valid and uses the existing grammar. URL scan accepts only exact HTTPS Hugging Face model repository roots and documented `/tree/{revision}` references (embedded revisions are one path component; refs containing `/` use `--revision`); no generic URL, dataset/Space, arbitrary endpoint, query, fragment, URL credential or implicit prompt. If both URL revision and `--revision` differ, exit 40. Default moving refs must be resolved to full commit before inventory. Public repos need no credential and implicit saved-token lookup is disabled. Private/gated access uses only explicitly selected local Hub login or `HF_TOKEN` with `--use-hf-token`; no login prompt, raw token flag, secret echo or fallback account. Missing/inaccessible revision and network failures return 40 when input/access cannot be established; if a sound partial evidence report is created, missing required inventory/retrieval/check coverage returns 30. Existing decision/error exit meanings do not change.
+
+Progress should name phases (reference validation, revision resolution, inventory, selective retrieval, assessment, reporting) and report measured elapsed time; it must not say “scan passed” before the decision. The inventory must precede downloads. Resource settings cannot exceed reviewed hard caps; provisional defaults and failure handling are defined in [HUB_ASSESSMENT_SPEC](HUB_ASSESSMENT_SPEC.md). Tokens, local cache paths and environment values are never printed or persisted. No interactive auth, model load, full-repo download or Hub UI/API server is part of this proposal.
+
+## Implemented Hub candidate (working tree)
+
+The earlier proposed CLI section is now implemented together with the maintainer-requested local Workbench URL input. `scan` accepts the existing local folder or exact HTTPS Hub model URL, with `--revision` and explicit `--use-hf-token`. Only the process's HF_TOKEN is supported initially; no implicit saved login. Public access needs no key. Use existing `--max-files`, `--max-file-mib`, `--max-total-mib` and scanner flags within their hard ceilings. No complete metadata/access result maps to exit 40; safely represented retrieval gaps yield INSUFFICIENT/30 unless independent policy evidence substantiates BLOCK. New remote reports use schema 2.0.0; local output stays 1.0.0. `version --json` reports both reader versions. See HUB_ASSESSMENT_SPEC for actual limits and failure semantics.

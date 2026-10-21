@@ -32,12 +32,13 @@ from modelvet.evidence.models import (
     ToolInfo,
 )
 from modelvet.evidence.normalize import EvidenceNormalizer, normalize_inspection
+from modelvet.hub.models import HubSource
 from modelvet.inventory.classify import Classifier, FileFormat, applicable_checks
 from modelvet.inventory.gate import InputGate
 from modelvet.inventory.identity import InventoryService, final_identity_checks
 from modelvet.metadata.claims import MetadataReader
 from modelvet.policies.evaluator import AdmissionEvaluator
-from modelvet.policies.models import AdmissionDecision
+from modelvet.policies.models import AdmissionDecision, DecisionState
 from modelvet.reports.json_report import Report, ReportBuilder, RunMetadata
 from modelvet.reports.writer import ReportWriter
 from modelvet.scanners.base import RawScannerExecution
@@ -71,6 +72,7 @@ class ScanService:
         *,
         on_progress: Callable[[str], None] | None = None,
         process_observer: Callable[[int, bool], None] | None = None,
+        remote_source: HubSource | None = None,
     ) -> ScanOutcome:
         def progress(stage: str) -> None:
             if on_progress is not None:
@@ -232,6 +234,39 @@ class ScanService:
             progress("integrity")
             checks = final_identity_checks(snapshot, manifest, checks)
             coverage, conflicts, decision = assess(checks)
+            if remote_source is not None:
+                if not remote_source.complete and decision.state != "BLOCK":
+                    decision = AdmissionDecision(
+                        state=DecisionState.INSUFFICIENT,
+                        rule_ids=("INVALID-EVIDENCE",),
+                        reason=(
+                            "Repository retrieval is incomplete; "
+                            "required file checks are unresolved."
+                        ),
+                        evidence_refs=("hub:source",),
+                        required_controls=(),
+                    )
+                rows = {row.file_id: row for row in coverage}
+                paths = {f.relpath: f.file_id for f in manifest.files}
+                remote_source = remote_source.model_copy(
+                    update={
+                        "files": tuple(
+                            f.model_copy(
+                                update={
+                                    "required_checks": tuple(
+                                        sorted(
+                                            rows[paths[f.path]].mandatory_check_ids
+                                            if f.path in paths
+                                            else set(f.required_checks)
+                                            & set(policy.mandatory_checks)
+                                        )
+                                    )
+                                }
+                            )
+                            for f in remote_source.files
+                        )
+                    }
+                )
             evidence = EvidenceBundle(
                 tools=tuple(tools),
                 checks=tuple(checks),
@@ -266,6 +301,7 @@ class ScanService:
                 coverage=coverage,
                 conflicts=conflicts,
                 raw_payloads=payloads,
+                source=remote_source,
                 private_roots=(str(source.artifact_dir), str(snapshot.root), str(Path.home())),
             )
             snapshot_root = snapshot.root

@@ -73,3 +73,13 @@ MV-026 hosted follow-up: `gh auth login --hostname github.com --git-protocol htt
 ## Workbench preview commands
 
 From the repository root: `uv sync --locked --extra ui`, then `uv run --extra ui modelvet ui --models-root /absolute/path/to/models`. Node is not needed at runtime. See [WORKBENCH_GUIDE](WORKBENCH_GUIDE.md) for frontend development, one-use session privacy, separate pinned scanner setup and the complete synthetic correction/comparison workflow. Actual local/hosted results live in PROGRESS; installing or listing commands does not verify a gate.
+
+## Proposed Hub URL command — not implemented
+
+Future syntax only, after PH-19/20 and dependency/security review:
+
+```sh
+modelvet scan https://huggingface.co/owner/model-name --revision FULL_OR_MOVING_REF --out ./out
+```
+
+`--revision` is optional. No API key is needed for public repositories. For an authorized private/gated repo, users configure their own local Hub authentication or `HF_TOKEN`; do not paste token values into shell history or reports. This doc does not ask agents to enumerate credential stores. Inventory-first, per-file retrieval limits and token redaction are normative in `HUB_ASSESSMENT_SPEC.md`. The current published command remains local-directory-only; do not run this illustrative command against a real endpoint as if it were implemented.

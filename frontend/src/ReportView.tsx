@@ -1,17 +1,14 @@
 import {
   ArrowLeft,
-  Check,
   CircleAlert,
-  CircleMinus,
   Download,
   FileJson,
   Fingerprint,
   LoaderCircle,
   Search,
   ShieldCheck,
-  X,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   api,
   dateLabel,
@@ -22,10 +19,19 @@ import {
   type EvidencePage,
   type Summary,
 } from "./api";
-import { Badge, CopyButton, Empty, Notice, PageHeading } from "./components";
+import {
+  Badge,
+  CheckGlyph,
+  CopyButton,
+  DecisionMark,
+  Empty,
+  Notice,
+  PageHeading,
+} from "./components";
 
 type Row = Record<string, unknown>;
 type Section =
+  | "retrieval"
   | "files"
   | "checks"
   | "findings"
@@ -35,6 +41,7 @@ type Section =
   | "executions"
   | "references";
 const tabs: { id: Section; label: string }[] = [
+  { id: "retrieval", label: "Hub retrieval" },
   { id: "files", label: "Files & coverage" },
   { id: "findings", label: "Findings" },
   { id: "claims", label: "Declarations" },
@@ -86,37 +93,68 @@ export function checkStatus(coverage: Row, check: string): string {
     : "INCONCLUSIVE";
 }
 
-function DetailDialog({ row, onClose }: { row: Row; onClose: () => void }) {
-  const ref = useRef<HTMLDialogElement>(null);
-  useEffect(() => {
-    ref.current?.showModal();
-  }, []);
+function EvidenceInspector({ row }: { row: Row }) {
+  const raw = JSON.stringify(row, null, 2);
+  const fields = [
+    ["Check / repository file", field(row, "check_id") || field(row, "path")],
+    ["Execution status", field(row, "status")],
+    ["Result", field(row, "result") || "No result recorded"],
+    ["Executor", field(row, "executor_id") || "No executor recorded"],
+    [
+      "Evidence reference",
+      field(row, "raw_ref") || "No raw reference retained",
+    ],
+    ["Reason", field(row, "reason") || "No reason recorded"],
+    ["Error code", field(row, "error_code") || "No error code recorded"],
+  ];
+  const limitations = strings(row.limitations);
   return (
-    <dialog
-      ref={ref}
-      className="detail-dialog"
-      aria-labelledby="evidence-detail-title"
-      onClose={onClose}
-    >
-      <header>
+    <aside className="evidence-inspector" aria-label="Evidence inspector">
+      <div className="inspector-heading">
         <div>
-          <p className="eyebrow">VALIDATED REPORT RECORD</p>
-          <h2 id="evidence-detail-title">Evidence detail</h2>
+          <p className="eyebrow">SELECTED REPORT RECORD</p>
+          <h3>
+            {field(row, "check_id") || field(row, "kind") || "Evidence record"}
+          </h3>
         </div>
-        <button
-          className="icon-button"
-          aria-label="Close evidence detail"
-          onClick={() => ref.current?.close()}
-        >
-          <X size={18} />
-        </button>
-      </header>
+        {field(row, "status") && (
+          <Badge state={field(row, "status").toUpperCase()} />
+        )}
+      </div>
+      <dl className="inspector-fields">
+        {fields.map(([label, value]) => (
+          <div key={label}>
+            <dt>{label}</dt>
+            <dd className={label === "Evidence reference" ? "mono" : ""}>
+              {value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+      {limitations.length > 0 && (
+        <div className="inspector-limitations">
+          <strong>Recorded limitations</strong>
+          <ul>
+            {limitations.map((value) => (
+              <li key={value}>{value}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <p className="fine-print">
-        Values below are stored evidence and declarations. They are displayed as
-        text, not executed.
+        Stored report content is shown as inert text. A completed check is not a
+        safety guarantee.
       </p>
-      <pre>{JSON.stringify(row, null, 2)}</pre>
-    </dialog>
+      <details className="raw-record">
+        <summary>Open raw JSON</summary>
+        <pre>
+          {raw.length > 65536
+            ? raw.slice(0, 65536) +
+              "\n…Preview limited to 65,536 characters. Download the JSON report for the complete record."
+            : raw}
+        </pre>
+      </details>
+    </aside>
   );
 }
 
@@ -190,20 +228,10 @@ function Files({
                   const state = checkStatus(coverage, check);
                   return (
                     <td className="check-cell" key={check}>
-                      <span
-                        className={"check-state " + state.toLowerCase()}
-                        title={`${check} · ${state} · ${required.includes(check) ? "mandatory" : "optional or not applicable"}`}
-                        role="img"
-                        aria-label={`${check}: ${state}`}
-                      >
-                        {state === "COMPLETE" ? (
-                          <Check size={14} />
-                        ) : state === "NOT_APPLICABLE" ? (
-                          <CircleMinus size={12} />
-                        ) : (
-                          <CircleAlert size={14} />
-                        )}
-                      </span>
+                      <CheckGlyph
+                        status={state}
+                        required={required.includes(check)}
+                      />
                     </td>
                   );
                 })}
@@ -325,6 +353,7 @@ export default function ReportView({ id }: { id: string }) {
       </p>
     );
   const advice = report.guidance || [];
+  const source = object(report.hub_source);
   return (
     <>
       {report.demo && (
@@ -360,6 +389,16 @@ export default function ReportView({ id }: { id: string }) {
           <Download size={14} />
           Markdown
         </a>
+        {report.hub_source && (
+          <button
+            className="primary"
+            onClick={() =>
+              navigate("/scan?url=" + encodeURIComponent(field(source, "url")))
+            }
+          >
+            New scan
+          </button>
+        )}
         {report.model_path && (
           <button
             className="primary"
@@ -377,21 +416,16 @@ export default function ReportView({ id }: { id: string }) {
       >
         <div className="verdict-heading">
           <div>
-            <Badge state={report.decision} />
+            <DecisionMark state={report.decision} />
             <h2>{report.reason}</h2>
-            <p>
-              Scoped to this artifact and policy. Static assessment does not
-              establish universal safety, verified lineage or legal clearance.
-            </p>
           </div>
-          <span className="verdict-glyph">
-            <ShieldCheck size={36} strokeWidth={1.3} />
-          </span>
         </div>
         <div className="report-stat-row">
           <div>
             <strong>{report.file_count}</strong>
-            <span>files inventoried</span>
+            <span>
+              {report.hub_source ? "files retrieved" : "files inventoried"}
+            </span>
           </div>
           <div>
             <strong>
@@ -425,6 +459,27 @@ export default function ReportView({ id }: { id: string }) {
           <CopyButton value={report.semantic_digest} />
         </span>
       </div>
+      {report.hub_source && (
+        <section
+          className="panel hub-source-summary"
+          aria-label="Hugging Face source"
+        >
+          <p className="eyebrow">HUGGING FACE · PINNED SOURCE</p>
+          <strong>{field(source, "repo_id")}</strong>
+          <p className="mono">Commit {field(source, "resolved_commit")}</p>
+          <p>
+            {String(source.retrieved_count)} / {String(source.inventory_count)}{" "}
+            inventoried files retrieved. Transfer completion is separate from
+            required-check coverage.
+          </p>
+          <button
+            className="text-button"
+            onClick={() => changeSection("retrieval")}
+          >
+            Inspect retrieval gaps <ArrowRightIcon />
+          </button>
+        </section>
+      )}
       <div className="report-layout">
         <div className="report-main">
           <section className="panel evidence-panel">
@@ -461,27 +516,29 @@ export default function ReportView({ id }: { id: string }) {
                 nodes[next].focus();
               }}
             >
-              {tabs.map((tab) => (
-                <button
-                  role="tab"
-                  id={"tab-" + tab.id}
-                  aria-controls="evidence-content"
-                  aria-selected={
-                    section === tab.id ||
-                    (section === "checks" && tab.id === "files")
-                  }
-                  tabIndex={
-                    section === tab.id ||
-                    (section === "checks" && tab.id === "files")
-                      ? 0
-                      : -1
-                  }
-                  key={tab.id}
-                  onClick={() => changeSection(tab.id)}
-                >
-                  {tab.label}
-                </button>
-              ))}
+              {tabs
+                .filter((tab) => tab.id !== "retrieval" || report.hub_source)
+                .map((tab) => (
+                  <button
+                    role="tab"
+                    id={"tab-" + tab.id}
+                    aria-controls="evidence-content"
+                    aria-selected={
+                      section === tab.id ||
+                      (section === "checks" && tab.id === "files")
+                    }
+                    tabIndex={
+                      section === tab.id ||
+                      (section === "checks" && tab.id === "files")
+                        ? 0
+                        : -1
+                    }
+                    key={tab.id}
+                    onClick={() => changeSection(tab.id)}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
             </div>
             <section
               role="tabpanel"
@@ -610,6 +667,7 @@ export default function ReportView({ id }: { id: string }) {
                               {field(row, "check_id") ||
                                 field(row, "kind") ||
                                 field(row, "name") ||
+                                field(row, "path") ||
                                 field(row, "id") ||
                                 `Record ${offset + index + 1}`}
                             </strong>
@@ -633,6 +691,12 @@ export default function ReportView({ id }: { id: string }) {
                                 field(row, "value") ||
                                 field(row, "pointer") ||
                                 field(row, "source_ref")}
+                            </p>
+                          )}
+                          {section === "retrieval" && (
+                            <p className="mono">
+                              {formatBytes(Number(row.size))} · Required:{" "}
+                              {strings(row.required_checks).join(", ")}
                             </p>
                           )}
                           <button
@@ -776,7 +840,7 @@ export default function ReportView({ id }: { id: string }) {
           )}
         </aside>
       </div>
-      {detail && <DetailDialog row={detail} onClose={() => setDetail(null)} />}
+      {detail && <EvidenceInspector row={detail} />}
     </>
   );
 }

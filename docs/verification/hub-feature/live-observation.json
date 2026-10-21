@@ -1,0 +1,179 @@
+{
+  "observation": "Live public Hub URL scan through Chrome and the dedicated Workbench worker",
+  "job_id": "6f64acb6383f46a99cb19631f2e3293c",
+  "report_sha256": "960dfbf7014961aebabe6e8e22e9c520741c98a5a27d4e654bbc817101e7b05d",
+  "schema_version": "2.0.0",
+  "source": {
+    "kind": "huggingface",
+    "url": "https://huggingface.co/hf-internal-testing/tiny-random-bert",
+    "repo_id": "hf-internal-testing/tiny-random-bert",
+    "requested_revision": null,
+    "resolved_commit": "f171d7baecaf37b5da5a3616d8833b9969753535",
+    "metadata_digest": "4e9adc31c948be3040ae2353c6158d0b8ebd9b78b7c9ed584692969f77a7dd7b",
+    "transport": "modelvet-https/1",
+    "inventory_complete": true,
+    "files": [
+      {
+        "path": ".gitattributes",
+        "size": 737,
+        "blob_id": "cefbc1394f3d04a79ceecc9eb31c9fec4511b168",
+        "lfs_sha256": null,
+        "sha256": "8072d6759ec86b43715d0f8d0b591e411f34d342e34ce6ab422ad205f4bbc114",
+        "status": "RETRIEVED",
+        "reason": null,
+        "required_checks": [
+          "classification",
+          "identity"
+        ]
+      },
+      {
+        "path": "config.json",
+        "size": 548,
+        "blob_id": "22ffb3454131a71d4144340befb799c66ad0c670",
+        "lfs_sha256": null,
+        "sha256": "54f9f0001ec62b6a53072a7c9d1b630e346ae51fca14a5799e54f0d918281872",
+        "status": "RETRIEVED",
+        "reason": null,
+        "required_checks": [
+          "classification",
+          "identity",
+          "metadata:local"
+        ]
+      },
+      {
+        "path": "model.safetensors",
+        "size": 520212,
+        "blob_id": "0473a084265e924a69db9c05daaea027c7129156",
+        "lfs_sha256": null,
+        "sha256": "965f02b6a7e5520fc12f710e4e3b6132f697f1c8f648819553c5ade86752d2de",
+        "status": "RETRIEVED",
+        "reason": null,
+        "required_checks": [
+          "classification",
+          "identity",
+          "structural:safetensors"
+        ]
+      },
+      {
+        "path": "onnx/model.onnx",
+        "size": 449599,
+        "blob_id": "bd28eaa4d1f8958d46bc9aaaf4b1d399186ae316",
+        "lfs_sha256": "083459756ab4f6e37a2ebbd0c9ab4cebbda7638d2015958dd2a7ac9047588f93",
+        "sha256": "083459756ab4f6e37a2ebbd0c9ab4cebbda7638d2015958dd2a7ac9047588f93",
+        "status": "RETRIEVED",
+        "reason": null,
+        "required_checks": [
+          "classification",
+          "identity"
+        ]
+      },
+      {
+        "path": "pytorch_model.bin",
+        "size": 540217,
+        "blob_id": "9507868d1d16957af2283d2e1f170208941c2c59",
+        "lfs_sha256": "9922e8996d0c7e24c7f4e7a5d9c5b7303549f4ee94de0f1138b103014b51be13",
+        "sha256": "9922e8996d0c7e24c7f4e7a5d9c5b7303549f4ee94de0f1138b103014b51be13",
+        "status": "RETRIEVED",
+        "reason": null,
+        "required_checks": [
+          "classification",
+          "identity",
+          "modelscan",
+          "scanner:resources",
+          "structural:zip"
+        ]
+      },
+      {
+        "path": "special_tokens_map.json",
+        "size": 112,
+        "blob_id": "e7b0375001f109a6b8873d756ad4f7bbb15fbaa5",
+        "lfs_sha256": null,
+        "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+        "status": "RETRIEVED",
+        "reason": null,
+        "required_checks": [
+          "classification",
+          "identity",
+          "metadata:local"
+        ]
+      },
+      {
+        "path": "tf_model.h5",
+        "size": 26654536,
+        "blob_id": "109788c471477ea43ed1a31555fbbb7a3d29e7ab",
+        "lfs_sha256": "e0d82efce33dd527e8b1d585c024eef3f34ff493084492010308224140519fe3",
+        "sha256": null,
+        "status": "OVERSIZED",
+        "reason": "Per-file byte limit.",
+        "required_checks": [
+          "classification",
+          "identity"
+        ]
+      },
+      {
+        "path": "tokenizer.json",
+        "size": 12930,
+        "blob_id": "1187eb27d714b64c07ffe8a535e6b42c3584557d",
+        "lfs_sha256": null,
+        "sha256": "dd65e2c292bcc86c93a547f53117b419711310c1467a90da2aac6ec6d5ee1c6b",
+        "status": "RETRIEVED",
+        "reason": null,
+        "required_checks": [
+          "classification",
+          "identity",
+          "metadata:local"
+        ]
+      },
+      {
+        "path": "tokenizer_config.json",
+        "size": 321,
+        "blob_id": "f1f6a44d59f78c8979183439c53d33fddf0dbde5",
+        "lfs_sha256": null,
+        "sha256": "9a8ed9b01c8a56b555dcdc31cd526ba9e488cfc16ee5a101b3ce64af81d34f3d",
+        "status": "RETRIEVED",
+        "reason": null,
+        "required_checks": [
+          "classification",
+          "identity",
+          "metadata:local"
+        ]
+      },
+      {
+        "path": "vocab.txt",
+        "size": 4679,
+        "blob_id": "d4c7c7af74653fc360d4da37c238973f192cc25a",
+        "lfs_sha256": null,
+        "sha256": "130f1804e2dd52ff08aee3df4c216167f86e7ee4e2fed48bbe0537d61e8dd117",
+        "status": "RETRIEVED",
+        "reason": null,
+        "required_checks": [
+          "classification",
+          "identity",
+          "metadata:local"
+        ]
+      }
+    ],
+    "max_file_bytes": 1048576,
+    "max_total_bytes": 2097152,
+    "wall_time_s": 600,
+    "cache": "disabled"
+  },
+  "decision": {
+    "state": "INSUFFICIENT",
+    "rule_ids": [
+      "INVALID-EVIDENCE"
+    ],
+    "reason": "Repository retrieval is incomplete; required file checks are unresolved.",
+    "evidence_refs": [
+      "hub:source"
+    ],
+    "required_controls": []
+  },
+  "semantic_digest": "sha256:d04b125e05e0ef45f7730d5e02dc88b6dc9ec5c500e712130e75983c6ab23864",
+  "manifest_digest": "sha256:fa0e2b6ccf09a9e50415741b105ad780336ae291b26ce44237992658fc50ff5b",
+  "retrieved_files": 9,
+  "mandatory_complete": 22,
+  "mandatory_total": 29,
+  "no_token_selected": true,
+  "model_loading_performed": false
+}

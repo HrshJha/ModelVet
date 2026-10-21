@@ -40,7 +40,7 @@ def test_p0_requirement_task_test_traceability() -> None:
         assert re.search(r"MV-\d{3}", row) and re.search(r"T-[A-Z0-9-]+", row)
         assert (ROOT / "tests" / test).is_file() and requirement in tasks
     ids = re.findall(r"^### (MV-\d{3}) —", tasks, re.M)
-    assert ids == [f"MV-{i:03d}" for i in range(1, 46)]
+    assert ids == [f"MV-{i:03d}" for i in range(1, 54)]
 
 
 def test_documentation_relative_links_resolve() -> None:
@@ -71,7 +71,7 @@ def test_version_support_and_claim_boundaries_are_explicit() -> None:
     assert "Mac-first" in readme and "Windows is unsupported" in readme
     assert "No independently reviewed benchmark or model-loading experiment" in readme
     decisions = (ROOT / "docs/DECISIONS.md").read_text()
-    assert len(re.findall(r"\*\*Status:\*\* Proposed", decisions)) == 12
+    assert len(re.findall(r"\*\*Status:\*\* Proposed", decisions)) == 13
     assert (
         "docs/verification"
         in tomllib.loads((ROOT / "pyproject.toml").read_text())["tool"]["hatch"]["build"][
@@ -101,3 +101,35 @@ def test_local_audit_extension_requirement_task_test_traceability() -> None:
     ):
         assert (ROOT / "schemas" / schema).is_file()
         assert schema in (ROOT / "docs/REPORT_AUDIT_SPEC.md").read_text()
+
+
+def test_proposed_hub_requirement_task_test_traceability() -> None:
+    prd = (ROOT / "PRD.md").read_text()
+    tasks = (ROOT / "docs/TASKS.md").read_text()
+    roadmap = (ROOT / "docs/ROADMAP.md").read_text()
+    hub_spec = (ROOT / "docs/HUB_ASSESSMENT_SPEC.md").read_text()
+    expected = {
+        "FR-029": ("MV-046", "T-HF-URL-01"),
+        "FR-030": ("MV-047", "T-HF-INV-01"),
+        "FR-031": ("MV-048", "T-HF-FETCH-01"),
+        "FR-032": ("MV-049", "T-HF-INTEGRITY-01"),
+        "FR-033": ("MV-050", "T-HF-COV-01"),
+        "FR-034": ("MV-052", "T-HF-E2E-01"),
+    }
+    for requirement, (task, test_id) in expected.items():
+        row = next(line for line in prd.splitlines() if line.startswith(f"| {requirement} |"))
+        assert task in row and test_id in row and "P1 next release" in row
+        assert f"### {task} —" in tasks and requirement in tasks
+        assert (
+            "PH-19" in roadmap
+            if requirement in {"FR-029", "FR-030", "FR-031", "FR-032"}
+            else "PH-20" in roadmap
+        )
+        assert test_id in hub_spec
+    assert "MV-046" in tasks and "first unblocked" in tasks
+    assert "implemented in the working tree" in hub_spec
+    assert (ROOT / "src/modelvet/hub/assessment.py").is_file()
+    assert (
+        "Hub URL" in (ROOT / "frontend/src/ScanView.tsx").read_text()
+        or "Hugging Face model URL" in (ROOT / "frontend/src/ScanView.tsx").read_text()
+    )

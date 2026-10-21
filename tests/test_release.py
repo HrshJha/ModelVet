@@ -141,7 +141,7 @@ def test_installed_commands_are_available(installed_candidate) -> None:
         assert result.returncode == 0, result.stderr
     assert json.loads(invoke_installed(installed_candidate, "version", "--json").stdout)[
         "schema_versions"
-    ] == ["1.0.0"]
+    ] == ["1.0.0", "2.0.0"]
 
 
 @pytest.mark.parametrize(
@@ -332,3 +332,34 @@ def test_installed_report_audit_compare_and_batch_without_network(installed_cand
     )
     assert audited.returncode == 30 and json.loads(audited.stdout)["unresolved_reports"] == 1
     assert str(parent) not in audited.stdout + audited.stderr
+
+
+def test_installed_hub_reference_guard_and_v2_reader(installed_candidate, tmp_path, monkeypatch):
+    from fixture_factory import artifact
+    from hub_fixtures import URL, FakeHTTPS
+
+    from modelvet.hub import assessment
+    from modelvet.hub.assessment import scan_hub
+
+    root = artifact(tmp_path / "inert")
+    files = {p.name: p.read_bytes() for p in root.iterdir()}
+    monkeypatch.setattr(assessment, "HTTPS", lambda **kwargs: FakeHTTPS(files))
+    remote = scan_hub(URL, output_dir=tmp_path / "out")
+    result = invoke_installed(
+        installed_candidate,
+        "inspect",
+        str(remote.json_path),
+        "--format",
+        "json",
+        network_guard=True,
+    )
+    assert result.returncode == 0, result.stderr
+    assert json.loads(result.stdout)["schema_version"] == "2.0.0"
+    rejected = invoke_installed(
+        installed_candidate,
+        "scan",
+        "https://evil.example/a/b?token=PRIVATE",
+        network_guard=True,
+    )
+    assert rejected.returncode == 40
+    assert "PRIVATE" not in rejected.stdout + rejected.stderr

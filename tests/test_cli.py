@@ -87,7 +87,10 @@ def test_invalid_arguments_exit_40(arguments: list[str]) -> None:
 def test_version_reports_implemented_schema_support() -> None:
     result = invoke("version", "--json")
     assert result.returncode == 0
-    assert json.loads(result.stdout) == {"modelvet_version": "0.1.0", "schema_versions": ["1.0.0"]}
+    assert json.loads(result.stdout) == {
+        "modelvet_version": "0.1.0",
+        "schema_versions": ["1.0.0", "2.0.0"],
+    }
     assert result.stderr == ""
 
 

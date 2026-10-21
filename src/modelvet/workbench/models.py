@@ -1,8 +1,8 @@
 """Versioned browser contracts, separate from admission evidence."""
 
-from typing import Annotated, Any, Literal
+from typing import Annotated, Any, Literal, Self
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class ApiModel(BaseModel):
@@ -46,13 +46,32 @@ class PolicyResponse(ApiModel):
 
 
 class ScanInput(ApiModel):
-    model_path: Annotated[str, Field(min_length=1, max_length=4096)]
+    model_path: Annotated[str, Field(max_length=4096)] = ""
+    hub_url: Annotated[str | None, Field(max_length=512)] = None
+    revision: Annotated[str | None, Field(max_length=200)] = None
+    use_hf_token: bool = False
     policy_id: Annotated[str, Field(max_length=80)] = "default"
     scanner: Literal["auto", "modelscan", "none"] = "auto"
     max_files: Annotated[int, Field(ge=1, le=10000)] = 10000
     max_file_mib: Annotated[int, Field(ge=1, le=1024)] = 1024
     max_total_mib: Annotated[int, Field(ge=1, le=2048)] = 2048
     timeout_sec: Annotated[int, Field(ge=1, le=120)] = 120
+
+    @model_validator(mode="after")
+    def selected_input(self) -> Self:
+        if bool(self.model_path) == bool(self.hub_url):
+            raise ValueError("Choose one local folder or Hugging Face URL.")
+        if self.hub_url:
+            from modelvet.core.errors import InvalidInput
+            from modelvet.hub.reference import HubReference
+
+            try:
+                HubReference.parse(self.hub_url, self.revision)
+            except InvalidInput as error:
+                raise ValueError(str(error)) from None
+        elif self.revision is not None or self.use_hf_token:
+            raise ValueError("Hub revision/auth options require a Hub URL.")
+        return self
 
 
 class JobRecord(ApiModel):
@@ -65,6 +84,7 @@ class JobRecord(ApiModel):
     error_code: str | None = None
     report_id: str | None = None
     model_path: str | None = None
+    hub_url: str | None = None
 
 
 class Guidance(ApiModel):
@@ -99,6 +119,7 @@ class ReportSummary(ApiModel):
     controls: list[dict[str, str]] = []
     limitations: list[str] = []
     model_path: str | None = None
+    hub_source: dict[str, Any] | None = None
 
 
 class ReportPage(ApiModel):
@@ -129,4 +150,6 @@ class Capabilities(ApiModel):
     scanner_available: bool
     scanner_version: str | None
     serialized_scan_ready: bool
+    hub_available: bool = True
+    hub_token_configured: bool = False
     limitations: list[str]

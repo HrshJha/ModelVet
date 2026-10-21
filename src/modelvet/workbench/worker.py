@@ -42,13 +42,15 @@ def main() -> int:
                     raise InvalidInput("Worker input root identity changed.")
             finally:
                 os.close(fd)
-        artifact = root / relative_path(request.model_path)
-        fd = open_directory(artifact)
-        try:
-            if not has_ancestor_identity(fd, *descriptor["model_identity"]):
-                raise InvalidInput("Worker artifact escapes the selected root.")
-        finally:
-            os.close(fd)
+        artifact = None
+        if not request.hub_url:
+            artifact = root / relative_path(request.model_path)
+            fd = open_directory(artifact)
+            try:
+                if not has_ancestor_identity(fd, *descriptor["model_identity"]):
+                    raise InvalidInput("Worker artifact escapes the selected root.")
+            finally:
+                os.close(fd)
         staging = workspace / "staging" / descriptor["id"]
         tempfile.tempdir = str(staging)
         parent = descriptor["parent_pid"]
@@ -83,12 +85,29 @@ def main() -> int:
             timeout_s=request.timeout_sec,
         )
         output = workspace / "reports" / descriptor["id"]
-        InputGate().validate(artifact, output, limits)
-        outcome = ScanService().run(
-            ScanRequest(artifact, output, policy, request.scanner, limits, True),
-            on_progress=lambda stage: emit("stage", stage=stage),
-            process_observer=lambda pid, active: emit("process", pid=pid, active=active),
-        )
+        if request.hub_url:
+            from modelvet.hub.assessment import scan_hub
+
+            outcome = scan_hub(
+                request.hub_url,
+                revision=request.revision,
+                use_hf_token=request.use_hf_token,
+                output_dir=output,
+                policy_path=policy,
+                scanner=request.scanner,
+                limits=limits,
+                on_progress=lambda stage: emit("stage", stage=stage),
+                process_observer=lambda pid, active: emit("process", pid=pid, active=active),
+            )
+        else:
+            if artifact is None:
+                raise InvalidInput("Local artifact selection is missing.")
+            InputGate().validate(artifact, output, limits)
+            outcome = ScanService().run(
+                ScanRequest(artifact, output, policy, request.scanner, limits, True),
+                on_progress=lambda stage: emit("stage", stage=stage),
+                process_observer=lambda pid, active: emit("process", pid=pid, active=active),
+            )
         emit("result", report_path=str(outcome.json_path.relative_to(workspace)))
         return 0
     except KeyboardInterrupt:
@@ -98,8 +117,12 @@ def main() -> int:
             pass
         return 130
     except Exception as error:
+        from modelvet.hub.transport import HubError
+
         code = (
-            "BUDGET_EXCEEDED"
+            "HUB_ACCESS_FAILED"
+            if isinstance(error, HubError)
+            else "BUDGET_EXCEEDED"
             if isinstance(error, BudgetExceeded)
             else "IDENTITY_DRIFT"
             if isinstance(error, SnapshotChanged)
