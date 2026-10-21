@@ -637,7 +637,7 @@
 
 ### MV-043 — Package assets and extend supported CI
 
-- **Priority / status / phase:** P1; **COMPLETE (local); hosted execution pending**; `PH-17`. **Requirement(s):** FR-027.
+- **Priority / status / phase:** P1; **COMPLETE**; `PH-17`. **Requirement(s):** FR-027.
 - **Prerequisites:** MV-042.
 - **Procedure / failure modes:** Frontend assets in wheel/sdist, no Node needed at runtime, optional-extra isolation, generated-type drift check, pinned Ubuntu/macOS frontend/browser gate. Missing, malformed, conflicting, unsupported and interrupted paths must remain explicit; no model deserialization or policy weakening.
 - **Interfaces:** WORKBENCH_SPEC.md.
@@ -646,7 +646,7 @@
 
 ### MV-044 — Document and hand off local preview
 
-- **Priority / status / phase:** P1; **COMPLETE (local preview); hosted confirmation pending**; `PH-17`. **Requirement(s):** FR-027.
+- **Priority / status / phase:** P1; **COMPLETE (local preview)**; `PH-17`. **Requirement(s):** FR-027.
 - **Prerequisites:** MV-043.
 - **Procedure / failure modes:** Offline demonstration reports, launch/privacy/scanner/recovery tutorial, actual gate logs/hashes and clear external release/research/loader gates. Missing, malformed, conflicting, unsupported and interrupted paths must remain explicit; no model deserialization or policy weakening.
 - **Interfaces:** WORKBENCH_SPEC.md.
@@ -655,4 +655,4 @@
 
 ## Next task
 
-PH-15–17 local implementation and installed-package acceptance are complete. Run/review the extended hosted Ubuntu/macOS matrix, then independent project/security review for public release. PH-08 independent benchmark acceptance and PH-11 Linux/KVM loader work remain gated; no loading is enabled.
+PH-15–17 local implementation, installed-package acceptance and hosted Ubuntu/macOS matrix are complete (run 39611891146, source 996d19f). Independent project/security review is required for public release. PH-08 independent benchmark acceptance and PH-11 Linux/KVM loader work remain gated; no loading is enabled.

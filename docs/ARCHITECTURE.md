@@ -1,6 +1,6 @@
 # Architecture — proposed modular monolith
 
-Status: **PROPOSED**, 2026-10-20. The full local static CLI workflow and package candidate are implemented; hosted CI/public release remain pending. See PROGRESS for verified module state. Requirements are defined in `../PRD.md`; data types in `DATA_MODEL.md`, interfaces in `API_SPEC.md`, boundaries in `THREAT_MODEL.md`.
+Status: **PROPOSED**, 2026-10-20. The static CLI and optional PH-15–17 workbench are implemented; extended hosted CI passed at 996d19f, with public release pending review. See PROGRESS for verified module state. Requirements are defined in `../PRD.md`; data types in `DATA_MODEL.md`, interfaces in `API_SPEC.md`, boundaries in `THREAT_MODEL.md`.
 
 ## Goals and constraints
 

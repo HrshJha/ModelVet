@@ -1,0 +1,18 @@
+{
+  "source": "996d19f5af32ff1a89b770534e58e3c9d258a67a",
+  "run": "https://github.com/HrshJha/ModelVet/actions/runs/39611891146",
+  "logs": [
+    {
+      "platform": "ubuntu",
+      "log": "out/workbench-hosted/ubuntu.log",
+      "sha256": "68b7e530c2f84b96a221cc73e4b4431b463a261a6a1498e395291050bd69ca46",
+      "bytes": 113954
+    },
+    {
+      "platform": "macos-intel",
+      "log": "out/workbench-hosted/macos-intel.log",
+      "sha256": "3ca27ffc2014ce97104445326bb2827e256127d46a98bf7bf1721273bc39a839",
+      "bytes": 89110
+    }
+  ]
+}

@@ -13,7 +13,7 @@ uv sync --locked --extra ui
 uv run --extra ui modelvet ui --models-root /absolute/path/to/models
 ```
 
-Compiled assets ship with the Python package; Node is a development dependency only. The service binds to `127.0.0.1` and uses a private authenticated session. Keep the workspace outside the model root. See the [launch, privacy, recovery and demonstration guide](docs/WORKBENCH_GUIDE.md). Workbench preview verification is recorded separately from the earlier hosted static gate.
+Compiled assets ship with the Python package; Node is a development dependency only. The service binds to `127.0.0.1` and uses a private authenticated session. Keep the workspace outside the model root. See the [launch, privacy, recovery and demonstration guide](docs/WORKBENCH_GUIDE.md). The [workbench hosted gate](https://github.com/HrshJha/ModelVet/actions/runs/39611891146) passed on Ubuntu 24.04 and macOS 15 Intel, including browser and installed-wheel workflows. Public release remains pending review.
 
 ## What it does
 

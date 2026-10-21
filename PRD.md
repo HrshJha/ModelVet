@@ -5,7 +5,7 @@
 | Document version | `0.1.0-draft` |
 | Status | **PROPOSED requirements; local static candidate through PH-10; hosted Ubuntu/macOS validation passed; public release pending** |
 | Updated | 2026-10-21 |
-| Development stage | P0 local workflow implemented; Ubuntu 24.04/macOS 15 Intel hosted gates passed; public release pending review |
+| Development stage | Static CLI and optional PH-15–17 workbench preview implemented; Ubuntu 24.04/macOS 15 Intel hosted gates passed; public release pending review |
 | Product | Open-source local AI model artifact security and admission verification |
 | Authority | Primary source of truth for requirements; `docs/DECISIONS.md` for why |
 | Scope | Local static CLI plus optional PH-15–17 browser workbench; isolated loading remains gated |
