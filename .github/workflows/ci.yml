@@ -1,4 +1,4 @@
-name: Static MVP checks
+name: Static engine and local workbench checks
 on:
   push:
     branches: [main]
@@ -17,7 +17,7 @@ jobs:
       matrix:
         os: [ubuntu-24.04, macos-15-intel]
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 25
+    timeout-minutes: 35
     env:
       CI: "1"
       NO_COLOR: "1"
@@ -30,28 +30,46 @@ jobs:
         with:
           version: "0.13.3"
           enable-cache: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "24.14.1"
+          package-manager-cache: false
       - name: Pinned Python and dependencies
         run: |
           uv python install 3.12.15
-          uv sync --locked --python 3.12.15
+          uv sync --locked --python 3.12.15 --extra ui
           uv lock --check
       - name: Prime hash-locked runtime cache for offline release tests
         run: |
-          uv export --locked --no-dev --no-emit-project --format requirements-txt --output-file "$RUNNER_TEMP/modelvet-runtime.txt"
+          uv export --locked --extra ui --no-dev --no-emit-project --format requirements-txt --output-file "$RUNNER_TEMP/modelvet-runtime.txt"
           uv venv --python 3.12.15 "$RUNNER_TEMP/modelvet-cache-primer"
           uv pip sync --python "$RUNNER_TEMP/modelvet-cache-primer/bin/python" --require-hashes --only-binary :all: "$RUNNER_TEMP/modelvet-runtime.txt"
       - name: Static checks
         run: |
-          uv run ruff check .
-          uv run ruff format --check .
-          uv run ruff check src --select S
-          uv run mypy src
+          uv run --extra ui ruff check .
+          uv run --extra ui ruff format --check .
+          uv run --extra ui ruff check src --select S
+          uv run --extra ui mypy src
+      - name: Frontend contract, formatting, tests and bundled assets
+        run: |
+          npm ci --prefix frontend --ignore-scripts
+          npm run --prefix frontend format:check
+          npm run --prefix frontend typecheck
+          npm run --prefix frontend test
+          uv run --extra ui python tools/workbench_schema.py --check
+          npm run --prefix frontend types
+          npm run --prefix frontend build
+          git diff --exit-code -- schemas/workbench-api-v1.json frontend/src/generated-api.d.ts src/modelvet/workbench/static
+          cd frontend
+          npx --no-install playwright install --with-deps chromium
+      - name: Authenticated browser workflows and responsive accessibility
+        run: npm run --prefix frontend test:browser
       - name: Safe unit, property, contract and CLI tests
-        run: uv run pytest -q
+        run: uv run --extra ui pytest -q
       - name: Build and installed-package checks
         run: |
           uv build
-          uv run pytest -q tests/test_release.py
+          uv run --extra ui pytest -q tests/test_release.py tests/test_workbench_release.py
       - name: Separate pinned scanner environment
         run: |
           uv venv --python 3.12.15 .scanner-venv
@@ -59,4 +77,4 @@ jobs:
       - name: Real inert ModelScan contract
         run: |
           export PATH="$PWD/.scanner-venv/bin:$PATH"
-          uv run python tools/smoke_scanner.py
+          uv run --extra ui python tools/smoke_scanner.py

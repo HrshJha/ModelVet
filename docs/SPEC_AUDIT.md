@@ -2,7 +2,21 @@
 
 **Historical blueprint audit date:** 2026-10-20. **Historical scope:** Markdown/design consistency only. At that initial checkpoint no application code/tests/scanner had run. Later implementation evidence is recorded below; this historical table is not the current product state.
 
-## Review outcome
+## Current completion audit — 2026-10-21
+
+The static CLI, optional advisory supplement, report-audit extensions and PH-15–17 Workbench are implemented. All 44 task cards and 27 FR IDs are present; every P0 task has recorded local-candidate completion. MV-022/023 have development engineering/pilot evidence, with independent research acceptance pending. MV-030–032 remain unstarted behind the PH-11 prerequisites. No unblocked incomplete P0 implementation task was found.
+
+PR 3 is open and mergeable at `767aa18560d41e7afc77de0a07a232c1746d7675`, with zero submitted review approvals. Hosted run 39613283917 passes Ubuntu/macOS gates. The tested implementation has 623 Python tests on Ubuntu, 622 plus one Linux-only skip on macOS, seven component tests and 14 browser workflows each. Package install, offline runtime acceptance, exact generated-asset checks and real inert ModelScan contracts pass. This audit rechecks those actual records; it does not claim a new full test execution.
+
+| Remaining gate | Reason it is incomplete | Required external input |
+|---|---|---|
+| PH-08 independent acceptance | No reviewed hidden holdout or independent discrepancy/baseline adjudication | Custodian/reviewer records and frozen approved evidence |
+| PH-10 public release | No project/security risk disposition or release destination approval; no published release | Exact source/package approval and maintainer publication decision |
+| PH-11 loader research | Local host is Darwin arm64 without KVM, Firecracker or jailer; no approved dedicated host or isolation review supplied | Approved Linux/KVM alias, reviewed design/runtime/fixture identities and trial/teardown evidence |
+
+The concrete candidate is already reviewable in RELEASE_REVIEW_PACKET. An agent's own review or synthetic pilot cannot supply independence; a general request to complete the project does not create missing review records or a dedicated host. `verification/completion/` records the current task inventory, live PR/CI state, release list and host capabilities. Historical audit tables/checkpoints below remain unchanged as dated evidence.
+
+## Original blueprint review outcome
 
 | Check | Status | Evidence and remaining gap |
 |---|---|---|
@@ -34,7 +48,7 @@ Static analysis checked required-file existence, unique FR/task/phase IDs, requi
 5. Obtain fair baseline access/held-out corpus before asserting differentiated scanner-loader proof (OQ-10/13).
 6. Decide whether separate microVM research is justified and supportable before starting PH-11 (OQ-09).
 
-## Exact next task
+## Original blueprint next task
 
 **`MV-001` — Scaffold Python packaging and locked toolchain.** Create minimal `pyproject.toml`, `.python-version`, lockfile, ignore rules and package init; resolve pinned versions; install into an isolated Python 3.12 environment; run import/build smoke and record actual results in `PROGRESS.md`. The next task is **not started**.
 

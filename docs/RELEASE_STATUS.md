@@ -1,6 +1,6 @@
-# Static v0.1.0 candidate and release gates
+# Local static/workbench v0.1.0 preview and release gates
 
-**Current:** Ubuntu 24.04 and macOS 15 Intel hosted validation passes in PR 1. Public release, independent project/security review and PH-08/11 external evidence remain pending. Earlier checkpoint descriptions below are historical.
+**Current (2026-10-21):** PH-15–17 local workbench preview implemented; 622 local Python tests, seven components and 14 browser workflows pass, including installed-wheel launch without application Node/external sockets. Extended hosted Ubuntu/macOS execution passed at 996d19f (run 39611891146): 623 Python tests on Ubuntu, 622 plus one skip on macOS, seven components and 14 browser workflows each. Prior static hosted validation is recorded below. Public release, independent project/security review and PH-08/11 external evidence remain pending. Earlier checkpoint descriptions below are historical. See [workbench guide](WORKBENCH_GUIDE.md) and PROGRESS.
 
 The user selected **“Finish local candidate; leave hosted CI pending.”** PH-06/07 and the local portions of PH-09/10 are implemented. This is not a public release, hosted CI pass or independent security certification. Work started at e2f2bb269683d79cd6a12757aa140357fef089ad. A newer local checkpoint af86ffee5c7b4f1e990e9dbbdba6625e973acef0 appeared outside agent commands; checkpoint b91a791c6c3b4137a39fb540822e888d54948549 was observed later; final working-tree/source identities are recorded in verification/MV-023/.
 

@@ -1,0 +1,6 @@
+
+> modelvet-workbench@0.1.0 types
+> openapi-typescript ../schemas/workbench-api-v1.json -o src/generated-api.d.ts
+
+✨ openapi-typescript 7.13.0
+🚀 ../schemas/workbench-api-v1.json → src/generated-api.d.ts [27.4ms]

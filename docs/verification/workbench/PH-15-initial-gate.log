@@ -1,0 +1,38 @@
+$ uv lock --check
+Resolved 42 packages in 2ms
+EXIT 0
+$ uv run --extra ui ruff check .
+All checks passed!
+EXIT 0
+$ uv run --extra ui ruff format --check .
+104 files already formatted
+EXIT 0
+$ uv run --extra ui ruff check src --select S
+S110 `try`-`except`-`pass` detected, consider logging the exception
+  --> src/modelvet/application/scan.py:78:17
+   |
+76 |                   try:
+77 |                       on_progress(stage)
+78 | /                 except Exception:
+79 | |                     # Observational UI transport never alters evidence or admission.
+80 | |                     pass
+   | |________________________^
+81 |
+82 |           progress("validation")
+   |
+
+S110 `try`-`except`-`pass` detected, consider logging the exception
+   --> src/modelvet/workbench/jobs.py:280:13
+    |
+278 |                   current.report_id = None
+279 |                   self.store.save_job(current)
+280 | /             except Exception:
+281 | |                 # A broken index cannot record completion; recovery marks it interrupted.
+282 | |                 pass
+    | |____________________^
+283 |           finally:
+284 |               self.force_stop(process)
+    |
+
+Found 2 errors.
+EXIT 1

@@ -1,10 +1,10 @@
 # Architecture — proposed modular monolith
 
-Status: **PROPOSED**, 2026-10-20. The full local static CLI workflow and package candidate are implemented; hosted CI/public release remain pending. See PROGRESS for verified module state. Requirements are defined in `../PRD.md`; data types in `DATA_MODEL.md`, interfaces in `API_SPEC.md`, boundaries in `THREAT_MODEL.md`.
+Status: **PROPOSED**, 2026-10-20. The static CLI and optional PH-15–17 workbench are implemented; extended hosted CI passed at 996d19f, with public release pending review. See PROGRESS for verified module state. Requirements are defined in `../PRD.md`; data types in `DATA_MODEL.md`, interfaces in `API_SPEC.md`, boundaries in `THREAT_MODEL.md`.
 
 ## Goals and constraints
 
-Local-only, predictable, zero untrusted-code execution in the standard process, immutable assessment input, explicit incompleteness, reproducible policy verdicts, JSON/Markdown output. No HTTP server, message broker, persistent database, or microservices. Python 3.12 baseline; Linux/macOS static workflow; Windows support after testing. P2 behavioral verification separately gated.
+Local-only, predictable, zero untrusted-code execution in the standard process, immutable assessment input, explicit incompleteness, reproducible policy verdicts, JSON/Markdown output. The original static MVP has no HTTP server or database. The authorized PH-15–17 extension adds optional loopback HTTP and a private SQLite index; no message broker or microservices. Python 3.12 baseline; Linux/macOS static workflow; Windows support after testing. P2 behavioral verification separately gated.
 
 ## System context
 
@@ -117,7 +117,7 @@ sequenceDiagram
 - `SnapshotManifest` is the single source for file identities. Two tool outputs for same path but different content hash cause identity conflict.
 - `ToolExecution` records never count as `AssessmentCoverage` without declared per-file mapping.
 - `AssessmentResult` carries `status` separate from `findings`. Empty list on FAILED != NO_FINDINGS.
-- Local output is JSON and Markdown; no SQLite until a concrete user need. Raw scanner output may be archived with a recorded hash and privacy-limited retention.
+- Local output is JSON and Markdown; the optional workbench now uses a private SQLite history index. Raw scanner output may be archived with a recorded hash and privacy-limited retention.
 - Offline by default; P1 optional advisory imports from a user-supplied immutable snapshot file; no hidden network access.
 - Snapshot staging is deleted in `finally` after report creation or failure. Disk exhaustion produces controlled fail-closed result.
 
@@ -132,7 +132,7 @@ sequenceDiagram
 
 - **Snapshot costs storage** but avoids source mutation during subprocess scanning. Set budgets (PRD NFR-04); reject over-budget rather than stream an unsafe moving target.
 - **Local subprocess ModelScan** supplies proven existing scanning logic but carries parser-level risk; environment hardening reduces blast radius without claiming isolation. P2 security tests may require separate microVM.
-- **No database/queue** keeps a solo project simpler; reports can be audited and compared. Report integrity is hash-based; signed attestations are deferred.
+- **Report files with an optional local index** keep the CLI standalone; reports can be audited and compared. Report integrity is hash-based; signed attestations are deferred.
 - **No scoring model** avoids ungrounded risk percentages; policy decisions are typed, explicit, explainable.
 
 ## Architecture acceptance (planned)
@@ -146,3 +146,7 @@ MV-020 adds dependencies/advisories.py and a separate CLI path: read/validate st
 ## Static report audit extension — PH-12–14
 
 The reports boundary owns `audit.py`, `compare.py` and `batch.py`. They consume validated stored reports through the secure bounded JSON reader; they never call the scan service or policy evaluator. Batch reuses captured bytes and raw audit logic with shared budgets. CLI wrappers map typed results/errors to documented exits. Versioned result/manifest schemas ship with the wheel. Read-only operations retain best-effort identity checks; no filesystem transaction or signature is implied. See [REPORT_AUDIT_SPEC](REPORT_AUDIT_SPEC.md).
+
+## Workbench extension — FR-025–027
+
+The optional workbench adds a loopback FastAPI service serving bundled frontend assets, a private SQLite index, and one dedicated scan worker. Workers call the existing ScanService with observational progress; reports remain authoritative on disk. The server never forks scanner code from request threads. No database server or remote service is added.

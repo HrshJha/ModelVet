@@ -1,0 +1,1 @@
+Initial npm install failed: openapi-typescript 7.13.0 requires TypeScript ^5.x; latest TypeScript 7.0.2 does not satisfy it. Selected TypeScript 5.9.3, without force or legacy-peer-deps. Python optional UI extra resolved and installed successfully with the existing Pydantic 2.14.1 pin.

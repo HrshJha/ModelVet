@@ -249,6 +249,21 @@ def doctor(json_output: Annotated[bool, typer.Option("--json")] = False) -> None
 
 
 @cli.command()
+def ui(
+    models_root: Annotated[Path, typer.Option(help="Explicit local model-folder root.")],
+    workspace: Annotated[
+        Path | None, typer.Option(help="Private workspace outside model inputs.")
+    ] = None,
+    port: Annotated[int, typer.Option(min=0, max=65535)] = 0,
+    no_browser: bool = False,
+) -> None:
+    """Open the optional private local workbench; static assessment only."""
+    from modelvet.workbench.launch import launch
+
+    launch(models_root, workspace, port, no_browser)
+
+
+@cli.command()
 def version(json_output: Annotated[bool, typer.Option("--json")] = False) -> None:
     """Show package version and implemented schema support."""
     if json_output:

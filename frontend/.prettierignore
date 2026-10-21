@@ -1,0 +1,4 @@
+src/generated-api.d.ts
+node_modules/
+test-results/
+playwright-report/

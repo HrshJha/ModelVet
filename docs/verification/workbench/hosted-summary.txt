@@ -1,0 +1,12 @@
+Python 3.12 / ubuntu-24.04	UNKNOWN STEP	2026-10-21T13:53:24.7593455Z  Test Files  1 passed (1)
+Python 3.12 / ubuntu-24.04	UNKNOWN STEP	2026-10-21T13:53:24.7594045Z       Tests  7 passed (7)
+Python 3.12 / ubuntu-24.04	UNKNOWN STEP	2026-10-21T13:54:06.9832511Z   14 passed (18.1s)
+Python 3.12 / ubuntu-24.04	UNKNOWN STEP	2026-10-21T13:54:42.1343203Z 623 passed, 1 warning in 34.62s
+Python 3.12 / ubuntu-24.04	UNKNOWN STEP	2026-10-21T13:54:56.1733201Z 13 passed in 13.02s
+Python 3.12 / ubuntu-24.04	UNKNOWN STEP	2026-10-21T13:54:57.3437307Z {"checks": [{"id": "modelscan", "status": "COMPLETE"}, {"id": "scanner:resources", "status": "COMPLETE"}], "decision": "APPROVE", "fixture": "inert None bytes; never deserialized by ModelVet", "platform": "Linux", "tools": [{"binary_sha256": "da1b6ee8c3b1da9c7adfe86d67ce385b6a92ee7c622441709231c9db10347bf1", "source": "pypi:modelscan==0.8.8", "tool_id": "modelscan", "version": "0.8.8"}, {"binary_sha256": null, "source": "installed package", "tool_id": "modelvet", "version": "0.1.0"}]}
+Python 3.12 / macos-15-intel	UNKNOWN STEP	2026-10-21T13:54:58.2517330Z  Test Files  1 passed (1)
+Python 3.12 / macos-15-intel	UNKNOWN STEP	2026-10-21T13:54:58.2519400Z       Tests  7 passed (7)
+Python 3.12 / macos-15-intel	UNKNOWN STEP	2026-10-21T13:56:28.3025210Z   14 passed (50.9s)
+Python 3.12 / macos-15-intel	UNKNOWN STEP	2026-10-21T13:58:22.2425880Z 622 passed, 1 skipped, 1 warning in 112.06s (0:01:52)
+Python 3.12 / macos-15-intel	UNKNOWN STEP	2026-10-21T13:58:58.6648680Z 13 passed in 31.70s
+Python 3.12 / macos-15-intel	UNKNOWN STEP	2026-10-21T13:59:01.8996050Z {"checks": [{"id": "modelscan", "status": "COMPLETE"}, {"id": "scanner:resources", "status": "UNSUPPORTED"}], "decision": "INSUFFICIENT", "fixture": "inert None bytes; never deserialized by ModelVet", "platform": "Darwin", "tools": [{"binary_sha256": "d3f8122a849cf33d7eaf26c7bb4263ac51692ddd45baa9e7a77b4e06bf43d0b2", "source": "pypi:modelscan==0.8.8", "tool_id": "modelscan", "version": "0.8.8"}, {"binary_sha256": null, "source": "installed package", "tool_id": "modelvet", "version": "0.1.0"}]}

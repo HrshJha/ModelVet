@@ -1,0 +1,24 @@
+
+> modelvet-workbench@0.1.0 test:browser
+> playwright test
+
+
+Running 13 tests using 1 worker
+
+(node:59790) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/workbench.spec.ts:18:1 › overview has real empty state and working navigation (501ms)
+  ✓   2 tests/workbench.spec.ts:30:1 › folder browser runs a genuine supported static scan (1.0s)
+  ✓   3 tests/workbench.spec.ts:60:1 › BLOCK, INSUFFICIENT and CONTROLS remain distinct completed outcomes (1.6s)
+  ✓   4 tests/workbench.spec.ts:77:1 › original JSON download/import and attachment checks preserve stored admission (385ms)
+  ✓   5 tests/workbench.spec.ts:97:1 › comparison exposes exact changes without recomputing decisions (564ms)
+  ✓   6 tests/workbench.spec.ts:114:1 › cancellation stops a real worker and never produces an admission result (954ms)
+  ✓   7 tests/workbench.spec.ts:126:3 › responsive and accessible review at 375px (955ms)
+  ✓   8 tests/workbench.spec.ts:126:3 › responsive and accessible review at 768px (893ms)
+  ✓   9 tests/workbench.spec.ts:126:3 › responsive and accessible review at 1024px (927ms)
+  ✓  10 tests/workbench.spec.ts:126:3 › responsive and accessible review at 1440px (916ms)
+  ✓  11 tests/workbench.spec.ts:153:1 › hostile declaration text never becomes browser markup (724ms)
+  ✓  12 tests/workbench.spec.ts:164:1 › disconnected progress keeps the last observed state and can reconnect (2.3s)
+  ✓  13 tests/workbench.spec.ts:181:1 › keyboard and coarse-pointer controls remain usable (163ms)
+
+  13 passed (13.4s)

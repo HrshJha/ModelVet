@@ -1,6 +1,6 @@
 # ModelVet progress dashboard
 
-**Updated 2026-10-20. Overall: local static candidate complete through PH-10. Hosted Ubuntu/macOS gates passed; public release PENDING review.** The five MVP commands, optional offline advisory command and three stored-report audit commands work. PH-12–14 are complete. Work started against base `e2f2bb269683d79cd6a12757aa140357fef089ad`; a newer checkpoint `af86ffee5c7b4f1e990e9dbbdba6625e973acef0` appeared during this run outside the agent commands and was preserved. Further external checkpoints were observed and preserved; the prior pilot checkpoint is recorded in `verification/MV-023/`; the PH-12–14 checkpoint is in `verification/MV-035/`; current hosted/candidate identities are in `verification/MV-026/hosted-followup/`. Only a synthetic development pilot ran; no model loading or independently adjudicated benchmark.
+**Updated 2026-10-21. Overall: static CLI and PH-15–17 local workbench preview complete. Earlier static hosted Ubuntu/macOS gates passed; extended Ubuntu/macOS workbench CI passed at 996d19f; public release review remains pending.** The five MVP commands, optional offline advisory command and three stored-report audit commands work. PH-12–14 are complete. Work started against base `e2f2bb269683d79cd6a12757aa140357fef089ad`; a newer checkpoint `af86ffee5c7b4f1e990e9dbbdba6625e973acef0` appeared during this run outside the agent commands and was preserved. Further external checkpoints were observed and preserved; the prior pilot checkpoint is recorded in `verification/MV-023/`; the PH-12–14 checkpoint is in `verification/MV-035/`; current hosted/candidate identities are in `verification/MV-026/hosted-followup/`. Only a synthetic development pilot ran; no model loading or independently adjudicated benchmark.
 
 | Workstream | Actual state | Evidence |
 |---|---|---|
@@ -8,12 +8,12 @@
 | Architecture and threat model | Drafted, pending review | `ARCHITECTURE.md`, `THREAT_MODEL.md` |
 | Dependency resolution / lock | COMPLETE for foundation | `../pyproject.toml`, `../uv.lock`, `verification/MV-001/` |
 | Source implementation | Full local CLI, static checks, evidence/coverage/policy, reports and packaging | `../src/modelvet/` |
-| Tests/fixtures | 559 passed / one Linux-only skip locally; 560 passed on hosted Ubuntu | `verification/MV-026/hosted-followup/` |
+| Tests/fixtures | 622 passed / one Linux-only skip locally; seven component and 14 browser workflows passed | `verification/workbench/PH-17-final-gate.log`, `verification/workbench/MV-044-final-browser.log` |
 | Benchmarks | INCONCLUSIVE local development pilot; independent research PENDING | `../benchmarks/results/`, `verification/MV-023/` |
 | Isolated model-loading safety | DEFERRED | PH-11 / ADR-009 proposed |
 | Release | NOT RELEASED | Local wheel/sdist and hosted CI verified; public release pending review |
 
-**Active task:** external review/laboratory prerequisites awaited; MV-026 and PH-12–14 are implemented and verified. **Next gates:** independent corpus/security review and dedicated Linux/KVM prerequisites, left pending by user selection. **Next external gate:** independent project/security review and research/loader prerequisites. ADRs remain Proposed; provisional toolchain choices and deviations are recorded in ADR-002.
+**Active task:** PH-15–17 preview complete locally and on hosted targets; independent public-release review remains pending.
 
 ## Milestones
 
@@ -33,6 +33,9 @@
 | PH-12 | COMPLETE | Raw evidence verification; 508 pass / one Linux-only skip |
 | PH-13 | COMPLETE | Stored report comparison; 521 pass / one Linux-only skip |
 | PH-14 | COMPLETE | Explicit report batch audit; 558 pass / one Linux-only skip |
+| PH-15 | COMPLETE locally | Optional dependencies, authenticated API, private worker/history |
+| PH-16 | COMPLETE locally | Scan/report workspace, deterministic guidance, history/import/compare |
+| PH-17 | PREVIEW COMPLETE; hosted Ubuntu/macOS passed | 622 Python tests, seven components, 14 browser workflows; installed wheel without Node/external socket access |
 
 ## Decisions awaiting approval
 
@@ -132,3 +135,46 @@ On completing an individual task: edit only its status from NOT STARTED to COMPL
 - **2026-10-20 candidate refresh:** Final local gate passes 559 tests / one Linux-only skip, lock/lint/format/security/types and wheel/sdist build (verification/MV-026/hosted-followup/final-local-gate.log). Agent commits/pushes now exist on codex/ci-release-gates with PR 1; these changes correct hosted validation and prepare concrete review material. No public tag/package or loader execution is authorized by passing static CI alone. PH-08, PH-10 release acceptance and PH-11 remain dependent on the explicitly requested external records.
 
 - **2026-10-20 PR/main comparison and push checkpoint:** PR 1 is merged as fbf603c1f471d932cc109a3da4350dbeddb724ab. Its checked head d440925 has exactly the same tree as merged main; freshly fetched local/remote main have zero commits ahead/behind before this evidence checkpoint. Post-merge run 39467012708 passes both hosted targets: Ubuntu 560 tests; macOS Intel 559 pass / one Linux-only skip; 10 release tests and real inert scanner contracts pass on each. The exact built wheel also installs with hash-locked cached dependencies and passes a network-denied synthetic scan plus stored-byte verification. Four remaining verification records were reviewed as structured metadata, with no artifact payload or credential data. Comparison, hashes and actual outputs are in verification/MV-026/hosted-followup/. This checkpoint changes progress/evidence only; no application code, dependency, accepted ADR, public release or loader capability changes.
+
+- **2026-10-20 MV-011 contract correction:** Direct Python evidence construction accepted unpaired-surrogate object keys, which the pinned serializer changed into replacement characters. Twelve new regressions failed before the fix. Strict UTF-8 checks now cover keys in nested check details and dependency advisories; all 40 evidence tests pass, including 18 new Python/JSON/valid-Unicode cases. Full local gate: 577 pass / one Linux-only skip; lock/lint/format/security/types (54 source files), wheel/sdist build and 10 fresh installed-package checks pass. Evidence: `verification/MV-011/unicode-keys/`. No dependency/schema/policy change or demonstrated admission bypass. Hosted results for this correction are not inferred from the earlier baseline. Remaining work is independent release/research review and the gated Linux/KVM loader prerequisites.
+
+- **2026-10-20 PH-15/MV-036:** Workbench contracts and optional dependency locks established; 9 contract/docs tests pass, Python/frontend combined import/request smoke passes. Exact pins, licenses and advisory queries recorded in verification/workbench/. The first npm attempt exposed a TypeScript 7/OpenAPI generator peer conflict; supported TypeScript 5.9.3 resolves without overrides. Workbench implementation now proceeds to MV-037; no new security or release approval is inferred.
+
+- **2026-10-21 PH-15 complete:** MV-036–038 implement the optional authenticated loopback service, rooted folder/policy handling, fixed own-module scan worker, genuine stage events, cancellation/scanner cleanup, parent-death interruption and private SQLite history. Local gate: 599 passed / one Linux-only skip; lock/lint/format/security/types pass (64 source files). Worker tests cover all four decisions and CLI semantic parity; no model loading or report/policy schema change. Logs: verification/workbench/PH-15-gate.log and MV-038-tests.log. Next: MV-039 UI shell/scan setup.
+
+- **2026-10-21 PH-16 complete:** MV-039–041 add the dark developer workbench, rooted scan setup, actual stage feedback, coverage matrix/file drill-down, safe record dialogs, deterministic guidance, private history, exact-byte JSON import/download, attachment verification and paged report comparison. Browser workflows cover every admission state, policy import and cancellation. Local full Python suite: 605 pass / one Linux-only skip; 7 frontend component tests and 6 Chromium workflows pass; types/build/lint/security pass. Desktop overview/report screenshots were inspected. Evidence: verification/workbench/MV-039 through MV-041 and PH-16-python-gate.log. PH-17 acceptance is next; public release remains pending independent review.
+
+
+## MV-043 local packaging gate — 2026-10-21
+
+Preserved external local commits 7691f1b/c314d5b before resuming. Added fresh optional-UI wheel installation and browser smoke, no Node on the application PATH, test-only nonloopback socket rejection in both server/worker environments, archive-content checks, generated-asset drift checks and pinned frontend Ubuntu/macOS CI steps. No admission/report schema change. Runtime third-party notices are bundled; frontend source/lock are in the sdist; modules and session state are excluded. Refreshed npm audit reports zero known matches, with every locked package carrying license metadata (see THIRD_PARTY).
+
+Actual commands/results in verification/workbench: `uv run --extra ui pytest -q` → **620 passed / one Linux-only skip**, `MV-043-python.log`; installed/UI+CI contract subset → **6 passed**, `MV-043-installed.log`; frontend components → **7 passed**, `MV-043-components.log`; browser workflow → **13 passed**, `MV-043-browser.log`; Ruff/format/security/mypy65 source files/lock → passed, `MV-043-lint.log`. Format/type/build/schema/type generation passed. The initial installed tests had incorrect routes/headings and an unscoped badge count; failures are retained, corrected checks pass. Hosted execution of the extended workflow is pending; earlier static CI is not workbench CI evidence. Next MV-044.
+
+
+## MV-044 / PH-17 local preview — 2026-10-21
+
+Bundled four frozen, schema/digest-valid synthetic reports generated by the actual static engine (`tools/workbench_demos.py`), pinned by `workbench/demo/manifest.json`. Gallery is explicitly synthetic and does not add history; verification cannot imply supplied raw attachments. Added launch/private-session/scanner/recovery/installed-wheel instructions and the complete unknown-fixture correction/rerun/comparison tutorial in WORKBENCH_GUIDE. Updated CLI/architecture/stack/testing references and retained all 12 ADRs as Proposed. No model loading, automatic repair, dependency upgrade or admission/schema change.
+
+Actual final commands: lock/Ruff/format/security/mypy65 files/schema drift passed; `uv run --extra ui pytest -q` → **622 passed / one Linux-only skip** (`PH-17-final-gate.log`); frontend format/type/seven component tests/type regeneration/build passed (`PH-17-final-frontend.log`); **14 Chromium workflows passed** (`MV-044-final-browser.log`), including measured responsive/axe and demo/history separation. Frozen demo/API subset passed twice, and installed-wheel acceptance validates demo assets plus real scans/import/compare/verify with the application PATH empty and external sockets rejected in the server/worker acceptance environment. The browser driver aborts external requests. A final strengthened installed-wheel browser check also starts a real scan through the folder picker and opens its saved history; all three installed UI tests passed (`PH-17-installed-final.log`). Initial selector failures and lint errors are retained; corrected gates passed. Starlette emits a development-only HTTPX TestClient deprecation warning; runtime/API tests pass with the locked stack, no forced dependency substitution.
+
+Built wheel and source archive with `uv build --out-dir out/workbench-preview`; exact SHA-256 identities are retained in `verification/workbench/preview-distributions.json` after the final build. Operational logs/identities are excluded from the source archive; compiled assets/notices, demo reports, frontend sources/lock and test/build tools ship. Visual inspection of the 1440px Overview confirmed the labeled four-outcome gallery and private-history empty state; prior 375px report inspection remains recorded. This is a local preview, not a public release. Extended hosted execution is pending, as are independent project/security approval, hidden-holdout benchmark adjudication and the dedicated reviewed Linux/KVM loader gate.
+
+
+## Hosted workbench acceptance — 2026-10-21
+
+[Run 39611891146](https://github.com/HrshJha/ModelVet/actions/runs/39611891146) passed both targets at implementation commit `996d19f5af32ff1a89b770534e58e3c9d258a67a` in [PR 3](https://github.com/HrshJha/ModelVet/pull/3). Ubuntu 24.04: **623 Python tests passed**. macOS 15 Intel: **622 passed / one Linux-only skip**. Each target passed **seven component tests, 14 browser workflows, and the repeated 13-test core/UI installed-package subset**, plus lock/lint/types/generated-asset checks and build. Real ModelScan 0.8.8 inert standalone proof passed: Ubuntu records complete resource evidence and scoped APPROVE; macOS records unsupported memory evidence and INSUFFICIENT, as required. No malicious executable fixture or model load was used.
+
+Exact GitHub step metadata is retained in `verification/workbench/hosted-results.json`, selected actual output in `hosted-summary.txt`, and full downloaded job logs in ignored `out/workbench-hosted/`, pinned by `hosted-log-pins.json`. The evidence follow-up changes documentation only; the linked run tested the implementation commit, not a future source state. PH-15–17 is complete as a local preview. All ADRs remain Proposed; independent project/security review, public publication approval, independent benchmark adjudication and dedicated Linux/KVM loader prerequisites remain pending. The local preview server uses generated synthetic input only; no operator model directory was selected.
+
+
+## Whole-project completion audit — 2026-10-21
+
+Rechecked the clean 767aa18 checkpoint, all 44 task cards, PR 3, final-head CI run 39613283917 and the release list. No unblocked incomplete P0 implementation task remains. PR 3 is open/mergeable, hosted checks pass, and no independent review approvals or published releases are recorded. Local capability checks still report Darwin arm64, no /dev/kvm, no Firecracker/jailer, and none of the checked Linux VM tools on PATH. Task MV-022/023 research acceptance and MV-030–032 loader prerequisites remain externally gated. No review/holdout/host evidence was supplied by the general completion request; the required inputs were requested while local auditing continued.
+
+MV-029 documentation follow-up reconciles the current OPEN_QUESTIONS table, SPEC_AUDIT, CLI/data-model wording, security worker-boundary description and DoD interpretation with actual implemented/hosted evidence. Original dated checkpoints remain historical. No application code, dependencies, report/admission semantics, ADR status, release tag or loader capability changed. Exact audit snapshots and targeted doc-validation output are in verification/completion/. This records engineering completion without claiming the external release/research/loader gates have passed.
+
+
+## Maintainer authorization to finalize integration — 2026-10-21
+
+The maintainer explicitly authorized proceeding with all remaining available work. This authorizes candidate integration and local release preparation; it supplies no independent review identity, hidden holdout, dedicated host or containment observations. Preserve the existing external research/release/loader gates. The completion documentation follow-up passes 12 targeted contracts and Ruff; application code is unchanged from the verified 767aa18 checkpoint. Integrate the tested PR through the normal merge path without bypassing required checks, and retain source/package identities for review.

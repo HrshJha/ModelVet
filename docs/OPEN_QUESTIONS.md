@@ -1,25 +1,27 @@
 # Open questions and uncertainty register
 
-**Updated 2026-10-20.** Items remain OPEN or PARTIAL and has an executable resolution method; preliminary assumptions are provisional, not excuses for indefinite delay. Decision owner for all: ModelVet maintainer (future developer), with security reviewer for Q09/Q12.
+**Updated 2026-10-21.** This table is the current disposition. Original proposal cards and dated checkpoints below are historical evidence; they do not reopen resolved implementation questions. Independent review/research/loader questions remain open. All ADRs remain Proposed.
 
-| ID | Question | Status | Resolution tasks |
+| ID | Question | Current disposition | Evidence / remaining requirement |
 |---|---|---|---|
-| OQ-01 | What exact versions of hatchling, pytest, ruff, mypy and ModelScan resolve together under Python 3.12? | PARTIAL | MV-001,MV-010 |
-| OQ-02 | Can ModelScan output establish positive coverage per individual file/member? | OPEN | MV-010,MV-012 |
-| OQ-03 | What snapshot budgets remain useful for multi-GB models? | OPEN | MV-004,MV-025 |
-| OQ-04 | Which local license/provenance fields are reliable enough to make mandatory? | OPEN | MV-008,MV-015 |
-| OQ-05 | Can the tool distinguish PyTorch ZIP checkpoint members safely without importing torch? | OPEN | MV-007,MV-022,MV-031 |
-| OQ-06 | How should a PROHIBITED policy rule be corroborated? | OPEN | MV-014,MV-019 |
-| OQ-07 | Is offline OSV matching sufficient for dependency vulnerability evidence? | OPEN | MV-020 |
-| OQ-08 | What supported OS matrix is practical? | OPEN | MV-026 |
-| OQ-09 | Is safe microVM execution operationally feasible for one developer? | OPEN | MV-030 |
-| OQ-10 | Does a head-to-head benchmark show incremental held-out value vs Layerfault/PickleBall/ModelScan? | OPEN | MV-022,MV-023 |
-| OQ-11 | Will default report destination work on all intended hosts without input overlap? | OPEN | MV-003,MV-016 |
-| OQ-12 | Can scanner invocation be sufficiently constrained without a VM? | OPEN | MV-010,MV-024 |
-| OQ-13 | What constitutes an independent true discrepancy rather than an unsupported format? | OPEN | MV-022,MV-023 |
-| OQ-14 | What licenses apply to all selected direct and transitive packages and fixtures? | PARTIAL | MV-001,MV-029 |
+| OQ-01 | Exact compatible core/scanner/UI versions? | RESOLVED for declared targets | Core/ui uv.lock plus separate ModelScan 0.8.8 lock; fresh installs and Ubuntu/macOS CI pass. They deliberately use separate environments. |
+| OQ-02 | Positive per-file/member coverage? | PARTIAL | Named standalone file proof observed; archive/member completeness remains INCONCLUSIVE. No inference from tool exit alone. |
+| OQ-03 | Useful multi-GB snapshot budgets? | PARTIAL | Fixed ceilings and bounded synthetic resource measurements tested. Real multi-GB throughput/usability is unmeasured. |
+| OQ-04 | Reliable mandatory metadata fields? | PARTIAL | Sourced LICENSE/PROVENANCE declarations and conflict handling implemented. Authenticity/legal rights are not established. |
+| OQ-05 | Safe PyTorch ZIP interpretation? | PARTIAL | Bounded ZIP index subset implemented without torch. Loader reachability/equivalence remains unproven. |
+| OQ-06 | Corroboration for prohibitions? | IMPLEMENTED; review pending | Owned inventory/classification/source-presence proof substantiates the configured source ban. Other scanner claims cannot independently BLOCK; tests pass. ADR/project review remains pending. |
+| OQ-07 | Offline advisory evidence sufficient? | PARTIAL | Explicit exact-version snapshot supplement implemented; source authenticity, ranges, actual installed state and reachability remain unresolved. |
+| OQ-08 | Supported OS matrix? | RESOLVED for declared targets | Ubuntu 24.04 and macOS 15 Intel pass full static/workbench CI; local macOS arm64 tested. Windows/other targets are unsupported. |
+| OQ-09 | Operationally safe microVM research? | OPEN; external prerequisites | Dedicated approved Linux/KVM host, independent isolation review and fixed runtime identities not supplied. No loader implementation enabled. |
+| OQ-10 | Held-out incremental value? | OPEN; independent research | Development pilot is INCONCLUSIVE. Hidden holdout, eligible alternatives and independent adjudication remain pending. |
+| OQ-11 | Safe report destination? | IMPLEMENTED and tested | Explicit/default output separation, inode ancestry and edge/failure cases pass on supported targets. Filesystem race detection remains best effort. |
+| OQ-12 | Sufficient scanner confinement? | PARTIAL; risk acceptance pending | Process caps tested; required Darwin memory evidence remains unsupported, and OS network isolation is not enforced. A subprocess is not a sandbox. |
+| OQ-13 | Independently true discrepancy? | OPEN; independent research | Development byte-method agreement does not replace independent discrepancy/holdout adjudication. |
+| OQ-14 | Dependency/fixture licenses? | INVENTORIED; release review pending | Core/scanner/UI license metadata/notices retained; runtime notices bundled; generated inert fixtures use project MIT license. Public redistribution still needs project review. |
 
-## Detailed uncertainty cards
+Current hosted evidence: run [39613283917](https://github.com/HrshJha/ModelVet/actions/runs/39613283917) at `767aa18560d41e7afc77de0a07a232c1746d7675`. See PROGRESS, THIRD_PARTY, RELEASE_REVIEW_PACKET and `verification/completion/` for the exact remaining gates. No question is closed by merely editing this register.
+
+## Detailed uncertainty cards — historical proposal
 
 
 ### OQ-01 — What exact versions of hatchling, pytest, ruff, mypy and ModelScan resolve together under Python 3.12?

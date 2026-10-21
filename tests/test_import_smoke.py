@@ -5,6 +5,7 @@ import subprocess
 import sys
 from importlib.metadata import distribution
 
+from packaging.requirements import Requirement
 from packaging.specifiers import SpecifierSet
 
 import modelvet
@@ -16,10 +17,20 @@ def test_installed_metadata_matches_package() -> None:
     assert set(package.metadata["Requires-Python"].split(",")) == {">=3.12", "<3.13"}
     assert package.metadata["License-Expression"] == "MIT"
     requirements = package.requires or []
-    assert {requirement.split("==", 1)[0] for requirement in requirements} == {
+    parsed = [Requirement(requirement) for requirement in requirements]
+    assert {
+        requirement.name
+        for requirement in parsed
+        if requirement.marker is None or requirement.marker.evaluate({"extra": ""})
+    } == {
         "pydantic",
         "typer",
     }
+    assert {
+        requirement.name
+        for requirement in parsed
+        if requirement.marker is not None and requirement.marker.evaluate({"extra": "ui"})
+    } == {"fastapi", "uvicorn"}
 
 
 def test_python_support_metadata_excludes_unsupported_versions() -> None:

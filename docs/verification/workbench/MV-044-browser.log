@@ -1,0 +1,57 @@
+
+> modelvet-workbench@0.1.0 test:browser
+> playwright test
+
+
+Running 14 tests using 1 worker
+
+(node:68563) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/workbench.spec.ts:33:1 › overview has real empty state and working navigation (297ms)
+  ✓   2 tests/workbench.spec.ts:59:1 › folder browser runs a genuine supported static scan (1.0s)
+  ✓   3 tests/workbench.spec.ts:113:1 › BLOCK, INSUFFICIENT and CONTROLS remain distinct completed outcomes (1.7s)
+  ✓   4 tests/workbench.spec.ts:147:1 › original JSON download/import and attachment checks preserve stored admission (370ms)
+  ✓   5 tests/workbench.spec.ts:193:1 › comparison exposes exact changes without recomputing decisions (566ms)
+  ✓   6 tests/workbench.spec.ts:246:1 › cancellation stops a real worker and never produces an admission result (958ms)
+  ✓   7 tests/workbench.spec.ts:264:3 › responsive and accessible review at 375px (907ms)
+  ✓   8 tests/workbench.spec.ts:264:3 › responsive and accessible review at 768px (898ms)
+  ✓   9 tests/workbench.spec.ts:264:3 › responsive and accessible review at 1024px (927ms)
+  ✓  10 tests/workbench.spec.ts:264:3 › responsive and accessible review at 1440px (932ms)
+  ✓  11 tests/workbench.spec.ts:355:1 › hostile declaration text never becomes browser markup (720ms)
+  ✓  12 tests/workbench.spec.ts:380:1 › disconnected progress keeps the last observed state and can reconnect (2.3s)
+  ✓  13 tests/workbench.spec.ts:413:1 › keyboard and coarse-pointer controls remain usable (147ms)
+  ✘  14 tests/workbench.spec.ts:451:1 › bundled demonstrations explain all outcomes without entering scan history (5.2s)
+
+
+  1) tests/workbench.spec.ts:451:1 › bundled demonstrations explain all outcomes without entering scan history 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('.decision-state')
+    Expected: "APPROVE"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" locator('.decision-state') with timeout 5000ms
+      - waiting for locator('.decision-state')
+
+
+      461 |       .filter({ hasText: state })
+      462 |       .click();
+    > 463 |     await expect(page.locator(".decision-state")).toHaveText(state);
+          |                                                   ^
+      464 |     await expect(
+      465 |       page.getByText(/Synthetic demonstration/).first(),
+      466 |     ).toBeVisible();
+        at /Users/harshkumarjha/Desktop/ModelVet/frontend/tests/workbench.spec.ts:463:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/workbench-bundled-demonstr-c1e7a-thout-entering-scan-history/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/workbench-bundled-demonstr-c1e7a-thout-entering-scan-history/error-context.md
+
+  1 failed
+    tests/workbench.spec.ts:451:1 › bundled demonstrations explain all outcomes without entering scan history 
+  13 passed (18.3s)

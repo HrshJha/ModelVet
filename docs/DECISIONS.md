@@ -260,3 +260,19 @@ The user explicitly selected “Extend the local feature plan.” Extend static 
 ## MV-026 hosted runner follow-up — 2026-10-20
 
 GitHub access now exposes prior hosted cache failures. Prime hash-locked runtime dependencies before offline installed-package tests; do not remove offline installation/runtime guards. Ubuntu 24.04 now passes the full gate at feb9e8d. Hosted macos-15 ARM jobs remain queued; select the documented standard macos-15-intel target for the macOS hosted gate, with local arm64 evidence labeled separately. All OS checks are retained; this does not claim hosted ARM validation or dedicated Linux/KVM containment. No dependency change; ADRs remain Proposed.
+
+## MV-011 Unicode object-key correction — 2026-10-20
+
+The normalized JSON validator already checked string values, but direct Python construction could admit unpaired surrogates in object keys. Under the pinned serializer, a high-surrogate key became three replacement characters. Validate object keys with the same strict UTF-8 encoding used for values, at every nested object in check details and dependency advisories. Preserve valid Unicode keys and existing structural budgets. JSON input already rejected the invalid keys; no admission bypass is established. This repairs the existing v1 UTF-8 contract without a schema, policy or dependency change. ADRs remain Proposed.
+
+## PH-15–17 workbench scope — user-authorized
+
+The user explicitly requested implementation of the local browser workbench plan. Amend the scope of proposed ADR-001/011 for this extension: permit loopback-only FastAPI/Uvicorn, a bundled React/TypeScript/Vite interface and a private stdlib SQLite index. Core CLI dependencies stay separate through the optional ui extra. ScanService remains authoritative; worker JSON progress is observational, not evidence. UI decisions are never evaluated in JavaScript. All ADRs remain Proposed; no independent review or loader gate is accepted by this change.
+
+## Workbench acceptance refinements — 2026-10-21
+
+Cache capability probes before HTTP request threads start; resource-limit preexec must not run from those threads. Exclude both lexical and resolved model/workspace scanner paths, and filter worker PATH against those roots. Track launched scanner groups through bounded own-worker JSON events; POSIX parent-death polling uses a signal timer rather than a second worker thread. Recompute UI summaries from pinned, validated report bytes; index fields cannot promote admission. Bound active API requests to four and body reception to ten seconds. Job setup/thread/disk failures clean staging and cannot finalize a report. Node typings, Prettier and axe/Playwright are test/build-only tooling; axe is unmodified MPL-2.0 and is not bundled into the runtime. All ADRs remain Proposed.
+
+## MV-043 distribution acceptance — 2026-10-21
+
+Commit compiled frontend assets and complete upstream runtime notices so wheel/source builds do not require Node or registry access. Pin the Node CI action and runtime; rebuild and compare generated schema/types/assets in both supported CI targets. A disposable installed-wheel acceptance environment injects a trusted site-packages socket guard into the server and own worker; this is test instrumentation, not a product scanner sandbox. The application PATH contains no Node. Playwright runs separately as a test driver. Browser storage state is excluded from distributions and CI uploads. All ADRs remain Proposed.

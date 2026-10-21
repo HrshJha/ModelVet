@@ -6,11 +6,13 @@ import shutil
 import stat
 import subprocess
 import tempfile
+from collections.abc import Callable
 from datetime import UTC, datetime
 from pathlib import Path
 
 from modelvet.core.errors import InvalidInput
 from modelvet.core.json_data import strict_json
+from modelvet.core.limits import ScanLimits
 from modelvet.core.snapshot import Snapshot
 from modelvet.inventory.discover import stat_identity
 from modelvet.inventory.gate import InputGate, open_directory
@@ -52,23 +54,42 @@ def _report_bytes(path: Path) -> bytes:
 class ModelScanAdapter:
     id = "modelscan"
 
-    def __init__(self, executable: Path | None = None, output_limit: int = 1024 * 1024) -> None:
+    def __init__(
+        self,
+        executable: Path | None = None,
+        output_limit: int = 1024 * 1024,
+        *,
+        process_observer: Callable[[int, bool], None] | None = None,
+    ) -> None:
         self.executable = executable
         self.output_limit = output_limit
+        self.process_observer = process_observer
 
     def _executable(self) -> Path | None:
         found = str(self.executable) if self.executable is not None else shutil.which("modelscan")
         return Path(found).resolve(strict=True) if found else None
 
-    def probe(self) -> ToolInfo | ToolUnavailable:
+    def probe(self, *, excluded_roots: tuple[Path, ...] = ()) -> ToolInfo | ToolUnavailable:
         try:
+            original = (
+                str(self.executable) if self.executable is not None else shutil.which("modelscan")
+            )
+            if original:
+                for root in excluded_roots:
+                    InputGate().validate(root, Path(original).absolute().parent, ScanLimits())
             binary = self._executable()
             if binary is None or not binary.is_file() or not os.access(binary, os.X_OK):
                 return ToolUnavailable("ModelScan executable unavailable.")
+            for root in excluded_roots:
+                InputGate().validate(root, binary.parent, ScanLimits())
             digest = _binary_digest(binary)
             with tempfile.TemporaryDirectory(prefix="modelvet-probe-") as directory:
                 result = run_bounded(
-                    (str(binary), "--version"), Path(directory), 5, self.output_limit
+                    (str(binary), "--version"),
+                    Path(directory),
+                    5,
+                    self.output_limit,
+                    process_observer=self.process_observer,
                 )
             if result.failure or result.exit_code != 0:
                 return ToolUnavailable("ModelScan version probe failed.")
@@ -107,7 +128,7 @@ class ModelScanAdapter:
             return RawScannerExecution(
                 manifest.manifest_digest, None, "NOT_RUN", reason="Scanner executable unavailable."
             )
-        tool = self.probe()
+        tool = self.probe(excluded_roots=(snapshot.source.artifact_dir, snapshot.root))
         if isinstance(tool, ToolUnavailable):
             return RawScannerExecution(
                 manifest.manifest_digest, None, "NOT_RUN", reason=tool.reason
@@ -146,7 +167,13 @@ class ModelScanAdapter:
                     "--output-file",
                     str(target),
                 )
-                result = run_bounded(argv, private, timeout_s, self.output_limit)
+                result = run_bounded(
+                    argv,
+                    private,
+                    timeout_s,
+                    self.output_limit,
+                    process_observer=self.process_observer,
+                )
                 raw = _report_bytes(target)
             statuses: dict[int, ScannerStatus] = {
                 0: "COMPLETE",

@@ -4,11 +4,11 @@
 |---|---|
 | Document version | `0.1.0-draft` |
 | Status | **PROPOSED requirements; local static candidate through PH-10; hosted Ubuntu/macOS validation passed; public release pending** |
-| Updated | 2026-10-20 |
-| Development stage | P0 local workflow implemented; Ubuntu 24.04/macOS 15 Intel hosted gates passed; public release pending review |
+| Updated | 2026-10-21 |
+| Development stage | Static CLI and optional PH-15–17 workbench preview implemented; Ubuntu 24.04/macOS 15 Intel hosted gates passed; public release pending review |
 | Product | Open-source local AI model artifact security and admission verification |
 | Authority | Primary source of truth for requirements; `docs/DECISIONS.md` for why |
-| Scope | Local artifact assessment MVP; isolated loading is a gated future experiment |
+| Scope | Local static CLI plus optional PH-15–17 browser workbench; isolated loading remains gated |
 
 ## 1. Executive summary
 
@@ -72,6 +72,9 @@ P0 = essential first release, P1 = validated follow-up, P2 = gated research. The
 | FR-022 | Stored raw evidence verification | P1 | Hash every declared bounded attachment; incomplete/tampered evidence cannot verify | `Reports` | `MV-033` | `T-AUDIT-01` |
 | FR-023 | Stored report comparison | P1 | Compare identities/semantic evidence without recomputing admission; bounded private output | `Reports` | `MV-034` | `T-COMPARE-01` |
 | FR-024 | Batch stored-report audit | P1 | Explicit local manifest, aggregate budgets, independent row failures and no false aggregate success | `Reports` | `MV-035` | `T-BATCH-01` |
+| FR-025 | Local workbench service | P1 | Authenticated loopback app, restricted roots, worker scans, cancellation and private history | `Workbench` | `MV-036–038` | `T-UI-API-01` |
+| FR-026 | Visual developer review | P1 | Setup, actual progress, coverage/evidence, deterministic guidance, imports and comparison | `Workbench UI` | `MV-039–041` | `T-UI-FLOW-01` |
+| FR-027 | Packaged workbench acceptance | P1 | Bundled offline assets, browser/fault tests, supported CI and installed-package acceptance | `Distribution` | `MV-042–044` | `T-UI-RELEASE-01` |
 
 ### Requirement contracts
 
@@ -234,3 +237,7 @@ MV-022/023 engineering now supplies ten inert development recipes, frozen identi
 ## Local static report extension — FR-022–024
 
 The user explicitly selected “Extend the local feature plan.” PH-12–14 extend the local static CLI while externally gated research remains pending. PH-12–14 add raw-attachment verification, report comparison and explicit-manifest batch auditing. They consume existing stored reports, never load models, recalculate admission or imply author authentication. New task/FR IDs extend the original register without renumbering it. This is implementation scope, not acceptance of the proposed ADRs or external security gates. See REPORT_AUDIT_SPEC for finite budgets, privacy and command semantics.
+
+## Workbench extension — user-authorized next version
+
+PH-15–17 add a local browser application for ML developers, backed by the existing static engine. The no-web-UI constraint above describes the original MVP; this extension permits an authenticated loopback HTTP service and a private stdlib SQLite index. Remote hosting, downloads and model execution remain excluded. FR-025–027 are defined in docs/WORKBENCH_SPEC.md; existing report schemas and policy semantics remain unchanged.

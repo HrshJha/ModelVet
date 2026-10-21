@@ -1,0 +1,15 @@
+
+> modelvet-workbench@0.1.0 build
+> tsc --noEmit && vite build && node scripts/notices.mjs
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 1935 modules transformed.
+rendering chunks...
+computing gzip size...
+../src/modelvet/workbench/static/assets/mark-urvmYx_P.svg     0.29 kB │ gzip:  0.19 kB
+../src/modelvet/workbench/static/index.html                   0.64 kB │ gzip:  0.37 kB
+../src/modelvet/workbench/static/assets/index-cPZn6Ebv.css   40.40 kB │ gzip:  9.16 kB
+../src/modelvet/workbench/static/assets/index-DApNRTdx.js   287.26 kB │ gzip: 87.48 kB
+
+✓ built in 135ms

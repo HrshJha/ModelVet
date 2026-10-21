@@ -1,6 +1,6 @@
 # Dependency-aware implementation roadmap
 
-Status: **PLANNED**, 2026-10-20. PH-01–07 and local PH-09/10 candidate work are implemented with macOS evidence; hosted CI/public release remain pending by user-selected scope. PH-08 local advisory/corpus/pilot engineering is implemented; independent benchmark acceptance remains pending. PH-11 has a proposed review packet and remains gated without execution. All hour ranges are rough solo-developer *focused effort*, not guaranteed calendar times. Security research is explicitly separate from writing code. See `TASKS.md` for executable steps/paths.
+Status: **implemented local static/workbench preview; external review gates remain**, 2026-10-21. PH-01–07 and local PH-09/10 candidate work are implemented with macOS evidence; earlier static hosted CI passed; extended workbench CI also passed at 996d19f; public release remains pending. PH-08 local advisory/corpus/pilot engineering is implemented; independent benchmark acceptance remains pending. PH-11 has a proposed review packet and remains gated without execution. All hour ranges are rough solo-developer *focused effort*, not guaranteed calendar times. Security research is explicitly separate from writing code. See `TASKS.md` for executable steps/paths.
 
 ## Phase overview
 
@@ -184,3 +184,10 @@ Input: 1 local deliberately malformed synthetic safetensors fixture, default pol
 ## Local continuation phases — PH-12–14 implemented
 
 PH-12–14 extend the completed static report path independently of PH-11: MV-016 → MV-033 → MV-034 → MV-035. They handle stored-report audit workflows only. The original phase estimates remain historical and do not include this extension; no delivery estimate is invented. New IDs are appended, and the loader/research/public-release gates remain unchanged. Each task must pass its own targeted/full gate before advancing.
+
+## Workbench extension — FR-025–027
+
+PH-15 (MV-036–038): contracts/locked optional dependencies, authenticated local API, private worker/history. PH-16 (MV-039–041): developer shell/scan setup, evidence workspace, history/comparison/guidance. PH-17 (MV-042–044): security/browser fault acceptance, bundled distribution/CI, tutorial/demo/handoff. Each phase requires actual targeted and broader test evidence; public release and PH-11 remain independently gated.
+
+
+PH-15–17 local preview tasks MV-036–044 are implemented and tested, with final local evidence in PROGRESS. The extended hosted matrix passed at 996d19f (run 39611891146); actual counts and limitations are in PROGRESS. Independent project/security review, PH-08 adjudication and PH-11 host/isolation prerequisites remain separate.

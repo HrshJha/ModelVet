@@ -2,6 +2,8 @@
 
 **Status:** evidence/coverage/conflict/policy/decision/report v1 records implemented for the local static candidate. All JSON example values below illustrative. `schema_version: "1.0.0"`; semantic versioning: additive optional fields in minor versions, changes in required fields/enums/meaning are major. Unknown `schema_version` major must fail validation; unknown enum is not assumed clean. All serialized timestamps use UTC RFC3339; creation times are **not** included in semantic decision digest. JSON uses UTF-8, sorted canonical keys for hashing, no NaN/Infinity. Unknown top-level keys are forbidden in implemented v1; no extensions container is accepted.
 
+Nested JSON in check details and dependency advisories must have UTF-8-encodable object keys and string values, including when constructed through the Python API. Unpaired Unicode surrogates are rejected before serialization. Valid Unicode keys retain their exact spelling; this validation does not normalize them or change the v1 schema shape.
+
 ## Entity contracts
 
 | Entity / responsible module | Required fields (types) | Optional fields | Invariants / relationships | Missing data |
@@ -73,7 +75,7 @@ Report JSON and Markdown in a user-designated report directory, raw reports in a
 
 ## Implemented classifier applicability v1 — MV-006
 
-All files require `identity` and `classification`. Safetensors additionally uses `structural:safetensors`; ZIP/PyTorch ZIP uses `structural:zip` and `modelscan`; pickle-like uses `modelscan`; JSON/Markdown/text uses `metadata:local`; repository Python files use `source:presence`. Unknown formats retain classification uncertainty; extension/signature disagreements remain explicit. These are applicability expectations, not completed coverage. Policy and normalized evidence are not implemented at this checkpoint.
+All files require `identity` and `classification`. Safetensors additionally uses `structural:safetensors`; ZIP/PyTorch ZIP uses `structural:zip` and `modelscan`; pickle-like uses `modelscan`; JSON/Markdown/text uses `metadata:local`; repository Python files use `source:presence`. Unknown formats retain classification uncertainty; extension/signature disagreements remain explicit. These are applicability expectations, not completed coverage. This applicability description originated before policy/normalization implementation; both are now implemented and tested. See PROGRESS for current evidence.
 
 ## Explicit environment input v1 — MV-009
 

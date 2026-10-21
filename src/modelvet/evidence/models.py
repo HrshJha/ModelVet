@@ -33,7 +33,9 @@ def _finite_json(value: JsonValue | tuple[JsonValue, ...]) -> None:
         if isinstance(item, str):
             item.encode("utf-8", errors="strict")
         elif isinstance(item, dict):
-            pending.extend((child, depth + 1) for child in item.values())
+            for key, child in item.items():
+                key.encode("utf-8", errors="strict")
+                pending.append((child, depth + 1))
         elif isinstance(item, (list, tuple)):
             pending.extend((child, depth + 1) for child in item)
 

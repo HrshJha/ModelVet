@@ -10,6 +10,7 @@ import signal
 import subprocess
 import sys
 import time
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -44,7 +45,12 @@ def safe_environment(workdir: Path) -> dict[str, str]:
 
 
 def run_bounded(
-    argv: tuple[str, ...], workdir: Path, timeout_s: int, output_limit: int = 1024 * 1024
+    argv: tuple[str, ...],
+    workdir: Path,
+    timeout_s: int,
+    output_limit: int = 1024 * 1024,
+    *,
+    process_observer: Callable[[int, bool], None] | None = None,
 ) -> ProcessResult:
     if not 1 <= timeout_s <= 120 or not 1 <= output_limit <= 1024 * 1024:
         raise ValueError("Process limits outside reviewed bounds.")
@@ -83,6 +89,8 @@ def run_bounded(
                 pass
 
         try:
+            if process_observer is not None:
+                process_observer(process.pid, True)
             with selectors.DefaultSelector() as selector:
                 if process.stdout is None or process.stderr is None:
                     raise RuntimeError("Process pipes missing.")
@@ -116,6 +124,8 @@ def run_bounded(
         finally:
             kill_group()
             process.wait(timeout=5)
+            if process_observer is not None:
+                process_observer(process.pid, False)
         return ProcessResult(
             process.returncode,
             bytes(buffers["stdout"]),

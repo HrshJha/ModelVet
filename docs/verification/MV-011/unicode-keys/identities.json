@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-20",
+  "base_commit": "bdab77502cbb32591d1625de4e3afcc1abe28b1b",
+  "branch": "codex/evidence-unicode-keys",
+  "platform": {
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "python": "3.12.15",
+  "uv": "uv 0.13.3 (Homebrew 2026-10-20 aarch64-apple-darwin)",
+  "files_sha256": {
+    "src/modelvet/evidence/models.py": "8d6cade91df9673c7077835e9829c8ed56b0b8dcb7c2e3aa1ade4e4ad75cd1fc",
+    "tests/test_evidence.py": "fb2cbe84c3fde8a88476aa91b08311ea63f666de3539c4c31b7fd1f60796864d",
+    "uv.lock": "a46d68b74ef8036d8bdad809862d3e0fabf77e2f5e078b6f21a5cde8240eeba5",
+    "schemas/advisories-v1.json": "596467d0bcfc293b923e63020ad7cffa7ebc0f1d80a6de77d957845638a68152",
+    "schemas/benchmark-corpus-v1.json": "3c4e8cb7edcd129b7fb789b37bb91b96da54106c39e9963e535362c2b8a56da1",
+    "schemas/benchmark-run-v1.json": "773c90e2d308ec2258b2b83b4114bc3b32f7881b8141a944bcd295be0cf0b864",
+    "schemas/conflict-v1.json": "9bb8a69116c3f392d32f3526cf4d5294c06f3d93d17655fcd01975c73ae70cfb",
+    "schemas/coverage-v1.json": "67ff329c672ef3a53526cae875aa5019c3db6c025f90fdab7fa561acc3a55a23",
+    "schemas/decision-v1.json": "4f3eb26af4b2cace38ed6c3744baebed040c46e5dfd29f472648571ed155bdda",
+    "schemas/evidence-v1.json": "8d62c8ae56f6dc7745a6e91e654f6f5a9c5a47ce3dd9728ed85907b7054e8a90",
+    "schemas/policy-v1.json": "5f4b196916c8ce9d1470baa4e0260af631797a16ae5407a17e38b5552d42bc06",
+    "schemas/report-audit-v1.json": "57ab63935458c47a3f5f8a043bd2a06ebf033eea0f626d06bf26fbb215627ad4",
+    "schemas/report-batch-audit-v1.json": "97a198970e9bfd03e35491cb96567e625130e37b4433a28f5541f3c5c3d43cd9",
+    "schemas/report-batch-manifest-v1.json": "8c37f87f7608ce438faeb778a175d1876d6150d9fcf4b61ca3b5ad9968319e82",
+    "schemas/report-comparison-v1.json": "ec074b779d99d01c4646c2291a8d924343bbc3a076c8b1b8a9489c5abb1c4d73",
+    "schemas/report-v1.json": "cacb122a9b8e3a28b5971a080052ac65a918f6cd3614bbcd8897b79a5c5fb74c"
+  },
+  "distributions_sha256": {
+    "dist/checkpoints/evidence-unicode-keys/final/modelvet-0.1.0-py3-none-any.whl": "29ffba59c3e75dee30fe16a963ae35b16a0ea5aaff5aa71de5e6fc217f0287d9",
+    "dist/checkpoints/evidence-unicode-keys/final/modelvet-0.1.0.tar.gz": "ac8c27698ca6121819df82999d6215b45bd7bb5b52f024d0dfbd2aea7a88fe9e"
+  },
+  "schema_and_dependency_lock_unchanged": true,
+  "local_tests": {
+    "passed": 577,
+    "skipped": 1,
+    "skip_scope": "Linux-only"
+  },
+  "evidence_tests_passed": 40,
+  "release_tests_passed": 10,
+  "independent_release_or_loader_approval": false
+}

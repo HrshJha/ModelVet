@@ -68,7 +68,7 @@ dev = ["pytest", "pytest-cov", "hypothesis==6.170.5", "ruff", "mypy"] # LOCK IN 
 
 ## Rejected or deferred technologies
 
-No FastAPI/HTTP endpoints, Docker/Kubernetes hosting, Postgres, Redis, Celery, ML model inference stack, LangChain, LLM judgement, cloud credentials, PyYAML, or full PyTorch dependency in MVP. No forced scanners besides a pinned optional/mandated-by-policy ModelScan adapter. Firecracker isolated loader testing is P2 and Linux-only; building a host-side mock sandbox would be misleading.
+The original CLI MVP excludes HTTP; PH-15–17 adds optional loopback FastAPI and stdlib SQLite. No Docker/Kubernetes hosting, Postgres, Redis, Celery, ML model inference stack, LangChain, LLM judgement, cloud credentials, PyYAML, or full PyTorch dependency in MVP. No forced scanners besides a pinned optional/mandated-by-policy ModelScan adapter. Firecracker isolated loader testing is P2 and Linux-only; building a host-side mock sandbox would be misleading.
 
 ## Compatibility verification plan
 
@@ -77,3 +77,8 @@ MV-001: create manifest, `uv lock`, install on supported Python, run Typer/Pydan
 ## MV-010 external environment checkpoint
 
 ModelScan 0.8.8 is pinned separately in `tools/modelscan/requirements.lock` with eight packages and hashes. Core runtime dependencies remain unchanged. Exact upstream metadata, installed wheel notices (including NumPy bundled GPL/GCC-exception and LGPL notices) and OSV query evidence are in `verification/MV-010/`. This repository does not redistribute scanner binaries/environment; any redistribution requires retaining applicable notices and a fresh license review. Real inert-fixture smoke passed on macOS; memory caps and archive scope remain limited as documented.
+
+
+## PH-15–17 optional workbench stack
+
+The current Python lock resolves 42 packages, including optional FastAPI 0.156.0/Uvicorn 0.54.0 and development HTTPX 0.28.1. Core Typer/Pydantic requirements are unchanged. React/React DOM 19.3.1, Lucide 1.60.0, Vite 8.3.4, TypeScript 5.9.3 and exact test/tool versions are in frontend/package.json and its integrity-pinned lock. Node 24.14.1 is build/test only. TypeScript 7 was rejected because it did not satisfy openapi-typescript's peer contract; no forced overrides. Combined API, browser and installed-distribution tests pass locally. See WORKBENCH_GUIDE and THIRD_PARTY for commands, privacy, license inventory and evidence limits.

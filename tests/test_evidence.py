@@ -4,12 +4,13 @@ from dataclasses import replace
 from pathlib import Path
 
 import pytest
-from pydantic import ValidationError
+from pydantic import JsonValue, ValidationError
 
 from modelvet.evidence.models import (
     CheckRecord,
     CheckResult,
     CheckStatus,
+    DependencyRecord,
     EvidenceBundle,
     ToolExecution,
 )
@@ -202,3 +203,61 @@ def test_nonfinite_normalized_details_rejected() -> None:
     data = checks[0].model_dump(mode="json")
     with pytest.raises(ValidationError):
         CheckRecord.model_validate_json(json.dumps({**data, "details": {"value": float("nan")}}))
+
+
+def record_with_json(
+    record_kind: str, payload: dict[str, JsonValue]
+) -> CheckRecord | DependencyRecord:
+    if record_kind == "check":
+        return CheckRecord(
+            check_id="fixture",
+            file_id="a" * 64,
+            executor_id="modelvet",
+            status=CheckStatus.COMPLETE,
+            result=CheckResult.NO_FINDINGS,
+            artifact_digest="sha256:" + "b" * 64,
+            details=payload,
+        )
+    return DependencyRecord(
+        name="fixture-package",
+        ecosystem="PyPI",
+        version="1.0",
+        source_ref="fixture",
+        source_sha256="a" * 64,
+        status="DECLARED_PINNED",
+        advisories=(payload,),
+    )
+
+
+@pytest.mark.parametrize("record_kind", ["check", "dependency"])
+@pytest.mark.parametrize("bad_key", ["\ud800", "\udfff"], ids=["high-surrogate", "low-surrogate"])
+@pytest.mark.parametrize("nesting", ["root", "object", "array"])
+def test_python_evidence_rejects_invalid_unicode_keys(
+    record_kind: str, bad_key: str, nesting: str
+) -> None:
+    payload: dict[str, JsonValue] = {bad_key: "untrusted-key"}
+    if nesting == "object":
+        payload = {"nested": payload}
+    elif nesting == "array":
+        payload = {"nested": [payload]}
+    with pytest.raises(ValidationError):
+        record_with_json(record_kind, payload)
+
+
+@pytest.mark.parametrize("record_kind", ["check", "dependency"])
+@pytest.mark.parametrize("bad_key", ["\ud800", "\udfff"], ids=["high-surrogate", "low-surrogate"])
+def test_json_evidence_rejects_invalid_unicode_keys(record_kind: str, bad_key: str) -> None:
+    record = record_with_json(record_kind, {"valid": "value"})
+    data = record.model_dump(mode="json")
+    if record_kind == "check":
+        data["details"] = {bad_key: "untrusted-key"}
+    else:
+        data["advisories"] = [{bad_key: "untrusted-key"}]
+    with pytest.raises(ValidationError):
+        type(record).model_validate_json(json.dumps(data))
+
+
+@pytest.mark.parametrize("record_kind", ["check", "dependency"])
+def test_valid_unicode_evidence_keys_roundtrip(record_kind: str) -> None:
+    record = record_with_json(record_kind, {"caf\u00e9": [{"\U0001f9ea": "value"}]})
+    assert type(record).model_validate_json(record.model_dump_json()) == record

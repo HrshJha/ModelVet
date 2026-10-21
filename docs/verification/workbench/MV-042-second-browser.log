@@ -1,0 +1,331 @@
+
+> modelvet-workbench@0.1.0 test:browser
+> playwright test
+
+
+Running 13 tests using 1 worker
+
+(node:59165) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/workbench.spec.ts:18:1 › overview has real empty state and working navigation (521ms)
+  ✓   2 tests/workbench.spec.ts:30:1 › folder browser runs a genuine supported static scan (1.0s)
+  ✓   3 tests/workbench.spec.ts:60:1 › BLOCK, INSUFFICIENT and CONTROLS remain distinct completed outcomes (1.6s)
+  ✓   4 tests/workbench.spec.ts:77:1 › original JSON download/import and attachment checks preserve stored admission (387ms)
+  ✓   5 tests/workbench.spec.ts:97:1 › comparison exposes exact changes without recomputing decisions (565ms)
+  ✓   6 tests/workbench.spec.ts:114:1 › cancellation stops a real worker and never produces an admission result (993ms)
+  ✘   7 tests/workbench.spec.ts:126:3 › responsive and accessible review at 375px (117ms)
+(node:59195) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   8 tests/workbench.spec.ts:126:3 › responsive and accessible review at 768px (463ms)
+(node:59203) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   9 tests/workbench.spec.ts:126:3 › responsive and accessible review at 1024px (418ms)
+(node:59209) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  10 tests/workbench.spec.ts:126:3 › responsive and accessible review at 1440px (396ms)
+(node:59215) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  11 tests/workbench.spec.ts:147:1 › hostile declaration text never becomes browser markup (729ms)
+  ✓  12 tests/workbench.spec.ts:158:1 › disconnected progress keeps the last observed state and can reconnect (2.3s)
+  ✓  13 tests/workbench.spec.ts:175:1 › keyboard and coarse-pointer controls remain usable (203ms)
+
+
+  1) tests/workbench.spec.ts:126:3 › responsive and accessible review at 375px ─────────────────────
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      130 |     await expect(page.locator('.root-label')).toContainText('models');
+      131 |     expect(await page.evaluate(() => innerWidth)).toBe(width);
+    > 132 |     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+          |                                                                                           ^
+      133 |     const overview = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+      134 |     expect(overview.violations).toEqual([]);
+      135 |     await page.screenshot({ path: info.outputPath(`overview-${width}.png`), fullPage: true });
+        at /Users/harshkumarjha/Desktop/ModelVet/frontend/tests/workbench.spec.ts:132:91
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/workbench-responsive-and-accessible-review-at-375px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/workbench-responsive-and-accessible-review-at-375px/error-context.md
+
+  2) tests/workbench.spec.ts:126:3 › responsive and accessible review at 768px ─────────────────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 40
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+    +     "help": "Elements must have their visible text as part of their accessible name",
+    +     "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=playwright",
+    +     "id": "label-content-name-mismatch",
+    +     "impact": "serious",
+    +     "nodes": Array [
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": null,
+    +             "id": "label-content-name-mismatch",
+    +             "impact": "serious",
+    +             "message": "Text inside the element is not included in the accessible name",
+    +             "relatedNodes": Array [],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   Text inside the element is not included in the accessible name",
+    +         "html": "<button class=\"jump-button\" aria-label=\"Jump to…\">",
+    +         "impact": "serious",
+    +         "none": Array [],
+    +         "target": Array [
+    +           ".jump-button",
+    +         ],
+    +       },
+    +     ],
+    +     "tags": Array [
+    +       "cat.semantics",
+    +       "wcag21a",
+    +       "wcag253",
+    +       "EN-301-549",
+    +       "EN-9.2.5.3",
+    +       "RGAAv4",
+    +       "RGAA-6.1.5",
+    +     ],
+    +   },
+    + ]
+
+      132 |     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+      133 |     const overview = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+    > 134 |     expect(overview.violations).toEqual([]);
+          |                                 ^
+      135 |     await page.screenshot({ path: info.outputPath(`overview-${width}.png`), fullPage: true });
+      136 |     await page.getByRole('link', { name: 'Scan history', exact: true }).click();
+      137 |     await page.getByRole('link', { name: /unknown-content/ }).first().click();
+        at /Users/harshkumarjha/Desktop/ModelVet/frontend/tests/workbench.spec.ts:134:33
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/workbench-responsive-and-accessible-review-at-768px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/workbench-responsive-and-accessible-review-at-768px/error-context.md
+
+  3) tests/workbench.spec.ts:126:3 › responsive and accessible review at 1024px ────────────────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 80
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+    +     "help": "Elements must have their visible text as part of their accessible name",
+    +     "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=playwright",
+    +     "id": "label-content-name-mismatch",
+    +     "impact": "serious",
+    +     "nodes": Array [
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": null,
+    +             "id": "label-content-name-mismatch",
+    +             "impact": "serious",
+    +             "message": "Text inside the element is not included in the accessible name",
+    +             "relatedNodes": Array [],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   Text inside the element is not included in the accessible name",
+    +         "html": "<a href=\"#/\" aria-label=\"ModelVet overview\">",
+    +         "impact": "serious",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "a[aria-label=\"ModelVet overview\"]",
+    +         ],
+    +       },
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": null,
+    +             "id": "label-content-name-mismatch",
+    +             "impact": "serious",
+    +             "message": "Text inside the element is not included in the accessible name",
+    +             "relatedNodes": Array [],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   Text inside the element is not included in the accessible name",
+    +         "html": "<a href=\"#/scan\" aria-label=\"New scan\" class=\"\">",
+    +         "impact": "serious",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "a[href$=\"#/scan\"]",
+    +         ],
+    +       },
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": null,
+    +             "id": "label-content-name-mismatch",
+    +             "impact": "serious",
+    +             "message": "Text inside the element is not included in the accessible name",
+    +             "relatedNodes": Array [],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   Text inside the element is not included in the accessible name",
+    +         "html": "<button class=\"jump-button\" aria-label=\"Jump to…\">",
+    +         "impact": "serious",
+    +         "none": Array [],
+    +         "target": Array [
+    +           ".jump-button",
+    +         ],
+    +       },
+    +     ],
+    +     "tags": Array [
+    +       "cat.semantics",
+    +       "wcag21a",
+    +       "wcag253",
+    +       "EN-301-549",
+    +       "EN-9.2.5.3",
+    +       "RGAAv4",
+    +       "RGAA-6.1.5",
+    +     ],
+    +   },
+    + ]
+
+      132 |     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+      133 |     const overview = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+    > 134 |     expect(overview.violations).toEqual([]);
+          |                                 ^
+      135 |     await page.screenshot({ path: info.outputPath(`overview-${width}.png`), fullPage: true });
+      136 |     await page.getByRole('link', { name: 'Scan history', exact: true }).click();
+      137 |     await page.getByRole('link', { name: /unknown-content/ }).first().click();
+        at /Users/harshkumarjha/Desktop/ModelVet/frontend/tests/workbench.spec.ts:134:33
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/workbench-responsive-and-accessible-review-at-1024px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/workbench-responsive-and-accessible-review-at-1024px/error-context.md
+
+  4) tests/workbench.spec.ts:126:3 › responsive and accessible review at 1440px ────────────────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 80
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+    +     "help": "Elements must have their visible text as part of their accessible name",
+    +     "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=playwright",
+    +     "id": "label-content-name-mismatch",
+    +     "impact": "serious",
+    +     "nodes": Array [
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": null,
+    +             "id": "label-content-name-mismatch",
+    +             "impact": "serious",
+    +             "message": "Text inside the element is not included in the accessible name",
+    +             "relatedNodes": Array [],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   Text inside the element is not included in the accessible name",
+    +         "html": "<a href=\"#/\" aria-label=\"ModelVet overview\">",
+    +         "impact": "serious",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "a[aria-label=\"ModelVet overview\"]",
+    +         ],
+    +       },
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": null,
+    +             "id": "label-content-name-mismatch",
+    +             "impact": "serious",
+    +             "message": "Text inside the element is not included in the accessible name",
+    +             "relatedNodes": Array [],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   Text inside the element is not included in the accessible name",
+    +         "html": "<a href=\"#/scan\" aria-label=\"New scan\" class=\"\">",
+    +         "impact": "serious",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "a[href$=\"#/scan\"]",
+    +         ],
+    +       },
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": null,
+    +             "id": "label-content-name-mismatch",
+    +             "impact": "serious",
+    +             "message": "Text inside the element is not included in the accessible name",
+    +             "relatedNodes": Array [],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   Text inside the element is not included in the accessible name",
+    +         "html": "<button class=\"jump-button\" aria-label=\"Jump to…\">",
+    +         "impact": "serious",
+    +         "none": Array [],
+    +         "target": Array [
+    +           ".jump-button",
+    +         ],
+    +       },
+    +     ],
+    +     "tags": Array [
+    +       "cat.semantics",
+    +       "wcag21a",
+    +       "wcag253",
+    +       "EN-301-549",
+    +       "EN-9.2.5.3",
+    +       "RGAAv4",
+    +       "RGAA-6.1.5",
+    +     ],
+    +   },
+    + ]
+
+      132 |     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+      133 |     const overview = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+    > 134 |     expect(overview.violations).toEqual([]);
+          |                                 ^
+      135 |     await page.screenshot({ path: info.outputPath(`overview-${width}.png`), fullPage: true });
+      136 |     await page.getByRole('link', { name: 'Scan history', exact: true }).click();
+      137 |     await page.getByRole('link', { name: /unknown-content/ }).first().click();
+        at /Users/harshkumarjha/Desktop/ModelVet/frontend/tests/workbench.spec.ts:134:33
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/workbench-responsive-and-accessible-review-at-1440px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/workbench-responsive-and-accessible-review-at-1440px/error-context.md
+
+  4 failed
+    tests/workbench.spec.ts:126:3 › responsive and accessible review at 375px ──────────────────────
+    tests/workbench.spec.ts:126:3 › responsive and accessible review at 768px ──────────────────────
+    tests/workbench.spec.ts:126:3 › responsive and accessible review at 1024px ─────────────────────
+    tests/workbench.spec.ts:126:3 › responsive and accessible review at 1440px ─────────────────────
+  9 passed (12.3s)

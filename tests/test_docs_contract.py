@@ -40,7 +40,7 @@ def test_p0_requirement_task_test_traceability() -> None:
         assert re.search(r"MV-\d{3}", row) and re.search(r"T-[A-Z0-9-]+", row)
         assert (ROOT / "tests" / test).is_file() and requirement in tasks
     ids = re.findall(r"^### (MV-\d{3}) —", tasks, re.M)
-    assert ids == [f"MV-{i:03d}" for i in range(1, 36)]
+    assert ids == [f"MV-{i:03d}" for i in range(1, 45)]
 
 
 def test_documentation_relative_links_resolve() -> None:

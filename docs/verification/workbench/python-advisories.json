@@ -1,0 +1,97 @@
+{
+  "queries": [
+    {
+      "package": {
+        "name": "anyio",
+        "ecosystem": "PyPI"
+      },
+      "version": "4.15.1"
+    },
+    {
+      "package": {
+        "name": "certifi",
+        "ecosystem": "PyPI"
+      },
+      "version": "2026.10.19"
+    },
+    {
+      "package": {
+        "name": "click",
+        "ecosystem": "PyPI"
+      },
+      "version": "8.5.0"
+    },
+    {
+      "package": {
+        "name": "fastapi",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.156.0"
+    },
+    {
+      "package": {
+        "name": "h11",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.16.0"
+    },
+    {
+      "package": {
+        "name": "httpcore",
+        "ecosystem": "PyPI"
+      },
+      "version": "1.0.9"
+    },
+    {
+      "package": {
+        "name": "httpx",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.28.1"
+    },
+    {
+      "package": {
+        "name": "idna",
+        "ecosystem": "PyPI"
+      },
+      "version": "3.20"
+    },
+    {
+      "package": {
+        "name": "opentelemetry-api",
+        "ecosystem": "PyPI"
+      },
+      "version": "1.45.1"
+    },
+    {
+      "package": {
+        "name": "starlette",
+        "ecosystem": "PyPI"
+      },
+      "version": "1.9.0"
+    },
+    {
+      "package": {
+        "name": "uvicorn",
+        "ecosystem": "PyPI"
+      },
+      "version": "0.54.0"
+    }
+  ],
+  "result": {
+    "results": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ]
+  },
+  "notice": "Point-in-time advisory match query; no exploitability or universal safety claim."
+}
