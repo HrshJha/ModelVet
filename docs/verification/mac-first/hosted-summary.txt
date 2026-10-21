@@ -1,0 +1,6 @@
+Python 3.12 / macos-15-intel	UNKNOWN STEP	2026-10-21T14:51:09.6932880Z  Test Files  1 passed (1)
+Python 3.12 / macos-15-intel	UNKNOWN STEP	2026-10-21T14:51:09.6979920Z       Tests  7 passed (7)
+Python 3.12 / macos-15-intel	UNKNOWN STEP	2026-10-21T14:52:57.7882500Z   15 passed (59.7s)
+Python 3.12 / macos-15-intel	UNKNOWN STEP	2026-10-21T14:55:27.1431880Z 627 passed, 1 skipped, 1 warning in 146.99s (0:02:26)
+Python 3.12 / macos-15-intel	UNKNOWN STEP	2026-10-21T14:56:05.6555090Z 13 passed in 34.29s
+Python 3.12 / macos-15-intel	UNKNOWN STEP	2026-10-21T14:56:10.1012560Z {"checks": [{"id": "modelscan", "status": "COMPLETE"}, {"id": "scanner:resources", "status": "UNSUPPORTED"}], "decision": "INSUFFICIENT", "fixture": "inert None bytes; never deserialized by ModelVet", "platform": "Darwin", "tools": [{"binary_sha256": "d3f8122a849cf33d7eaf26c7bb4263ac51692ddd45baa9e7a77b4e06bf43d0b2", "source": "pypi:modelscan==0.8.8", "tool_id": "modelscan", "version": "0.8.8"}, {"binary_sha256": null, "source": "installed package", "tool_id": "modelvet", "version": "0.1.0"}]}

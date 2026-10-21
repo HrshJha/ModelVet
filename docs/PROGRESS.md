@@ -1,6 +1,6 @@
 # ModelVet progress dashboard
 
-**Updated 2026-10-21. Current delivery: Mac-first local static CLI and Workbench. MV-045 local acceptance passed; the Mac hosted gate is pending. Benchmark comparison and Linux/KVM loader research are deferred and no longer block the local Mac preview; engineering and honest mandatory-evidence checks remain required.** Earlier dated records below describe their original broader scope.
+**Updated 2026-10-21. Current delivery: Mac-first local static CLI and Workbench. MV-045 local arm64 and hosted Intel acceptance passed. Benchmark comparison and Linux/KVM loader research are deferred and no longer block the local Mac preview; engineering and honest mandatory-evidence checks remain required.** Earlier dated records below describe their original broader scope.
 
 | Workstream | Actual state | Evidence |
 |---|---|---|
@@ -11,9 +11,9 @@
 | Tests/fixtures | 622 passed / one Linux-only skip locally; seven component and 14 browser workflows passed | `verification/workbench/PH-17-final-gate.log`, `verification/workbench/MV-044-final-browser.log` |
 | Benchmarks | INCONCLUSIVE development pilot; independent research DEFERRED | `../benchmarks/results/`, `verification/MV-023/` |
 | Isolated model-loading safety | DEFERRED | PH-11 / ADR-009 proposed |
-| Release | NOT RELEASED | Local wheel/sdist and hosted CI verified; public release pending review |
+| Release | MAC PREVIEW READY | Scoped local/internal acceptance passed; general-release certification is not claimed |
 
-**Active task:** MV-045 / PH-18 — local verification complete; hosted Mac gate and preview integration pending.
+**Active task:** Mac preview engineering is complete; integrate and publish the scoped preview. PH-08 independent research and PH-11 remain deferred.
 
 ## Milestones
 
@@ -36,6 +36,7 @@
 | PH-15 | COMPLETE locally | Optional dependencies, authenticated API, private worker/history |
 | PH-16 | COMPLETE locally | Scan/report workspace, deterministic guidance, history/import/compare |
 | PH-17 | PREVIEW COMPLETE; hosted Ubuntu/macOS passed | 622 Python tests, seven components, 14 browser workflows; installed wheel without Node/external socket access |
+| PH-18 | COMPLETE — Mac preview engineering | MV-045; 627 Python tests, seven components, 15 browser workflows; hosted Mac gate passed |
 
 ## Decisions awaiting approval
 
@@ -185,3 +186,10 @@ The maintainer explicitly authorized proceeding with all remaining available wor
 The maintainer explicitly said only the Mac is available and instructed changing requirements that stop the current delivery. Work proceeds in an isolated main-based worktree because external commit 5f99293 on codex/evidence-unicode-keys tracks caches and omits the Workbench source. That commit is preserved untouched. FR-028/MV-045/PH-18 define the narrowed local Mac preview, defer PH-08 independent comparison and PH-11 loading, and replace Linux-host next-step guidance. The required hosted matrix now targets macOS 15 Intel, with local arm64 evidence separate. Engine/policy/evidence/report semantics and all security invariants remain unchanged. No dependency addition or independent validation claim.
 
 Local acceptance: 17 targeted contracts and 627 full Python tests passed, with one Linux-only skip; Ruff/format/security/mypy65 files/lock/schema checks pass. Seven frontend component tests, formatting/type/build and 15 browser workflows pass. Exact outputs are retained under verification/mac-first/. The initial targeted check used a mismatched documentation phrase and failed; the wording was corrected and the full gate passed. The full suite includes fresh installed core/UI package acceptance. The changed copy and scope do not alter admission evidence or policy. Required hosted Mac execution is pending. Earlier research/review requirements remain documented for future broader work, not current product blockers.
+
+
+## MV-045 Mac hosted acceptance — 2026-10-21
+
+Run [39620134875](https://github.com/HrshJha/ModelVet/actions/runs/39620134875) passed the required macOS 15 Intel gate at a415a2ded7894c0ba603b0e40b2429f80ac08032. Exact platform counts and the real inert ModelScan observation are retained in verification/mac-first/hosted-summary.txt; complete step metadata/log pin are adjacent. Local arm64 acceptance passed 627 Python tests, one Linux-only skip, seven components and 15 browser workflows, plus lock/lint/types/schema/build/fresh-install tests. An actual installed-wheel browser session also selected the generated synthetic folder and produced a scoped APPROVE with 9/9 mandatory checks; no trained model was loaded. Mac capability text was visually inspected. ModelScan's required Darwin resource gap remains INSUFFICIENT in its real smoke contract.
+
+MV-045 is complete for the narrowed Mac preview; no Linux/KVM host or independent benchmark is a prerequisite. This is internal engineering validation, not independent certification. Source/guidance changes preserve default policy/evidence/coverage files exactly. The following evidence-only update does not change the tested application. Prepare the prerelease with exact merged-source/package identities; repository visibility is unchanged. Preserved external branch/commit 5f99293 is not part of this release.

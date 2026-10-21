@@ -655,7 +655,7 @@
 
 ### MV-045 — Finish Mac-first local preview
 
-- **Priority / status / phase:** P1; **COMPLETE locally; Mac hosted gate pending**; `PH-18`. **Requirement(s):** FR-028.
+- **Priority / status / phase:** P1; **COMPLETE — Mac preview**; `PH-18`. **Requirement(s):** FR-028.
 - **Prerequisites:** MV-044. User-authorized scope revision: Mac-only local delivery; PH-08 research and PH-11 are deferred.
 - **Procedure / failure modes:** Reconcile product/roadmap/release scope, run macOS release CI, remove Linux-host advice from Mac guidance, verify bundled assets and Mac fixture decisions. Preserve unsupported memory/resource evidence and every admission invariant. Do not label deferred research complete, claim independent review, or execute models.
 - **Interfaces:** MAC_RELEASE_SPEC.md; existing CLI/report/policy contracts are unchanged.
@@ -664,4 +664,4 @@
 
 ## Next task
 
-MV-045 completes the maintainer-authorized Mac-first preview. Research tasks remain deferred; no dedicated Linux host or independent benchmark is required for the local Mac product. Missing mandatory evidence still prevents admission.
+MV-045 is complete for the maintainer-authorized Mac-first preview, with local arm64 and hosted Intel acceptance. Research tasks remain deferred; no dedicated Linux host or independent benchmark is required for the local Mac product. Missing mandatory evidence still prevents admission.
