@@ -5,4 +5,4 @@ tests/test_workbench_contract.py::test_optional_python_stack_smoke
     from starlette.testclient import TestClient as TestClient  # noqa
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-12 passed, 1 warning in 0.33s
+12 passed, 1 warning in 0.37s

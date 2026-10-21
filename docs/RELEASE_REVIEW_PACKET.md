@@ -1,6 +1,12 @@
-# Static candidate review packet — acceptance pending
+# Static/workbench preview review packet — acceptance pending
 
 The user requested completion of PH-08–11. This packet separates actual candidate evidence from the external evidence still required. It records no reviewer approval and enables no loader capability.
+
+## Current workbench preview — 2026-10-21
+
+The PH-15–17 optional local workbench is implemented in [PR 3](https://github.com/HrshJha/ModelVet/pull/3), with source implementation `996d19f5af32ff1a89b770534e58e3c9d258a67a`. [Hosted run 39611891146](https://github.com/HrshJha/ModelVet/actions/runs/39611891146) passes Ubuntu 24.04 (623 Python tests) and macOS 15 Intel (622 plus one Linux-only skip), seven components and 14 browser workflows each, including installed-package acceptance. Subsequent evidence/documentation commits do not change application code. The earlier candidate/Unicode paragraphs below remain historical.
+
+Review the new loopback authentication/Host/Origin/CSRF boundary, rooted path browser, private SQLite and pinned report reads, fixed own-worker argv/environment, cancellation/restart cleanup, untrusted-text rendering and optional dependency/distribution notices. See [WORKBENCH_SPEC](WORKBENCH_SPEC.md), [WORKBENCH_GUIDE](WORKBENCH_GUIDE.md), THREAT_MODEL and `verification/workbench/`. `preview-distributions.json` pins the retained local wheel/source archive; a reviewer must select exact reviewed source/package identities before publication. Synthetic demo reports and automated acceptance are not independent security review. The optional HTTP interface and persistent index expand the review scope beyond the original static CLI. All reviewer dispositions and proposed ADR acceptances remain pending.
 
 ## Candidate under review
 
