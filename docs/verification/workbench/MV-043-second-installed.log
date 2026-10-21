@@ -1,0 +1,52 @@
+..F...                                                                   [100%]
+=================================== FAILURES ===================================
+_________________________ test_installed_browser_smoke _________________________
+
+ui_candidate = (PosixPath('/private/var/folders/dh/_5m7l0cd7gv5nypd9dv3lyyh0000gn/T/pytest-of-harshkumarjha/pytest-295/ui-installed0'...<httpx.Client object at 0x109a33fe0>, <Popen: returncode: None args: ['/private/var/folders/dh/_5m7l0cd7gv5nypd9dv...>)
+
+    def test_installed_browser_smoke(ui_candidate):
+        """Node is a test driver only; it is absent from the application's inherited PATH."""
+        *_, client, process = ui_candidate
+        node = shutil.which("node")
+        if node is None or not (ROOT / "frontend/node_modules/@playwright/test").exists():
+            if os.environ.get("CI"):
+                pytest.fail("CI must install the pinned browser test driver")
+            pytest.skip("Browser development dependencies unavailable")
+        environment = {
+            **os.environ,
+            "MODELVET_ACCEPTANCE_ORIGIN": str(client.base_url).rstrip("/"),
+            "MODELVET_ACCEPTANCE_COOKIE": client.cookies.get("modelvet_session"),
+        }
+        result = subprocess.run(
+            [node, "scripts/installed-smoke.mjs"],
+            cwd=ROOT / "frontend",
+            env=environment,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: node:internal/modules/run_main:107
+E             triggerUncaughtException(
+E             ^
+E         
+E         locator.waitFor: Timeout 10000ms exceeded.
+E         Call log:
+E         [2m  - waiting for getByRole('heading', { name: 'Scan history', exact: true }) to be visible[22m
+E         
+E             at /Users/harshkumarjha/Desktop/ModelVet/frontend/scripts/installed-smoke.mjs:35:6 {
+E           log: [
+E             "  - waiting for getByRole('heading', { name: 'Scan history', exact: true }) to be visible"
+E           ],
+E           name: 'TimeoutError'
+E         }
+E         
+E         Node.js v24.14.1
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/Users/harshkumarjha/.nvm/versions/node/v24.14.1/bin/node', 'scripts/installed-smoke.mjs'], re...g\', { name: \'Scan history\', exact: true }) to be visible"\n  ],\n  name: \'TimeoutError\'\n}\n\nNode.js v24.14.1\n').returncode
+
+tests/test_workbench_release.py:267: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_workbench_release.py::test_installed_browser_smoke - Assert...
+1 failed, 5 passed in 12.35s

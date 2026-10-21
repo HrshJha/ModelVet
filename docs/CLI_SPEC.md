@@ -96,3 +96,7 @@ Summary report paths are relative to the selected output root; report_root is <r
 ## Implemented stored-report audits — PH-12–14
 
 `verify REPORT.json [--expected-report-sha256 HEX]`, `compare BEFORE.json AFTER.json [--show-paths] [--fail-on-change]`, and `audit-batch MANIFEST.json --root REPORT_ROOT` emit typed JSON to stdout. Verify/batch use 0 for VERIFIED and 30 for incomplete checks; compare uses 0 for a completed comparison or 30 for semantic differences when requested. Common errors remain 40/50/130. These are stored assertion/byte workflows, not admission decisions. No network or model access occurs. See [REPORT_AUDIT_SPEC](REPORT_AUDIT_SPEC.md) for bounds, schemas, privacy and partial failures.
+
+## Optional local workbench — FR-025–027
+
+`modelvet ui --models-root DIR [--workspace DIR] [--port 0] [--no-browser]` launches the private numeric-loopback browser application. The `ui` extra is required; the ordinary CLI stays standalone. The default port is OS-assigned and workspace is `~/.local/state/modelvet/workbench`, outside model inputs. Manual launch prints a private one-use capability; do not share or capture it in verification logs. Job completion and admission are separate; the UI command's process lifetime is not a scan decision exit code. See [complete guide](WORKBENCH_GUIDE.md) and [versioned contract](WORKBENCH_SPEC.md). Existing command exit semantics are unchanged.

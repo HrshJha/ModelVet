@@ -1,0 +1,74 @@
+.FF                                                                      [100%]
+=================================== FAILURES ===================================
+___________ test_installed_workflow_without_node_or_external_network ___________
+
+ui_candidate = (PosixPath('/private/var/folders/dh/_5m7l0cd7gv5nypd9dv3lyyh0000gn/T/pytest-of-harshkumarjha/pytest-294/ui-installed0'...<httpx.Client object at 0x10bc433e0>, <Popen: returncode: None args: ['/private/var/folders/dh/_5m7l0cd7gv5nypd9dv...>)
+
+    def test_installed_workflow_without_node_or_external_network(ui_candidate):
+        _, _, _, _, client, _ = ui_candidate
+        started = client.post("/api/v1/jobs", json={"model_path": "tiny", "scanner": "none"})
+>       assert started.status_code == 201, started.text
+E       AssertionError: {"detail":"Not Found"}
+E       assert 404 == 201
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests/test_workbench_release.py:215: AssertionError
+_________________________ test_installed_browser_smoke _________________________
+
+ui_candidate = (PosixPath('/private/var/folders/dh/_5m7l0cd7gv5nypd9dv3lyyh0000gn/T/pytest-of-harshkumarjha/pytest-294/ui-installed0'...<httpx.Client object at 0x10bc433e0>, <Popen: returncode: None args: ['/private/var/folders/dh/_5m7l0cd7gv5nypd9dv...>)
+
+    def test_installed_browser_smoke(ui_candidate):
+        """Node is a test driver only; it is absent from the application's inherited PATH."""
+        *_, client, process = ui_candidate
+        node = shutil.which("node")
+        if node is None or not (ROOT / "frontend/node_modules/@playwright/test").exists():
+            if os.environ.get("CI"):
+                pytest.fail("CI must install the pinned browser test driver")
+            pytest.skip("Browser development dependencies unavailable")
+        environment = {
+            **os.environ,
+            "MODELVET_ACCEPTANCE_ORIGIN": str(client.base_url).rstrip("/"),
+            "MODELVET_ACCEPTANCE_COOKIE": client.cookies.get("modelvet_session"),
+        }
+>       result = subprocess.run(
+            [node, "scripts/installed-smoke.mjs"],
+            cwd=ROOT / "frontend",
+            env=environment,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+
+tests/test_workbench_release.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.local/share/uv/python/cpython-3.12.15-macos-aarch64-none/lib/python3.12/subprocess.py:550: in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.12.15-macos-aarch64-none/lib/python3.12/subprocess.py:1209: in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.12.15-macos-aarch64-none/lib/python3.12/subprocess.py:2116: in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Popen: returncode: -9 args: ['/Users/harshkumarjha/.nvm/versions/node/v24.1...>
+endtime = 882018.678455666, orig_timeout = 30, stdout_seq = [], stderr_seq = []
+skip_check_and_raise = False
+
+    def _check_timeout(self, endtime, orig_timeout, stdout_seq, stderr_seq,
+                       skip_check_and_raise=False):
+        """Convenience for checking if a timeout has expired."""
+        if endtime is None:
+            return
+        if skip_check_and_raise or _time() > endtime:
+>           raise TimeoutExpired(
+                    self.args, orig_timeout,
+                    output=b''.join(stdout_seq) if stdout_seq else None,
+                    stderr=b''.join(stderr_seq) if stderr_seq else None)
+E           subprocess.TimeoutExpired: Command '['/Users/harshkumarjha/.nvm/versions/node/v24.14.1/bin/node', 'scripts/installed-smoke.mjs']' timed out after 30 seconds
+
+../../.local/share/uv/python/cpython-3.12.15-macos-aarch64-none/lib/python3.12/subprocess.py:1253: TimeoutExpired
+=========================== short test summary info ============================
+FAILED tests/test_workbench_release.py::test_installed_workflow_without_node_or_external_network
+FAILED tests/test_workbench_release.py::test_installed_browser_smoke - subpro...
+2 failed, 1 passed in 32.19s

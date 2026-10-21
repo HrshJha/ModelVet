@@ -1,0 +1,30 @@
+{
+  "purpose": "Synthetic static demonstrations. No trained weights or scanner validation.",
+  "generator": "tools/workbench_demos.py",
+  "reports": [
+    {
+      "file": "demo-approve.json",
+      "sha256": "b8201333659d9c72cec3c267b9ce59ce386c304b41a15b4cd09b347eb5524323",
+      "decision": "APPROVE",
+      "semantic_digest": "sha256:f18129d8dbfa5fddcaab5e1b3567bb15942e293166732ff7ba9e8aca84309d1f"
+    },
+    {
+      "file": "demo-controls.json",
+      "sha256": "f4905ebf9b7b922da57b51b2f25253e8b20468cb135a94dc4f3c856c047de7ec",
+      "decision": "CONTROLS",
+      "semantic_digest": "sha256:d68e6326fd96841afd3e49985c2f982bec07fd554b963175719aa1dbdf59fe87"
+    },
+    {
+      "file": "demo-block.json",
+      "sha256": "b099836229ce05b518ba786124a4886019479a1834b577044fe9b16ce8b64a69",
+      "decision": "BLOCK",
+      "semantic_digest": "sha256:f837a849586f2c0fa95b06edc00a7c08b7eefd06b3adeb1c5baa27ef4baa6b5d"
+    },
+    {
+      "file": "demo-insufficient.json",
+      "sha256": "3613d2a438c32d8592b750f6f3e2f2e6c2ed3e9cc24891cd9698e637f577e962",
+      "decision": "INSUFFICIENT",
+      "semantic_digest": "sha256:0fa3112b73c8c032efa5fd48df58eed859007367002652f129d82f3d24a3d04d"
+    }
+  ]
+}

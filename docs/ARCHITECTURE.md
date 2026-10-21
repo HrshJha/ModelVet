@@ -4,7 +4,7 @@ Status: **PROPOSED**, 2026-10-20. The full local static CLI workflow and package
 
 ## Goals and constraints
 
-Local-only, predictable, zero untrusted-code execution in the standard process, immutable assessment input, explicit incompleteness, reproducible policy verdicts, JSON/Markdown output. No HTTP server, message broker, persistent database, or microservices. Python 3.12 baseline; Linux/macOS static workflow; Windows support after testing. P2 behavioral verification separately gated.
+Local-only, predictable, zero untrusted-code execution in the standard process, immutable assessment input, explicit incompleteness, reproducible policy verdicts, JSON/Markdown output. The original static MVP has no HTTP server or database. The authorized PH-15–17 extension adds optional loopback HTTP and a private SQLite index; no message broker or microservices. Python 3.12 baseline; Linux/macOS static workflow; Windows support after testing. P2 behavioral verification separately gated.
 
 ## System context
 
@@ -117,7 +117,7 @@ sequenceDiagram
 - `SnapshotManifest` is the single source for file identities. Two tool outputs for same path but different content hash cause identity conflict.
 - `ToolExecution` records never count as `AssessmentCoverage` without declared per-file mapping.
 - `AssessmentResult` carries `status` separate from `findings`. Empty list on FAILED != NO_FINDINGS.
-- Local output is JSON and Markdown; no SQLite until a concrete user need. Raw scanner output may be archived with a recorded hash and privacy-limited retention.
+- Local output is JSON and Markdown; the optional workbench now uses a private SQLite history index. Raw scanner output may be archived with a recorded hash and privacy-limited retention.
 - Offline by default; P1 optional advisory imports from a user-supplied immutable snapshot file; no hidden network access.
 - Snapshot staging is deleted in `finally` after report creation or failure. Disk exhaustion produces controlled fail-closed result.
 
@@ -132,7 +132,7 @@ sequenceDiagram
 
 - **Snapshot costs storage** but avoids source mutation during subprocess scanning. Set budgets (PRD NFR-04); reject over-budget rather than stream an unsafe moving target.
 - **Local subprocess ModelScan** supplies proven existing scanning logic but carries parser-level risk; environment hardening reduces blast radius without claiming isolation. P2 security tests may require separate microVM.
-- **No database/queue** keeps a solo project simpler; reports can be audited and compared. Report integrity is hash-based; signed attestations are deferred.
+- **Report files with an optional local index** keep the CLI standalone; reports can be audited and compared. Report integrity is hash-based; signed attestations are deferred.
 - **No scoring model** avoids ungrounded risk percentages; policy decisions are typed, explicit, explainable.
 
 ## Architecture acceptance (planned)

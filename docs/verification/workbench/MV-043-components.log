@@ -1,0 +1,13 @@
+
+> modelvet-workbench@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.5 /Users/harshkumarjha/Desktop/ModelVet/frontend
+
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  19:13:04
+   Duration  195ms (import 60%, transform 33%, tests 5%, worker 2%)
+

@@ -1,0 +1,487 @@
+{
+  "artifact": {
+    "file_count": 4,
+    "hash_algorithm": "sha256",
+    "manifest_digest": "sha256:30e44eec5919ad6aa0cd04ae150a6e256286cf1bd1e005de48fad5a0cdc51ba9",
+    "total_bytes": 326
+  },
+  "checks": [
+    {
+      "artifact_digest": "sha256:30e44eec5919ad6aa0cd04ae150a6e256286cf1bd1e005de48fad5a0cdc51ba9",
+      "check_id": "classification",
+      "details": {
+        "format_class": "MARKDOWN",
+        "mismatch": false
+      },
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "29c9a4a5b7955ea894b91d9107415dac2b866b8f0b32ed486434071fd1e38fb7",
+      "limitations": [],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    },
+    {
+      "artifact_digest": "sha256:30e44eec5919ad6aa0cd04ae150a6e256286cf1bd1e005de48fad5a0cdc51ba9",
+      "check_id": "identity",
+      "details": {
+        "sha256": "4fcf92b47cfb487e649e0cb0169cfa22175fae22523f833aa878f3d1dd3429b4"
+      },
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "29c9a4a5b7955ea894b91d9107415dac2b866b8f0b32ed486434071fd1e38fb7",
+      "limitations": [],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    },
+    {
+      "artifact_digest": "sha256:30e44eec5919ad6aa0cd04ae150a6e256286cf1bd1e005de48fad5a0cdc51ba9",
+      "check_id": "metadata:local",
+      "details": {},
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "29c9a4a5b7955ea894b91d9107415dac2b866b8f0b32ed486434071fd1e38fb7",
+      "limitations": [
+        "Local declarations only; source, revision and legal rights are unverified."
+      ],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    },
+    {
+      "artifact_digest": "sha256:30e44eec5919ad6aa0cd04ae150a6e256286cf1bd1e005de48fad5a0cdc51ba9",
+      "check_id": "classification",
+      "details": {
+        "format_class": "PYTHON_SOURCE",
+        "mismatch": false
+      },
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "398232a02b30e7c04e118f4988f887fecf28ce75894c83447044aa3df1942454",
+      "limitations": [],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    },
+    {
+      "artifact_digest": "sha256:30e44eec5919ad6aa0cd04ae150a6e256286cf1bd1e005de48fad5a0cdc51ba9",
+      "check_id": "identity",
+      "details": {
+        "sha256": "1e6b6babbf3ec54bb80388cbea5ed1be15ddc3f0717d625bcb9250e5ccb590d2"
+      },
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "398232a02b30e7c04e118f4988f887fecf28ce75894c83447044aa3df1942454",
+      "limitations": [],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    },
+    {
+      "artifact_digest": "sha256:30e44eec5919ad6aa0cd04ae150a6e256286cf1bd1e005de48fad5a0cdc51ba9",
+      "check_id": "source:presence",
+      "details": {
+        "source_present": true
+      },
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "398232a02b30e7c04e118f4988f887fecf28ce75894c83447044aa3df1942454",
+      "limitations": [],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    },
+    {
+      "artifact_digest": "sha256:30e44eec5919ad6aa0cd04ae150a6e256286cf1bd1e005de48fad5a0cdc51ba9",
+      "check_id": "classification",
+      "details": {
+        "format_class": "JSON",
+        "mismatch": false
+      },
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "3e4d0574d1656858501fae8c9c1387486d6708afcd466e04cbdeea843329fe69",
+      "limitations": [],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    },
+    {
+      "artifact_digest": "sha256:30e44eec5919ad6aa0cd04ae150a6e256286cf1bd1e005de48fad5a0cdc51ba9",
+      "check_id": "identity",
+      "details": {
+        "sha256": "483103691479d626883f863cbd4feb43bb46141e07da197b7ab86b7edce71ba1"
+      },
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "3e4d0574d1656858501fae8c9c1387486d6708afcd466e04cbdeea843329fe69",
+      "limitations": [],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    },
+    {
+      "artifact_digest": "sha256:30e44eec5919ad6aa0cd04ae150a6e256286cf1bd1e005de48fad5a0cdc51ba9",
+      "check_id": "metadata:local",
+      "details": {},
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "3e4d0574d1656858501fae8c9c1387486d6708afcd466e04cbdeea843329fe69",
+      "limitations": [
+        "Local declarations only; source, revision and legal rights are unverified."
+      ],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    },
+    {
+      "artifact_digest": "sha256:30e44eec5919ad6aa0cd04ae150a6e256286cf1bd1e005de48fad5a0cdc51ba9",
+      "check_id": "classification",
+      "details": {
+        "format_class": "SAFETENSORS",
+        "mismatch": false
+      },
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "64d8469e2da29ae4e688956bc92e4362fa3808c0b0120f9c41707337209950a4",
+      "limitations": [],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    },
+    {
+      "artifact_digest": "sha256:30e44eec5919ad6aa0cd04ae150a6e256286cf1bd1e005de48fad5a0cdc51ba9",
+      "check_id": "identity",
+      "details": {
+        "sha256": "d7d247482395f891ddf71b226570af49b59f304cc826ea43e9e73eb6ba63a943"
+      },
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "64d8469e2da29ae4e688956bc92e4362fa3808c0b0120f9c41707337209950a4",
+      "limitations": [],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    },
+    {
+      "artifact_digest": "sha256:30e44eec5919ad6aa0cd04ae150a6e256286cf1bd1e005de48fad5a0cdc51ba9",
+      "check_id": "structural:safetensors",
+      "details": {
+        "tensor_count": 1
+      },
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "64d8469e2da29ae4e688956bc92e4362fa3808c0b0120f9c41707337209950a4",
+      "limitations": [
+        "Header/offset checks only; tensor values and loader behavior not tested."
+      ],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "45d04bd112acd7edd0914988369baec53e9e281db4e9ff05d321ff8c0b048db5",
+      "confidence": "DECLARED",
+      "kind": "PROVENANCE",
+      "source_file_id": "3e4d0574d1656858501fae8c9c1387486d6708afcd466e04cbdeea843329fe69",
+      "source_line": null,
+      "source_ref": "3e4d0574d1656858501fae8c9c1387486d6708afcd466e04cbdeea843329fe69#json:/revision",
+      "source_sha256": "483103691479d626883f863cbd4feb43bb46141e07da197b7ab86b7edce71ba1",
+      "value": "revision=illustrative-local-bytes-v1"
+    },
+    {
+      "claim_id": "7753730ff00399944e65998cd52037ceb46ec3cc675009d91cacadc3fea5874a",
+      "confidence": "DECLARED",
+      "kind": "LICENSE",
+      "source_file_id": "3e4d0574d1656858501fae8c9c1387486d6708afcd466e04cbdeea843329fe69",
+      "source_line": null,
+      "source_ref": "3e4d0574d1656858501fae8c9c1387486d6708afcd466e04cbdeea843329fe69#json:/license",
+      "source_sha256": "483103691479d626883f863cbd4feb43bb46141e07da197b7ab86b7edce71ba1",
+      "value": "MIT"
+    },
+    {
+      "claim_id": "918440ac5681541074b645ed3d354fc3150abc547999458f8c3f232ffae343d2",
+      "confidence": "DECLARED",
+      "kind": "PROVENANCE",
+      "source_file_id": "3e4d0574d1656858501fae8c9c1387486d6708afcd466e04cbdeea843329fe69",
+      "source_line": null,
+      "source_ref": "3e4d0574d1656858501fae8c9c1387486d6708afcd466e04cbdeea843329fe69#json:/repo_id",
+      "source_sha256": "483103691479d626883f863cbd4feb43bb46141e07da197b7ab86b7edce71ba1",
+      "value": "repo_id=synthetic/modelvet-demonstration"
+    }
+  ],
+  "conflicts": [],
+  "coverage": [
+    {
+      "completed_check_ids": [
+        "classification",
+        "identity",
+        "metadata:local"
+      ],
+      "expected_check_ids": [
+        "classification",
+        "identity",
+        "metadata:local"
+      ],
+      "failed_check_ids": [],
+      "file_id": "29c9a4a5b7955ea894b91d9107415dac2b866b8f0b32ed486434071fd1e38fb7",
+      "inconclusive_check_ids": [],
+      "mandatory_check_ids": [
+        "classification",
+        "identity",
+        "metadata:local"
+      ],
+      "nonapplicable_check_ids": [],
+      "not_run_check_ids": [],
+      "skipped_check_ids": [],
+      "unresolved_reasons": [],
+      "unsupported_check_ids": []
+    },
+    {
+      "completed_check_ids": [
+        "classification",
+        "identity",
+        "source:presence"
+      ],
+      "expected_check_ids": [
+        "classification",
+        "identity",
+        "source:presence"
+      ],
+      "failed_check_ids": [],
+      "file_id": "398232a02b30e7c04e118f4988f887fecf28ce75894c83447044aa3df1942454",
+      "inconclusive_check_ids": [],
+      "mandatory_check_ids": [
+        "classification",
+        "identity",
+        "source:presence"
+      ],
+      "nonapplicable_check_ids": [],
+      "not_run_check_ids": [],
+      "skipped_check_ids": [],
+      "unresolved_reasons": [],
+      "unsupported_check_ids": []
+    },
+    {
+      "completed_check_ids": [
+        "classification",
+        "identity",
+        "metadata:local"
+      ],
+      "expected_check_ids": [
+        "classification",
+        "identity",
+        "metadata:local"
+      ],
+      "failed_check_ids": [],
+      "file_id": "3e4d0574d1656858501fae8c9c1387486d6708afcd466e04cbdeea843329fe69",
+      "inconclusive_check_ids": [],
+      "mandatory_check_ids": [
+        "classification",
+        "identity",
+        "metadata:local"
+      ],
+      "nonapplicable_check_ids": [],
+      "not_run_check_ids": [],
+      "skipped_check_ids": [],
+      "unresolved_reasons": [],
+      "unsupported_check_ids": []
+    },
+    {
+      "completed_check_ids": [
+        "classification",
+        "identity",
+        "structural:safetensors"
+      ],
+      "expected_check_ids": [
+        "classification",
+        "identity",
+        "structural:safetensors"
+      ],
+      "failed_check_ids": [],
+      "file_id": "64d8469e2da29ae4e688956bc92e4362fa3808c0b0120f9c41707337209950a4",
+      "inconclusive_check_ids": [],
+      "mandatory_check_ids": [
+        "classification",
+        "identity",
+        "structural:safetensors"
+      ],
+      "nonapplicable_check_ids": [],
+      "not_run_check_ids": [],
+      "skipped_check_ids": [],
+      "unresolved_reasons": [],
+      "unsupported_check_ids": []
+    }
+  ],
+  "decision": {
+    "evidence_refs": [
+      "check:44465a07328afbb02779bfb61ab46a11e1561e0528f5f4ea2b0a81c231052ab1",
+      "check:abcf981e86dfd6e65387e87fe96a7f37146a5c8e29a681c78729c7c967478644",
+      "check:aeb6364aa77af278764b3b4b60742c1b15aa38853f30774d7317851f250f0162"
+    ],
+    "reason": "Inventory evidence substantiates a policy prohibition.",
+    "required_controls": [],
+    "rule_ids": [
+      "NO-REPOSITORY-CODE"
+    ],
+    "state": "BLOCK"
+  },
+  "dependencies": [],
+  "executions": [],
+  "files": [
+    {
+      "file_id": "29c9a4a5b7955ea894b91d9107415dac2b866b8f0b32ed486434071fd1e38fb7",
+      "format_class": "MARKDOWN",
+      "mismatch": false,
+      "relpath": "README.md",
+      "sha256": "4fcf92b47cfb487e649e0cb0169cfa22175fae22523f833aa878f3d1dd3429b4",
+      "size": 113
+    },
+    {
+      "file_id": "3e4d0574d1656858501fae8c9c1387486d6708afcd466e04cbdeea843329fe69",
+      "format_class": "JSON",
+      "mismatch": false,
+      "relpath": "config.json",
+      "sha256": "483103691479d626883f863cbd4feb43bb46141e07da197b7ab86b7edce71ba1",
+      "size": 108
+    },
+    {
+      "file_id": "398232a02b30e7c04e118f4988f887fecf28ce75894c83447044aa3df1942454",
+      "format_class": "PYTHON_SOURCE",
+      "mismatch": false,
+      "relpath": "modeling.py",
+      "sha256": "1e6b6babbf3ec54bb80388cbea5ed1be15ddc3f0717d625bcb9250e5ccb590d2",
+      "size": 39
+    },
+    {
+      "file_id": "64d8469e2da29ae4e688956bc92e4362fa3808c0b0120f9c41707337209950a4",
+      "format_class": "SAFETENSORS",
+      "mismatch": false,
+      "relpath": "weights.safetensors",
+      "sha256": "d7d247482395f891ddf71b226570af49b59f304cc826ea43e9e73eb6ba63a943",
+      "size": 66
+    }
+  ],
+  "findings": [],
+  "limitations": [
+    "Header/offset checks only; tensor values and loader behavior not tested.",
+    "Host paths and common credential patterns are redacted; exact artifact filenames and private raw evidence may remain sensitive.",
+    "Local declarations only; source, revision and legal rights are unverified.",
+    "Static assessment only; no model loading, legal clearance or universal safety guarantee.",
+    "User-declared pins; actual installation, vulnerabilities and reachability unverified."
+  ],
+  "manifest_digest": "sha256:30e44eec5919ad6aa0cd04ae150a6e256286cf1bd1e005de48fad5a0cdc51ba9",
+  "policy": {
+    "applicability_version": "2",
+    "control_rules": [],
+    "controls": [],
+    "mandatory_checks": [
+      "classification",
+      "dependencies:declared",
+      "identity",
+      "metadata:local",
+      "modelscan",
+      "scanner:resources",
+      "source:presence",
+      "structural:safetensors",
+      "structural:zip"
+    ],
+    "optional_checks": [],
+    "policy_id": "default-policy-v1",
+    "policy_version": "1",
+    "prohibitions": [
+      {
+        "category": "REPOSITORY_CODE",
+        "rule_id": "NO-REPOSITORY-CODE"
+      }
+    ],
+    "required_claims": [
+      "LICENSE",
+      "PROVENANCE"
+    ],
+    "schema_version": "1.0.0"
+  },
+  "policy_digest": "sha256:d7de8bfeccfb859c8e0f790fc44602e36102b3a20f2351ea397428ced0900ab6",
+  "raw_evidence": [],
+  "references": {
+    "check:44465a07328afbb02779bfb61ab46a11e1561e0528f5f4ea2b0a81c231052ab1": "/checks/4",
+    "check:49d89a387cb901472e7bb4f1c09650af57c7357a2aa4954de48a00740505a2a6": "/checks/1",
+    "check:4bfed1713a8485c9cb8f12b846d074bda505f45314e5f7c3dd9e1dcf06f382b3": "/checks/7",
+    "check:6026ad27b1fb4e62b9a749a1e34b70cb8b0a0770e13242c5857d48a99047e299": "/checks/10",
+    "check:7dabe3ed7853e74ce3e0671f8d1b17c1cc20d30eafcce9c9528c4ec944d04b50": "/checks/0",
+    "check:8de62f5fb2e1bec5155f7bda0b39fb38319df223e6af966ec1163bbee6e7c9fa": "/checks/2",
+    "check:936aa0fab7b012054ad0afa1ceb29c094f891a9f45e94eec16b73beea03a5a7c": "/checks/6",
+    "check:abcf981e86dfd6e65387e87fe96a7f37146a5c8e29a681c78729c7c967478644": "/checks/3",
+    "check:aeb6364aa77af278764b3b4b60742c1b15aa38853f30774d7317851f250f0162": "/checks/5",
+    "check:b9ac599e7055b0f764e3e64cb438f045d423261cd57b50791706cc8a2b5c843d": "/checks/11",
+    "check:d58561f61dadb813eca1785e12d10ed01db74511549676ac56f14d8bc848e3c3": "/checks/8",
+    "check:eb91dfffe8bf87c1dd7c17a16159478cddf75c4e5617bb935ae76d60efc3687d": "/checks/9",
+    "claim-kind:LICENSE": "/policy/required_claims/0",
+    "claim-kind:PROVENANCE": "/policy/required_claims/1",
+    "claim:45d04bd112acd7edd0914988369baec53e9e281db4e9ff05d321ff8c0b048db5": "/claims/0",
+    "claim:7753730ff00399944e65998cd52037ceb46ec3cc675009d91cacadc3fea5874a": "/claims/1",
+    "claim:918440ac5681541074b645ed3d354fc3150abc547999458f8c3f232ffae343d2": "/claims/2",
+    "coverage:29c9a4a5b7955ea894b91d9107415dac2b866b8f0b32ed486434071fd1e38fb7:classification": "/coverage/0",
+    "coverage:29c9a4a5b7955ea894b91d9107415dac2b866b8f0b32ed486434071fd1e38fb7:identity": "/coverage/0",
+    "coverage:29c9a4a5b7955ea894b91d9107415dac2b866b8f0b32ed486434071fd1e38fb7:metadata:local": "/coverage/0",
+    "coverage:398232a02b30e7c04e118f4988f887fecf28ce75894c83447044aa3df1942454:classification": "/coverage/1",
+    "coverage:398232a02b30e7c04e118f4988f887fecf28ce75894c83447044aa3df1942454:identity": "/coverage/1",
+    "coverage:398232a02b30e7c04e118f4988f887fecf28ce75894c83447044aa3df1942454:source:presence": "/coverage/1",
+    "coverage:3e4d0574d1656858501fae8c9c1387486d6708afcd466e04cbdeea843329fe69:classification": "/coverage/2",
+    "coverage:3e4d0574d1656858501fae8c9c1387486d6708afcd466e04cbdeea843329fe69:identity": "/coverage/2",
+    "coverage:3e4d0574d1656858501fae8c9c1387486d6708afcd466e04cbdeea843329fe69:metadata:local": "/coverage/2",
+    "coverage:64d8469e2da29ae4e688956bc92e4362fa3808c0b0120f9c41707337209950a4:classification": "/coverage/3",
+    "coverage:64d8469e2da29ae4e688956bc92e4362fa3808c0b0120f9c41707337209950a4:identity": "/coverage/3",
+    "coverage:64d8469e2da29ae4e688956bc92e4362fa3808c0b0120f9c41707337209950a4:structural:safetensors": "/coverage/3",
+    "file:29c9a4a5b7955ea894b91d9107415dac2b866b8f0b32ed486434071fd1e38fb7": "/files/0",
+    "file:398232a02b30e7c04e118f4988f887fecf28ce75894c83447044aa3df1942454": "/files/2",
+    "file:3e4d0574d1656858501fae8c9c1387486d6708afcd466e04cbdeea843329fe69": "/files/1",
+    "file:64d8469e2da29ae4e688956bc92e4362fa3808c0b0120f9c41707337209950a4": "/files/3",
+    "sha256:30e44eec5919ad6aa0cd04ae150a6e256286cf1bd1e005de48fad5a0cdc51ba9": "/artifact"
+  },
+  "run": {
+    "finished_at": "2026-10-21T13:44:30.090337+00:00",
+    "host_os_family": "Darwin",
+    "modelvet_version": "0.1.0",
+    "result_status": "COMPLETE",
+    "run_id": "45fb71c929bc4b769607a666e24f9be7",
+    "started_at": "2026-10-21T13:44:30.087660+00:00"
+  },
+  "schema_version": "1.0.0",
+  "semantic_digest": "sha256:f837a849586f2c0fa95b06edc00a7c08b7eefd06b3adeb1c5baa27ef4baa6b5d",
+  "tools": [
+    {
+      "binary_sha256": null,
+      "source": "installed package",
+      "tool_id": "modelvet",
+      "version": "0.1.0"
+    }
+  ]
+}

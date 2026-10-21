@@ -1,0 +1,15 @@
+{
+  "scope": "Local preview, not a published release",
+  "distributions": [
+    {
+      "file": "out/workbench-preview/modelvet-0.1.0-py3-none-any.whl",
+      "bytes": 259724,
+      "sha256": "f41038ec13e681153d89664507218f2b6f8c7affdb5ed0ccd8d0ef010cc238d5"
+    },
+    {
+      "file": "out/workbench-preview/modelvet-0.1.0.tar.gz",
+      "bytes": 493466,
+      "sha256": "7ab689d6ed224ffdc58e697d295aad57fd479e39982467ef806d2fd675105228"
+    }
+  ]
+}

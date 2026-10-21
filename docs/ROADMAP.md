@@ -1,6 +1,6 @@
 # Dependency-aware implementation roadmap
 
-Status: **PLANNED**, 2026-10-20. PH-01–07 and local PH-09/10 candidate work are implemented with macOS evidence; hosted CI/public release remain pending by user-selected scope. PH-08 local advisory/corpus/pilot engineering is implemented; independent benchmark acceptance remains pending. PH-11 has a proposed review packet and remains gated without execution. All hour ranges are rough solo-developer *focused effort*, not guaranteed calendar times. Security research is explicitly separate from writing code. See `TASKS.md` for executable steps/paths.
+Status: **implemented local static/workbench preview; external review gates remain**, 2026-10-21. PH-01–07 and local PH-09/10 candidate work are implemented with macOS evidence; earlier static hosted CI passed; the extended workbench matrix and public release remain pending. PH-08 local advisory/corpus/pilot engineering is implemented; independent benchmark acceptance remains pending. PH-11 has a proposed review packet and remains gated without execution. All hour ranges are rough solo-developer *focused effort*, not guaranteed calendar times. Security research is explicitly separate from writing code. See `TASKS.md` for executable steps/paths.
 
 ## Phase overview
 
@@ -188,3 +188,6 @@ PH-12–14 extend the completed static report path independently of PH-11: MV-01
 ## Workbench extension — FR-025–027
 
 PH-15 (MV-036–038): contracts/locked optional dependencies, authenticated local API, private worker/history. PH-16 (MV-039–041): developer shell/scan setup, evidence workspace, history/comparison/guidance. PH-17 (MV-042–044): security/browser fault acceptance, bundled distribution/CI, tutorial/demo/handoff. Each phase requires actual targeted and broader test evidence; public release and PH-11 remain independently gated.
+
+
+PH-15–17 local preview tasks MV-036–044 are implemented and tested, with final local evidence in PROGRESS. The extended hosted matrix must run on its actual source checkpoint; prior static CI is not workbench evidence. Independent project/security review, PH-08 adjudication and PH-11 host/isolation prerequisites remain separate.

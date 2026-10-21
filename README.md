@@ -4,6 +4,17 @@ Local static assessment of model artifacts, with independent coverage, determini
 
 **Status:** local v0.1.0 candidate; public release pending. macOS arm64/Python 3.12.15 has local evidence. Hosted Ubuntu 24.04 and macOS 15 Intel pass the full static gate. Windows is unsupported. No independently reviewed benchmark or model-loading experiment has been performed. A local synthetic development pilot is explicitly INCONCLUSIVE.
 
+## Local browser workbench
+
+Scan a local folder, inspect decisions and coverage, review evidence, revisit history and compare runs without writing commands. The dark workbench uses the same static engine as the CLI.
+
+```sh
+uv sync --locked --extra ui
+uv run --extra ui modelvet ui --models-root /absolute/path/to/models
+```
+
+Compiled assets ship with the Python package; Node is a development dependency only. The service binds to `127.0.0.1` and uses a private authenticated session. Keep the workspace outside the model root. See the [launch, privacy, recovery and demonstration guide](docs/WORKBENCH_GUIDE.md). Workbench preview verification is recorded separately from the earlier hosted static gate.
+
 ## What it does
 
 - Creates bounded private snapshots, rejects unsafe filesystem entries and computes exact file/manifest SHA-256 identities.
@@ -44,6 +55,7 @@ modelvet audit-batch MANIFEST.json --root REPORT_ROOT
 modelvet policy validate POLICY.toml [--json]
 modelvet doctor [--json]
 modelvet version [--json]
+modelvet ui --models-root DIR [--workspace DIR] [--port 0] [--no-browser]
 ```
 
 | Exit | Meaning |

@@ -127,15 +127,13 @@ test("BLOCK, INSUFFICIENT and CONTROLS remain distinct completed outcomes", asyn
   }
   await page.goto("/#/scan");
   await selectFolder(page, "tiny-safetensors");
-  await page
-    .getByLabel("Choose policy TOML")
-    .setInputFiles({
-      name: "controls.toml",
-      mimeType: "text/plain",
-      buffer: await readFile(
-        new URL("../../examples/controls.toml", import.meta.url),
-      ),
-    });
+  await page.getByLabel("Choose policy TOML").setInputFiles({
+    name: "controls.toml",
+    mimeType: "text/plain",
+    buffer: await readFile(
+      new URL("../../examples/controls.toml", import.meta.url),
+    ),
+  });
   await expect(
     page.getByText("Imported and validated TOML policy"),
   ).toBeVisible();
@@ -167,13 +165,11 @@ test("original JSON download/import and attachment checks preserve stored admiss
   await download.saveAs(target);
   expect(await readFile(target)).toEqual(original);
   await page.getByRole("link", { name: "Scan history", exact: true }).click();
-  await page
-    .getByLabel("Choose report JSON")
-    .setInputFiles({
-      name: "review.json",
-      mimeType: "application/json",
-      buffer: original,
-    });
+  await page.getByLabel("Choose report JSON").setInputFiles({
+    name: "review.json",
+    mimeType: "application/json",
+    buffer: original,
+  });
   await expect(
     page.getByRole("heading", { name: "Imported report", exact: true }),
   ).toBeVisible();
@@ -450,4 +446,25 @@ test("keyboard and coarse-pointer controls remain usable", async ({
   } finally {
     await context.close();
   }
+});
+
+test("bundled demonstrations explain all outcomes without entering scan history", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const before = await (await page.request.get("/api/v1/reports")).json();
+  for (const state of ["APPROVE", "CONTROLS", "BLOCK", "INSUFFICIENT"]) {
+    await page.goto("/");
+    await page
+      .locator(".demo-gallery")
+      .getByRole("button")
+      .filter({ hasText: state })
+      .click();
+    await expect(page.locator(".verdict-panel .badge")).toHaveText(state);
+    await expect(
+      page.getByText("SYNTHETIC DEMONSTRATION", { exact: true }),
+    ).toBeVisible();
+  }
+  const after = await (await page.request.get("/api/v1/reports")).json();
+  expect(after.total).toBe(before.total);
 });

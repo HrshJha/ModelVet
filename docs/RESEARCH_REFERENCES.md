@@ -215,3 +215,12 @@ The real ModelScan 0.8.8 run used only locally generated inert bytes. Raw vendor
 ## Hosted runner labels — 2026-10-20
 
 [GitHub-hosted runners reference](https://docs.github.com/en/actions/reference/runners/github-hosted-runners) documents macos-15 as ARM and macos-15-intel as the standard Intel macOS 15 target. This is vendor operational documentation, not independent security evidence or a completed execution. MV-026 actual Ubuntu/macOS results are stored separately under verification/MV-026/hosted-followup/.
+
+## Workbench implementation references — primary vendor documentation
+
+- [Vite backend integration](https://vite.dev/guide/backend-integration.html): bundled asset integration; vendor documentation, not independent security evidence.
+- [FastAPI static files](https://fastapi.tiangolo.com/tutorial/static-files/): serving local assets through the Python service.
+- [Playwright browser installation](https://playwright.dev/docs/browsers): pinned development browser installation; the application itself needs no Node runtime.
+- [Official setup-node action](https://github.com/actions/setup-node/tree/249970729cb0ef3589644e2896645e5dc5ba9c38): pinned CI runtime setup; commit verified against official v6 ref on 2026-10-21.
+
+Local tests establish only the bounded behaviors exercised. Dependency metadata, vendor specifications and automated accessibility checks are not independent product/security/accessibility certification.

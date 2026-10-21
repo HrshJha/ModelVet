@@ -1,0 +1,175 @@
+..F                                                                      [100%]
+=================================== FAILURES ===================================
+_________________________ test_installed_browser_smoke _________________________
+
+ui_candidate = (PosixPath('/private/var/folders/dh/_5m7l0cd7gv5nypd9dv3lyyh0000gn/T/pytest-of-harshkumarjha/pytest-302/ui-installed0'...<httpx.Client object at 0x10aa843e0>, <Popen: returncode: None args: ['/private/var/folders/dh/_5m7l0cd7gv5nypd9dv...>)
+
+    def test_installed_browser_smoke(ui_candidate):
+        """Node is a test driver only; it is absent from the application's inherited PATH."""
+        *_, client, process = ui_candidate
+        node = shutil.which("node")
+        if node is None or not (ROOT / "frontend/node_modules/@playwright/test").exists():
+            if os.environ.get("CI"):
+                pytest.fail("CI must install the pinned browser test driver")
+            pytest.skip("Browser development dependencies unavailable")
+        environment = {
+            **os.environ,
+            "MODELVET_ACCEPTANCE_ORIGIN": str(client.base_url).rstrip("/"),
+            "MODELVET_ACCEPTANCE_COOKIE": client.cookies.get("modelvet_session"),
+        }
+        result = subprocess.run(
+            [node, "scripts/installed-smoke.mjs"],
+            cwd=ROOT / "frontend",
+            env=environment,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: node:internal/modules/run_main:107
+E             triggerUncaughtException(
+E             ^
+E         
+E         ExpectError: expect(locator).toBeVisible() failed
+E         
+E         Locator: getByRole('table').getByRole('link', { name: 'tiny', exact: true }).first()
+E         Expected: visible
+E         Timeout: 5000ms
+E         Error: element(s) not found
+E         
+E         Call log:
+E           - Expect "toBeVisible" getByRole('table').getByRole('link', { name: 'tiny', exact: true }).first() with timeout 5000ms
+E           - waiting for getByRole('table').getByRole('link', { name: 'tiny', exact: true }).first()
+E         
+E             at captureRawStack (/Users/harshkumarjha/Desktop/ModelVet/frontend/node_modules/playwright-core/lib/coreBundle.js:9282:17)
+E             at callMatcherAsStep (/Users/harshkumarjha/Desktop/ModelVet/frontend/node_modules/playwright/lib/matchers/expect.js:13316:57)
+E             at Object.toBeVisible (/Users/harshkumarjha/Desktop/ModelVet/frontend/node_modules/playwright/lib/matchers/expect.js:13308:23)
+E             at /Users/harshkumarjha/Desktop/ModelVet/frontend/scripts/installed-smoke.mjs:55:5 {
+E           matcherResult: {
+E             message: 'expect(locator).toBeVisible() failed\n' +
+E               '\n' +
+E               "Locator: getByRole('table').getByRole('link', { name: 'tiny', exact: true }).first()\n" +
+E               'Expected: visible\n' +
+E               'Timeout: 5000ms\n' +
+E               'Error: element(s) not found\n' +
+E               '\n' +
+E               'Call log:\n' +
+E               `  - Expect "toBeVisible" getByRole('table').getByRole('link', { name: 'tiny', exact: true }).first() with timeout 5000ms\n` +
+E               "  - waiting for getByRole('table').getByRole('link', { name: 'tiny', exact: true }).first()\n",
+E             pass: false,
+E             actual: undefined,
+E             name: 'toBeVisible',
+E             expected: 'visible',
+E             log: [
+E               `  - Expect "toBeVisible" getByRole('table').getByRole('link', { name: 'tiny', exact: true }).first() with timeout 5000ms`,
+E               "  - waiting for getByRole('table').getByRole('link', { name: 'tiny', exact: true }).first()"
+E             ],
+E             timeout: 5000,
+E             ariaSnapshot: '- link "Skip to main content":\n' +
+E               '  - /url: "#main-content"\n' +
+E               '- complementary:\n' +
+E               '  - link "ModelVet Workbench overview":\n' +
+E               '    - /url: "#/"\n' +
+E               '    - text: ModelVet WORKBENCH\n' +
+E               '  - text: WORKSPACE\n' +
+E               '  - navigation "Main navigation":\n' +
+E               '    - link "Overview":\n' +
+E               '      - /url: "#/"\n' +
+E               '    - link "New scan N":\n' +
+E               '      - /url: "#/scan"\n' +
+E               '      - text: New scan\n' +
+E               '    - link "Scan history":\n' +
+E               '      - /url: "#/history"\n' +
+E               '    - link "Compare":\n' +
+E               '      - /url: "#/compare"\n' +
+E               '    - link "Environment":\n' +
+E               '      - /url: "#/environment"\n' +
+E               '  - text: Local session\n' +
+E               '  - paragraph: Static checks. Traceable decisions.\n' +
+E               '  - text: MODELVET 0.1.0\n' +
+E               '- banner:\n' +
+E               '  - text: Workbench /\n' +
+E               '  - strong: Scan history\n' +
+E               '  - button "Jump to… ⌘K": Jump to…\n' +
+E               '  - text: models\n' +
+E               '- main:\n' +
+E               '  - paragraph: PRIVATE LOCAL HISTORY\n' +
+E               '  - heading "An evidence trail worth keeping." [level=1]\n' +
+E               '  - paragraph: Reports are revalidated against their stored byte pins when listed and opened.\n' +
+E               '  - button "Compare"\n' +
+E               '  - button "Import report"\n' +
+E               '  - heading "Saved reports 3" [level=2]\n' +
+E               '  - paragraph: Drop a report JSON here, or import a file. Original bytes are preserved.\n' +
+E               '  - textbox "Filter this history page":\n' +
+E               '    - /placeholder: Filter this page…\n' +
+E               '  - combobox "Filter visible decisions":\n' +
+E               '    - option "All decisions" [selected]\n' +
+E               '    - option "APPROVE"\n' +
+E               '    - option "CONTROLS"\n' +
+E               '    - option "BLOCK"\n' +
+E               '    - option "INSUFFICIENT"\n' +
+E               '  - text: Page size\n' +
+E               '  - combobox "History page size":\n' +
+E               '    - option "1"\n' +
+E               '    - option "10"\n' +
+E               '    - option "25" [selected]\n' +
+E               '    - option "50"\n' +
+E               '  - table:\n' +
+E               '    - rowgroup:\n' +
+E               '      - row "Artifact Decision Required checks Created Open":\n' +
+E               '        - columnheader "Artifact"\n' +
+E               '        - columnheader "Decision"\n' +
+E               '        - columnheader "Required checks"\n' +
+E               '        - columnheader "Created"\n' +
+E               '        - columnheader "Open"\n' +
+E               '    - rowgroup:\n' +
+E               '      - row "tiny 7b1da1581e41 APPROVE 9 / 9 complete Oct 21, 07:20 PM Open tiny":\n' +
+E               '        - cell "tiny 7b1da1581e41":\n' +
+E               '          - link "tiny 7b1da1581e41":\n' +
+E               '            - /url: "#/reports/f99a263131e94a2297d5efddebc01cc4"\n' +
+E               '            - strong: tiny\n' +
+E               '            - text: 7b1da1581e41\n' +
+E               '        - cell "APPROVE"\n' +
+E               '        - cell "9 / 9 complete"\n' +
+E               '        - cell "Oct 21, 07:20 PM"\n' +
+E               '        - cell "Open tiny":\n' +
+E               '          - button "Open tiny"\n' +
+E               '      - row "Imported report 7b1da1581e41 APPROVE 9 / 9 complete Oct 21, 07:20 PM Open Imported report":\n' +
+E               '        - cell "Imported report 7b1da1581e41":\n' +
+E               '          - link "Imported report 7b1da1581e41":\n' +
+E               '            - /url: "#/reports/d39dac951b6f40dbb6fccd21835aa409"\n' +
+E               '            - strong: Imported report\n' +
+E               '            - text: 7b1da1581e41\n' +
+E               '        - cell "APPROVE"\n' +
+E               '        - cell "9 / 9 complete"\n' +
+E               '        - cell "Oct 21, 07:20 PM"\n' +
+E               '        - cell "Open Imported report":\n' +
+E               '          - button "Open Imported report"\n' +
+E               '      - row "tiny 7b1da1581e41 APPROVE 9 / 9 complete Oct 21, 07:20 PM Open tiny":\n' +
+E               '        - cell "tiny 7b1da1581e41":\n' +
+E               '          - link "tiny 7b1da1581e41":\n' +
+E               '            - /url: "#/reports/87a5323479864bf693b209298dbab138"\n' +
+E               '            - strong: tiny\n' +
+E               '            - text: 7b1da1581e41\n' +
+E               '        - cell "APPROVE"\n' +
+E               '        - cell "9 / 9 complete"\n' +
+E               '        - cell "Oct 21, 07:20 PM"\n' +
+E               '        - cell "Open tiny":\n' +
+E               '          - button "Open tiny"\n' +
+E               '  - button "Previous" [disabled]\n' +
+E               '  - text: 1–3 of 3 reports\n' +
+E               '  - button "Next" [disabled]\n' +
+E               '  - paragraph: Report JSON does not include its raw attachment files. Imported declarations remain unverified until those bytes are available and checked. History stays local until you explicitly remove its workspace.\n' +
+E               '- contentinfo: STATIC ASSESSMENT · LOCAL EVIDENCE Approval is scoped to the recorded artifact and policy.'
+E           }
+E         }
+E         
+E         Node.js v24.14.1
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/Users/harshkumarjha/.nvm/versions/node/v24.14.1/bin/node', 'scripts/installed-smoke.mjs'], re...C ASSESSMENT · LOCAL EVIDENCE Approval is scoped to the recorded artifact and policy.\'\n  }\n}\n\nNode.js v24.14.1\n').returncode
+
+tests/test_workbench_release.py:267: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_workbench_release.py::test_installed_browser_smoke - Assert...
+1 failed, 2 passed in 8.03s
