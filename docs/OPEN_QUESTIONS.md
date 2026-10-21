@@ -19,7 +19,7 @@
 | OQ-11 | Safe report destination? | IMPLEMENTED and tested | Explicit/default output separation, inode ancestry and edge/failure cases pass on supported targets. Filesystem race detection remains best effort. |
 | OQ-12 | Sufficient scanner confinement? | PARTIAL; risk acceptance pending | Process caps tested; required Darwin memory evidence remains unsupported, and OS network isolation is not enforced. A subprocess is not a sandbox. |
 | OQ-13 | Independently true discrepancy? | OPEN; independent research | Development byte-method agreement does not replace independent discrepancy/holdout adjudication. |
-| OQ-14 | Dependency/fixture licenses? | INVENTORIED; release review pending | Core/scanner/UI license metadata/notices retained; runtime notices bundled; generated inert fixtures use project MIT license. Public redistribution still needs project review. |
+| OQ-14 | Dependency/fixture licenses? | INVENTORIED; scoped Mac prerelease published | Core/scanner/UI license metadata/notices retained; runtime notices bundled; generated inert fixtures use project MIT license. Broader product/risk review remains open if release claims expand. |
 
 Current hosted evidence: run [39613283917](https://github.com/HrshJha/ModelVet/actions/runs/39613283917) at `767aa18560d41e7afc77de0a07a232c1746d7675`. See PROGRESS, THIRD_PARTY, RELEASE_REVIEW_PACKET and `verification/completion/` for the exact remaining gates. No question is closed by merely editing this register.
 

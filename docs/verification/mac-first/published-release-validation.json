@@ -1,0 +1,15 @@
+{
+  "url": "https://github.com/HrshJha/ModelVet/releases/tag/v0.1.0-mac-preview.1",
+  "tag": "v0.1.0-mac-preview.1",
+  "source_commit": "7e722c7c379bda6ec3dbc31feb38f3c7dc08e17e",
+  "source_tree": "f057605159d86b416a9ffc186e494824b3841a5d",
+  "prerelease": true,
+  "manifest_sha256": "389c7d150918d0a0395beea11b89c6a3074f95ba3b8c4a0d63a255b48e0afad0",
+  "wheel_sha256": "58e7b2bb08dc31f2754eb1fa5bd25ae8472eeefcfcd5857199ea9ff13eb0583a",
+  "sdist_sha256": "e021a3db31e34fa401bd719d691461d6ff537cbf370025abf9512e06ef7b6650",
+  "bundle_sha256": "8c506b2c66da42818da82cef4c369aaae5e2c3c03d28dda83b8aa6dc2fcb028a",
+  "published_assets_downloaded": 9,
+  "sha256sums_validated": true,
+  "zip_contents_and_bytes_verified": true,
+  "archive_contains_hash_locked_runtime": true
+}

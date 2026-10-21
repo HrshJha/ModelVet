@@ -24,6 +24,23 @@ def test_mac_scope_is_traceable_and_research_is_deferred() -> None:
     assert "Linux/KVM" in spec and "gate still applies" in spec
 
 
+def test_published_mac_status_is_consistent_in_project_docs() -> None:
+    release = "v0.1.0-mac-preview.1"
+    for relative in (
+        "PRD.md",
+        "docs/ROADMAP.md",
+        "docs/TASKS.md",
+        "docs/PROGRESS.md",
+        "docs/RELEASE_STATUS.md",
+        "docs/MAC_RELEASE_SPEC.md",
+    ):
+        assert release in (ROOT / relative).read_text(), relative
+    status = (ROOT / "docs/RELEASE_STATUS.md").read_text()
+    assert "independent benchmark" in status.lower()
+    assert "Linux/KVM" in status
+    assert "published" in status.lower()
+
+
 def test_mac_resource_guidance_does_not_require_linux_or_manufactured_evidence() -> None:
     title, action = CHECK_ADVICE["scanner:resources"]
     assert "macOS" in action and "unresolved" in action

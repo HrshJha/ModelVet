@@ -1,6 +1,6 @@
 # Executable implementation backlog
 
-**As of 2026-10-20 P0 tasks through MV-029 are complete for the local candidate. Hosted Ubuntu/macOS verification passes; public release remains pending; PH-08/MV-020 is complete; MV-022/023 local development engineering is implemented with independent research gates PENDING; gated PH-11 execution tasks are NOT STARTED.** PH-12–14 local report audits are complete with evidence in verification/MV-033 through MV-035. Task IDs stable; completion means implementation + test evidence + updated PROGRESS, never existence of planned filename alone. **Scheduling order follows P0 phase dependencies rather than numeric task IDs**: MV-021 (PH-07/P0) precedes optional MV-020 (PH-08/P1) in the recommended release path. There is no remaining local-candidate P0 implementation task in the selected scope. Task estimates are focused hours, not time-to-delivery promises. Command patterns remain planned until their task evidence records successful execution.
+**Current selected scope (2026-10-21): the Mac-first static CLI and Workbench preview is published as `v0.1.0-mac-preview.1` from main `7e722c7`. PH-01–07, PH-09/10 and local Mac product extensions PH-12–18 are complete for this delivery. Final hosted macOS 15 Intel CI passed (run 39624146859); local arm64 evidence is recorded separately. PH-08 independent comparison and PH-11 Linux/KVM loading are DEFERRED, not complete. No local Mac product task remains unblocked.** Task IDs and historical checkpoints below remain unchanged. Completion still requires evidence and progress records; deferred research must not be represented as achieved.
 
 ## Backlog index
 
@@ -456,7 +456,7 @@
 
 ### MV-028 — Build distribution and public release candidate
 
-- **Priority / status / phase:** P0; **COMPLETE — local candidate scope; public release PENDING**; `PH-10`. **Requirement(s):** FR-014. **Estimated focused effort:** 4–7 hours.
+- **Priority / status / phase:** P0; **COMPLETE — Mac preview published**; `PH-10`. **Requirement(s):** FR-014. **Estimated focused effort:** 4–7 hours.
 - **Purpose/context:** Deliver a bounded, independently testable part of the ModelVet evidence/admission workflow. Preserve the fail-closed invariant in PRD §7 and threat constraints in `THREAT_MODEL.md`.
 - **Prerequisites/dependencies:** MV-026,MV-027; no work should begin before dependent acceptance evidence exists.
 - **Expected files:** `pyproject.toml`, `uv.lock`, `README.md`. Paths are proposed and may be created only during implementation.
@@ -471,7 +471,7 @@
 
 ### MV-029 — Audit licenses, docs, specifications and claims
 
-- **Priority / status / phase:** P0; **COMPLETE — local candidate scope; public release PENDING**; `PH-10`. **Requirement(s):** FR-006,FR-017. **Estimated focused effort:** 2–4 hours.
+- **Priority / status / phase:** P0; **COMPLETE — Mac preview published**; `PH-10`. **Requirement(s):** FR-006,FR-017. **Estimated focused effort:** 2–4 hours.
 - **Purpose/context:** Deliver a bounded, independently testable part of the ModelVet evidence/admission workflow. Preserve the fail-closed invariant in PRD §7 and threat constraints in `THREAT_MODEL.md`.
 - **Prerequisites/dependencies:** MV-028; no work should begin before dependent acceptance evidence exists.
 - **Expected files:** `docs/RESEARCH_REFERENCES.md`, `docs/SPEC_AUDIT.md`, `docs/PROGRESS.md`. Paths are proposed and may be created only during implementation.
@@ -662,6 +662,6 @@
 - **Verification:** tests/test_mac_release.py, docs/CI contracts, full Python/frontend/browser/installed-package gates. Record actual commands/results in PROGRESS.
 - **DoD:** A Mac user can install and use the local product; all Mac engineering gates pass and remaining research is explicitly deferred, with no Linux/KVM requirement for this preview.
 
-## Next task
+## Current scope status
 
-MV-045 is complete for the maintainer-authorized Mac-first preview, with local arm64 and hosted Intel acceptance. Research tasks remain deferred; no dedicated Linux host or independent benchmark is required for the local Mac product. Missing mandatory evidence still prevents admission.
+MV-045 and the scoped Mac release are complete. There is no unblocked implementation task for the delivered Mac product. PH-08 independent benchmark comparison and PH-11 loader research remain deferred outside this delivery; if that scope resumes, the existing holdout, independent review and Linux/KVM gates still apply. Missing mandatory evidence still prevents admission.

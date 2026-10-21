@@ -50,7 +50,7 @@ Reviewed risks and unresolved issues: <actual>
 
 A passing green line-coverage number never substitutes for security behavior. Benchmark superiority, scanner-loader equivalence or isolation claims require separately reviewed experiments. No `P2` capability may be represented as released based on documentation or theoretical design alone.
 
-## Local candidate checkpoint — 2026-10-20
+## Historical local candidate checkpoint — 2026-10-20
 
 The user selected local candidate completion with hosted CI pending. The local task evidence through MV-029 is recorded in PROGRESS and verification/PH-10: 381 tests pass, one Linux-only test is skipped, and lock/lint/format/security/types/build and fresh installation pass on macOS. This satisfies the selected local candidate scope. The unchecked public-release checklist above remains the release gate; hosted Linux/macOS execution, project review/risk acceptance and a version-controlled release checkpoint are pending. PH-08 and PH-11 are not achieved.
 
@@ -59,6 +59,11 @@ The user selected local candidate completion with hosted CI pending. The local t
 MV-026 now passes the declared Ubuntu 24.04/macOS 15 Intel hosted matrix; full tests, static gates, builds, fresh installation and real inert scanner contracts succeed at 3d24c0a (run 39465563101). Hosted target evidence is separate from local arm64. The release checklist still requires project review/residual-risk acceptance and publication; PH-08 independent holdout/adjudication and PH-11 dedicated host/isolation review are not satisfied by static CI. See RELEASE_REVIEW_PACKET.md for the concrete candidate and missing records.
 
 
-## Current engineering completion — 2026-10-21
+## Historical pre-Mac engineering checkpoint — 2026-10-21
 
 Static CLI and PH-12–17 extensions meet their recorded engineering/package acceptance gates. Run 39613283917 passes on Ubuntu 24.04/macOS 15 Intel at 767aa18. The original release checklist is a gate definition, not evidence that every box remains technically untested: P0 traceability, deterministic decisions, failure paths, schemas, docs, installed distributions and supported-target CI are implemented and verified in PROGRESS. Project/security residual-risk acceptance and publication remain pending. PH-08 independent research and all PH-11 loader prerequisites remain unsatisfied; no local test run substitutes for those external gates. See SPEC_AUDIT and RELEASE_REVIEW_PACKET for current dispositions.
+
+
+## Mac scoped publication closeout — 2026-10-21
+
+The maintainer narrowed the current product gate to the Mac static CLI and Workbench. Release `v0.1.0-mac-preview.1` is published from `7e722c7c379bda6ec3dbc31feb38f3c7dc08e17e`; final merged-main macOS CI run 39624146859 passes 628 tests, one Linux-only skip, seven browser components, 15 browser workflows and 13 installed-package checks. Downloads and source identity were verified. This completes the authorized Mac delivery; PH-08 independent benchmark comparison and PH-11 Linux/KVM loading stay deferred and are not marked complete.

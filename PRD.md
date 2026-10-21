@@ -5,7 +5,7 @@
 | Document version | `0.1.0-draft` |
 | Status | **Mac-first local preview; engineering gates apply; research is deferred** |
 | Updated | 2026-10-21 |
-| Development stage | Static CLI and optional PH-15–17 workbench preview implemented; Ubuntu 24.04/macOS 15 Intel hosted gates passed; public release pending review |
+| Development stage | Mac-first static CLI and Workbench preview published as v0.1.0-mac-preview.1; merged-main macOS CI passed; PH-08 independent comparison and PH-11 loader research deferred |
 | Product | Open-source local AI model artifact security and admission verification |
 | Authority | Primary source of truth for requirements; `docs/DECISIONS.md` for why |
 | Scope | Mac-first local static CLI and Workbench; benchmark/loader research deferred |

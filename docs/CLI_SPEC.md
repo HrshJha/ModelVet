@@ -1,6 +1,6 @@
 # CLI interface contract — local static candidate
 
-**Program:** `modelvet`; Python console script set in `pyproject.toml`. Local and noninteractive by default. Commands and flags here supersede illustrative snippets elsewhere. MV-002 implements the grammar/help/version and explicit unavailable errors; MV-015 implements bounded `policy validate` with success 0/invalid input 40. Full CLI/report integration and the optional Workbench pass local and hosted Ubuntu/macOS acceptance (run 39613283917). Public release remains pending review. See `COMMANDS.md` for operational status.
+**Program:** `modelvet`; Python console script set in `pyproject.toml`. Local and noninteractive by default. Commands and flags here supersede illustrative snippets elsewhere. MV-002 implements the grammar/help/version and explicit unavailable errors; MV-015 implements bounded `policy validate` with success 0/invalid input 40. Full CLI/report integration and the optional Workbench pass local Mac and hosted macOS acceptance (final merged-main run 39624146859). The scoped Mac preview is published at `v0.1.0-mac-preview.1`; broader-platform validation is outside its support claim. See `COMMANDS.md` for operational status.
 
 ## Implemented hierarchy
 

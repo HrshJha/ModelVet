@@ -1,6 +1,6 @@
 # PH-11 proposed review packet — capability disabled
 
-**Status: PROPOSED, NOT READY.** This packet prepares review; it does not complete MV-030 or authorize implementation/execution. PH-08 independent research acceptance and PH-10 review/public-release gates remain pending. PH-09 hosted static validation passes on Ubuntu 24.04/macOS 15 Intel. No loader runner, guest image or model execution is enabled.
+**Status: PROPOSED, NOT READY.** This packet prepares review; it does not complete MV-030 or authorize implementation/execution. The Mac-scoped PH-10 preview is published, but PH-08 independent research and the PH-11 loader review/host gates remain pending. No loader runner, guest image or model execution is enabled.
 
 ## Observed prerequisites — 2026-10-20
 
@@ -9,7 +9,7 @@ Read-only local checks in `verification/MV-023/loader-readiness.json`: Darwin ar
 | Gate | Evidence required before advancement | Current state |
 |---|---|---|
 | Research acceptance | Independently adjudicated corpus/eligible comparisons; heldout integrity and limitations reviewed | Pending; development pilot only |
-| Static release readiness | Hosted target results, project security review, versioned checkpoint | Pending |
+| Loader-research readiness | Independent loader risk review, dedicated host and versioned checkpoint | Pending; Mac static-preview publication does not satisfy PH-11 |
 | Dedicated Linux/KVM host | Operator ownership, `/dev/kvm` access, patch inventory and hardening evidence | Not supplied; current host is macOS |
 | Reviewed isolation design | Named independent reviewer/date and reviewed config/source hashes | Not supplied |
 | Fixed runtime identities | Approved hypervisor/jailer/kernel/rootfs/framework versions and SHA-256 | Not selected; no invented pins |

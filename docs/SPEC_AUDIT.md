@@ -4,16 +4,20 @@
 
 **Historical blueprint audit date:** 2026-10-20. **Historical scope:** Markdown/design consistency only. At that initial checkpoint no application code/tests/scanner had run. Later implementation evidence is recorded below; this historical table is not the current product state.
 
-## Current completion audit — 2026-10-21
+## Mac preview closeout — 2026-10-21
+
+The scoped Mac preview is published at `v0.1.0-mac-preview.1` from `7e722c7c379bda6ec3dbc31feb38f3c7dc08e17e`. Final merged-main macOS CI run [39624146859](https://github.com/HrshJha/ModelVet/actions/runs/39624146859) succeeds: 628 Python tests, one Linux-only skip, seven components, 15 browser workflows and 13 installed-package checks. All nine published assets and checksums were downloaded and verified. There is no incomplete unblocked task for the selected Mac product. PH-08 independent comparison and PH-11 Linux/KVM loading remain deferred; this does not claim independent certification or model execution.
+
+## Historical broader-scope audit — 2026-10-21
 
 The static CLI, optional advisory supplement, report-audit extensions and PH-15–17 Workbench are implemented. All 44 task cards and 27 FR IDs are present; every P0 task has recorded local-candidate completion. MV-022/023 have development engineering/pilot evidence, with independent research acceptance pending. MV-030–032 remain unstarted behind the PH-11 prerequisites. No unblocked incomplete P0 implementation task was found.
 
-PR 3 is open and mergeable at `767aa18560d41e7afc77de0a07a232c1746d7675`, with zero submitted review approvals. Hosted run 39613283917 passes Ubuntu/macOS gates. The tested implementation has 623 Python tests on Ubuntu, 622 plus one Linux-only skip on macOS, seven component tests and 14 browser workflows each. Package install, offline runtime acceptance, exact generated-asset checks and real inert ModelScan contracts pass. This audit rechecks those actual records; it does not claim a new full test execution.
+Historical pre-Mac candidate record: PR 3 and run 39613283917 refer to the earlier broader-scope snapshot. They are superseded for the current Mac release by main 7e722c7 and run 39624146859, recorded in the closeout above.
 
 | Remaining gate | Reason it is incomplete | Required external input |
 |---|---|---|
 | PH-08 independent acceptance | No reviewed hidden holdout or independent discrepancy/baseline adjudication | Custodian/reviewer records and frozen approved evidence |
-| PH-10 public release | No project/security risk disposition or release destination approval; no published release | Exact source/package approval and maintainer publication decision |
+| Broader release / independent acceptance | Independent human risk disposition and PH-08/11 research evidence are not supplied; scoped Mac prerelease is published | Remains open only if broader claims or model-loading research resume |
 | PH-11 loader research | Local host is Darwin arm64 without KVM, Firecracker or jailer; no approved dedicated host or isolation review supplied | Approved Linux/KVM alias, reviewed design/runtime/fixture identities and trial/teardown evidence |
 
 The concrete candidate is already reviewable in RELEASE_REVIEW_PACKET. An agent's own review or synthetic pilot cannot supply independence; a general request to complete the project does not create missing review records or a dedicated host. `verification/completion/` records the current task inventory, live PR/CI state, release list and host capabilities. Historical audit tables/checkpoints below remain unchanged as dated evidence.

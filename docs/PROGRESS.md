@@ -1,6 +1,6 @@
 # ModelVet progress dashboard
 
-**Updated 2026-10-21. Current delivery: Mac-first local static CLI and Workbench. MV-045 local arm64 and hosted Intel acceptance passed. Benchmark comparison and Linux/KVM loader research are deferred and no longer block the local Mac preview; engineering and honest mandatory-evidence checks remain required.** Earlier dated records below describe their original broader scope.
+**Updated 2026-10-21. Current delivery: Mac-first local static CLI and Workbench, published as `v0.1.0-mac-preview.1` from main `7e722c7`. Final merged-main macOS 15 Intel CI passes (run [39624146859](https://github.com/HrshJha/ModelVet/actions/runs/39624146859)): 628 Python tests, one Linux-only skip, seven component tests, 15 browser workflows and 13 installed-package checks. Local Mac arm64 acceptance and a real installed-Workbench synthetic scan also pass. PH-08 independent comparison and PH-11 Linux/KVM loader research remain deferred; no independent certification or model execution is claimed. Earlier dated records are historical.
 
 | Workstream | Actual state | Evidence |
 |---|---|---|
@@ -8,12 +8,12 @@
 | Architecture and threat model | Drafted, pending review | `ARCHITECTURE.md`, `THREAT_MODEL.md` |
 | Dependency resolution / lock | COMPLETE for foundation | `../pyproject.toml`, `../uv.lock`, `verification/MV-001/` |
 | Source implementation | Full local CLI, static checks, evidence/coverage/policy, reports and packaging | `../src/modelvet/` |
-| Tests/fixtures | 622 passed / one Linux-only skip locally; seven component and 14 browser workflows passed | `verification/workbench/PH-17-final-gate.log`, `verification/workbench/MV-044-final-browser.log` |
+| Tests/fixtures | Final hosted Mac gate: 628 passed / one Linux-only skip, seven components, 15 browser workflows, 13 installed-package checks; local Mac arm64 suite also passes | `verification/mac-first/main-ci-summary.txt`, `main-ci-state.json`, `published-release-validation.json` |
 | Benchmarks | INCONCLUSIVE development pilot; independent research DEFERRED | `../benchmarks/results/`, `verification/MV-023/` |
 | Isolated model-loading safety | DEFERRED | PH-11 / ADR-009 proposed |
-| Release | MAC PREVIEW READY | Scoped local/internal acceptance passed; general-release certification is not claimed |
+| Release | MAC PREVIEW PUBLISHED | `v0.1.0-mac-preview.1`; checksums and downloaded assets verified; general-release certification is not claimed |
 
-**Active task:** Mac preview engineering is complete; integrate and publish the scoped preview. PH-08 independent research and PH-11 remain deferred.
+**Active task:** No unblocked implementation task remains for the selected Mac product scope. Continue only if scope expands; PH-08 and PH-11 stay deferred with their original review and host gates intact.
 
 ## Milestones
 
@@ -28,15 +28,15 @@
 | PH-07 | COMPLETE | MV-019/021; 345-test macOS gate |
 | PH-08 | LOCAL ENGINEERING IMPLEMENTED; independent research DEFERRED | MV-020 plus development corpus/pilot; no hidden holdout/independent adjudication |
 | PH-09 | COMPLETE — tested hosted targets | MV-024–026; Ubuntu 24.04 + macOS 15 Intel hosted gate; local arm64 evidence separate |
-| PH-10 | LOCAL CANDIDATE COMPLETE; public release PENDING | MV-027–029 verified; 381 pass / one Linux-only skip |
+| PH-10 | COMPLETE — scoped Mac preview published | MV-027–029; final merged-main acceptance 628 pass / one Linux-only skip |
 | PH-11 | DEFERRED — outside Mac preview | Proposed review packet prepared; no reviewed Linux/KVM environment |
 | PH-12 | COMPLETE | Raw evidence verification; 508 pass / one Linux-only skip |
 | PH-13 | COMPLETE | Stored report comparison; 521 pass / one Linux-only skip |
 | PH-14 | COMPLETE | Explicit report batch audit; 558 pass / one Linux-only skip |
 | PH-15 | COMPLETE locally | Optional dependencies, authenticated API, private worker/history |
 | PH-16 | COMPLETE locally | Scan/report workspace, deterministic guidance, history/import/compare |
-| PH-17 | PREVIEW COMPLETE; hosted Ubuntu/macOS passed | 622 Python tests, seven components, 14 browser workflows; installed wheel without Node/external socket access |
-| PH-18 | COMPLETE — Mac preview engineering | MV-045; 627 Python tests, seven components, 15 browser workflows; hosted Mac gate passed |
+| PH-17 | COMPLETE — packaged Mac Workbench | Included in final Mac acceptance: 628 Python tests, seven components, 15 browser workflows and 13 installed-package checks |
+| PH-18 | COMPLETE — Mac preview published | MV-045; 628 Python tests, one Linux-only skip, seven components, 15 browser workflows, 13 installed-package checks; local arm64 and hosted macOS 15 Intel |
 
 ## Decisions awaiting approval
 
@@ -143,7 +143,7 @@ On completing an individual task: edit only its status from NOT STARTED to COMPL
 
 - **2026-10-21 PH-15 complete:** MV-036–038 implement the optional authenticated loopback service, rooted folder/policy handling, fixed own-module scan worker, genuine stage events, cancellation/scanner cleanup, parent-death interruption and private SQLite history. Local gate: 599 passed / one Linux-only skip; lock/lint/format/security/types pass (64 source files). Worker tests cover all four decisions and CLI semantic parity; no model loading or report/policy schema change. Logs: verification/workbench/PH-15-gate.log and MV-038-tests.log. Next: MV-039 UI shell/scan setup.
 
-- **2026-10-21 PH-16 complete:** MV-039–041 add the dark developer workbench, rooted scan setup, actual stage feedback, coverage matrix/file drill-down, safe record dialogs, deterministic guidance, private history, exact-byte JSON import/download, attachment verification and paged report comparison. Browser workflows cover every admission state, policy import and cancellation. Local full Python suite: 605 pass / one Linux-only skip; 7 frontend component tests and 6 Chromium workflows pass; types/build/lint/security pass. Desktop overview/report screenshots were inspected. Evidence: verification/workbench/MV-039 through MV-041 and PH-16-python-gate.log. PH-17 acceptance is next; public release remains pending independent review.
+- **2026-10-21 PH-16 checkpoint (historical; superseded by PH-17/18):** MV-039–041 add the dark developer workbench, rooted scan setup, actual stage feedback, coverage matrix/file drill-down, safe record dialogs, deterministic guidance, private history, exact-byte JSON import/download, attachment verification and paged report comparison. Browser workflows cover every admission state, policy import and cancellation. Local full Python suite: 605 pass / one Linux-only skip; 7 frontend component tests and 6 Chromium workflows pass; types/build/lint/security pass. Desktop overview/report screenshots were inspected. Evidence: verification/workbench/MV-039 through MV-041 and PH-16-python-gate.log. At that checkpoint, PH-17 acceptance was next; later Mac-scoped acceptance and publication are recorded at the top of this file.
 
 
 ## MV-043 local packaging gate — 2026-10-21
@@ -202,8 +202,13 @@ While PR 5 was under validation, external PR 4 merged 5f99293 into main, trackin
 Actual hygiene validation: Ruff lint/format and the full suite pass: **628 passed / one Linux-only skip** (`verification/mac-first/hygiene-full.log`). The 18-test Mac/package contract subset and 13 repeated installed core/UI checks pass; fresh wheel/sdist build succeeds. Generated dependency and browser-session files are absent from the index; the original external commit and working files remain intact. Required hosted Mac validation of this cleanup follows in its own PR before publication.
 
 
-## Mac preview release preparation — 2026-10-21
+## Mac preview release acceptance — 2026-10-21
 
 Source-hygiene PR 6 passes required hosted macOS 15 Intel run [39622723371](https://github.com/HrshJha/ModelVet/actions/runs/39622723371) at 5cd322d5059c5cfdeca545efffc973d422ea080e. Full Python suite: **628 passed / one Linux-only skip**; seven component tests, 15 browser workflows, 13 repeated installed core/UI tests and the real inert scanner contract pass. Step metadata, selected output and full-log hash are retained under verification/mac-first/hygiene-hosted-*. Local final installed checks again pass 13 tests. Two builds produce identical wheel and source bytes. Archive inspection confirms bundled assets/guides/licenses and no dependency caches, browser sessions or workspaces. The authenticated installed-wheel UI visibly shows the synthetic saved run (9/9 mandatory checks) and private history.
 
-The repository is public when freshly checked; preserve visibility and publish only the scoped Mac preview under the maintainer's release authorization. Release tag v0.1.0-mac-preview.1 is the designated handoff; exact final merged commit/tree and distribution identities are recorded in its release-manifest.json and SHA256SUMS. Python package version remains 0.1.0; no PyPI upload. This documentation/evidence follow-up changes no application, schema, policy or dependency bytes. Independent benchmark comparison and Linux/KVM loading remain DEFERRED. No independent certification or loader execution is inferred.
+The repository was public when freshly checked; its visibility was preserved. The scoped Mac preview was published at tag v0.1.0-mac-preview.1. Exact final merged commit/tree and distribution identities are recorded in its release-manifest.json and SHA256SUMS. Python package version remains 0.1.0; no PyPI upload. This documentation/evidence follow-up changes no application, schema, policy or dependency bytes. Independent benchmark comparison and Linux/KVM loading remain DEFERRED. No independent certification or loader execution is inferred.
+
+
+## Mac preview publication verified — 2026-10-21
+
+Published prerelease [v0.1.0-mac-preview.1](https://github.com/HrshJha/ModelVet/releases/tag/v0.1.0-mac-preview.1) from main `7e722c7c379bda6ec3dbc31feb38f3c7dc08e17e`. Final merged-main macOS 15 Intel Actions run [39624146859](https://github.com/HrshJha/ModelVet/actions/runs/39624146859) succeeds: 628 Python tests / one Linux-only skip, seven component tests, 15 browser workflows, 13 fresh installed-package checks, and real inert scanner contract. Run metadata, selected actual output and full-log hash are retained in `verification/mac-first/`; the release manifest and SHA256SUMS are attached to the published release. All nine downloaded assets, payload checksums, ZIP contents and source tag were verified locally. Desktop checkout is clean at the release commit, the previously tracked generated files remain preserved locally, and original commit 5f99293 remains in history. Independent benchmark comparison (PH-08) and Linux/KVM loader research (PH-11) remain deferred; no model execution or independent certification is claimed.

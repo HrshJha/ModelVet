@@ -1,6 +1,6 @@
 # Dependency-aware implementation roadmap
 
-Status: **implemented local static/workbench preview; external review gates remain**, 2026-10-21. PH-01–07 and local PH-09/10 candidate work are implemented with macOS evidence; earlier static hosted CI passed; extended workbench CI also passed at 996d19f; public release remains pending. PH-08 local advisory/corpus/pilot engineering is implemented; independent benchmark acceptance remains pending. PH-11 has a proposed review packet and remains gated without execution. All hour ranges are rough solo-developer *focused effort*, not guaranteed calendar times. Security research is explicitly separate from writing code. See `TASKS.md` for executable steps/paths.
+Status: **Mac-first static CLI and Workbench preview published**, 2026-10-21, at `v0.1.0-mac-preview.1` from main `7e722c7`. Required macOS 15 Intel CI passes on the merged source (run [39624146859](https://github.com/HrshJha/ModelVet/actions/runs/39624146859)); local arm64 acceptance passes separately. PH-01–07, PH-09/10 and local PH-12–18 product work are complete for this Mac scope. PH-08 independent comparison and PH-11 Linux/KVM loader research remain deferred and are not represented as complete. All hour ranges are rough solo-developer *focused effort*, not guaranteed calendar times. Security research is explicitly separate from writing code. See `TASKS.md` for task evidence.
 
 ## Phase overview
 
@@ -20,6 +20,10 @@ Status: **implemented local static/workbench preview; external review gates rema
 | PH-12 | Stored raw-evidence verification | MV-033 | not calibrated | P1 local extension | T-AUDIT-01 |
 | PH-13 | Stored report comparison | MV-034 | not calibrated | P1 local extension | T-COMPARE-01 |
 | PH-14 | Explicit-manifest batch audit | MV-035 | not calibrated | P1 local extension | T-BATCH-01 |
+| PH-15 | Local Workbench API and scan jobs | MV-036–MV-038 | not calibrated | P1 local extension, complete | T-UI-API-01 |
+| PH-16 | Evidence-first browser workspace | MV-039–MV-041 | not calibrated | P1 local extension, complete | T-UI-FLOW-01 |
+| PH-17 | Packaged Workbench acceptance | MV-042–MV-044 | not calibrated | P1 local extension, complete | T-UI-RELEASE-01 |
+| PH-18 | Mac-first delivery and publication | MV-045 | not calibrated | Mac scope, complete | T-MAC-01 |
 
 ## Dependency graph
 
@@ -187,12 +191,12 @@ PH-12–14 extend the completed static report path independently of PH-11: MV-01
 
 ## Workbench extension — FR-025–027
 
-PH-15 (MV-036–038): contracts/locked optional dependencies, authenticated local API, private worker/history. PH-16 (MV-039–041): developer shell/scan setup, evidence workspace, history/comparison/guidance. PH-17 (MV-042–044): security/browser fault acceptance, bundled distribution/CI, tutorial/demo/handoff. Each phase requires actual targeted and broader test evidence; public release and PH-11 remain independently gated.
+PH-15 (MV-036–038): contracts/locked optional dependencies, authenticated local API, private worker/history. PH-16 (MV-039–041): developer shell/scan setup, evidence workspace, history/comparison/guidance. PH-17 (MV-042–044): security/browser fault acceptance, bundled distribution/CI, tutorial/demo/handoff. Each phase requires actual targeted and broader test evidence. Mac preview publication is complete; independent comparative research and PH-11 remain outside the selected Mac scope.
 
 
-PH-15–17 local preview tasks MV-036–044 are implemented and tested, with final local evidence in PROGRESS. The extended hosted matrix passed at 996d19f (run 39611891146); actual counts and limitations are in PROGRESS. Independent project/security review, PH-08 adjudication and PH-11 host/isolation prerequisites remain separate.
+PH-15–17 tasks MV-036–044 are implemented and tested. The Mac release CI also verifies the Workbench on the required hosted target; final merged-main evidence is in PROGRESS. Independent benchmark adjudication and PH-11 host/isolation prerequisites remain deferred.
 
 
 ## PH-18 — Mac-first local completion · FR-028 / MV-045
 
-The maintainer revised the deliverable to the available Mac. Complete the CLI/Workbench, Mac readiness guidance, required macOS CI and installed-package preview. PH-08 independent comparison and PH-11 Linux/KVM loading are **DEFERRED** and do not block this release scope; no research result or loader capability is claimed. Preserve historical platform evidence and all mandatory-evidence semantics. Exit: actual Mac code/schema/browser/package gates pass and the scoped preview is installable. See MAC_RELEASE_SPEC.md.
+The maintainer revised the deliverable to the available Mac. Complete the CLI/Workbench, Mac readiness guidance, required macOS CI and installed-package preview. PH-08 independent comparison and PH-11 Linux/KVM loading are **DEFERRED** and do not block this release scope; no research result or loader capability is claimed. Preserve historical platform evidence and all mandatory-evidence semantics. Exit: actual Mac code/schema/browser/package gates pass and the scoped preview is installable and published. This exit passed at main 7e722c7 (CI run 39624146859). See MAC_RELEASE_SPEC.md.

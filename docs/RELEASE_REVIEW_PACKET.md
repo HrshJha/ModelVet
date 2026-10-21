@@ -1,8 +1,8 @@
-# Static/workbench preview review packet — acceptance pending
+# Broader project/security review packet — pending
 
 **Current Mac-first scope (2026-10-21):** The maintainer narrowed the deliverable to the local static Mac CLI/Workbench. [MAC_RELEASE_SPEC](MAC_RELEASE_SPEC.md) controls this limited preview: required engineering/package checks apply; independent benchmark and Linux/KVM loader research are deferred and do not block it. Historical broader-release gates below remain applicable only if that broader scope is resumed. No independent review or loader validation is claimed.
 
-The user requested completion of PH-08–11. This packet separates actual candidate evidence from the external evidence still required. It records no reviewer approval and enables no loader capability.
+The Mac-scoped preview is published at `v0.1.0-mac-preview.1` after its actual engineering and hosted Mac gates passed. This packet records broader project/security review and research gates that remain relevant only if the scope expands. It records no independent reviewer approval and enables no loader capability.
 
 ## Current workbench preview — 2026-10-21
 
@@ -20,7 +20,7 @@ Review the new loopback authentication/Host/Origin/CSRF boundary, rooted path br
 - Local gate: 559 passed, one explicit Linux-only skip; lock/lint/format/security/types pass. New-cache reproduction and 12 passing release/CI contracts are retained under verification/MV-026/hosted-followup/.
 - No dependency addition or admission change. CI primes exported hash-locked runtime dependencies during setup; installation/runtime release checks remain offline/network-denied.
 
-## Required project/security review
+## Broader project/security review (not a Mac preview blocker)
 
 Review the proposed ADRs and source at the exact candidate commit. Each acceptance needs reviewer identity, date, source/config identities, examined evidence, residual risks and explicit disposition. An implementation agent's own tests/review cannot supply independent human acceptance. Do not sign a blank template or infer acceptance from a general request to complete the project.
 
@@ -31,7 +31,7 @@ Review the proposed ADRs and source at the exact candidate commit. Each acceptan
 | Admission integrity | coverage and evaluator, policy/config schemas, fail-closed/property/E2E cases | Project review pending |
 | Report confidentiality/integrity | restricted writes, best-effort redaction, raw byte preservation, semantic digest and audit tests | Project review pending |
 | Dependencies and distribution | uv.lock, notices under verification/MV-001/010/024, fresh installed-package tests and build identities | Project review pending |
-| Public release target | fixed reviewed source, passing hosted checks and reviewed package hashes | Not published; destination/release acceptance pending |
+| Mac-scoped prerelease | fixed tagged source, passing hosted checks, published hashes | Published as v0.1.0-mac-preview.1; see MAC_RELEASE_SPEC and RELEASE_STATUS |
 
 Residual risks requiring explicit review include: exploitable scanner parsers execute as a host subprocess rather than a sandbox; scanner network isolation is not OS-enforced; Darwin cannot enforce required scanner memory limits; archive/member completeness remains unproven; unknown formats and declarations remain unresolved; filesystem rechecks are best effort; raw bytes/exact names/policy owners may contain sensitive information. ModelVet's default policy preserves these gaps as INSUFFICIENT where required. No universal safety, provenance authenticity or legal-clearance claim is offered.
 

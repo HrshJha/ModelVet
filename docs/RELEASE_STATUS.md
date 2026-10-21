@@ -2,7 +2,7 @@
 
 **Mac product complete:** static CLI and local Workbench meet the scoped FR-028/MV-045 gate. Local arm64 and hosted macOS 15 Intel acceptance pass: 628 Python tests, one Linux-only skip, seven components, 15 browser workflows and 13 repeated installed-package checks. Source hygiene is verified at 5cd322d in [run 39622723371](https://github.com/HrshJha/ModelVet/actions/runs/39622723371). Generated dependencies and browser session files are excluded from the release tree; the original external commit remains in history.
 
-**Distribution record:** [Mac preview release](https://github.com/HrshJha/ModelVet/releases/tag/v0.1.0-mac-preview.1) is the designated handoff location for the wheel, source archive, bundle, installation notes and checksums. The release manifest records the exact merged source and byte identities. This is a limited GitHub prerelease, with no PyPI upload. Repository visibility remains unchanged (public when checked). Internal engineering acceptance is not independent certification.
+**Distribution record:** [Mac preview v0.1.0-mac-preview.1 is published](https://github.com/HrshJha/ModelVet/releases/tag/v0.1.0-mac-preview.1) with the wheel, source archive, bundle, installation notes, hash-locked runtime requirements and checksums. The release manifest records the exact merged source and byte identities. This is a limited GitHub prerelease, with no PyPI upload. Repository visibility remains unchanged (public when checked). Internal engineering acceptance is not independent certification.
 
 **Deferred scope:** PH-08 independent comparative research and PH-11 Linux/KVM loader research remain deferred, not completed. They do not block the Mac static product. No model loading, containment or benchmark superiority is claimed. Required missing scanner/resource proof still yields INSUFFICIENT. See [Mac release specification](MAC_RELEASE_SPEC.md).
 
@@ -14,7 +14,7 @@ The dated records below describe earlier scopes and candidates; the Mac scope ab
 
 **Current Mac-first scope (2026-10-21):** The maintainer narrowed the deliverable to the local static Mac CLI/Workbench. [MAC_RELEASE_SPEC](MAC_RELEASE_SPEC.md) controls this limited preview: required engineering/package checks apply; independent benchmark and Linux/KVM loader research are deferred and do not block it. Historical broader-release gates below remain applicable only if that broader scope is resumed. No independent review or loader validation is claimed.
 
-**Current (2026-10-21):** PH-15–17 local workbench preview implemented; 622 local Python tests, seven components and 14 browser workflows pass, including installed-wheel launch without application Node/external sockets. Extended hosted Ubuntu/macOS execution passed at 996d19f (run 39611891146): 623 Python tests on Ubuntu, 622 plus one skip on macOS, seven components and 14 browser workflows each. Prior static hosted validation is recorded below. Public release, independent project/security review and PH-08/11 external evidence remain pending. Earlier checkpoint descriptions below are historical. See [workbench guide](WORKBENCH_GUIDE.md) and PROGRESS.
+**Historical workbench checkpoint (2026-10-21):** PH-15–17 local workbench implementation passed the extended Ubuntu/macOS run at 996d19f (run 39611891146). The later Mac-scoped release gate and publication are recorded at the top of this document and in PROGRESS. This record preserves the earlier run; its release-pending language no longer describes current status. See [workbench guide](WORKBENCH_GUIDE.md).
 
 The user selected **“Finish local candidate; leave hosted CI pending.”** PH-06/07 and the local portions of PH-09/10 are implemented. This is not a public release, hosted CI pass or independent security certification. Work started at e2f2bb269683d79cd6a12757aa140357fef089ad. A newer local checkpoint af86ffee5c7b4f1e990e9dbbdba6625e973acef0 appeared outside agent commands; checkpoint b91a791c6c3b4137a39fb540822e888d54948549 was observed later; final working-tree/source identities are recorded in verification/MV-023/.
 
@@ -29,7 +29,7 @@ The user selected **“Finish local candidate; leave hosted CI pending.”** PH-
 
 Exact final commands, counts, failed attempts and artifact checksums are in `verification/PH-10/`, `verification/MV-024/` through `verification/MV-029/`, and PROGRESS. Operational verification records are deliberately excluded from distribution archives; the local checkout retains them.
 
-## Pending public-release gates
+## Historical broader-release gates (outside the published Mac preview)
 
 | Gate | Current state |
 |---|---|
