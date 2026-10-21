@@ -1,5 +1,7 @@
 # Definition of done — task, milestone and release
 
+**Current Mac-first scope (2026-10-21):** The maintainer narrowed the deliverable to the local static Mac CLI/Workbench. [MAC_RELEASE_SPEC](MAC_RELEASE_SPEC.md) controls this limited preview: required engineering/package checks apply; independent benchmark and Linux/KVM loader research are deferred and do not block it. Historical broader-release gates below remain applicable only if that broader scope is resumed. No independent review or loader validation is claimed.
+
 **This document defines future gates, not passed checks.** Task/phase/release remains incomplete until evidence exists in `PROGRESS.md`.
 
 ## Task gate

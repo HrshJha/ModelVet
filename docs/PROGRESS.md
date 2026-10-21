@@ -1,6 +1,6 @@
 # ModelVet progress dashboard
 
-**Updated 2026-10-21. Overall: static CLI and PH-15–17 local workbench preview complete. Earlier static hosted Ubuntu/macOS gates passed; extended Ubuntu/macOS workbench CI passed at 996d19f; public release review remains pending.** The five MVP commands, optional offline advisory command and three stored-report audit commands work. PH-12–14 are complete. Work started against base `e2f2bb269683d79cd6a12757aa140357fef089ad`; a newer checkpoint `af86ffee5c7b4f1e990e9dbbdba6625e973acef0` appeared during this run outside the agent commands and was preserved. Further external checkpoints were observed and preserved; the prior pilot checkpoint is recorded in `verification/MV-023/`; the PH-12–14 checkpoint is in `verification/MV-035/`; current hosted/candidate identities are in `verification/MV-026/hosted-followup/`. Only a synthetic development pilot ran; no model loading or independently adjudicated benchmark.
+**Updated 2026-10-21. Current delivery: Mac-first local static CLI and Workbench. MV-045 local acceptance passed; the Mac hosted gate is pending. Benchmark comparison and Linux/KVM loader research are deferred and no longer block the local Mac preview; engineering and honest mandatory-evidence checks remain required.** Earlier dated records below describe their original broader scope.
 
 | Workstream | Actual state | Evidence |
 |---|---|---|
@@ -9,11 +9,11 @@
 | Dependency resolution / lock | COMPLETE for foundation | `../pyproject.toml`, `../uv.lock`, `verification/MV-001/` |
 | Source implementation | Full local CLI, static checks, evidence/coverage/policy, reports and packaging | `../src/modelvet/` |
 | Tests/fixtures | 622 passed / one Linux-only skip locally; seven component and 14 browser workflows passed | `verification/workbench/PH-17-final-gate.log`, `verification/workbench/MV-044-final-browser.log` |
-| Benchmarks | INCONCLUSIVE local development pilot; independent research PENDING | `../benchmarks/results/`, `verification/MV-023/` |
+| Benchmarks | INCONCLUSIVE development pilot; independent research DEFERRED | `../benchmarks/results/`, `verification/MV-023/` |
 | Isolated model-loading safety | DEFERRED | PH-11 / ADR-009 proposed |
 | Release | NOT RELEASED | Local wheel/sdist and hosted CI verified; public release pending review |
 
-**Active task:** PH-15–17 preview complete locally and on hosted targets; independent public-release review remains pending.
+**Active task:** MV-045 / PH-18 — local verification complete; hosted Mac gate and preview integration pending.
 
 ## Milestones
 
@@ -26,10 +26,10 @@
 | PH-05 | COMPLETE | MV-014–015; 287-test macOS final gate |
 | PH-06 | COMPLETE | MV-016–018; 317 tests, macOS |
 | PH-07 | COMPLETE | MV-019/021; 345-test macOS gate |
-| PH-08 | LOCAL ENGINEERING IMPLEMENTED; research PENDING | MV-020 plus development corpus/pilot; no hidden holdout/independent adjudication |
+| PH-08 | LOCAL ENGINEERING IMPLEMENTED; independent research DEFERRED | MV-020 plus development corpus/pilot; no hidden holdout/independent adjudication |
 | PH-09 | COMPLETE — tested hosted targets | MV-024–026; Ubuntu 24.04 + macOS 15 Intel hosted gate; local arm64 evidence separate |
 | PH-10 | LOCAL CANDIDATE COMPLETE; public release PENDING | MV-027–029 verified; 381 pass / one Linux-only skip |
-| PH-11 | GATED; execution NOT STARTED | Proposed review packet prepared; no reviewed Linux/KVM environment |
+| PH-11 | DEFERRED — outside Mac preview | Proposed review packet prepared; no reviewed Linux/KVM environment |
 | PH-12 | COMPLETE | Raw evidence verification; 508 pass / one Linux-only skip |
 | PH-13 | COMPLETE | Stored report comparison; 521 pass / one Linux-only skip |
 | PH-14 | COMPLETE | Explicit report batch audit; 558 pass / one Linux-only skip |
@@ -178,3 +178,10 @@ MV-029 documentation follow-up reconciles the current OPEN_QUESTIONS table, SPEC
 ## Maintainer authorization to finalize integration — 2026-10-21
 
 The maintainer explicitly authorized proceeding with all remaining available work. This authorizes candidate integration and local release preparation; it supplies no independent review identity, hidden holdout, dedicated host or containment observations. Preserve the existing external research/release/loader gates. The completion documentation follow-up passes 12 targeted contracts and Ruff; application code is unchanged from the verified 767aa18 checkpoint. Integrate the tested PR through the normal merge path without bypassing required checks, and retain source/package identities for review.
+
+
+## MV-045 Mac-first scope change — 2026-10-21
+
+The maintainer explicitly said only the Mac is available and instructed changing requirements that stop the current delivery. Work proceeds in an isolated main-based worktree because external commit 5f99293 on codex/evidence-unicode-keys tracks caches and omits the Workbench source. That commit is preserved untouched. FR-028/MV-045/PH-18 define the narrowed local Mac preview, defer PH-08 independent comparison and PH-11 loading, and replace Linux-host next-step guidance. The required hosted matrix now targets macOS 15 Intel, with local arm64 evidence separate. Engine/policy/evidence/report semantics and all security invariants remain unchanged. No dependency addition or independent validation claim.
+
+Local acceptance: 17 targeted contracts and 627 full Python tests passed, with one Linux-only skip; Ruff/format/security/mypy65 files/lock/schema checks pass. Seven frontend component tests, formatting/type/build and 15 browser workflows pass. Exact outputs are retained under verification/mac-first/. The initial targeted check used a mismatched documentation phrase and failed; the wording was corrected and the full gate passed. The full suite includes fresh installed core/UI package acceptance. The changed copy and scope do not alter admission evidence or policy. Required hosted Mac execution is pending. Earlier research/review requirements remain documented for future broader work, not current product blockers.

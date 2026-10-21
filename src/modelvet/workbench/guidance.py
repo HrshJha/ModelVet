@@ -59,10 +59,12 @@ CHECK_ADVICE = {
         ),
     ),
     "scanner:resources": (
-        "Use a supported scanner environment",
+        "Review the Mac scanner limitation",
         (
-            "Required scanner memory bounds are unavailable on macOS. Use the "
-            "supported Linux workflow; this does not provide a sandbox."
+            "Required scanner memory bounds are unavailable on macOS, so this check "
+            "remains unresolved. Review the recorded evidence or ask the publisher "
+            "for a supported safetensors artifact with accurate declarations. "
+            "Do not load unknown files to convert them."
         ),
     ),
 }

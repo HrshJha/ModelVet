@@ -150,3 +150,8 @@ The reports boundary owns `audit.py`, `compare.py` and `batch.py`. They consume 
 ## Workbench extension — FR-025–027
 
 The optional workbench adds a loopback FastAPI service serving bundled frontend assets, a private SQLite index, and one dedicated scan worker. Workers call the existing ScanService with observational progress; reports remain authoritative on disk. The server never forks scanner code from request threads. No database server or remote service is added.
+
+
+## Mac-first release scope — FR-028
+
+The local static CLI/Workbench is the current Mac deliverable. Required release CI targets macOS; local arm64 execution is recorded separately from hosted Intel execution. Future comparative research and Linux/KVM loading are outside this preview and do not block it. No engine, default policy, applicability, schema or subprocess isolation claim changes. See MAC_RELEASE_SPEC.md.

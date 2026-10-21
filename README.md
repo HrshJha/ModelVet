@@ -2,7 +2,7 @@
 
 Local static assessment of model artifacts, with independent coverage, deterministic admission rules and private JSON/Markdown reports.
 
-**Status:** local v0.1.0 candidate; public release pending. macOS arm64/Python 3.12.15 has local evidence. Hosted Ubuntu 24.04 and macOS 15 Intel pass the full static gate. Windows is unsupported. No independently reviewed benchmark or model-loading experiment has been performed. A local synthetic development pilot is explicitly INCONCLUSIVE.
+**Status:** Mac-first local static CLI and Workbench preview. Current targets are local macOS arm64 and hosted macOS 15 Intel with Python 3.12.15. Windows is unsupported; Linux is outside the current release support promise. Independent benchmark validation and Linux/KVM loader research are deferred and do not block this scoped preview. No independently reviewed benchmark or model-loading experiment has been performed. The synthetic development pilot remains INCONCLUSIVE.
 
 ## Local browser workbench
 
@@ -13,7 +13,7 @@ uv sync --locked --extra ui
 uv run --extra ui modelvet ui --models-root /absolute/path/to/models
 ```
 
-Compiled assets ship with the Python package; Node is a development dependency only. The service binds to `127.0.0.1` and uses a private authenticated session. Keep the workspace outside the model root. See the [launch, privacy, recovery and demonstration guide](docs/WORKBENCH_GUIDE.md). The [workbench hosted gate](https://github.com/HrshJha/ModelVet/actions/runs/39611891146) passed on Ubuntu 24.04 and macOS 15 Intel, including browser and installed-wheel workflows. Public release remains pending review.
+Compiled assets ship with the Python package; Node is a development dependency only. The service binds to `127.0.0.1` and uses a private authenticated session. Keep the workspace outside the model root. See the [launch, privacy, recovery and demonstration guide](docs/WORKBENCH_GUIDE.md). Earlier [workbench hosted evidence](https://github.com/HrshJha/ModelVet/actions/runs/39611891146) covers Ubuntu and macOS. The current required release gate is macOS; see [Mac release scope](docs/MAC_RELEASE_SPEC.md).
 
 ## What it does
 
@@ -30,7 +30,7 @@ Compiled assets ship with the Python package; Node is a development dependency o
 
 ## Run locally
 
-Prerequisites: [uv 0.13.3](https://github.com/astral-sh/uv/releases/tag/0.13.3), Python 3.12 (checked: 3.12.15), POSIX Linux/macOS. Ubuntu 24.04 has hosted validation; macOS arm64 has local validation. macOS 15 Intel also has hosted validation.
+Prerequisites: macOS, [uv 0.13.3](https://github.com/astral-sh/uv/releases/tag/0.13.3), and Python 3.12 (checked: 3.12.15). Local arm64 and hosted macOS 15 Intel evidence are recorded separately.
 
 ```sh
 uv sync --locked
@@ -103,6 +103,11 @@ uv run pytest -q
 uv build
 ```
 
-Actual commands/results, including initial failures, are in [PROGRESS](docs/PROGRESS.md) and `docs/verification/`. The [hosted Ubuntu/macOS matrix passes](https://github.com/HrshJha/ModelVet/actions/runs/39465563101); public release remains pending independent project/security review. PH-08 offline advisory enrichment is implemented separately; independent benchmark acceptance and gated PH-11 loading remain pending. A ten-case development corpus and local pilot are documented in [benchmarks](benchmarks/README.md); no superiority claim is supported by synthetic tests. The [PH-11 review packet](docs/LOADER_REVIEW_PACKET.md) records pending prerequisites and enables no execution.
+Actual commands/results, including initial failures, are in [PROGRESS](docs/PROGRESS.md) and `docs/verification/`. Earlier [Ubuntu/macOS results](https://github.com/HrshJha/ModelVet/actions/runs/39465563101) remain historical evidence. The current release gate targets macOS, with local arm64 and hosted Intel checks recorded separately. The scoped Mac preview does not require independent benchmark adjudication or a Linux/KVM host. Those experiments are deferred, not claimed complete. The ten-case development [benchmark](benchmarks/README.md) remains INCONCLUSIVE and supports no superiority claim. The [loader review packet](docs/LOADER_REVIEW_PACKET.md) remains a prerequisite only if future loader research is resumed.
 
 Start with [PRD](PRD.md), [architecture](docs/ARCHITECTURE.md), [threat model](docs/THREAT_MODEL.md), [security handling](docs/SECURITY_POLICY.md) and [ADRs](docs/DECISIONS.md). ADRs remain Proposed until explicit project review. MIT licensed; dependency metadata/notices are retained in verification evidence. The external scanner is not redistributed in the core wheel.
+
+
+## Current completion boundary
+
+The maintainer explicitly narrowed this delivery to the available Mac. Engineering/package acceptance completes the local preview; PH-08 independent comparison and PH-11 Linux/KVM trials are deferred future research, not prerequisites to using this product. Internal review is not independent certification. Existing unsafe-path, missing-evidence and scanner-resource behavior remains unchanged. See [Mac release contract](docs/MAC_RELEASE_SPEC.md).

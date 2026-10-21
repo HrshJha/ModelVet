@@ -1,4 +1,4 @@
-name: Static engine and local workbench checks
+name: Mac local product checks
 on:
   push:
     branches: [main]
@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, macos-15-intel]
+        os: [macos-15-intel]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 35
     env:

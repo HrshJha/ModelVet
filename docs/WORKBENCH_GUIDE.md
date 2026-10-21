@@ -1,6 +1,6 @@
 # ModelVet Workbench — local preview
 
-A private browser workspace for the existing static assessment engine. It does not load models, run repository code, repair artifacts or authenticate metadata. A finished scan can produce any admission decision. This is a local preview; public release remains pending project/security review.
+A private browser workspace for the existing static assessment engine. It does not load models, run repository code, repair artifacts or authenticate metadata. A finished scan can produce any admission decision. This is the Mac-first local preview; benchmark/loader research is deferred. Internal engineering review and the Mac release contract apply.
 
 ## Launch from this checkout
 
@@ -83,6 +83,6 @@ npx --no-install playwright install chromium
 npm run test:browser
 ```
 
-From the repository root, `uv run --extra ui pytest -q` includes fresh installed-wheel UI acceptance when browser tooling is present; CI requires it. CI rebuilds schema/types/assets and rejects drift on Ubuntu 24.04 and macOS 15 Intel. The browser suite measures 375/768/1024/1440 viewports, keyboard/reduced-motion behavior, hostile text escaping and automated accessibility rules. These checks do not substitute for a full human accessibility audit.
+From the repository root, `uv run --extra ui pytest -q` includes fresh installed-wheel UI acceptance when browser tooling is present; CI requires it. The current required CI rebuilds schema/types/assets and rejects drift on macOS 15 Intel. The browser suite measures 375/768/1024/1440 viewports, keyboard/reduced-motion behavior, hostile text escaping and automated accessibility rules. These checks do not substitute for a full human accessibility audit.
 
-`tools/workbench_demos.py --out NEW_DIRECTORY` regenerates demonstrations using the static engine, refusing an existing target. Frozen run metadata records actual generation, and a manifest pins report bytes. Builds never silently regenerate reports. Actual verification results and distribution hashes are in [PROGRESS](PROGRESS.md); independent benchmark adjudication, public release approval and PH-11 Linux/KVM loader prerequisites remain separate.
+`tools/workbench_demos.py --out NEW_DIRECTORY` regenerates demonstrations using the static engine, refusing an existing target. Frozen run metadata records actual generation, and a manifest pins report bytes. Builds never silently regenerate reports. Actual verification results and distribution hashes are in [PROGRESS](PROGRESS.md); independent benchmark adjudication and PH-11 Linux/KVM loading are deferred outside this Mac preview; neither is required to use the local static product.

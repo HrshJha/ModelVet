@@ -1,0 +1,38 @@
+
+> modelvet-workbench@0.1.0 format:check
+> prettier --check src tests scripts *.ts *.json index.html
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> modelvet-workbench@0.1.0 typecheck
+> tsc --noEmit
+
+
+> modelvet-workbench@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.5 /Users/harshkumarjha/.codex/worktrees/release-validation/ModelVet/frontend
+
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  20:14:47
+   Duration  156ms (import 61%, transform 32%, tests 6%, worker 2%)
+
+
+> modelvet-workbench@0.1.0 build
+> tsc --noEmit && vite build && node scripts/notices.mjs
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 1935 modules transformed.
+rendering chunks...
+computing gzip size...
+../src/modelvet/workbench/static/assets/mark-urvmYx_P.svg     0.29 kB │ gzip:  0.19 kB
+../src/modelvet/workbench/static/index.html                   0.64 kB │ gzip:  0.37 kB
+../src/modelvet/workbench/static/assets/index-cPZn6Ebv.css   40.40 kB │ gzip:  9.16 kB
+../src/modelvet/workbench/static/assets/index-dtsDDtwb.js   287.49 kB │ gzip: 87.54 kB
+
+✓ built in 449ms

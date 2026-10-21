@@ -468,3 +468,24 @@ test("bundled demonstrations explain all outcomes without entering scan history"
   const after = await (await page.request.get("/api/v1/reports")).json();
   expect(after.total).toBe(before.total);
 });
+
+test("Mac readiness explains usable static scans without requiring a Linux host", async ({
+  page,
+}) => {
+  await page.goto("/#/environment");
+  await expect(
+    page.getByRole("heading", { name: "Know your environment." }),
+  ).toBeVisible();
+  await expect(page.getByText(/Mac-first static review:/)).toContainText(
+    "supported safetensors",
+  );
+  await expect(page.getByText(/Mac-first static review:/)).toContainText(
+    "INSUFFICIENT",
+  );
+  await expect(page.locator(".environment-list")).toContainText(
+    "Disabled · static review only",
+  );
+  await expect(page.locator("main")).not.toContainText(
+    "Use the supported Linux workflow",
+  );
+});

@@ -191,3 +191,8 @@ PH-15 (MV-036–038): contracts/locked optional dependencies, authenticated loca
 
 
 PH-15–17 local preview tasks MV-036–044 are implemented and tested, with final local evidence in PROGRESS. The extended hosted matrix passed at 996d19f (run 39611891146); actual counts and limitations are in PROGRESS. Independent project/security review, PH-08 adjudication and PH-11 host/isolation prerequisites remain separate.
+
+
+## PH-18 — Mac-first local completion · FR-028 / MV-045
+
+The maintainer revised the deliverable to the available Mac. Complete the CLI/Workbench, Mac readiness guidance, required macOS CI and installed-package preview. PH-08 independent comparison and PH-11 Linux/KVM loading are **DEFERRED** and do not block this release scope; no research result or loader capability is claimed. Preserve historical platform evidence and all mandatory-evidence semantics. Exit: actual Mac code/schema/browser/package gates pass and the scoped preview is installable. See MAC_RELEASE_SPEC.md.
