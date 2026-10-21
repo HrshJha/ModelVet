@@ -21,6 +21,10 @@ Internal implementation review, actual unit/property/API/browser/fault tests, li
 
 A limited Mac preview may be packaged and handed off after these engineering checks without treating future research as a dependency. Keep repository visibility unchanged. Publication can use the existing repository's prerelease channel under the maintainer's prior authorization; no PyPI/account/visibility expansion is implied. Record exact source and distribution identities, tested scope and limitations. Earlier general-release review packets remain useful for future broader claims, not blockers to this explicitly narrowed preview.
 
+## Published Mac preview
+
+The scoped preview is published as `v0.1.0-mac-preview.1` from main `7e722c7c379bda6ec3dbc31feb38f3c7dc08e17e` in the existing public repository. Final merged-main CI run 39624146859 passed; the exact package hashes, installation notes, runtime lock and manifest are attached to the GitHub prerelease. The public assets were downloaded and verified against SHA256SUMS. Local engineering evidence is not independent security certification. PH-08 and PH-11 remain deferred.
+
 ## Acceptance
 
 T-MAC-01 verifies stable requirement/task mapping, Mac CI without a Linux target prerequisite, safe Mac guidance, unchanged serialized-input incompleteness and supported safetensors decisions. Existing suites continue to exercise all four decisions and actual installed assets. Mark MV-045 complete only after actual passing evidence. Deferred tasks remain deferred.
