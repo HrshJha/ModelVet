@@ -3,12 +3,12 @@
 | Field | Value |
 |---|---|
 | Document version | `0.1.0-draft` |
-| Status | **PROPOSED requirements; local static candidate through PH-10; hosted Ubuntu/macOS validation passed; public release pending** |
+| Status | **Mac-first local preview; engineering gates apply; research is deferred** |
 | Updated | 2026-10-21 |
 | Development stage | Static CLI and optional PH-15–17 workbench preview implemented; Ubuntu 24.04/macOS 15 Intel hosted gates passed; public release pending review |
 | Product | Open-source local AI model artifact security and admission verification |
 | Authority | Primary source of truth for requirements; `docs/DECISIONS.md` for why |
-| Scope | Local static CLI plus optional PH-15–17 browser workbench; isolated loading remains gated |
+| Scope | Mac-first local static CLI and Workbench; benchmark/loader research deferred |
 
 ## 1. Executive summary
 
@@ -75,6 +75,7 @@ P0 = essential first release, P1 = validated follow-up, P2 = gated research. The
 | FR-025 | Local workbench service | P1 | Authenticated loopback app, restricted roots, worker scans, cancellation and private history | `Workbench` | `MV-036–038` | `T-UI-API-01` |
 | FR-026 | Visual developer review | P1 | Setup, actual progress, coverage/evidence, deterministic guidance, imports and comparison | `Workbench UI` | `MV-039–041` | `T-UI-FLOW-01` |
 | FR-027 | Packaged workbench acceptance | P1 | Bundled offline assets, browser/fault tests, supported CI and installed-package acceptance | `Distribution` | `MV-042–044` | `T-UI-RELEASE-01` |
+| FR-028 | Mac-first completion scope | P1 | Complete local macOS product without Linux/KVM or research gates; retain mandatory evidence semantics | `Distribution` | `MV-045` | `T-MAC-01` |
 
 ### Requirement contracts
 
@@ -241,3 +242,10 @@ The user explicitly selected “Extend the local feature plan.” PH-12–14 ext
 ## Workbench extension — user-authorized next version
 
 PH-15–17 add a local browser application for ML developers, backed by the existing static engine. The no-web-UI constraint above describes the original MVP; this extension permits an authenticated loopback HTTP service and a private stdlib SQLite index. Remote hosting, downloads and model execution remain excluded. FR-025–027 are defined in docs/WORKBENCH_SPEC.md; existing report schemas and policy semantics remain unchanged.
+
+
+## Mac-first scope revision — 2026-10-21
+
+The maintainer explicitly requested focusing on the available Mac and changing requirements that block that delivery. The current deliverable is the local static CLI and Workbench on macOS, with local arm64 and hosted Intel evidence. Linux/KVM loader research (FR-018/021, PH-11) and independently adjudicated benchmark comparison (FR-017, PH-08 research) are deferred and do not block this limited preview. They are not completed or supported features. Historical Linux static results remain evidence of those runs, not a requirement to acquire a Linux host.
+
+FR-028 requires a Mac-only release CI gate, scoped readiness/guidance, an installed-package synthetic workflow and truthful completion records. Required unavailable scanner resource checks remain unresolved; serialized inputs cannot APPROVE merely because this is a Mac release. No host model execution, default-policy weakening, fabricated review/benchmark evidence or broad safety claim is permitted. The limited Mac preview uses internal engineering review and explicit documented limitations; independent certification and a later general public release remain separate. See docs/MAC_RELEASE_SPEC.md and MV-045.

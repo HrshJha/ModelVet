@@ -1,0 +1,23 @@
+F................                                                        [100%]
+=================================== FAILURES ===================================
+_____________ test_mac_scope_is_traceable_and_research_is_deferred _____________
+
+    def test_mac_scope_is_traceable_and_research_is_deferred() -> None:
+        prd = (ROOT / "PRD.md").read_text()
+        tasks = (ROOT / "docs/TASKS.md").read_text()
+        spec = (ROOT / "docs/MAC_RELEASE_SPEC.md").read_text()
+        assert "| FR-028 |" in prd and "MV-045" in prd
+        assert "### MV-045" in tasks and "PH-18" in tasks
+>       assert "DEFERRED" in spec and "do not block" in spec
+E       AssertionError: assert ('DEFERRED' in '# Mac-first local preview — FR-028\n\n## Authorized scope\n\nOn 2026-10-21 the maintainer explicitly requested focusi...nd actual installed assets. Mark MV-045 complete only after actual passing evidence. Deferred tasks remain deferred.\n' and 'do not block' in '# Mac-first local preview — FR-028\n\n## Authorized scope\n\nOn 2026-10-21 the maintainer explicitly requested focusi...nd actual installed assets. Mark MV-045 complete only after actual passing evidence. Deferred tasks remain deferred.\n')
+
+tests/test_mac_release.py:21: AssertionError
+=============================== warnings summary ===============================
+tests/test_workbench_contract.py::test_optional_python_stack_smoke
+  /Users/harshkumarjha/.codex/worktrees/release-validation/ModelVet/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_mac_release.py::test_mac_scope_is_traceable_and_research_is_deferred
+1 failed, 16 passed, 1 warning in 1.81s

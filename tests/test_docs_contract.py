@@ -40,7 +40,7 @@ def test_p0_requirement_task_test_traceability() -> None:
         assert re.search(r"MV-\d{3}", row) and re.search(r"T-[A-Z0-9-]+", row)
         assert (ROOT / "tests" / test).is_file() and requirement in tasks
     ids = re.findall(r"^### (MV-\d{3}) —", tasks, re.M)
-    assert ids == [f"MV-{i:03d}" for i in range(1, 45)]
+    assert ids == [f"MV-{i:03d}" for i in range(1, 46)]
 
 
 def test_documentation_relative_links_resolve() -> None:
@@ -67,8 +67,8 @@ def test_version_support_and_claim_boundaries_are_explicit() -> None:
     project = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]
     assert project["version"] == __version__ and project["requires-python"] == ">=3.12,<3.13"
     readme = (ROOT / "README.md").read_text()
-    assert "public release pending" in readme.lower()
-    assert "Hosted Ubuntu 24.04" in readme and "Windows is unsupported" in readme
+    assert "Mac-first" in readme and "independently reviewed" in readme
+    assert "Mac-first" in readme and "Windows is unsupported" in readme
     assert "No independently reviewed benchmark or model-loading experiment" in readme
     decisions = (ROOT / "docs/DECISIONS.md").read_text()
     assert len(re.findall(r"\*\*Status:\*\* Proposed", decisions)) == 12

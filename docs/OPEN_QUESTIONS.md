@@ -1,5 +1,7 @@
 # Open questions and uncertainty register
 
+**Mac preview scope update:** OQ-09/10/13 remain unanswered research questions and are deferred; they do not block FR-028/MV-045 Mac completion. Current product acceptance is defined in [MAC_RELEASE_SPEC](MAC_RELEASE_SPEC.md). No independent review result is inferred from the scope change.
+
 **Updated 2026-10-21.** This table is the current disposition. Original proposal cards and dated checkpoints below are historical evidence; they do not reopen resolved implementation questions. Independent review/research/loader questions remain open. All ADRs remain Proposed.
 
 | ID | Question | Current disposition | Evidence / remaining requirement |

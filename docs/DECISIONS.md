@@ -276,3 +276,8 @@ Cache capability probes before HTTP request threads start; resource-limit preexe
 ## MV-043 distribution acceptance — 2026-10-21
 
 Commit compiled frontend assets and complete upstream runtime notices so wheel/source builds do not require Node or registry access. Pin the Node CI action and runtime; rebuild and compare generated schema/types/assets in both supported CI targets. A disposable installed-wheel acceptance environment injects a trusted site-packages socket guard into the server and own worker; this is test instrumentation, not a product scanner sandbox. The application PATH contains no Node. Playwright runs separately as a test driver. Browser storage state is excluded from distributions and CI uploads. All ADRs remain Proposed.
+
+
+## Mac-first product scope — maintainer direction, 2026-10-21
+
+The maintainer explicitly instructed focusing on the Mac and changing blockers tied to unavailable platforms. Add FR-028/MV-045/PH-18 for scoped completion: the local static Mac CLI/Workbench is the deliverable; independent benchmark and Linux/KVM loader research are deferred, not product-release prerequisites. Mac preview acceptance uses internal review, bounded safe fixtures, local arm64/hosted Intel checks and installed assets. Preserve all scanner-resource/check/decision semantics and host non-execution invariants. Independent review is not claimed, and the future loader gate remains unchanged if that research is resumed. Earlier ADRs remain Proposed; this note records the explicit scope instruction without approving unrelated architecture or security claims.

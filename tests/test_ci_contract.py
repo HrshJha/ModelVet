@@ -2,7 +2,7 @@ import re
 from pathlib import Path
 
 
-def test_workflow_has_pinned_actions_least_privilege_and_both_platform_targets() -> None:
+def test_workflow_has_pinned_actions_least_privilege_and_mac_release_target() -> None:
     workflow = (Path(__file__).parents[1] / ".github/workflows/ci.yml").read_text()
     actions = re.findall(r"uses: ([^\s]+)", workflow)
     assert len(actions) == 3 and all(
@@ -11,7 +11,8 @@ def test_workflow_has_pinned_actions_least_privilege_and_both_platform_targets()
     assert "contents: read" in workflow and "persist-credentials: false" in workflow
     assert "pull_request_target" not in workflow and "secrets." not in workflow
     assert "  push:\n    branches: [main]\n  pull_request:" in workflow
-    assert "ubuntu-24.04" in workflow and "macos-15-intel" in workflow
+    assert "os: [macos-15-intel]" in workflow
+    assert "ubuntu-24.04" not in workflow
     assert "timeout-minutes: 35" in workflow
     assert "--require-hashes" in workflow and "--only-binary :all:" in workflow
     assert "uv sync --locked --python 3.12.15" in workflow

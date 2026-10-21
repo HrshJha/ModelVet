@@ -291,6 +291,11 @@ function Environment({ capabilities }: { capabilities: Capabilities | null }) {
           </div>
         </dl>
       </section>
+      <Notice>
+        Mac-first static review: supported safetensors checks do not require
+        ModelScan. Serialized files can remain INSUFFICIENT when required
+        scanner memory bounds are unavailable. Model execution is disabled.
+      </Notice>
       {capabilities?.limitations.map((value) => (
         <Notice key={value}>{value}</Notice>
       ))}

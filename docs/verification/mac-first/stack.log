@@ -1,0 +1,48 @@
+Using CPython 3.12.15
+Creating virtual environment at: .venv
+Resolved 42 packages in 2ms
+   Building modelvet @ file:///Users/harshkumarjha/.codex/worktrees/release-validation/ModelVet
+      Built modelvet @ file:///Users/harshkumarjha/.codex/worktrees/release-validation/ModelVet
+Prepared 1 package in 262ms
+Installed 41 packages in 72ms
+ + annotated-doc==0.0.5
+ + annotated-types==0.8.0
+ + anyio==4.15.1
+ + ast-serialize==0.13.1
+ + certifi==2026.10.19
+ + click==8.5.0
+ + coverage==7.16.2
+ + fastapi==0.156.0
+ + h11==0.16.0
+ + hatchling==1.32.4
+ + httpcore==1.0.9
+ + httpx==0.28.1
+ + hypothesis==6.170.5
+ + idna==3.20
+ + iniconfig==2.3.1
+ + librt==0.16.0
+ + markdown-it-py==4.2.0
+ + mdurl==0.1.2
+ + modelvet==0.1.0 (from file:///Users/harshkumarjha/.codex/worktrees/release-validation/ModelVet)
+ + mypy==2.4.0
+ + mypy-extensions==1.1.0
+ + opentelemetry-api==1.45.1
+ + packaging==26.3
+ + pathspec==1.1.1
+ + pluggy==1.7.0
+ + pydantic==2.14.1
+ + pydantic-core==2.50.1
+ + pygments==2.21.0
+ + pytest==9.1.1
+ + pytest-cov==7.1.0
+ + rich==15.0.0
+ + ruff==0.17.1
+ + shellingham==1.5.4
+ + sortedcontainers==2.4.0
+ + starlette==1.9.0
+ + tomlkit==0.15.2
+ + trove-classifiers==2026.9.21.13
+ + typer==0.27.3
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+ + uvicorn==0.54.0

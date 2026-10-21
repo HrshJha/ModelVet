@@ -88,3 +88,8 @@ A consistent report plus raw bytes is forgeable by its author. VERIFIED authenti
 ## Workbench extension — FR-025–027
 
 The optional loopback HTTP interface is a new trust boundary. Require launch-token exchange, authenticated reads, CSRF on mutations, exact Host/Origin validation, no cross-origin sharing, strict body limits, CSP and no telemetry/CDNs. Browser paths are relative to one explicitly selected root, with descriptor/no-follow containment and root identity rechecks. Workspace, policies, job descriptors and index are owner-only; reports remain outside model inputs. Workers receive fixed own-module argv and private JSON descriptors, not shell commands or arbitrary modules. Cancellation must clean scanner process groups and snapshots. History/imported reports are untrusted; schema validation and byte pins apply on every use. This boundary is not a sandbox or a loader implementation.
+
+
+## Mac-first product boundary — FR-028
+
+The maintainer narrowed the current deliverable to the available Mac. Independent benchmark and Linux/KVM loader experiments are deferred rather than current release prerequisites. This narrows product scope without changing host non-execution, strict path/body/byte limits, mandatory coverage, report privacy, scanner risk or fail-closed admission. Darwin missing memory-bound evidence stays UNSUPPORTED; no default policy check becomes optional. The Linux/KVM isolation gate above still applies if loader research is ever resumed. Internal Mac preview review must not be described as independent security certification.

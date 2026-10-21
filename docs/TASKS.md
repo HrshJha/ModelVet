@@ -364,7 +364,7 @@
 
 ### MV-022 — Implement benchmark corpus and ground truth manifest
 
-- **Priority / status / phase:** P1; **IMPLEMENTED — development corpus; independent holdout/review PENDING**; `PH-08`. **Requirement(s):** FR-017. **Estimated focused effort:** 8–14 hours.
+- **Priority / status / phase:** P1; **IMPLEMENTED — development corpus; independent research DEFERRED for Mac preview**; `PH-08`. **Requirement(s):** FR-017. **Estimated focused effort:** 8–14 hours.
 - **Purpose/context:** Deliver a bounded, independently testable part of the ModelVet evidence/admission workflow. Preserve the fail-closed invariant in PRD §7 and threat constraints in `THREAT_MODEL.md`.
 - **Prerequisites/dependencies:** MV-019; no work should begin before dependent acceptance evidence exists.
 - **Expected files:** `benchmarks/manifest.json`, `benchmarks/README.md`, `tests/test_benchmark_manifest.py`. Paths are proposed and may be created only during implementation.
@@ -379,7 +379,7 @@
 
 ### MV-023 — Run fair baseline comparison and result audit
 
-- **Priority / status / phase:** P1; **IMPLEMENTED — local pilot; independent research acceptance PENDING**; `PH-08`. **Requirement(s):** FR-017. **Estimated focused effort:** 7–12 hours.
+- **Priority / status / phase:** P1; **IMPLEMENTED — local pilot; independent research DEFERRED for Mac preview**; `PH-08`. **Requirement(s):** FR-017. **Estimated focused effort:** 7–12 hours.
 - **Purpose/context:** Deliver a bounded, independently testable part of the ModelVet evidence/admission workflow. Preserve the fail-closed invariant in PRD §7 and threat constraints in `THREAT_MODEL.md`.
 - **Prerequisites/dependencies:** MV-022,MV-010; no work should begin before dependent acceptance evidence exists.
 - **Expected files:** `benchmarks/results/`, `docs/BENCHMARK_PLAN.md`, `tests/test_benchmark_metrics.py`. Paths are proposed and may be created only during implementation.
@@ -486,7 +486,7 @@
 
 ### MV-030 — Design and independently review isolated loader runner
 
-- **Priority / status / phase:** P2; **NOT STARTED**; `PH-11`. **Requirement(s):** FR-018. **Estimated focused effort:** 15–30 hours.
+- **Priority / status / phase:** P2; **DEFERRED — outside Mac preview scope**; `PH-11`. **Requirement(s):** FR-018. **Estimated focused effort:** 15–30 hours.
 - **Purpose/context:** Deliver a bounded, independently testable part of the ModelVet evidence/admission workflow. Preserve the fail-closed invariant in PRD §7 and threat constraints in `THREAT_MODEL.md`.
 - **Prerequisites/dependencies:** MV-023,MV-029; no work should begin before dependent acceptance evidence exists.
 - **Expected files:** `src/modelvet/verification/microvm.py`, `tests/isolated/`, `docs/THREAT_MODEL.md`. Paths are proposed and may be created only during implementation.
@@ -499,7 +499,7 @@
 
 ### MV-031 — Implement scoped version-specific loader test
 
-- **Priority / status / phase:** P2; **NOT STARTED**; `PH-11`. **Requirement(s):** FR-021. **Estimated focused effort:** 12–25 hours.
+- **Priority / status / phase:** P2; **DEFERRED — outside Mac preview scope**; `PH-11`. **Requirement(s):** FR-021. **Estimated focused effort:** 12–25 hours.
 - **Purpose/context:** Deliver a bounded, independently testable part of the ModelVet evidence/admission workflow. Preserve the fail-closed invariant in PRD §7 and threat constraints in `THREAT_MODEL.md`.
 - **Prerequisites/dependencies:** MV-030; no work should begin before dependent acceptance evidence exists.
 - **Expected files:** `src/modelvet/verification/loader_context.py`, `tests/isolated/test_version_diff.py`. Paths are proposed and may be created only during implementation.
@@ -512,7 +512,7 @@
 
 ### MV-032 — Independently adjudicate discrepancy findings
 
-- **Priority / status / phase:** P2; **NOT STARTED**; `PH-11`. **Requirement(s):** FR-018,FR-021. **Estimated focused effort:** 8–15 hours.
+- **Priority / status / phase:** P2; **DEFERRED — outside Mac preview scope**; `PH-11`. **Requirement(s):** FR-018,FR-021. **Estimated focused effort:** 8–15 hours.
 - **Purpose/context:** Deliver a bounded, independently testable part of the ModelVet evidence/admission workflow. Preserve the fail-closed invariant in PRD §7 and threat constraints in `THREAT_MODEL.md`.
 - **Prerequisites/dependencies:** MV-031; no work should begin before dependent acceptance evidence exists.
 - **Expected files:** `benchmarks/loader_cases/`, `docs/BENCHMARK_PLAN.md`. Paths are proposed and may be created only during implementation.
@@ -653,6 +653,15 @@
 - **Verification:** `tests/test_workbench_contract.py` plus lock/lint/types/full suite and build as applicable; commands/results recorded in PROGRESS. Planned checks are not verification.
 - **DoD:** implemented behavior and actual passing tests, reviewed diff/dependencies, updated source-of-truth documentation; independent release gates remain pending.
 
+### MV-045 — Finish Mac-first local preview
+
+- **Priority / status / phase:** P1; **COMPLETE — Mac preview**; `PH-18`. **Requirement(s):** FR-028.
+- **Prerequisites:** MV-044. User-authorized scope revision: Mac-only local delivery; PH-08 research and PH-11 are deferred.
+- **Procedure / failure modes:** Reconcile product/roadmap/release scope, run macOS release CI, remove Linux-host advice from Mac guidance, verify bundled assets and Mac fixture decisions. Preserve unsupported memory/resource evidence and every admission invariant. Do not label deferred research complete, claim independent review, or execute models.
+- **Interfaces:** MAC_RELEASE_SPEC.md; existing CLI/report/policy contracts are unchanged.
+- **Verification:** tests/test_mac_release.py, docs/CI contracts, full Python/frontend/browser/installed-package gates. Record actual commands/results in PROGRESS.
+- **DoD:** A Mac user can install and use the local product; all Mac engineering gates pass and remaining research is explicitly deferred, with no Linux/KVM requirement for this preview.
+
 ## Next task
 
-PH-15–17 local implementation, installed-package acceptance and hosted Ubuntu/macOS matrix are complete (run 39611891146, source 996d19f). Independent project/security review is required for public release. PH-08 independent benchmark acceptance and PH-11 Linux/KVM loader work remain gated; no loading is enabled.
+MV-045 is complete for the maintainer-authorized Mac-first preview, with local arm64 and hosted Intel acceptance. Research tasks remain deferred; no dedicated Linux host or independent benchmark is required for the local Mac product. Missing mandatory evidence still prevents admission.

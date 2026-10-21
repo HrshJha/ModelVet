@@ -17,7 +17,7 @@ def test_workbench_traceability() -> None:
     tasks = (ROOT / "docs/TASKS.md").read_text()
     roadmap = (ROOT / "docs/ROADMAP.md").read_text()
     assert all(f"| FR-{i:03d} |" in prd for i in range(25, 28))
-    assert re.findall(r"^### (MV-\d{3}) —", tasks, re.M) == [f"MV-{i:03d}" for i in range(1, 45)]
+    assert re.findall(r"^### (MV-\d{3}) —", tasks, re.M) == [f"MV-{i:03d}" for i in range(1, 46)]
     assert "PH-15" in roadmap and "PH-17" in roadmap
 
 

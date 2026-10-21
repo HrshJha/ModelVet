@@ -1,0 +1,16 @@
+{
+  "status": "Mac preview; hosted gate pending",
+  "base_commit": "474ecd5bc055df8b3cbbc9a89826642cf48ee410",
+  "distributions": [
+    {
+      "file": "modelvet-0.1.0-py3-none-any.whl",
+      "bytes": 260075,
+      "sha256": "58e7b2bb08dc31f2754eb1fa5bd25ae8472eeefcfcd5857199ea9ff13eb0583a"
+    },
+    {
+      "file": "modelvet-0.1.0.tar.gz",
+      "bytes": 501731,
+      "sha256": "9201427bfd841fde92c66d250673b1a11e53a8729a47f9cd479b12f8071c809f"
+    }
+  ]
+}
