@@ -1,0 +1,395 @@
+{
+  "artifact": {
+    "file_count": 2,
+    "hash_algorithm": "sha256",
+    "manifest_digest": "sha256:ccba41588643b69ac12c70e838fd1272a819b75c8c0eed1bfd1a768c5fbe752e",
+    "total_bytes": 115
+  },
+  "checks": [
+    {
+      "artifact_digest": "sha256:ccba41588643b69ac12c70e838fd1272a819b75c8c0eed1bfd1a768c5fbe752e",
+      "check_id": "classification",
+      "details": {
+        "format_class": "JSON",
+        "mismatch": false
+      },
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "36212024ab2f9b62f65b2b6c6fda04772f7b3882dea0bd751f192701f276599f",
+      "limitations": [],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    },
+    {
+      "artifact_digest": "sha256:ccba41588643b69ac12c70e838fd1272a819b75c8c0eed1bfd1a768c5fbe752e",
+      "check_id": "identity",
+      "details": {
+        "sha256": "1bd537b89dac2cfe44b62842a2ed10f49e342259f01541de738ca02d99c75905"
+      },
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "36212024ab2f9b62f65b2b6c6fda04772f7b3882dea0bd751f192701f276599f",
+      "limitations": [],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    },
+    {
+      "artifact_digest": "sha256:ccba41588643b69ac12c70e838fd1272a819b75c8c0eed1bfd1a768c5fbe752e",
+      "check_id": "metadata:local",
+      "details": {},
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "36212024ab2f9b62f65b2b6c6fda04772f7b3882dea0bd751f192701f276599f",
+      "limitations": [
+        "Local declarations only; source, revision and legal rights are unverified."
+      ],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    },
+    {
+      "artifact_digest": "sha256:ccba41588643b69ac12c70e838fd1272a819b75c8c0eed1bfd1a768c5fbe752e",
+      "check_id": "classification",
+      "details": {
+        "format_class": "MARKDOWN",
+        "mismatch": false
+      },
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "969993089b17881a1daa05a7ce97cffa57a39b3ffaff7ae8870b2173a7b7b202",
+      "limitations": [],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    },
+    {
+      "artifact_digest": "sha256:ccba41588643b69ac12c70e838fd1272a819b75c8c0eed1bfd1a768c5fbe752e",
+      "check_id": "identity",
+      "details": {
+        "sha256": "98b45ea81164d1e1a1dd82255207053b15cd6c69d922a1c5cf3387ce604d4b74"
+      },
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "969993089b17881a1daa05a7ce97cffa57a39b3ffaff7ae8870b2173a7b7b202",
+      "limitations": [],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    },
+    {
+      "artifact_digest": "sha256:ccba41588643b69ac12c70e838fd1272a819b75c8c0eed1bfd1a768c5fbe752e",
+      "check_id": "metadata:local",
+      "details": {},
+      "error_code": null,
+      "executor_id": "modelvet",
+      "file_id": "969993089b17881a1daa05a7ce97cffa57a39b3ffaff7ae8870b2173a7b7b202",
+      "limitations": [
+        "Local declarations only; source, revision and legal rights are unverified."
+      ],
+      "normalizer_version": "1",
+      "raw_ref": null,
+      "reason": null,
+      "result": "NO_FINDINGS",
+      "status": "COMPLETE"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "358edc478c11139bab1c150a3e0dcc32a522a17076a439005753fc7b0935749d",
+      "confidence": "DECLARED",
+      "kind": "LICENSE",
+      "source_file_id": "969993089b17881a1daa05a7ce97cffa57a39b3ffaff7ae8870b2173a7b7b202",
+      "source_line": 2,
+      "source_ref": "969993089b17881a1daa05a7ce97cffa57a39b3ffaff7ae8870b2173a7b7b202#frontmatter:/license:L2",
+      "source_sha256": "98b45ea81164d1e1a1dd82255207053b15cd6c69d922a1c5cf3387ce604d4b74",
+      "value": "apache-2.0"
+    }
+  ],
+  "conflicts": [],
+  "coverage": [
+    {
+      "completed_check_ids": [
+        "classification",
+        "identity",
+        "metadata:local"
+      ],
+      "expected_check_ids": [
+        "classification",
+        "identity",
+        "metadata:local"
+      ],
+      "failed_check_ids": [],
+      "file_id": "36212024ab2f9b62f65b2b6c6fda04772f7b3882dea0bd751f192701f276599f",
+      "inconclusive_check_ids": [],
+      "mandatory_check_ids": [
+        "classification",
+        "identity",
+        "metadata:local"
+      ],
+      "nonapplicable_check_ids": [],
+      "not_run_check_ids": [],
+      "skipped_check_ids": [],
+      "unresolved_reasons": [],
+      "unsupported_check_ids": []
+    },
+    {
+      "completed_check_ids": [
+        "classification",
+        "identity",
+        "metadata:local"
+      ],
+      "expected_check_ids": [
+        "classification",
+        "identity",
+        "metadata:local"
+      ],
+      "failed_check_ids": [],
+      "file_id": "969993089b17881a1daa05a7ce97cffa57a39b3ffaff7ae8870b2173a7b7b202",
+      "inconclusive_check_ids": [],
+      "mandatory_check_ids": [
+        "classification",
+        "identity",
+        "metadata:local"
+      ],
+      "nonapplicable_check_ids": [],
+      "not_run_check_ids": [],
+      "skipped_check_ids": [],
+      "unresolved_reasons": [],
+      "unsupported_check_ids": []
+    }
+  ],
+  "decision": {
+    "evidence_refs": [
+      "hub:source"
+    ],
+    "reason": "Repository retrieval is incomplete; required file checks are unresolved.",
+    "required_controls": [],
+    "rule_ids": [
+      "INVALID-EVIDENCE"
+    ],
+    "state": "INSUFFICIENT"
+  },
+  "dependencies": [],
+  "executions": [],
+  "files": [
+    {
+      "file_id": "969993089b17881a1daa05a7ce97cffa57a39b3ffaff7ae8870b2173a7b7b202",
+      "format_class": "MARKDOWN",
+      "mismatch": false,
+      "relpath": "README.md",
+      "sha256": "98b45ea81164d1e1a1dd82255207053b15cd6c69d922a1c5cf3387ce604d4b74",
+      "size": 28
+    },
+    {
+      "file_id": "36212024ab2f9b62f65b2b6c6fda04772f7b3882dea0bd751f192701f276599f",
+      "format_class": "JSON",
+      "mismatch": false,
+      "relpath": "model.safetensors.index.json",
+      "sha256": "1bd537b89dac2cfe44b62842a2ed10f49e342259f01541de738ca02d99c75905",
+      "size": 87
+    }
+  ],
+  "findings": [],
+  "limitations": [
+    "Host paths and common credential patterns are redacted; exact artifact filenames and private raw evidence may remain sensitive.",
+    "Local declarations only; source, revision and legal rights are unverified.",
+    "Static assessment only; no model loading, legal clearance or universal safety guarantee.",
+    "User-declared pins; actual installation, vulnerabilities and reachability unverified."
+  ],
+  "manifest_digest": "sha256:ccba41588643b69ac12c70e838fd1272a819b75c8c0eed1bfd1a768c5fbe752e",
+  "policy": {
+    "applicability_version": "2",
+    "control_rules": [],
+    "controls": [],
+    "mandatory_checks": [
+      "classification",
+      "dependencies:declared",
+      "identity",
+      "metadata:local",
+      "modelscan",
+      "scanner:resources",
+      "source:presence",
+      "structural:safetensors",
+      "structural:zip"
+    ],
+    "optional_checks": [],
+    "policy_id": "default-policy-v1",
+    "policy_version": "1",
+    "prohibitions": [
+      {
+        "category": "REPOSITORY_CODE",
+        "rule_id": "NO-REPOSITORY-CODE"
+      }
+    ],
+    "required_claims": [
+      "LICENSE",
+      "PROVENANCE"
+    ],
+    "schema_version": "1.0.0"
+  },
+  "policy_digest": "sha256:d7de8bfeccfb859c8e0f790fc44602e36102b3a20f2351ea397428ced0900ab6",
+  "raw_evidence": [
+    {
+      "digest": "1bd537b89dac2cfe44b62842a2ed10f49e342259f01541de738ca02d99c75905",
+      "filename": "raw/1bd537b89dac2cfe44b62842a2ed10f49e342259f01541de738ca02d99c75905.bin",
+      "size": 87
+    },
+    {
+      "digest": "bee440fae0850643e752b45bbd52a8c6a4c2ac54f55d75787356b487af725664",
+      "filename": "raw/bee440fae0850643e752b45bbd52a8c6a4c2ac54f55d75787356b487af725664.bin",
+      "size": 91
+    }
+  ],
+  "references": {
+    "check:408939c2abf944feeed12566e57eda999e893e15f301f9b75e1fc7236d55e5b2": "/checks/3",
+    "check:5c5d636172a0f1652639942682a1a73921c8dd0af81f1b94bf936b4af2539b3c": "/checks/4",
+    "check:aa3ec6835aa72f25ad9b67d2d08300bdb769a9ce99230ac5753be54042b32ba6": "/checks/2",
+    "check:d02051d5666f30378727d91b38869513198d128de856d723edf54002cd228de2": "/checks/5",
+    "check:e00c6ffe874dfa89490d481fbf51b937e13b67bda47861c259881f33033a304e": "/checks/1",
+    "check:f83b752096155496f8a10c80706fc38381d2fd491eb962dac61a4f00c36ef887": "/checks/0",
+    "claim-kind:LICENSE": "/policy/required_claims/0",
+    "claim-kind:PROVENANCE": "/policy/required_claims/1",
+    "claim:358edc478c11139bab1c150a3e0dcc32a522a17076a439005753fc7b0935749d": "/claims/0",
+    "coverage:36212024ab2f9b62f65b2b6c6fda04772f7b3882dea0bd751f192701f276599f:classification": "/coverage/0",
+    "coverage:36212024ab2f9b62f65b2b6c6fda04772f7b3882dea0bd751f192701f276599f:identity": "/coverage/0",
+    "coverage:36212024ab2f9b62f65b2b6c6fda04772f7b3882dea0bd751f192701f276599f:metadata:local": "/coverage/0",
+    "coverage:969993089b17881a1daa05a7ce97cffa57a39b3ffaff7ae8870b2173a7b7b202:classification": "/coverage/1",
+    "coverage:969993089b17881a1daa05a7ce97cffa57a39b3ffaff7ae8870b2173a7b7b202:identity": "/coverage/1",
+    "coverage:969993089b17881a1daa05a7ce97cffa57a39b3ffaff7ae8870b2173a7b7b202:metadata:local": "/coverage/1",
+    "file:36212024ab2f9b62f65b2b6c6fda04772f7b3882dea0bd751f192701f276599f": "/files/1",
+    "file:969993089b17881a1daa05a7ce97cffa57a39b3ffaff7ae8870b2173a7b7b202": "/files/0",
+    "hub:header:9d75c1098fc54a1f7bd270f148884f599765d894639c9c4ee891396968c60df2": "/source/files/2/header",
+    "hub:shard-index": "/source/shard_index",
+    "hub:source": "/source",
+    "raw:1bd537b89dac2cfe44b62842a2ed10f49e342259f01541de738ca02d99c75905": "/raw_evidence/0",
+    "raw:bee440fae0850643e752b45bbd52a8c6a4c2ac54f55d75787356b487af725664": "/raw_evidence/1",
+    "sha256:ccba41588643b69ac12c70e838fd1272a819b75c8c0eed1bfd1a768c5fbe752e": "/artifact"
+  },
+  "run": {
+    "finished_at": "2026-10-23T19:06:37.160977+00:00",
+    "host_os_family": "Darwin",
+    "modelvet_version": "0.1.0",
+    "result_status": "DEGRADED",
+    "run_id": "9861ae0c9bb745b1afc8e8e11b53f68c",
+    "started_at": "2026-10-23T19:06:37.158617+00:00"
+  },
+  "schema_version": "3.0.0",
+  "semantic_digest": "sha256:e5b9fcaccb9f7b23e238fd0f30b1a989e09f336c33a9cffed798b677e5756fd8",
+  "source": {
+    "assessment_profile": "large-safetensors/1",
+    "cache": "disabled",
+    "files": [
+      {
+        "blob_id": "154df8298fab5ecf322016157858e08cd1bccbe1",
+        "lfs_sha256": null,
+        "path": "README.md",
+        "reason": null,
+        "required_checks": [
+          "classification",
+          "identity",
+          "metadata:local"
+        ],
+        "sha256": "98b45ea81164d1e1a1dd82255207053b15cd6c69d922a1c5cf3387ce604d4b74",
+        "size": 28,
+        "status": "RETRIEVED"
+      },
+      {
+        "blob_id": "27949aaf30453ff2ca7cf32f3acf3b85083d5002",
+        "lfs_sha256": null,
+        "path": "media.png",
+        "reason": "Supporting content deferred to prioritize weight-header evidence and bounded small metadata.",
+        "required_checks": [
+          "classification",
+          "identity"
+        ],
+        "sha256": null,
+        "size": 5,
+        "status": "DEFERRED"
+      },
+      {
+        "blob_id": "98020734e20025536618bf29753acfc4a02d4233",
+        "header": {
+          "bytes_read": 91,
+          "data_bytes": 5000000000,
+          "full_file_hashed": false,
+          "header_length": 83,
+          "producer": "modelvet:safetensors-header/1",
+          "raw_digest": "bee440fae0850643e752b45bbd52a8c6a4c2ac54f55d75787356b487af725664",
+          "raw_size": 91,
+          "reason": "Header structure and offsets are consistent with the advertised file size.",
+          "status": "COMPLETE",
+          "tensor_count": 1,
+          "tensor_names_digest": "e6ef59bce9fe5b099c2807d27031228b9f56a0472ce99579657469f6aa4f6e1b",
+          "validator_digest": "fc5955c8599edf7d5badc9a7243a3930592b567d700cd6b9c27d750b386f5046"
+        },
+        "lfs_sha256": null,
+        "path": "model.safetensors",
+        "reason": "Per-file byte limit.",
+        "required_checks": [
+          "classification",
+          "identity",
+          "structural:safetensors"
+        ],
+        "sha256": null,
+        "size": 5000000091,
+        "status": "OVERSIZED"
+      },
+      {
+        "blob_id": "b301f90477d19c28c1509a4423ada08f19785e7c",
+        "lfs_sha256": null,
+        "path": "model.safetensors.index.json",
+        "reason": null,
+        "required_checks": [
+          "classification",
+          "identity",
+          "metadata:local"
+        ],
+        "sha256": "1bd537b89dac2cfe44b62842a2ed10f49e342259f01541de738ca02d99c75905",
+        "size": 87,
+        "status": "RETRIEVED"
+      }
+    ],
+    "inventory_complete": true,
+    "kind": "huggingface",
+    "max_file_bytes": 1024,
+    "max_total_bytes": 4096,
+    "metadata_digest": "e0c72417b2f98b2f68feea27173349806b085980eb2bd33545ee0ba2fdada939",
+    "repo_id": "example/model",
+    "requested_revision": null,
+    "resolved_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "shard_index": {
+      "assessed_shards": 1,
+      "declared_data_bytes": 5000000000,
+      "expected_shards": 1,
+      "index_path": "model.safetensors.index.json",
+      "index_sha256": "1bd537b89dac2cfe44b62842a2ed10f49e342259f01541de738ca02d99c75905",
+      "observed_data_bytes": 5000000000,
+      "reason": "Every indexed tensor name, shard and declared data byte total matches the captured headers; tensor values remain unread.",
+      "status": "COMPLETE",
+      "tensor_count": 1
+    },
+    "transport": "modelvet-https/1",
+    "url": "https://huggingface.co/example/model",
+    "wall_time_s": 600
+  },
+  "tools": [
+    {
+      "binary_sha256": null,
+      "source": "installed package",
+      "tool_id": "modelvet",
+      "version": "0.1.0"
+    }
+  ]
+}
